@@ -1,5 +1,6 @@
 ---
 import BaseMeta from "@/components/BaseMeta.astro";
+import { SITE_TITLE } from "@/consts";
 import CommonBody from "@/layouts/CommonBody.astro";
 import "@/styles/blog.less";
 
@@ -19,7 +20,7 @@ const schema = JSON.stringify([
     },
     publisher: {
       "@type": "Organization",
-      name: import.meta.env.SITE_NAME,
+      name: SITE_TITLE,
       logo: {
         "@type": "ImageObject",
         url: Astro.site + "img/logo.svg",
@@ -66,9 +67,9 @@ const schema = JSON.stringify([
     <!-- OGP -->
     <meta property="og:type" content="article" />
     <meta property="og:title" content={data.title} />
-    <meta property="og:site_name" content={import.meta.env.SITE_NAME} />
+    <meta property="og:site_name" content={SITE_TITLE} />
     <meta property="og:description" content={data.description} />
-    <meta property="og:image" content={data.cover} />
+    <meta property="og:image" content={data.cover.src} />
     <meta property="og:url" content={Astro.url} />
     <meta property="og:locale" content="ja_JP" />
     <meta name="twitter:card" content="summary_large_image" />

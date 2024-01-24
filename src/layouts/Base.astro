@@ -20,7 +20,7 @@ title = title ? title + "｜" + SITE_TITLE : SITE_TITLE;
     <!-- OGP -->
     <meta property="og:type" content="website" />
     <meta property="og:title" content={title} />
-    <meta property="og:site_name" content={import.meta.env.SITE_NAME} />
+    <meta property="og:site_name" content={SITE_TITLE} />
     <meta property="og:description" content={description} />
     <meta property="og:image" content={Astro.site + "img/ogp.png"} />
     <meta property="og:url" content={Astro.url} />
