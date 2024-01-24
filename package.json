@@ -6,7 +6,7 @@
     "dev": "astro dev",
     "start": "npm run dev",
     "server": "astro dev --host",
-    "build": "npm run sprite && astro build",
+    "build": "astro build",
     "preview": "astro preview",
     "sprite": "svg-sprite -s --symbol-dest 'public/img' --symbol-sprite './sprite.svg' --shape-transform-svgo svgo.json 'src/assets/svg-sprite/**/*.svg'",
     "new": "./shell/new.sh",
