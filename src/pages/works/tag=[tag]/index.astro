@@ -1,0 +1,16 @@
+---
+import { loadCollection } from "@/components/loadCollection.js";
+import { sortTypes } from "@/components/Works/SortConstructor.js";
+
+export async function getStaticPaths() {
+  const worksCollection = await loadCollection("works");
+
+  return worksCollection.tags.map((tag) => {
+    return {
+      params: { tag },
+    };
+  });
+}
+
+return Astro.redirect(`/works/tag=${Astro.params.tag}/sort=${sortTypes[0].id}`);
+---

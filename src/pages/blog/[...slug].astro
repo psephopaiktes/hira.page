@@ -1,0 +1,448 @@
+---
+import BlogCard from "@/components/Blog/Card.astro";
+import Share from "@/components/Blog/Share.astro";
+import SVG from "@/components/SVG.astro";
+import { loadCollection } from "@/components/loadCollection.js";
+import SnsLink from "@/components/ui/SnsLink.astro";
+import BlogDetail from "@/layouts/BlogDetail.astro";
+import { Image } from "astro:assets";
+
+export async function getStaticPaths() {
+  const blogCollection = await loadCollection("blog");
+
+  return blogCollection.posts.map((post) => ({
+    params: { slug: post.slug },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const { Content, headings } = await post.render();
+
+// 関連記事
+let recommendCollection = await loadCollection("blog");
+recommendCollection.posts = recommendCollection.posts.filter((recPost) => {
+  const includesFirstTag = recPost.data.tags.includes(post.data.tags[0]);
+  const isDifferentSlug = recPost.slug !== post.slug;
+  return includesFirstTag && isDifferentSlug;
+});
+
+// TODO: URL変わるかも?
+const followList = [
+  {
+    sns: "x",
+    link: "https://x.com/psephopaiktes",
+    title: "Xでフォロー",
+  },
+  {
+    sns: "facebook",
+    link: "https://fb.me/webablog",
+    title: "Facebookでフォロー",
+  },
+  {
+    sns: "feedly",
+    link: "https://feedly.com/i/subscription/feed%2Fhttps%3A%2F%2Fhira.page%2Fblog%2Findex.xml",
+    title: "Feedlyでフォロー",
+  },
+  {
+    sns: "rss",
+    link: "https://hira.page/rss.xml",
+    title: "RSSを表示",
+  },
+  {
+    sns: "gnews",
+    link: "https://news.google.com/publications/CAAqBwgKML_jpQswl-69Aw",
+    title: "Googleニュース",
+  },
+];
+---
+
+<BlogDetail data={post.data}>
+  <article>
+    <header>
+      <Image
+        src={post.data.cover}
+        alt={post.data.title}
+        transition:name={"blog-cover-" + post.slug}
+      />
+
+      <div class="meta">
+        <ol
+          class="breadcrumb"
+          itemscope=""
+          itemtype="https://schema.org/BreadcrumbList"
+        >
+          <li
+            itemprop="itemListElement"
+            name="HOME"
+            itemscope=""
+            itemType="https://schema.org/ListItem"
+          >
+            <a href="/" itemprop="item">HOME</a>
+            <SVG symbol="next" class="u-iconInText" />
+            <meta itemprop="position" content="1" />
+          </li>
+          <li
+            itemprop="itemListElement"
+            name="ブログ一覧"
+            itemscope=""
+            itemType="https://schema.org/ListItem"
+          >
+            <a href="/blog" itemprop="item">ブログ一覧</a>
+            <SVG symbol="next" class="u-iconInText" />
+            <meta itemprop="position" content="2" />
+          </li>
+        </ol>
+
+        <h1>{post.data.title}</h1>
+        <p>{post.data.description}</p>
+
+        <time datetime={post.data.date.toISOString()}>
+          <SVG symbol="date" class="u-iconInText" />
+          {post.data.date.toLocaleDateString("ja-JP")}
+        </time>
+        {
+          post.data.updatedDate && (
+            <time datetime={post.data.updatedDate.toISOString()}>
+              <SVG symbol="update" class="u-iconInText" />
+              {post.data.updatedDate.toLocaleDateString("ja-JP")}更新
+            </time>
+          )
+        }
+
+        <ul>
+          {
+            post.data.tags.map((tag) => (
+              <li>
+                <a class="c-tag" href={`/blog/tag=${tag}/`}>
+                  <SVG symbol="tag" />
+                  {tag}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </header>
+
+    <aside>
+      <div class="sticky">
+        <h2>Follow Blog</h2>
+        <ul class="follow">
+          {
+            followList.map((sns) => {
+              return (
+                <li>
+                  <SnsLink sns={sns.sns} link={sns.link} title={sns.title} />
+                </li>
+              );
+            })
+          }
+        </ul>
+
+        <h2>Table of Contents</h2>
+        <ul class="toc">
+          {
+            headings.map((heading) =>
+              heading.depth === 2 ? (
+                <li>
+                  <a href={"#" + heading.slug}>{heading.text}</a>
+                </li>
+              ) : null,
+            )
+          }
+        </ul>
+      </div>
+    </aside>
+
+    <div class="content">
+      <Content />
+    </div>
+
+    <Share post={post} />
+  </article>
+
+  <footer class="blogFooter">
+    <div class="l-content">
+      <h2>広告</h2>
+      <div class="banner"></div>
+
+      <h2>おすすめ記事</h2>
+      <ul class="recommendList">
+        {
+          recommendCollection.posts.slice(0, 5).map((post) => (
+            <li>
+              <BlogCard slug={post.slug} data={post.data} />
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </footer>
+</BlogDetail>
+
+<style lang="less">
+  @import "@/styles/common.less";
+
+  article {
+    display: grid;
+    padding: 64px 32px 0 80px;
+    gap: 0 48px;
+    grid-template-columns: 800px minmax(0, 1fr);
+    grid-template-areas:
+      "header aside"
+      "content aside";
+    @media (width < @2xl) {
+      padding: 56px 24px 0 64px;
+      gap: 0 56px;
+      grid-template-columns: 640px minmax(0, 1fr);
+    }
+    @media (width < @xl) {
+      gap: 0 16px;
+      grid-template-columns: 100%;
+      grid-template-areas:
+        "header"
+        "aside"
+        "content";
+      padding: 0;
+    }
+  }
+
+  header {
+    grid-area: header;
+
+    img {
+      display: block;
+      border-radius: 6px;
+      border: 1px solid rgba(@main, 0.05);
+      @media (width < @xl) {
+        border-radius: 24px 24px 0 0;
+        border-width: 0 0 1px;
+      }
+      @media (width < @xs) {
+        border-radius: 0;
+      }
+    }
+
+    .breadcrumb {
+      margin-top: 8px;
+      display: flex;
+      gap: 2px;
+      opacity: 0.6;
+      :global(svg) {
+        opacity: 0.4;
+      }
+    }
+
+    .meta {
+      margin-top: 24px;
+      @media (width < @xl) {
+        padding: 0 48px;
+      }
+      @media (width < @md) {
+        padding: 0 32px;
+      }
+      @media (width < @xs) {
+        padding: 0 24px;
+      }
+    }
+
+    h1 {
+      margin-top: 4px;
+      font-size: 2em;
+    }
+
+    time {
+      font-size: 0.9em;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5em;
+      margin-top: 20px;
+      margin-right: 16px;
+      color: rgba(@main, 0.6);
+    }
+
+    ul {
+      display: flex;
+      float: right;
+      margin-top: 18px;
+      gap: 6px;
+      @media (width < @xs) {
+        float: none;
+      }
+    }
+
+    p {
+      font-size: 0.9em;
+    }
+  }
+
+  aside {
+    grid-area: aside;
+    @media (width < @xl) {
+      margin-inline: 48px;
+      margin-top: 24px;
+      position: relative;
+      background: rgba(@theme, 0.05);
+      border-radius: 6px;
+      padding: 0 24px 32px;
+    }
+    @media (width < @md) {
+      margin-inline: 32px;
+    }
+    @media (width < @xs) {
+      margin-inline: 24px;
+    }
+
+    .sticky {
+      position: sticky;
+      top: 24px;
+    }
+
+    h2 {
+      font-size: 18px;
+      opacity: 0.2;
+      &:nth-of-type(2) {
+        margin-top: 32px;
+      }
+      @media (width < @xl) {
+        margin-top: 24px !important;
+      }
+    }
+
+    .follow {
+      display: flex;
+      gap: 4px;
+      margin-top: 16px;
+      li:nth-child(1):hover {
+        color: rgb(@main);
+      }
+      li:nth-child(2):hover {
+        color: #1876f2;
+      }
+      li:nth-child(3):hover {
+        color: #2bb24c;
+      }
+      li:nth-child(4):hover {
+        color: rgb(@main);
+      }
+      li:nth-child(5):hover {
+        color: #eb4d3c;
+      }
+    }
+
+    .toc {
+      list-style: disc;
+      border-left: 1px solid rgba(@main, 0.2);
+      margin: 16px 0 0 16px;
+      padding-left: 13.5px;
+      @media (width < @xl) {
+        margin-top: 12px;
+      }
+      @media (width < @md) {
+        padding-left: 12px;
+      }
+
+      a {
+        display: block;
+        position: relative;
+        top: -2px;
+        padding-block: 8px;
+        font-size: 0.8em;
+        line-height: 1.4;
+        opacity: 0.4;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
+        @media (width < @xl) {
+          padding: 4px 8px;
+          margin-top: 4px;
+          opacity: 0.7;
+        }
+
+        &:hover {
+          opacity: 0.8;
+        }
+      }
+    }
+  }
+
+  .content {
+    grid-area: content;
+    @media (width < @xl) {
+      padding: 0 48px;
+    }
+    @media (width < @md) {
+      padding: 0 32px;
+    }
+    @media (width < @xs) {
+      padding: 0 24px;
+    }
+  }
+
+  .blogFooter {
+    border-top: 2px dashed rgba(@theme, 0.4);
+    margin-top: 96px;
+    @media (width < @lg) {
+      margin-top: 64px;
+    }
+
+    h2 {
+      font-size: 1.4em;
+      color: rgb(@label);
+      margin-top: 64px;
+    }
+
+    .banner {
+      box-shadow: 0px 8px 24px -8px rgba(@label, 0.1);
+      margin-top: 16px;
+      min-height: 160px;
+      background: rgba(@main, 0.1);
+      border-radius: 6px;
+      overflow: hidden;
+    }
+  }
+
+  .recommendList {
+    filter: @filterShadow;
+    margin-top: 16px;
+    display: flex;
+    gap: 8px;
+    @media (width < @lg) {
+      flex-wrap: wrap;
+    }
+    @media (width < @xs) {
+      flex-wrap: nowrap;
+      width: 100vw;
+      margin-inline: -24px;
+      padding-inline: 24px;
+      scroll-padding-inline: 24px;
+      overflow: scroll;
+      scroll-snap-type: x mandatory;
+    }
+
+    li {
+      width: calc((100% - 16px) / 3);
+      @media (width < @lg) {
+        width: calc(50% - 4px);
+      }
+      @media (width < @xs) {
+        width: 240px;
+        flex-shrink: 0;
+        scroll-snap-align: start;
+      }
+      // 要素の数を調整
+      @media (width >= @xs) {
+        &:nth-child(n + 5) {
+          display: none;
+        }
+      }
+      @media (width >= @lg) {
+        &:nth-child(n + 4) {
+          display: none;
+        }
+      }
+    }
+  }
+</style>

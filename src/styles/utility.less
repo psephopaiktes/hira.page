@@ -1,0 +1,39 @@
+.u-textHidden {
+  overflow: hidden;
+  text-indent: 200%;
+  white-space: nowrap;
+}
+
+.u-iconInText {
+  margin: 0 -0.2em;
+  width: 1.4em;
+  height: 1.4em;
+  vertical-align: text-bottom;
+}
+
+.u-showPc,
+.u-hideTabSp {
+  @media (width < @lg) {
+    display: none !important;
+  }
+}
+
+.u-showPcTab,
+.u-hideSp {
+  @media (width < @xs) {
+    display: none !important;
+  }
+}
+
+.u-showTabSp,
+.u-hidePc {
+  @media (width >= @lg) {
+    display: none !important;
+  }
+}
+.u-showSp,
+.u-hidePcTab {
+  @media (width >= @xs) {
+    display: none !important;
+  }
+}

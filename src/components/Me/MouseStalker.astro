@@ -1,0 +1,135 @@
+---
+import SVG from "@/components/SVG.astro";
+---
+
+<ul id="js-stalker">
+  <li class="hirata">
+    <SVG symbol="contact" />
+    <p>お問い合わせ</p>
+  </li>
+
+  <li class="design">
+    <SVG symbol="next" />
+    <p>デザインの実績</p>
+  </li>
+
+  <li class="develop">
+    <SVG symbol="next" />
+    <p>フロントエンドの実績</p>
+  </li>
+
+  <li class="skillmap">
+    <SVG symbol="next" />
+    <p>すべての実績</p>
+  </li>
+
+  <li class="open">
+    <SVG symbol="open" />
+  </li>
+
+  <li class="contact">
+    <SVG symbol="contact" />
+  </li>
+</ul>
+
+<script>
+  document.addEventListener(
+    "astro:page-load",
+    () => {
+      const stalker = document.getElementById("js-stalker");
+      if (!stalker) return;
+
+      document.addEventListener("mousemove", function (e) {
+        stalker.style.transform = `translate(${e.clientX}px,${e.clientY}px)`;
+      });
+
+      // すべての 'data-swellStalker' 属性を持つ要素を取得
+      const swellStalkerElements = document.querySelectorAll(
+        "[data-swellStalker]",
+      );
+
+      // 各要素に対するイベントハンドラーを設定
+      swellStalkerElements.forEach((element) => {
+        element.addEventListener("mouseenter", () => {
+          stalker.classList.add(
+            "swell",
+            element.getAttribute("data-swellStalker") || "",
+          );
+        });
+
+        element.addEventListener("mouseleave", () => {
+          stalker.classList.remove(...stalker.classList);
+        });
+      });
+    },
+    { once: false },
+  );
+</script>
+
+<style lang="less">
+  @import "@/styles/common.less";
+
+  #js-stalker {
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    width: 16px;
+    height: 16px;
+    overflow: hidden;
+    margin: -8px 0 0 -8px;
+    border-radius: 50%;
+    will-change: transform;
+    user-select: none;
+    pointer-events: none;
+    z-index: 9999;
+    mix-blend-mode: exclusion;
+    transition: @transition;
+    background: rgb(@theme);
+    color: #000;
+    @media (width < @sm) {
+      display: none;
+    }
+
+    li {
+      display: none;
+      text-align: center;
+      :global(svg) {
+        margin-top: 4px;
+        width: 64px;
+        aspect-ratio: 1;
+      }
+      p {
+        margin: 0;
+        font-size: 12px;
+      }
+    }
+
+    &.swell {
+      width: 160px;
+      height: 160px;
+      margin: -80px 0 0 -80px;
+
+      &.open,
+      &.contact {
+        width: 40px;
+        height: 40px;
+        margin: -20px 0 0 -20px;
+        :global(svg) {
+          width: 32px;
+        }
+      }
+
+      &.hirata .hirata,
+      &.design .design,
+      &.develop .develop,
+      &.skillmap .skillmap,
+      &.open .open,
+      &.contact .contact {
+        display: block;
+      }
+    }
+  }
+</style>

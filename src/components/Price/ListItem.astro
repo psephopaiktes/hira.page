@@ -1,0 +1,146 @@
+---
+const data = Astro.props;
+const totalPrice = Object.values(data.price).reduce(
+  (acc, price) => acc + price,
+  0,
+);
+---
+
+<li data-inview>
+  <div class="playerContiner">
+    <dotlottie-player autoplay loop src={`lottie/example-${data.id}.lottie`}
+    ></dotlottie-player>
+  </div>
+
+  <section class="meta">
+    <h2>{data.title}</h2>
+    <p>
+      <budoux-ja>{data.text}</budoux-ja>
+    </p>
+    <table>
+      {
+        Object.entries(data.price).map(([service, price]) => (
+          <tr>
+            <td>{service}</td>
+            <td>{`¥${price.toLocaleString()}`}</td>
+          </tr>
+        ))
+      }
+      <tr>
+        <td>合計金額(税込)</td>
+        <td>{`¥${totalPrice.toLocaleString()}`}</td>
+      </tr>
+    </table>
+  </section>
+</li>
+
+<style lang="less">
+  @import "@/styles/common.less";
+
+  // Layout
+  li {
+    perspective: 1200;
+    -webkit-perspective: 1200;
+    margin-top: 64px;
+    display: grid;
+    gap: 48px;
+    grid-template-areas: "left right";
+    grid-template-columns: auto auto;
+    align-items: center;
+    justify-content: center;
+    @media (width < @xl) {
+      gap: 24px;
+    }
+    @media (width < @lg) {
+      margin-top: 48px;
+      grid-template-areas: "left" "right";
+      grid-template-columns: 100%;
+    }
+    .playerContiner {
+      filter: @filterShadow;
+    }
+    &:nth-child(odd) {
+      .playerContiner {
+        grid-area: left;
+        transform: rotateX(4deg) rotateY(12deg);
+        @media (width < @lg) {
+          transform: none;
+          grid-area: auto;
+        }
+      }
+      .meta {
+        grid-area: right;
+        text-align: left;
+        @media (width < @lg) {
+          text-align: left;
+          grid-area: auto;
+        }
+      }
+    }
+    &:nth-child(even) {
+      .playerContiner {
+        grid-area: right;
+        transform: rotateX(4deg) rotateY(-12deg);
+        @media (width < @lg) {
+          transform: none;
+          grid-area: auto;
+        }
+      }
+      .meta {
+        grid-area: left;
+        text-align: right;
+        @media (width < @lg) {
+          text-align: left;
+          grid-area: auto;
+        }
+      }
+    }
+  }
+
+  // Style
+  dotlottie-player {
+    clip-path: url(#squircle);
+    margin-inline: auto;
+    max-width: 400px;
+    padding: 32px;
+    background-color: #fff;
+    @media (width < @lg) {
+      max-width: 320px;
+    }
+  }
+  .meta {
+    max-width: 560px;
+    h2 {
+      font-size: 24px;
+      color: rgba(@label);
+    }
+    table {
+      opacity: 0.8;
+      display: inline-block;
+      width: auto;
+      margin-top: 20px;
+      text-align: left;
+      @media (width < @lg) {
+        width: 100%;
+      }
+
+      td {
+        padding: 2px 0 4px;
+      }
+      td:first-child {
+        padding-right: 24px;
+        @media (width < @lg) {
+          width: 100%;
+        }
+      }
+      td:last-child {
+        text-align: right;
+      }
+
+      tr:last-child {
+        font-weight: bold;
+        border-top: 1px solid currentColor;
+      }
+    }
+  }
+</style>

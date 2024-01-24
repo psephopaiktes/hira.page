@@ -1,0 +1,242 @@
+---
+import Logo from "@/assets/logo.svg";
+import { Squircle } from "@/components/Squircle.js";
+
+const url = Squircle({
+  returnFormat: "dataUrl",
+  radius: 16,
+  curve: 12,
+  fill: "#ffffff44",
+});
+const currentPath = Astro.url.pathname;
+const pageList = ["blog", "works", "me", "price"];
+---
+
+<nav class="l-nav">
+  <h1 class="logo">
+    <a href="/">
+      <img src={Logo.src} width={Logo.width} height={Logo.height} alt="webA" />
+      <span class="u-textHidden">WEBA</span>
+    </a>
+  </h1>
+
+  <ul class="menu">
+    {
+      pageList.map((path) => {
+        const isActive = new RegExp(`^/${path}/?$`).test(currentPath);
+        const isChild = new RegExp(`^/${path}(?:/|$)`).test(currentPath);
+
+        return (
+          <li>
+            {isChild && (
+              <div class="navIndicator" transition:name="nav-indicator" />
+            )}
+
+            <a class={isChild ? "active" : null} href={`/${path}`}>
+              <dotlottie-player
+                autoplay={isActive ? "autoplay" : null}
+                src={`/lottie/${path}.lottie`}
+              />
+              {path.toUpperCase()}
+            </a>
+          </li>
+        );
+      })
+    }
+  </ul>
+
+  <a
+    class:list={["contact", { active: /^\/contact\/?$/.test(currentPath) }]}
+    href="/contact"
+    style={`border-image-source: url('${url}')`}
+  >
+    <dotlottie-player
+      autoplay={/^\/contact\/?$/.test(currentPath) ? "autoplay" : null}
+      src="/lottie/contact.lottie"></dotlottie-player>
+    CONTACT
+  </a>
+</nav>
+
+<style lang="less">
+  @import "@/styles/common.less";
+
+  nav {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 48px;
+    @media (width < @xl) {
+      gap: 32px;
+    }
+    @media (width < @lg) {
+      align-items: start;
+      padding: 28px 8px 0;
+      gap: 8px;
+    }
+    @media (width < @xs) {
+      padding: 20px 10px 0;
+    }
+  }
+
+  dotlottie-player {
+    width: 36px;
+    height: 36px;
+    @media (width < @xs) {
+      width: 32px;
+      height: 32px;
+    }
+  }
+
+  @width: 168px;
+
+  .logo {
+    width: @width;
+    margin-top: -5vh;
+    @media (width < @lg) {
+      margin-top: 0;
+      width: 128px;
+    }
+    @media (width < @xs) {
+      width: 96px;
+    }
+
+    a {
+      display: block;
+      opacity: 0.9;
+      transform-origin: left center;
+      &:hover,
+      &:active {
+        opacity: 1;
+        scale: 1.02;
+      }
+    }
+    span {
+      display: block;
+      height: 0;
+    }
+  }
+
+  .menu {
+    width: @width;
+    @media (width < @lg) {
+      display: flex;
+      width: 100%;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 16px;
+    }
+    @media (width < @xs) {
+      padding: 0 24px;
+    }
+
+    li {
+      position: relative;
+      margin-top: 16px;
+      @media (width < @xs) {
+        // margin-top: 12px;
+      }
+
+      .navIndicator {
+        position: absolute;
+        right: 105%;
+        bottom: 12px;
+        width: 12px;
+        height: 16px;
+        clip-path: polygon(0 0, 100% 50%, 0 100%);
+        background-color: rgba(#fff, 0.8);
+        transition: @transition;
+        @media (width < @lg) {
+          width: 48px;
+          height: 4px;
+          bottom: -8px;
+          right: calc(50% - 24px);
+          clip-path: none;
+          border-radius: 4px 4px 0 0;
+        }
+        @media (width < @xs) {
+          width: 32px;
+          right: calc(50% - 16px);
+        }
+      }
+    }
+
+    a {
+      display: flex;
+      height: 40px;
+      opacity: 0.7;
+      align-items: center;
+      gap: 6px;
+      font-size: 20px;
+      font-weight: 500;
+      font-variation-settings: "wght" 500;
+      color: #fff;
+      text-shadow: 0 0 24px rgba(#840, 0.2);
+      @media (width < @lg) {
+        font-size: 18px;
+      }
+      @media (width < @sm) {
+        font-size: 16px;
+        gap: 2px;
+      }
+      @media (width < @xs) {
+        flex-direction: column;
+        height: auto;
+        gap: 0;
+        font-size: 11px;
+      }
+      &.active,
+      &:hover,
+      &:active {
+        opacity: 1;
+        font-variation-settings: "wght" 700;
+      }
+    }
+  }
+
+  .contact {
+    width: @width;
+    display: flex;
+    gap: 6px;
+    height: 48px;
+    justify-content: center;
+    align-items: center;
+    font-size: 18px;
+    font-weight: 500;
+    font-variation-settings: "wght" 500;
+    background: none;
+    border: solid 16px;
+    border-image-slice: 16 fill;
+    color: rgba(#fff, 0.8);
+    text-shadow: 0 0 24px rgba(#840, 0.2);
+    word-break: keep-all;
+    &.active,
+    &:hover,
+    &:active {
+      color: rgba(#fff, 1);
+      font-variation-settings: "wght" 700;
+      filter: drop-shadow(0 0 8px rgba(#fff, 0.5));
+    }
+    @media (width < @lg) {
+      width: 160px;
+      height: 40px;
+      position: absolute;
+      top: 24px;
+      right: 2px;
+      dotlottie-player {
+        margin-left: -6px;
+      }
+    }
+    @media (width < @xs) {
+      width: auto;
+      top: 12px;
+      right: 6px;
+      gap: 2px;
+      font-size: 12px;
+      font-variation-settings: "wght" 700;
+      dotlottie-player {
+        margin-left: -8px;
+      }
+    }
+  }
+</style>

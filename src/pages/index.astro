@@ -1,0 +1,36 @@
+---
+import BlogList from "@/components/Home/BlogList.astro";
+import ContactInfo from "@/components/Home/ContactInfo.astro";
+import Headline from "@/components/Home/Headline.astro";
+import Hero from "@/components/Home/Hero.astro";
+import MeBanner from "@/components/Home/MeBanner.astro";
+import WorksList from "@/components/Home/WorksList.astro";
+import Base from "@/layouts/Base.astro";
+---
+
+<Base>
+  <Hero />
+
+  <div class="l-content">
+    <Headline href="/blog" label="BLOG" />
+    <BlogList />
+
+    <Headline href="/works" label="WORKS" />
+    <WorksList />
+
+    <Headline href="/me" label="ABOUT ME" />
+    <MeBanner />
+
+    <Headline label="REQUEST" />
+    <ContactInfo />
+  </div>
+</Base>
+
+<style lang="less">
+  @import "@/styles/common.less";
+
+  h2 {
+    font-size: 2em;
+    margin-top: 2rem;
+  }
+</style>

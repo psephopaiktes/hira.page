@@ -1,0 +1,41 @@
+---
+const { label, class: className, href } = Astro.props;
+---
+
+<h1 transition:name={"headline-" + label} class={className}>
+  <a {href} inert={href ? null : "inert"}>
+    {label}
+  </a>
+</h1>
+
+<style lang="less">
+  @import "@/styles/common.less";
+
+  h1 {
+    margin-top: 40px;
+    font-weight: 800;
+    line-height: 1.2;
+    letter-spacing: 0.05em;
+    color: rgb(@label);
+    @media (width < @xl) {
+      margin-top: 56px;
+    }
+    @media (width < @lg) {
+      margin-top: 48px;
+    }
+    @media (width < @sm) {
+      margin-top: 16px;
+    }
+
+    &::first-letter {
+      font-size: 1.2em;
+      vertical-align: -0.02em;
+    }
+    &::after {
+      content: ".";
+      color: rgb(@theme);
+      font-size: 1.4em;
+      margin-left: -0.2em;
+    }
+  }
+</style>

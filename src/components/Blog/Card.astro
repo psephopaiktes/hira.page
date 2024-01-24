@@ -1,0 +1,176 @@
+---
+import SVG from "@/components/SVG.astro";
+import { Image } from "astro:assets";
+const { slug, data } = Astro.props;
+
+const redirectSite = data.redirect
+  ? /note/.test(data.redirect)
+    ? "note"
+    : /qiita/.test(data.redirect)
+      ? "qiita"
+      : /zenn/.test(data.redirect)
+        ? "zenn"
+        : console.error("未対応のURLです")
+  : "";
+---
+
+<a
+  href={data.redirect || `/blog/${slug}/`}
+  target={redirectSite ? "_blank" : null}
+  transition:name={"blog-card-" + slug}
+  class="c-card"
+>
+  <Image class="bg" src={data.cover} alt="背景" />
+  <Image
+    class="cover"
+    src={data.cover}
+    alt={data.title}
+    transition:name={"blog-cover-" + slug}
+  />
+
+  {
+    redirectSite && (
+      <span class:list={["redirect", redirectSite]}>
+        <SVG symbol={"logo-" + redirectSite} />
+        <SVG symbol="open" />
+      </span>
+    )
+  }
+
+  <div class="meta">
+    <h4 class="title">{data.title}</h4>
+    <p>{data.description}</p>
+    <ul>
+      {
+        data.tags.slice(0, 2).map((tag) => (
+          <li class="c-tag">
+            <SVG symbol="tag" />
+            {tag}
+          </li>
+        ))
+      }
+    </ul>
+    <time datetime={data.date.toISOString()}>
+      {data.date.toLocaleDateString("ja-JP")}
+    </time>
+  </div>
+</a>
+
+<style lang="less">
+  @import "@/styles/common.less";
+
+  a {
+    display: grid;
+    grid-template-areas: "top" "bottom";
+    grid-template-rows: auto 1fr;
+    overflow: hidden;
+    border-radius: 4% 12%;
+    border: 1px solid rgba(@main, 0);
+    background: light-dark(#fff, rgb(@base));
+
+    &:hover .redirect {
+      opacity: 1;
+      padding: 16px 24px 8px;
+    }
+
+    container-type: inline-size;
+    @container (max-width: 230px) {
+      p {
+        -webkit-line-clamp: 1 !important;
+      }
+    }
+  }
+
+  .bg {
+    grid-area: bottom;
+    opacity: 0.4;
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+    filter: blur(12px);
+    transform: scale(1.1, -1.1);
+  }
+  .cover {
+    grid-area: top;
+    border-radius: 4% 12% 0 0 / 8% 24% 0 0; // view transitionの像欠けを防ぐ
+    background-color: #99999922;
+  }
+  .redirect {
+    grid-area: top;
+    align-self: start;
+    justify-self: end;
+    border-bottom-left-radius: 8px;
+    transition: @transition;
+    padding: 12px 14px 4px;
+    opacity: 0.4;
+    z-index: 1;
+    &.note {
+      background: #000;
+      :global(svg:first-child) {
+        aspect-ratio: 167/60;
+      }
+    }
+    &.qiita {
+      background: #41c9b4;
+      :global(svg:first-child) {
+        aspect-ratio: 181/60;
+      }
+    }
+    &.zenn {
+      background: #3ea8ff;
+      :global(svg:first-child) {
+        aspect-ratio: 342/120;
+      }
+    }
+
+    :global(svg) {
+      height: 20px;
+      fill: #fff;
+    }
+  }
+
+  .meta {
+    grid-area: bottom;
+    position: relative;
+    padding: 4% 5%;
+
+    h4 {
+      font-size: 1em;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+    p {
+      margin-top: 2%;
+      opacity: 0.6;
+      line-height: 1.5;
+      font-size: 12px;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      @media (width < @xs) {
+        font-size: 14px;
+      }
+    }
+    ul {
+      display: flex;
+      gap: 4px;
+      position: absolute;
+      left: 5%;
+      bottom: 8%;
+    }
+    li {
+      font-size: 11px;
+    }
+    time {
+      letter-spacing: 0.1em;
+      opacity: 0.7;
+      position: absolute;
+      right: 5%;
+      bottom: 8%;
+      font-size: 11px;
+    }
+  }
+</style>

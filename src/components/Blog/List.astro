@@ -1,0 +1,36 @@
+---
+import BlogCard from "@/components/Blog/Card.astro";
+
+const { posts } = Astro.props;
+---
+
+<ul>
+  {
+    posts.map((post) => (
+      <li>
+        <BlogCard slug={post.slug} data={post.data} />
+      </li>
+    ))
+  }
+</ul>
+
+<style lang="less">
+  @import "@/styles/common.less";
+
+  ul {
+    filter: @filterShadow;
+    margin-top: 32px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+  li {
+    width: calc((100% - 32px) / 3);
+    @media (width < @lg) {
+      width: calc(50% - 8px);
+    }
+    @media (width < @xs) {
+      width: 100%;
+    }
+  }
+</style>

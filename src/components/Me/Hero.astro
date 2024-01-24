@@ -1,0 +1,133 @@
+---
+import { Image } from "astro:assets";
+import MeImage from "@/assets/img/me/eyecatch.jpg";
+import SnsLink from "@/components/ui/SnsLink.astro";
+
+const snsList = ["X", "note", "GitHub", "Instagram", "Pinterest"];
+---
+
+<section>
+  <img
+    src="data:image/webp;base64,UklGRjAAAABXRUJQVlA4ICQAAACQAQCdASoGAAMAA4BYJaQAAp1HI1AA/tF+F7SeAIg7owAAAAA="
+    alt=""
+    aria-hidden="true"
+  />
+  <Image
+    id="js-fadeImage"
+    data-loaded="false"
+    src={MeImage}
+    alt="平田のイメージ画像"
+  />
+
+  <div class="l-content content">
+    <h2>
+      <p>Akira HIRATA</p>
+      <p>is a Digital Product Designer</p>
+      <p>and Web Front-end Developer.</p>
+    </h2>
+
+    <ul class="sns">
+      {
+        snsList.map((sns) => {
+          return (
+            <li>
+              <SnsLink {sns} />
+            </li>
+          );
+        })
+      }
+    </ul>
+  </div>
+</section>
+
+<script>
+  document.addEventListener(
+    "astro:page-load",
+    () => {
+      const fadeImage = document.getElementById("js-fadeImage");
+
+      fadeImage?.complete && fadeImage.setAttribute("data-loaded", "true");
+      fadeImage?.addEventListener("load", () => {
+        fadeImage.setAttribute("data-loaded", "true");
+      });
+    },
+    { once: false },
+  );
+</script>
+
+<style lang="less">
+  @import "@/styles/common.less";
+
+  #js-fadeImage {
+    opacity: 0;
+    transition: opacity 0.6s ease-in;
+    &[data-loaded="true"] {
+      opacity: 0.4;
+    }
+  }
+
+  section {
+    display: grid;
+    height: 320px;
+    margin: 16px;
+    border-radius: 12px;
+    overflow: hidden;
+    background: #999;
+    @media (width < @xs) {
+      height: 240px;
+      margin: 0;
+      border-radius: 0;
+    }
+
+    > * {
+      grid-area: 1/-1;
+    }
+
+    img {
+      width: 100%;
+      height: 100%;
+      min-height: 0;
+      object-fit: cover;
+      object-position: right;
+      &:first-child {
+        opacity: 0.6;
+      }
+      @media (width < @xs) {
+        object-position: 50% center;
+      }
+    }
+
+    .content {
+      z-index: 1;
+      margin-block: auto;
+      color: #fff;
+    }
+
+    h2 {
+      letter-spacing: 0.1em;
+      font-size: 48px;
+      text-shadow: 0 0 32px rgba(#000, 0.4);
+      @media (width < @xs) {
+        font-size: 32px;
+      }
+      p:nth-child(2) {
+        margin-top: 8px;
+        font-size: 0.335em;
+      }
+      p:nth-child(3) {
+        margin-top: 8px;
+        font-size: 0.325em;
+      }
+    }
+
+    .sns {
+      display: flex;
+      gap: 16px;
+      margin-top: 24px;
+      justify-content: center;
+      @media (width < @xs) {
+        gap: 12px;
+      }
+    }
+  }
+</style>

@@ -1,0 +1,134 @@
+---
+import SVG from "@/components/SVG.astro";
+import Headline from "@/components/ui/Headline.astro";
+import SnsLink from "@/components/ui/SnsLink.astro";
+import { loadCollection } from "@/components/loadCollection.js";
+
+// TODO: URL変わるかも?
+const followList = [
+  {
+    sns: "x",
+    link: "https://x.com/psephopaiktes",
+    title: "Xでフォロー",
+  },
+  {
+    sns: "facebook",
+    link: "https://fb.me/webablog",
+    title: "Facebookでフォロー",
+  },
+  {
+    sns: "feedly",
+    link: "https://feedly.com/i/subscription/feed%2Fhttps%3A%2F%2Fhira.page%2Fblog%2Findex.xml",
+    title: "Feedlyでフォロー",
+  },
+  {
+    sns: "rss",
+    link: "https://hira.page/rss.xml",
+    title: "RSSを表示",
+  },
+  {
+    sns: "gnews",
+    link: "https://news.google.com/publications/CAAqBwgKML_jpQswl-69Aw",
+    title: "Googleニュース",
+  },
+];
+
+const blogCollection = await loadCollection("blog");
+const currentTag = Astro.params.tag;
+---
+
+<header class="grid">
+  <Headline label="BLOG" href="/blog" class="grid1" />
+
+  <ul class="follow grid2">
+    {
+      followList.map((sns) => {
+        return (
+          <li>
+            <SnsLink sns={sns.sns} link={sns.link} title={sns.title} />
+          </li>
+        );
+      })
+    }
+    <li><button id="js-search"><SVG symbol="search" /></button></li>
+  </ul>
+
+  <ul class="c-tagFilter grid3">
+    {
+      blogCollection.tags.map((tag) => (
+        <li>
+          <a
+            href={tag == currentTag ? "/blog" : `/blog/tag=${tag}/`}
+            class:list={["c-tag", tag == currentTag ? "active" : ""]}
+          >
+            <SVG symbol="tag" class="u-iconInText" />
+            {tag}
+          </a>
+          <span>{blogCollection.tagCounts[tag]}</span>
+        </li>
+      ))
+    }
+  </ul>
+</header>
+
+<script>
+  document.addEventListener(
+    "astro:page-load",
+    () => {
+      const search = document.getElementById("js-search");
+      search?.addEventListener("click", () => {
+        const Query = prompt("キーワードを入力");
+        if (!Query) return;
+        window.open(
+          `https://www.google.co.jp/search?q=${Query}&as_sitesearch=hira.page`,
+        );
+      });
+    },
+    { once: false },
+  );
+</script>
+
+<style lang="less">
+  @import "@/styles/common.less";
+
+  .grid {
+    display: grid;
+    gap: 24px;
+    grid-template-areas: "grid1 grid2" "grid3 grid3";
+    align-items: end;
+    @media (width < @xs) {
+      grid-template-areas: "grid1" "grid2" "grid3";
+    }
+    .grid1 {
+      grid-area: grid1;
+    }
+    .grid2 {
+      grid-area: grid2;
+    }
+    .grid3 {
+      grid-area: grid3;
+    }
+  }
+
+  .follow {
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    gap: 4px;
+    color: rgba(@main, 0.7);
+    @media (width < @xs) {
+      justify-content: start;
+    }
+  }
+
+  #js-search {
+    color: rgb(@label);
+    margin-left: 8px;
+    display: block;
+    height: 28px;
+    :global(svg) {
+      aspect-ratio: 1;
+      width: 28px;
+    }
+  }
+</style>

@@ -1,0 +1,233 @@
+---
+import { Squircle } from "@/components/Squircle.js";
+import SquircleButton from "@/components/ui/SquircleButton.astro";
+import Headline from "@/components/ui/Headline.astro";
+import Base from "@/layouts/Base.astro";
+import SVG from "@/components/SVG.astro";
+
+const FormId = import.meta.env.PUBLIC_FORMCARRY_ENDPOINT;
+
+const svgUrl = Squircle({
+  returnFormat: "dataUrl",
+  radius: 12,
+  curve: 8,
+  fill: "#ddccbb66",
+});
+---
+
+<Base title="CONTACT">
+  <div class="l-content">
+    <Headline label="CONTACT" />
+
+    <p>
+      ご依頼、お問い合わせはこちらから。<br class="u-hideSp" />
+    </p>
+    <p>
+      <budoux-ja>
+        料金や請負内容については
+        <a href="/price">PRICEページ</a>
+        をご確認ください。
+        <a href="https://x.com/psephopaiktes" target="_blank"> 𝕏 (旧Twitter)</a>
+        にリプライ、DMいただいても大丈夫です。
+      </budoux-ja>
+    </p>
+
+    <section class="status">
+      <h3>現在の稼働状況</h3>
+      <ul>
+        <li>
+          <!-- 対応可能です。 -->
+          しばらく手が空かないため、基本的に新規のご依頼はお断りしております。
+        </li>
+        <li>
+          転職活動は行っておりません。エージェント様のメールにはご返事できかねます。
+        </li>
+      </ul>
+    </section>
+
+    <form id="js-contactForm" novalidate>
+      <label>
+        <span>返信用メールアドレス</span>
+        <input
+          id="js-email"
+          type="email"
+          name="email"
+          placeholder="hoge@mail.com"
+          required
+          style={`border-image-source: url('${svgUrl}')`}
+        />
+      </label>
+
+      <label>
+        <span>お問い合わせ内容</span>
+        <textarea
+          id="js-message"
+          name="message"
+          placeholder="お問い合わせ内容"
+          rows="6"
+          required
+          minlength="10"
+          maxlength="800"
+          style={`border-image-source: url('${svgUrl}')`}></textarea>
+      </label>
+
+      <SquircleButton id="js-submit" type="submit" disabled button>
+        送信
+      </SquircleButton>
+
+      <p id="js-errorText">
+        <SVG symbol="caution" class="u-iconInText" />
+        <span></span>
+      </p>
+    </form>
+  </div>
+</Base>
+
+<script define:vars={{ FormId }}>
+  const contactForm = document.getElementById("js-contactForm");
+  const emailInput = document.getElementById("js-email");
+  const messageInput = document.getElementById("js-message");
+  const errorText = document.getElementById("js-errorText");
+  const submitButton = document.getElementById("js-submit");
+
+  emailInput?.addEventListener("input", validateForm);
+  messageInput?.addEventListener("input", validateForm);
+
+  function validateForm() {
+    if (!emailInput?.checkValidity()) {
+      errorText.style.display = "block";
+      errorText.querySelector("span").textContent =
+        "正しい形式のEmailを入力してください。";
+      submitButton.setAttribute("disabled", "");
+    } else if (!messageInput?.checkValidity()) {
+      errorText.style.display = "block";
+      errorText.querySelector("span").textContent =
+        "10文字以上、800文字以下のお問い合わせ内容を入力してください。";
+      submitButton.setAttribute("disabled", "");
+    } else {
+      errorText.style.display = "none";
+      errorText.querySelector("span").textContent = "";
+      submitButton.removeAttribute("disabled");
+    }
+  }
+
+  contactForm?.addEventListener("submit", (e) => {
+    e.preventDefault();
+    submitButton.textContent = "送信中...";
+    submitButton.setAttribute("disabled", "");
+
+    fetch(`https://formcarry.com/s/${FormId}`, {
+      recapture: false,
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+      body: JSON.stringify({
+        email: emailInput.value,
+        message: messageInput.value,
+      }),
+    })
+      .then((res) => {
+        if (res.ok) {
+          submitButton.textContent = "送信しました";
+          contactForm.reset();
+        } else {
+          // Formcarry error
+          submitButton.textContent = "サーバーエラー ❌";
+        }
+      })
+      .catch((err) => {
+        // network error
+        submitButton.textContent = "ネットワークエラー ❌";
+        console.error(err);
+      });
+  });
+</script>
+
+<style lang="less">
+  @import "@/styles/common.less";
+
+  .status {
+    h3 {
+      margin-top: 24px;
+      font-size: 1em;
+    }
+    ul {
+      margin-top: 0.2em;
+    }
+    li {
+      opacity: 0.8;
+      &::before {
+        opacity: 0.4;
+        content: "※";
+      }
+    }
+  }
+
+  form {
+    margin-top: 48px;
+    max-width: 40em;
+    label {
+      display: block;
+      margin-top: 24px;
+      span {
+        margin-left: 2px;
+        letter-spacing: 0;
+        font-weight: 500;
+        &::after {
+          content: "必須";
+          font-size: 11px;
+          color: rgb(@base);
+          margin-left: 0.5em;
+          padding: 0 0.5em;
+          line-height: 1.5;
+          font-weight: 500;
+          border-radius: 3px;
+          background: rgba(@main, 0.8);
+        }
+      }
+    }
+    input,
+    textarea {
+      display: block;
+      margin-top: 8px;
+      padding: 0;
+      width: 100%;
+      color: rgb(@main);
+      outline: none;
+      caret-color: rgb(@theme);
+      font-size: 18px;
+      line-height: 1.5;
+      cursor: text;
+      appearance: none;
+      background: none;
+      border: solid 12px;
+      border-image-slice: 12 fill;
+      opacity: 0.8;
+      &:user-invalid {
+        color: rgb(@caution);
+        border-color: red;
+      }
+      &::placeholder {
+        color: rgb(@main, 0.3);
+      }
+      &:focus {
+        opacity: 1;
+        filter: drop-shadow(0 0 8px rgba(@main, 0.2));
+      }
+    }
+    textarea {
+      resize: vertical;
+      form-sizing: content;
+    }
+    #js-errorText {
+      display: none;
+      color: rgb(@caution);
+      margin-left: 4px;
+      span {
+        margin-left: 0.5em;
+      }
+    }
+  }
+</style>

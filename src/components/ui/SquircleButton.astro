@@ -1,0 +1,60 @@
+---
+import { Squircle } from "@/components/Squircle.js";
+const { fill = "#fb0", button = false, ...attr } = Astro.props;
+
+const svgUrl = Squircle({
+  returnFormat: "dataUrl",
+  radius: 16,
+  curve: 12,
+  fill: fill,
+});
+---
+
+{
+  button ? (
+    <button {...attr} style={`border-image-source: url('${svgUrl}')`}>
+      <slot />
+    </button>
+  ) : (
+    <a {...attr} style={`border-image-source: url('${svgUrl}')`}>
+      <slot />
+    </a>
+  )
+}
+
+<style lang="less">
+  @import "@/styles/common.less";
+
+  a,
+  button {
+    display: block;
+    min-width: 160px;
+    max-width: 280px;
+    margin-top: 32px;
+    padding: 0;
+    background: none;
+    border: solid 16px;
+    border-image-slice: 16 fill;
+    color: rgb(@base);
+    letter-spacing: 0.1em;
+    text-align: center;
+    font-weight: 700;
+    font-size: 1.1em;
+    &:disabled {
+      opacity: 0.7;
+      color: rgba(@base, 0.5);
+      pointer-events: none;
+    }
+    &:hover,
+    &:active,
+    &:focus {
+      filter: drop-shadow(0 4px 8px rgba(@theme, 0.8));
+    }
+    :global(svg) {
+      width: 1.6em;
+      height: 1.6em;
+      vertical-align: bottom;
+      fill: currentColor;
+    }
+  }
+</style>

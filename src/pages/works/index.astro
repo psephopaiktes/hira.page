@@ -1,0 +1,17 @@
+---
+import WorksHeader from "@/components/Works/Header.astro";
+import WorksList from "@/components/Works/List.astro";
+import { sortPosts, sortTypes } from "@/components/Works/SortConstructor.js";
+import { loadCollection } from "@/components/loadCollection.js";
+import Base from "@/layouts/Base.astro";
+
+const worksCollection = await loadCollection("works");
+const posts = sortPosts(worksCollection.posts, sortTypes[0].id);
+---
+
+<Base title="WORKS">
+  <div class="l-content">
+    <WorksHeader />
+    <WorksList {posts} />
+  </div>
+</Base>

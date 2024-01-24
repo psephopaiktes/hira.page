@@ -1,0 +1,88 @@
+---
+
+---
+
+<section class="history">
+  <h2 data-inview>経歴</h2>
+  <table data-inview id="career">
+    <tr>
+      <th>2017</th>
+      <td>
+        <h4>株式会社 U-NEXT 入社</h4>
+        プロダクトデザイナーとして勤務
+      </td>
+    </tr>
+    <tr>
+      <th>2015</th>
+      <td>
+        <h4>同大学院 図書館情報メディア研究科 入学</h4>
+        クラウドソーシングを用いたコンテンツ生成について研究
+      </td>
+    </tr>
+    <tr>
+      <th>2011</th>
+      <td>
+        <h4>筑波大学 情報学群 情報メディア創生学類 入学</h4>
+        情報学の基本、デザイン、認知心理学等について学ぶ
+      </td>
+    </tr>
+    <tr>
+      <th>1992</th>
+      <td><h4>高知県出身</h4></td>
+    </tr>
+  </table>
+</section>
+
+<style lang="less">
+  @import "@/styles/common.less";
+
+  section {
+    margin-top: 96px;
+    padding-top: 64px;
+    border-top: 3px dotted rgba(@theme, 0.4);
+  }
+
+  h2 {
+    color: rgb(@label);
+  }
+
+  .history {
+    table {
+      border-collapse: separate;
+      border-spacing: 0 24px;
+      line-height: 1.4;
+      th {
+        color: rgb(@label);
+        width: 35%;
+        text-align: right;
+        padding: 8px 16px;
+        border-right: 2px solid;
+        font-weight: 700;
+        font-family: monospace;
+        @media (width < @xl) {
+          width: 30%;
+        }
+        @media (width < @lg) {
+          width: 25%;
+        }
+        @media (width < @sm) {
+          width: 20%;
+        }
+      }
+      td {
+        font-weight: auto;
+        padding: 8px 16px;
+        text-align: left;
+        h4 {
+          font-weight: bold;
+          margin-bottom: 0.4em;
+        }
+      }
+    }
+  }
+  .license {
+    ul {
+      margin-top: 24px;
+    }
+  }
+</style>

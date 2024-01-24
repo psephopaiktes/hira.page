@@ -1,0 +1,72 @@
+---
+import SVG from "@/components/SVG.astro";
+const { label, href } = Astro.props;
+---
+
+<h2 data-inview transition:name={"headline-" + label}>
+  {
+    href ? (
+      <a {href}>
+        <span>{label}</span>
+
+        <small>
+          more <SVG symbol="next" />
+        </small>
+      </a>
+    ) : (
+      <span>{label}</span>
+    )
+  }
+</h2>
+
+<style lang="less">
+  @import "@/styles/common.less";
+
+  h2 {
+    position: relative; // for z-index
+    margin-top: 64px;
+    color: rgb(@label);
+    @media (width < @lg) {
+      margin-top: 48px;
+      font-size: 20px;
+    }
+  }
+
+  span {
+    font-weight: 800;
+    line-height: 1.1;
+    letter-spacing: 0.05em;
+    font-size: 24px;
+    display: inline-block;
+    &::first-letter {
+      font-size: 1.2em;
+    }
+    &::after {
+      content: ".";
+      color: rgb(@theme);
+      font-size: 1.4em;
+    }
+  }
+
+  a small {
+    display: inline-flex;
+    align-items: center;
+    font-size: 0.8em;
+    margin-left: 0.4em;
+    font-variation-settings: "wght" 500;
+    color: rgb(@main);
+    opacity: 0.6;
+    transition: @transition;
+    line-height: 1;
+    :global(svg) {
+      width: 1em;
+      height: 1em;
+      margin-bottom: -0.35em;
+    }
+  }
+  :is(a:hover, a:active) small {
+    opacity: 1;
+    color: rgba(@main, 0.9);
+    font-variation-settings: "wght" 700;
+  }
+</style>

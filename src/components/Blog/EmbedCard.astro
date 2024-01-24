@@ -1,0 +1,20 @@
+---
+const { url, img = "/img/embed-placeholder.png", title, site } = Astro.props;
+---
+
+<a class="embed-card" href={url} target="_blank">
+  <img
+    class="og"
+    src={img == "" ? "/img/embed-placeholder.png" : img}
+    alt="参照記事サムネイル"
+  />
+  <h5>{title}</h5>
+  <img
+    class="favi"
+    alt="favicon"
+    src={"https://www.google.com/s2/favicons?domain=" + site}
+    width="20"
+    height="20"
+  />
+  <span>{site}</span>
+</a>

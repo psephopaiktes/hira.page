@@ -1,0 +1,70 @@
+---
+import { Squircle } from "@/components/Squircle.js";
+import Footer from "@/components/ui/Footer.astro";
+import Nav from "@/components/ui/Nav.astro";
+
+const path = Squircle({
+  returnFormat: "path",
+  width: 120,
+  height: 120,
+  radius: 32,
+});
+const pathOuter = Squircle({
+  returnFormat: "path",
+  width: 125,
+  height: 125,
+  radius: 37,
+});
+---
+
+<body class="l-body">
+  <Nav />
+
+  <main class="l-main">
+    <slot />
+    <Footer />
+  </main>
+
+  <!-- clip-pathで切り取る用 -->
+  <svg class="c-clip" width="0" height="0" viewBox="0 0 120 120">
+    <clipPath id="squircle" clipPathUnits="objectBoundingBox">
+      <path d={path} transform="scale(0.0083333333, 0.0083333333)"></path>
+    </clipPath>
+  </svg>
+  <svg class="c-clip" width="0" height="0" viewBox="0 0 120 120">
+    <clipPath id="squircleOuter" clipPathUnits="objectBoundingBox">
+      <path d={pathOuter} transform="scale(0.008, 0.008)"></path>
+    </clipPath>
+  </svg>
+</body>
+
+<script is:inline>
+  console.log(
+    "This site's code: \n%chttps://github.com/psephopaiktes/hira.page",
+    `
+    padding: 24px 32px;
+    margin: 16px 0px;
+    border: 2px solid #fb0;
+    border-radius: 16px;
+    letter-spacing: .1em;
+    font-size: large;
+    font-weight: bold;
+  `,
+  );
+</script>
+
+<style lang="less">
+  @import "@/styles/common.less";
+
+  main {
+    margin: 8px;
+    border-radius: 24px;
+    border: 1px solid rgba(@label, 0.1);
+    background: rgb(@base);
+    box-shadow: 2px 8px 48px rgba(@label, 0.3);
+    @media (width < @xs) {
+      margin-bottom: 0;
+      border-radius: 0;
+    }
+  }
+</style>

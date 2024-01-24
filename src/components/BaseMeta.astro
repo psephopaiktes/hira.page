@@ -1,0 +1,55 @@
+---
+import "@/styles/global.less";
+import { ViewTransitions } from "astro:transitions";
+const { title, description } = Astro.props;
+---
+
+<title>{title}</title>
+<meta name="description" content={description} />
+
+<ViewTransitions />
+
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="generator" content={Astro.generator} />
+<link rel="sitemap" href="/sitemap-index.xml" />
+
+<!-- Favicon -->
+<link rel="icon" sizes="64x64" type="image/png" href="/img/icon/favicon.svg" />
+<link rel="icon" sizes="192x192" href="/img/icon/android-chrome.png" />
+<link
+  rel="apple-touch-icon"
+  sizes="180x180"
+  href="/img/icon/apple-touch-icon.png"
+/>
+<meta name="theme-color" content="#fb0" />
+<meta name="color-scheme" content="light dark" />
+
+<!-- Font preloads -->
+<link
+  rel="preload"
+  href="/font/Regular.woff2"
+  as="font"
+  type="font/woff2"
+  crossorigin
+/>
+<link
+  rel="preload"
+  href="/font/Bold.woff2"
+  as="font"
+  type="font/woff2"
+  crossorigin
+/>
+<link
+  rel="preload"
+  href="/font/FuturaNowVar.woff2"
+  as="font"
+  type="font/woff2"
+  crossorigin
+/>
+
+<script>
+  import "@dotlottie/player-component";
+  import "@dotlottie/player-component";
+  import "budoux/module/webcomponents/budoux-ja";
+</script>

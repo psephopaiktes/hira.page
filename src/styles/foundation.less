@@ -1,0 +1,178 @@
+@font-face {
+  font-family: "FuturaNowVar";
+  src:
+    local("Futura Now Var"),
+    url("/font/FuturaNowVar.woff2") format("woff2");
+  font-display: fallback;
+}
+@font-face {
+  font-family: "Tazugane";
+  font-weight: 100 200;
+  src:
+    local("Tazugane Gothic StdN Regular"),
+    url("/font/Regular.woff2") format("woff2");
+  font-display: fallback;
+}
+@font-face {
+  font-family: "Tazugane";
+  font-weight: 300 400;
+  src:
+    local("Tazugane Gothic StdN Regular"),
+    url("/font/Regular.woff2") format("woff2");
+  font-display: fallback;
+}
+@font-face {
+  font-family: "Tazugane";
+  font-weight: 500;
+  src:
+    local("Tazugane Gothic StdN Regular"),
+    url("/font/Regular.woff2") format("woff2");
+  font-display: fallback;
+}
+@font-face {
+  font-family: "Tazugane";
+  font-weight: 600 700;
+  src:
+    local("Tazugane Gothic StdN Bold"),
+    url("/font/Bold.woff2") format("woff2");
+  font-display: fallback;
+}
+@font-face {
+  font-family: "Tazugane";
+  font-weight: 800 900;
+  src:
+    local("Tazugane Gothic StdN Bold"),
+    url("/font/Bold.woff2") format("woff2");
+  font-display: fallback;
+}
+
+:root {
+  background: rgba(@theme);
+  accent-color: rgba(@theme);
+  color: rgba(@main, 0.9);
+
+  --color-theme: 255, 187, 0;
+  --color-label: 136, 68, 0;
+  --color-base: 255, 252, 240;
+  --color-main: 56, 52, 48;
+  --color-caution: 216, 39, 0;
+
+  @media (prefers-color-scheme: dark) {
+    --color-theme: 255, 187, 0;
+    --color-label: 255, 187, 0;
+    --color-base: 42, 40, 36;
+    --color-main: 255, 255, 255;
+    --color-caution: 255, 83, 29;
+  }
+}
+
+body {
+  line-height: 1.7;
+  font-weight: 500;
+  font-size: 16px;
+  font-family:
+    FuturaNowVar,
+    "Futura Now Text",
+    "Futura",
+    "Avenir Next",
+    "Avenir",
+    "Century Gothic",
+    Tazugane,
+    "Tazugane Gothic StdN",
+    "Robot",
+    "SF Pro Text",
+    "Helvetica Neue",
+    "Helvetica",
+    "Arial",
+    "Hiragino Sans",
+    "Hiragino Kaku Gothic ProN",
+    "Noto Sans JP",
+    "Noto Sans CJK JP",
+    "BIZ UDPGothic",
+    Meiryo,
+    -apple-system,
+    BlinkMacSystemFont,
+    sans-serif;
+  font-feature-settings: "pkna" 1;
+  font-kerning: normal;
+  letter-spacing: 0.02em;
+  @media (width < @md) {
+    font-size: 14px;
+  }
+}
+
+// Grain Noise
+body::before {
+  content: "";
+  display: block;
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  opacity: 0.6;
+  filter: contrast(480%) brightness(120%);
+  mix-blend-mode: color-burn;
+  background-image: radial-gradient(
+      160vw 120vh at center -20vh,
+      #ff660000 20%,
+      #ff6600cc 100%
+    ),
+    url("data:image/svg+xml,%3Csvg%20viewBox='0%200%201200%201200'%20xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter%20id='noiseFilter'%3E%3CfeTurbulence%20type='fractalNoise'%20baseFrequency='0.6'%20numOctaves='3'%20stitchTiles='stitch'/%3E%3C/filter%3E%3Crect%20width='100%25'%20height='100%25'%20filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  @media (width < @xs) {
+    display: none;
+  }
+}
+
+// Basic DOM Style
+h1,
+h2,
+h3,
+h4,
+button,
+input,
+label {
+  line-height: 1.2;
+}
+
+p {
+  margin-top: 12px;
+}
+p a {
+  color: rgb(@theme);
+}
+
+a,
+button {
+  transition: @transition;
+  &:hover,
+  &:active {
+    transition: @transition;
+  }
+}
+
+svg,
+path {
+  fill: currentColor;
+  aspect-ratio: 1;
+}
+
+:focus-visible {
+  outline-color: rgb(@theme);
+}
+::selection {
+  background: rgb(@theme);
+  color: rgb(@base);
+}
+::marker {
+  color: rgb(@theme);
+}
+:is(
+    ::-webkit-calendar-picker-indicator,
+    ::-webkit-clear-button,
+    ::-webkit-inner-spin-button,
+    ::-webkit-outer-spin-button
+  ) {
+  color: rgb(@theme);
+}

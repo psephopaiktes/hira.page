@@ -1,0 +1,180 @@
+---
+import SVG from "@/components/SVG.astro";
+
+const { post } = Astro.props;
+---
+
+<aside>
+  <button
+    class="native"
+    id="js-nativeBtn"
+    data-title={post.data.title + "｜WEBA"}
+    data-url={Astro.url}
+  >
+    <SVG symbol="share-google" />
+    <SVG symbol="share-apple" />
+    <span class="u-textHidden">シェア</span>
+  </button>
+
+  <a
+    class="x"
+    href={"https://twitter.com/intent/tweet?url=" +
+      Astro.url +
+      "&text=" +
+      post.data.title +
+      "｜WEBA"}
+    target="_blank"
+    title="Xにポスト"
+  >
+    <SVG symbol="x" />
+    <span class="u-textHidden">Xにポスト</span>
+  </a>
+
+  <a
+    class="facebook"
+    href={"https://www.facebook.com/sharer/sharer.php?u=" + Astro.url}
+    target="_blank"
+    title="Facebookでシェア"
+  >
+    <SVG symbol="facebook" />
+    <span class="u-textHidden">Facebookでシェア</span>
+  </a>
+
+  <a
+    class="hatena"
+    href={"https://b.hatena.ne.jp/entry/" + Astro.url}
+    target="_blank"
+    title="はてブに登録"
+  >
+    <SVG symbol="hatebu" />
+    <span class="u-textHidden">はてブに登録</span>
+  </a>
+
+  <a
+    class="pocket u-hideSp"
+    href={"https://getpocket.com/save?url=" + Astro.url}
+    target="_blank"
+    title="Pocketに保存"
+  >
+    <SVG symbol="pocket" />
+    <span class="u-textHidden">Pocketに保存</span>
+  </a>
+
+  <a
+    class="line u-showSp"
+    href={"https://line.me/R/msg/text/?" +
+      post.data.title +
+      "｜WEBA " +
+      Astro.url}
+    target="_blank"
+    title="LINEで共有"
+  >
+    <SVG symbol="line" />
+    <span class="u-textHidden">LINEで共有</span>
+  </a>
+</aside>
+
+<script>
+  document.addEventListener(
+    "astro:page-load",
+    () => {
+      const nativeBtn = document.getElementById("js-nativeBtn");
+
+      if (!nativeBtn || !navigator.share) return;
+
+      nativeBtn.classList.add("show");
+      const title = nativeBtn.dataset.title;
+      const url = nativeBtn.dataset.url;
+
+      nativeBtn.addEventListener("click", () => {
+        navigator.share({
+          title,
+          url,
+        });
+      });
+
+      const isApple = navigator.userAgent.match(/(iphone|ipad|macintosh)/i);
+      if (isApple) {
+        nativeBtn.classList.add("apple");
+      }
+    },
+    { once: false },
+  );
+</script>
+
+<style lang="less">
+  @import "@/styles/common.less";
+
+  aside {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    gap: 12px;
+    position: fixed;
+    left: 0;
+    bottom: 48px;
+    z-index: 999;
+    @media (width < @2xl) {
+      bottom: 32px;
+    }
+    @media (width < @xs) {
+      bottom: calc(16px + env(safe-area-inset-bottom));
+      justify-content: left;
+      padding-left: 16px;
+    }
+
+    button,
+    a {
+      display: block;
+      overflow: hidden;
+      aspect-ratio: 1;
+      width: 40px;
+      padding: 8px;
+      border-radius: 50%;
+      background-color: rgba(#000, 0.3);
+      backdrop-filter: blur(8px);
+      @media (width < @xs) {
+        width: 32px;
+        padding: 4px;
+      }
+      :global(svg) {
+        fill: #fff;
+        width: 100%;
+        aspect-ratio: 1;
+      }
+    }
+
+    button {
+      display: none;
+      &:hover {
+        background: rgb(@label);
+      }
+      &.show {
+        display: block;
+      }
+      &.apple {
+        :global(svg:first-child) {
+          display: none;
+        }
+      }
+    }
+
+    a {
+      &:hover.x {
+        background-color: #000;
+      }
+      &:hover.facebook {
+        background-color: #1977f2;
+      }
+      &:hover.hatena {
+        background-color: #00a4de;
+      }
+      &:hover.pocket {
+        background-color: #ef4056;
+      }
+      &:hover.line {
+        background-color: #00b500;
+      }
+    }
+  }
+</style>

@@ -1,0 +1,67 @@
+[data-inview] {
+  transition: 0.6s ease;
+  opacity: 0;
+  transform: translateY(96px);
+  &.show {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.c-card {
+  will-change: transform;
+  &:hover,
+  &:active {
+    scale: 1.02;
+  }
+}
+
+.c-clip {
+  position: fixed;
+  top: 0;
+  left: 0;
+  user-select: none;
+}
+
+.c-tag {
+  padding: 0em 0.1em 0.2em;
+  color: rgba(@label, 0.8);
+  svg {
+    opacity: 0.5;
+    margin-right: -0.35em;
+    width: 1.3em;
+    height: 1.3em;
+    vertical-align: text-bottom;
+  }
+}
+
+.c-tagFilter {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  font-size: 0.8em;
+
+  span {
+    opacity: 0.4;
+    font-size: 11px;
+    margin-left: -0.3em;
+  }
+
+  .active {
+    color: rgba(@main, 0.8);
+    position: relative;
+    :global(svg) {
+      opacity: 1;
+    }
+    &::after {
+      content: "";
+      position: absolute;
+      display: block;
+      width: 106%;
+      height: 0.2em;
+      top: 1.6em;
+      left: 3%;
+      background: rgba(@main, 0.8);
+    }
+  }
+}

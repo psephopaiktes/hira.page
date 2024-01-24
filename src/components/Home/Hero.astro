@@ -1,0 +1,107 @@
+---
+import { Image } from "astro:assets";
+import AoSleepImage from "@/assets/img/ao-sleep.webp";
+---
+
+<section>
+  <Image
+    id="js-fadeImage"
+    data-loaded="false"
+    src={AoSleepImage}
+    alt="眠る猫の背景画像"
+  />
+
+  <h2 class="l-content">
+    <dotlottie-player autoplay src="/lottie/weba.lottie"></dotlottie-player>
+    <p>
+      Hi, I design & develop. <br class="u-showSp" />
+      This is My Blog & Portfolio.
+    </p>
+  </h2>
+</section>
+
+<script>
+  document.addEventListener(
+    "astro:page-load",
+    () => {
+      const fadeImage = document.getElementById("js-fadeImage");
+
+      fadeImage?.complete && fadeImage.setAttribute("data-loaded", "true");
+      fadeImage?.addEventListener("load", () => {
+        fadeImage.setAttribute("data-loaded", "true");
+      });
+    },
+    { once: false },
+  );
+</script>
+
+<style lang="less">
+  @import "@/styles/common.less";
+
+  #js-fadeImage {
+    opacity: 0;
+    transition: opacity 0.4s ease-in;
+    &[data-loaded="true"] {
+      opacity: 0.1;
+    }
+  }
+
+  section {
+    display: grid;
+    height: 240px;
+
+    > * {
+      grid-area: 1/-1;
+    }
+    // &::after {
+    //   content: "";
+    //   grid-area: 1/-1;
+    //   backdrop-filter: blur(2px);
+    //   background-image: radial-gradient(
+    //     ellipse 160% 100% at top center,
+    //     rgba(@base, 0.8) 70%,
+    //     rgba(@base, 1) 100%
+    //   );
+    //   background-size: 100%;
+    //   @media (width < @xs) {
+    //     backdrop-filter: blur(1px);
+    //   }
+    // }
+  }
+  img {
+    width: 100%;
+    height: 100%;
+    min-height: 0;
+    object-fit: cover;
+    object-position: right;
+    border-radius: 24px 24px 0 0;
+    @media (width < @xs) {
+      border-radius: 0;
+      object-position: 80% center;
+    }
+  }
+  h2 {
+    z-index: 1;
+    margin-block: auto;
+    @media (width < @xs) {
+      display: grid;
+      place-items: center;
+      text-align: center;
+    }
+    dotlottie-player {
+      width: 160px;
+      aspect-ratio: 4;
+      @media (width < @lg) {
+        width: 120px;
+      }
+    }
+    p {
+      margin: 16px 4px -16px;
+      line-height: 1.8;
+      color: rgba(@label, 0.9);
+      font-size: 14px;
+      font-weight: 400;
+      letter-spacing: 0.1em;
+    }
+  }
+</style>

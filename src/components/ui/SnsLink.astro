@@ -1,0 +1,80 @@
+---
+import SVG from "@/components/SVG.astro";
+
+const {
+  sns,
+  link = `https://${sns}.com/psephopaiktes`,
+  title = sns,
+} = Astro.props;
+---
+
+<a href={link} target="_blank" title={title}>
+  <SVG symbol={sns} />
+  <span class="u-textHidden">{sns}</span>
+</a>
+
+<style lang="less">
+  @import "@/styles/common.less";
+
+  a {
+    display: block;
+    position: relative;
+    width: 28px;
+    height: 28px;
+    word-break: keep-all;
+    opacity: 0.7;
+
+    span {
+      display: block;
+      height: 0;
+    }
+
+    :global(svg) {
+      width: 100%;
+      aspect-ratio: 1;
+    }
+
+    &::before,
+    &::after {
+      position: absolute;
+      display: block;
+      left: 50%;
+      transform: translateX(-50%);
+      opacity: 0;
+      transition: bottom @transition;
+      pointer-events: none;
+    }
+    &::before {
+      content: "";
+      border-width: 20px 10px;
+      border-style: solid;
+      border-color: rgb(@label) transparent transparent;
+      bottom: 30%;
+    }
+    &::after {
+      content: attr(title);
+      margin-left: auto;
+      margin-right: auto;
+      bottom: 100%;
+      padding: 0.2em 0.6em 0.3em;
+      border-radius: 8px;
+      text-align: center;
+      font-size: 14px;
+      background: rgb(@label);
+      color: rgb(@base);
+    }
+    &:hover,
+    &:active {
+      opacity: 1;
+      transform: scale(1.07);
+      &::before {
+        opacity: 1;
+        bottom: 40%;
+      }
+      &::after {
+        opacity: 1;
+        bottom: 120%;
+      }
+    }
+  }
+</style>

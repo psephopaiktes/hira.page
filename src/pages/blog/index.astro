@@ -1,0 +1,15 @@
+---
+import BlogHeader from "@/components/Blog/Header.astro";
+import BlogList from "@/components/Blog/List.astro";
+import { loadCollection } from "@/components/loadCollection.js";
+import Base from "@/layouts/Base.astro";
+
+const blogCollection = await loadCollection("blog");
+---
+
+<Base title="BLOG">
+  <div class="l-content">
+    <BlogHeader />
+    <BlogList posts={blogCollection.posts} />
+  </div>
+</Base>

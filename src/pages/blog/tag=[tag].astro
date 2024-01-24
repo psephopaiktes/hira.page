@@ -1,0 +1,30 @@
+---
+import BlogHeader from "@/components/Blog/Header.astro";
+import BlogList from "@/components/Blog/List.astro";
+import { loadCollection } from "@/components/loadCollection.js";
+import Base from "@/layouts/Base.astro";
+
+export async function getStaticPaths() {
+  const blogCollection = await loadCollection("blog");
+
+  return blogCollection.tags.map((tag) => {
+    const filteredPosts = blogCollection.posts.filter((post) =>
+      post.data.tags.includes(tag),
+    );
+
+    return {
+      params: { tag },
+      props: { posts: filteredPosts },
+    };
+  });
+}
+
+const { posts } = Astro.props;
+---
+
+<Base title="BLOG">
+  <div class="l-content">
+    <BlogHeader />
+    <BlogList {posts} />
+  </div>
+</Base>

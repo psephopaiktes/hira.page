@@ -1,0 +1,111 @@
+---
+import SVG from "@/components/SVG.astro";
+import Headline from "@/components/ui/Headline.astro";
+import { loadCollection } from "@/components/loadCollection.js";
+import { sortTypes } from "@/components/Works/SortConstructor.js";
+
+const worksCollection = await loadCollection("works");
+
+const currentTag = Astro.params.tag;
+const currentSort = Astro.params.sort || sortTypes[0].id;
+---
+
+<header class="grid">
+  <Headline label="WORKS" href="/works" class="grid1" />
+
+  <select id="js-sort" class="grid2">
+    {
+      sortTypes.map((sortType) => (
+        <option
+          value={
+            currentTag
+              ? `/works/tag=${currentTag}/sort=${sortType.id}`
+              : `/works/sort=${sortType.id}`
+          }
+          selected={currentSort === sortType.id}
+        >
+          {sortType.label}
+        </option>
+      ))
+    }
+  </select>
+
+  <ul class="c-tagFilter grid3">
+    {
+      worksCollection.tags.map((tag) => (
+        <li>
+          <a
+            href={
+              tag == currentTag
+                ? `/works/sort=${currentSort}`
+                : `/works/tag=${tag}/sort=${currentSort}`
+            }
+            class:list={["c-tag", tag == currentTag ? "active" : ""]}
+          >
+            <SVG symbol="tag" class="u-iconInText" />
+            {tag}
+          </a>
+          <span>{worksCollection.tagCounts[tag]}</span>
+        </li>
+      ))
+    }
+  </ul>
+</header>
+
+<script>
+  document.addEventListener(
+    "astro:page-load",
+    () => {
+      const sort = document.getElementById("js-sort");
+      sort?.addEventListener("change", function () {
+        window.location.href = this.value;
+      });
+    },
+    { once: false },
+  );
+</script>
+
+<style lang="less">
+  @import "@/styles/common.less";
+
+  .grid {
+    display: grid;
+    gap: 24px;
+    grid-template-areas: "grid1 grid2" "grid3 grid3";
+    align-items: end;
+    @media (width < @2xs) {
+      gap: 16px;
+      grid-template-areas: "grid1" "grid2" "grid3";
+    }
+    .grid1 {
+      grid-area: grid1;
+    }
+    .grid2 {
+      justify-self: end;
+      grid-area: grid2;
+    }
+    .grid3 {
+      grid-area: grid3;
+    }
+  }
+
+  #js-sort {
+    display: block;
+    position: relative;
+    padding: 4px 40px 4px 12px;
+    appearance: none;
+    cursor: pointer;
+    border-radius: 6px;
+    border: none;
+    font-weight: 700;
+    color: rgb(@label);
+    background-color: rgba(@theme, 0.2);
+    background-size: 32px;
+    background-position: center right 4px;
+    background-repeat: no-repeat;
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg%20fill%3D%22none%22%20height%3D%2224%22%20viewBox%3D%220%200%2024%2024%22%20width%3D%2224%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Cpath%20d%3D%22m15.88%209.29-3.88%203.88-3.87998-3.88c-.08965-.10468-.19997-.1897-.32403-.24973-.12407-.06002-.2592-.09375-.39692-.09907s-.27505.01789-.40338.06816c-.12832.05028-.24487.12653-.34232.22399-.09746.09745-.17372.214-.22399.34233-.05028.12832-.07348.26565-.06816.40337.00532.13775.03905.27285.09907.39695.06002.124.14505.2344.24973.324l4.58998%204.59c.1874.1863.4408.2908.705.2908s.5177-.1045.705-.2908l4.59-4.59c.1863-.1874.2908-.4408.2908-.705%200-.26419-.1045-.51764-.2908-.705-.0929-.09373-.2035-.16812-.3254-.21889s-.2526-.07691-.3846-.07691-.2627.02614-.3846.07691c-.1218.05077-.2324.12516-.3254.21889z%22%20fill%3D%22%23fb0%22%2F%3E%3C%2Fsvg%3E");
+    @media (width < @2xs) {
+      width: 100%;
+    }
+  }
+</style>

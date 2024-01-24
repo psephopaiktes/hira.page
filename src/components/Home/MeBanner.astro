@@ -1,0 +1,133 @@
+---
+import Icon from "@/assets/img/icon.png";
+import MeImage from "@/assets/img/me/eyecatch.jpg";
+import { Squircle } from "@/components/Squircle.js";
+import { ME_DESCRIPTION } from "@/consts";
+import { Image } from "astro:assets";
+
+const path = Squircle({
+  returnFormat: "path",
+  width: 160,
+  height: 40,
+  radius: 16,
+  curve: 16,
+});
+---
+
+<a data-inview href="/me" class="c-card">
+  <Image class="meImage" src={MeImage} alt="平田のイメージ画像" />
+
+  <div class="overlay">
+    <Image class="icon" src={Icon} alt="プロフィールアイコン" />
+
+    <h3>Akira HIRATA</h3>
+    <p>
+      <budoux-ja>{ME_DESCRIPTION}</budoux-ja>
+    </p>
+  </div>
+</a>
+
+<svg class="c-clip" width="0" height="0" viewBox="0 0 120 120">
+  <clipPath id="squircleMe" clipPathUnits="objectBoundingBox">
+    <path d={path} transform="scale(0.00625, 0.025)"></path>
+  </clipPath>
+</svg>
+
+<style lang="less">
+  @import "@/styles/common.less";
+
+  a {
+    display: block;
+    filter: @filterShadow;
+    margin-top: 16px;
+    width: 100%;
+    overflow: hidden;
+
+    .meImage {
+      clip-path: url(#squircleMe);
+      background-color: #99999922;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      position: absolute;
+      @media (width < @xs) {
+        clip-path: url(#squircle);
+      }
+    }
+
+    .overlay {
+      clip-path: url(#squircleMe);
+      display: grid;
+      gap: 16px 32px;
+      align-items: center;
+      align-content: center;
+
+      position: relative;
+      height: 100%;
+      padding: 64px 32px;
+      background-color: rgba(@base, 0.7);
+      backdrop-filter: blur(8px) grayscale(0.4);
+      color: rgba(@main, 1);
+      transition: @transition;
+      @media (width < @lg) {
+        gap: 8px 16px;
+        padding: 32px 24px;
+      }
+      @media (width < @sm) {
+        padding: 24px;
+      }
+      @media (width < @xs) {
+        clip-path: url(#squircle);
+        gap: 8px;
+        text-align: center;
+      }
+
+      &::before {
+        content: "";
+        display: block;
+        position: absolute;
+        z-index: -1;
+        width: 800px;
+        height: 1200px;
+        transform-origin: left center;
+        rotate: 45deg;
+        background: rgba(@theme, 0.25);
+        top: calc(50% - 600px);
+        left: 50%;
+      }
+
+      .icon {
+        grid-area: 1 / 1 / 3 / 2;
+        justify-self: end;
+        width: 96px;
+        @media (width < @sm) {
+          width: 64px;
+        }
+        @media (width < @xs) {
+          grid-area: 1 / 1;
+          justify-self: center;
+          width: 80px;
+        }
+      }
+      h3 {
+        grid-area: 1 / 2 / 2 / 3;
+        font-size: 24px;
+        font-weight: 600;
+        letter-spacing: 0.1em;
+        @media (width < @xs) {
+          grid-area: 2 / 1;
+        }
+      }
+      p {
+        grid-area: 2 / 2 / 3 / 3;
+        max-width: 50em;
+        font-size: 14px;
+        font-weight: 400;
+        margin: 0;
+        @media (width < @xs) {
+          grid-area: 3 / 1;
+        }
+      }
+    }
+  }
+</style>

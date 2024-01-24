@@ -1,0 +1,168 @@
+---
+import SnsLink from "@/components/ui/SnsLink.astro";
+
+const snsList = ["X", "note", "GitHub", "Instagram", "Pinterest"];
+---
+
+<footer>
+  <ul class="sns">
+    {
+      snsList.map((sns) => {
+        return (
+          <li>
+            <SnsLink {sns} />
+          </li>
+        );
+      })
+    }
+  </ul>
+
+  <small>
+    © Akira HIRATA {new Date().getFullYear()}.
+  </small>
+
+  <a
+    href="https://github.com/psephopaiktes/hira.page"
+    target="_blank"
+    class="octocat u-hideTabSp"
+  >
+    <dotlottie-player src="/lottie/octocat.lottie" hover="true" loop="true"
+    ></dotlottie-player>
+    <span>Source Code</span>
+  </a>
+
+  <a href="#top" id="js-gotop" class="l-gotop">Scroll to Top</a>
+</footer>
+
+<script>
+  document.addEventListener(
+    "astro:page-load",
+    () => {
+      const elm = document.getElementById("js-gotop");
+
+      window.addEventListener("scroll", () => {
+        if (window.scrollY > 320) {
+          elm?.classList.add("show");
+        } else {
+          elm?.classList.remove("show");
+        }
+      });
+    },
+    { once: false },
+  );
+</script>
+
+<style lang="less">
+  @import "@/styles/common.less";
+
+  footer {
+    display: grid;
+    place-items: center;
+    gap: 32px;
+    margin-top: 96px;
+    padding: 64px 48px;
+    background: rgba(@theme, 0.1);
+    color: rgb(@label);
+    position: sticky;
+    top: 100vh;
+    @media (width < @lg) {
+      margin-top: 64px;
+    }
+    small {
+      font-size: 0.9em;
+      opacity: 0.8;
+    }
+  }
+
+  .sns {
+    display: flex;
+    gap: 32px;
+    @media (width < @lg) {
+      gap: 24px;
+    }
+    @media (width < @2xs) {
+      gap: 16px;
+    }
+  }
+
+  .octocat {
+    display: block;
+    width: 96px;
+    height: 96px;
+    position: fixed;
+    left: 0;
+    bottom: 24px;
+    will-change: transform;
+    transform-origin: left bottom;
+    opacity: 0.6;
+
+    span {
+      position: fixed;
+      left: 16px;
+      bottom: 96px;
+      width: 8em;
+      font-size: 14px;
+      color: #fff;
+      opacity: 0;
+    }
+
+    dotlottie-player {
+      rotate: 90deg;
+    }
+
+    &:hover {
+      opacity: 1;
+      scale: 1.2;
+      span {
+        opacity: 1;
+      }
+    }
+  }
+
+  #js-gotop {
+    display: block;
+    width: 48px;
+    height: 48px;
+
+    position: fixed;
+    right: 0;
+    bottom: -96px;
+
+    overflow: hidden;
+    text-indent: 200%;
+    white-space: nowrap;
+
+    border-radius: 24px 0 0 24px;
+    background: rgba(@main, 0.2);
+    backdrop-filter: saturate(1.6) blur(16px);
+    box-shadow: 2px 2px 16px rgba(@main, 0.2);
+
+    &::before {
+      content: "";
+      display: block;
+      position: absolute;
+      top: 16px;
+      left: 16px;
+      width: 18px;
+      height: 16px;
+      clip-path: polygon(50% 0, 100% 100%, 0 100%);
+      background: #fff;
+      transition: @transition;
+    }
+
+    &:hover,
+    &:active {
+      background: rgba(@main, 0.6);
+      &::before {
+        top: 14px;
+      }
+    }
+
+    &.show {
+      bottom: 24px;
+      @media (width < @xs) {
+        bottom: calc(16px + env(safe-area-inset-bottom));
+      }
+    }
+  }
+</style>

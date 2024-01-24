@@ -1,0 +1,98 @@
+---
+import ListItem from "@/components/Price/ListItem.astro";
+import SVG from "@/components/SVG.astro";
+import Headline from "@/components/ui/Headline.astro";
+import SquircleButton from "@/components/ui/SquircleButton.astro";
+import Base from "@/layouts/Base.astro";
+
+const priceList = [
+  {
+    id: "logo",
+    title: "ロゴと名刺の作成",
+    text: "ロゴと名刺をデザインする例です。モーションやコンストラクショングリッド等は含みません。",
+    price: {
+      "ヒアリング・ディレクション": 20000,
+      デザイン作業: 60000,
+    },
+  },
+  {
+    id: "lp",
+    title: "ランディングページのデザイン・コーディング",
+    text: "静的なWebサイト構築の例です。サーバーサイドの設定や内容含めた企画ディレクションなどにより料金は前後いたします。",
+    price: {
+      "ヒアリング・ディレクション": 40000,
+      "デザイン作業 x1ページ程": 50000,
+      "コーディング作業 x1ページ程": 60000,
+    },
+  },
+  {
+    id: "cms",
+    title: "CMSによるコーポレート/ブログサイト等の作成",
+    text: "ブログやニュースなど、記事の更新機能を含めたWebサイトです。Wordpressでの対応も可能ですが、基本的には保守・運用性の高い Headless CMS での構築をおすすめしています。",
+    price: {
+      "ヒアリング・ディレクション": 80000,
+      "デザイン作業 x5ページ程": 100000,
+      "コーディング作業 x5ページ程": 200000,
+    },
+  },
+  {
+    id: "ui",
+    title: "アプリケーションのUIデザイン・設計",
+    text: "iOS, Android や TV など、システムを考慮したアプリケーションのUIデザインです。Sketch, Figma, XD 等で納品いたします。ワイヤー・仕様設計・ドキュメンテーションなど全般的に対応可能です。",
+    price: {
+      "ヒアリング・ディレクション": 40000,
+      "デザイン作業 x5画面程": 100000,
+      "設計・ドキュメント x5画面程": 40000,
+    },
+  },
+];
+---
+
+<Base title="PRICE">
+  <div class="l-content">
+    <Headline label="PRICE" />
+
+    <p>
+      <budoux-ja>
+        ロゴ・UIなどのデザイン制作、Webサイトのコーディング作業、イベントでの登壇などを受け付けております。
+        過去の実績は <a href="/works">WORKS</a> ページからご確認ください。
+      </budoux-ja>
+    </p>
+    <p>
+      <budoux-ja>
+        制作料金は人日単価4万円〜からお見積もりします。例はあくまで目安ですので、作業内容の複雑さや納期により調整いたします。期間を決めて委任契約での対応も可能です。
+      </budoux-ja>
+    </p>
+
+    <ol>
+      {priceList.map((item) => <ListItem {...item} />)}
+    </ol>
+
+    <SquircleButton
+      data-inview
+      href="/contact"
+      data-swellStalker="contact"
+      class="contactBtn"
+    >
+      <SVG symbol="contact" />
+      ご依頼・お問い合わせ
+    </SquircleButton>
+  </div>
+</Base>
+
+<style lang="less">
+  @import "@/styles/common.less";
+
+  ol {
+    margin-top: 96px;
+    @media (width < @lg) {
+      margin-top: 64px;
+    }
+  }
+  .contactBtn {
+    margin: 96px auto 0;
+    @media (width < @lg) {
+      margin-top: 64px;
+    }
+  }
+</style>

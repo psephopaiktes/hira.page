@@ -1,0 +1,39 @@
+---
+import WorksCard from "@/components/Works/Card.astro";
+
+const { posts } = Astro.props;
+---
+
+<ul>
+  {
+    posts.map((post) => (
+      <li>
+        <WorksCard slug={post.slug} data={post.data} />
+      </li>
+    ))
+  }
+</ul>
+
+<style lang="less">
+  @import "@/styles/common.less";
+
+  ul {
+    margin-top: 32px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    @media (width < @xs) {
+      gap: 4px;
+    }
+  }
+  li {
+    filter: @filterShadow;
+    width: calc((100% - 32px) / 3);
+    @media (width < @lg) {
+      width: calc(50% - 8px);
+    }
+    @media (width < @xs) {
+      width: calc(50% - 2px);
+    }
+  }
+</style>

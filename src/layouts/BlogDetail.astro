@@ -1,0 +1,96 @@
+---
+import BaseMeta from "@/components/BaseMeta.astro";
+import CommonBody from "@/layouts/CommonBody.astro";
+import "@/styles/blog.less";
+
+const { data } = Astro.props;
+
+const schema = JSON.stringify([
+  {
+    "@context": "https://schema.org",
+    "@type": "NewsArticle",
+    mainEntityOfPage: Astro.url,
+    headline: data.title,
+    image: data.cover,
+    datePublished: data.date.toISOString(),
+    author: {
+      "@type": "Person",
+      name: "Akira HIRATA",
+    },
+    publisher: {
+      "@type": "Organization",
+      name: import.meta.env.SITE_NAME,
+      logo: {
+        "@type": "ImageObject",
+        url: Astro.site + "img/logo.svg",
+      },
+    },
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: "HOME",
+        item: Astro.site,
+      },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: "BLOG",
+        item: Astro.site + "blog/",
+      },
+      {
+        "@type": "ListItem",
+        position: 3,
+        name: data.title,
+        item: Astro.url,
+      },
+    ],
+  },
+]);
+---
+
+<!--
+
+  Source Code:
+  https://github.com/psephopaiktes/hira.page
+
+-->
+<html lang="ja">
+  <head prefix="og: https://ogp.me/ns#">
+    <BaseMeta title={data.title + "｜WEBA"} description={data.description} />
+
+    <!-- OGP -->
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content={data.title} />
+    <meta property="og:site_name" content={import.meta.env.SITE_NAME} />
+    <meta property="og:description" content={data.description} />
+    <meta property="og:image" content={data.cover} />
+    <meta property="og:url" content={Astro.url} />
+    <meta property="og:locale" content="ja_JP" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@psephopaiktes" />
+
+    <!-- Redirect -->
+    {
+      data.redirect && (
+        <>
+          <meta http-equiv="refresh" content={`0; url=${data.redirect}`} />
+          <link rel="canonical" href={data.redirect} />
+        </>
+      )
+    }
+
+    <!-- JSON-LD -->
+    <script type="application/ld+json" set:html={schema} />
+  </head>
+
+  <CommonBody>
+    <slot />
+  </CommonBody>
+
+
+</html>

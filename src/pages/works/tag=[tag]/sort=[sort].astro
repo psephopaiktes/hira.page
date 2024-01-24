@@ -1,0 +1,33 @@
+---
+import WorksHeader from "@/components/Works/Header.astro";
+import WorksList from "@/components/Works/List.astro";
+import { sortPosts, sortTypes } from "@/components/Works/SortConstructor.js";
+import { loadCollection } from "@/components/loadCollection.js";
+import Base from "@/layouts/Base.astro";
+
+export async function getStaticPaths() {
+  const worksCollection = await loadCollection("works");
+
+  return worksCollection.tags.flatMap((tag) => {
+    const filteredPosts = worksCollection.posts.filter((post) =>
+      post.data.tags.includes(tag),
+    );
+
+    return sortTypes.map((sortType) => {
+      return {
+        params: { tag, sort: sortType.id },
+        props: { posts: sortPosts(filteredPosts, sortType.id) },
+      };
+    });
+  });
+}
+
+const { posts } = Astro.props;
+---
+
+<Base title="WORKS">
+  <div class="l-content">
+    <WorksHeader />
+    <WorksList {posts} />
+  </div>
+</Base>
