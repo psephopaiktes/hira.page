@@ -12,7 +12,26 @@ const { posts } = Astro.props;
       </li>
     ))
   }
+  <li>
+    <ins
+      data-adtest={import.meta.env.PROD ? null : "on"}
+      class="adsbygoogle"
+      style="display:block"
+      data-ad-format="fluid"
+      data-ad-layout-key="-6t+ed+2i-1n-4w"
+      data-ad-client="ca-pub-5055970484117246"
+      data-ad-slot="6833318267"></ins>
+  </li>
 </ul>
+
+<script
+  is:inline
+  async
+  src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5055970484117246"
+  crossorigin="anonymous"></script>
+<script is:inline>
+  (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
 
 <style lang="less">
   @import "@/styles/common.less";

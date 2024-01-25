@@ -151,6 +151,16 @@ const followList = [
             )
           }
         </ul>
+
+        <h2 class="u-hideTabSp">広告</h2>
+        <ins
+          data-adtest={import.meta.env.PROD ? null : "on"}
+          class="u-hideTabSp adsbygoogle"
+          style="display:block"
+          data-ad-client="ca-pub-5055970484117246"
+          data-ad-slot="5115281607"
+          data-ad-format="auto"
+          data-full-width-responsive="true"></ins>
       </div>
     </aside>
 
@@ -164,7 +174,13 @@ const followList = [
   <footer class="blogFooter">
     <div class="l-content">
       <h2>広告</h2>
-      <div class="banner"></div>
+      <ins
+        data-adtest={import.meta.env.PROD ? null : "on"}
+        class="adsbygoogle"
+        style="display:block"
+        data-ad-format="autorelaxed"
+        data-ad-client="ca-pub-5055970484117246"
+        data-ad-slot="3774279778"></ins>
 
       <h2>おすすめ記事</h2>
       <ul class="recommendList">
@@ -178,6 +194,14 @@ const followList = [
       </ul>
     </div>
   </footer>
+
+  <script
+    async
+    src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5055970484117246"
+    crossorigin="anonymous"></script>
+  <script>
+    (adsbygoogle = window.adsbygoogle || []).push({});
+  </script>
 </BlogDetail>
 
 <style lang="less">
@@ -303,7 +327,7 @@ const followList = [
     h2 {
       font-size: 18px;
       opacity: 0.2;
-      &:nth-of-type(2) {
+      &:not(:first-child) {
         margin-top: 32px;
       }
       @media (width < @xl) {
@@ -393,15 +417,14 @@ const followList = [
       color: rgb(@label);
       margin-top: 64px;
     }
+  }
 
-    .banner {
-      box-shadow: 0px 8px 24px -8px rgba(@label, 0.1);
-      margin-top: 16px;
-      min-height: 160px;
-      background: rgba(@main, 0.1);
-      border-radius: 6px;
-      overflow: hidden;
-    }
+  .adsbygoogle {
+    box-shadow: 0px 8px 24px -8px rgba(@label, 0.1);
+    margin-top: 8px;
+    min-height: 80px;
+    border-radius: 6px;
+    overflow: hidden;
   }
 
   .recommendList {
