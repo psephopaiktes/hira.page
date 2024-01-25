@@ -107,20 +107,20 @@ const { post } = Astro.props;
 
   aside {
     display: flex;
-    justify-content: center;
-    width: 100%;
     gap: 12px;
     position: fixed;
-    left: 0;
+    left: 50vw;
+    translate: -50%;
     bottom: 48px;
-    z-index: 999;
+    z-index: 990;
+    padding-inline: 16px;
     @media (width < @2xl) {
       bottom: 32px;
     }
     @media (width < @xs) {
       bottom: calc(16px + env(safe-area-inset-bottom));
-      justify-content: left;
-      padding-left: 16px;
+      left: 0;
+      translate: 0;
     }
 
     button,
