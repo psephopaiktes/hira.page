@@ -1,0 +1,57 @@
+---
+import { AstroFont } from "astro-font";
+import { join } from "node:path";
+---
+
+<AstroFont
+  config={[
+    {
+      name: "FuturaNowVar",
+      src: [
+        {
+          style: "normal",
+          weight: "normal",
+          path: join(process.cwd(), "public", "font", "FuturaNowVar.woff2"),
+        },
+      ],
+      preload: false,
+      display: "swap",
+      fallback: "sans-serif",
+      cssVariable: "font-futura",
+    },
+    {
+      name: "Tazugane",
+      src: [
+        {
+          style: "normal",
+          weight: "100 200",
+          path: join(process.cwd(), "public", "font", "Regular.woff2"),
+        },
+        {
+          style: "normal",
+          weight: "300 400",
+          path: join(process.cwd(), "public", "font", "Regular.woff2"),
+        },
+        {
+          style: "normal",
+          weight: "500",
+          path: join(process.cwd(), "public", "font", "Regular.woff2"),
+        },
+        {
+          style: "normal",
+          weight: "600 700",
+          path: join(process.cwd(), "public", "font", "Bold.woff2"),
+        },
+        {
+          style: "normal",
+          weight: "800 900",
+          path: join(process.cwd(), "public", "font", "Bold.woff2"),
+        },
+      ],
+      preload: false,
+      display: "swap",
+      fallback: "sans-serif",
+      cssVariable: "font-tazugane",
+    },
+  ]}
+/>
