@@ -1,5 +1,6 @@
 ---
 import "@/styles/global.less";
+import LocalFont from "./LocalFont.astro";
 import { ViewTransitions } from "astro:transitions";
 const { title, description } = Astro.props;
 ---
@@ -27,27 +28,7 @@ const { title, description } = Astro.props;
 <meta name="color-scheme" content="light dark" />
 
 <!-- Font preloads -->
-<link
-  rel="preload"
-  href="/font/Regular.woff2"
-  as="font"
-  type="font/woff2"
-  crossorigin
-/>
-<link
-  rel="preload"
-  href="/font/Bold.woff2"
-  as="font"
-  type="font/woff2"
-  crossorigin
-/>
-<link
-  rel="preload"
-  href="/font/FuturaNowVar.woff2"
-  as="font"
-  type="font/woff2"
-  crossorigin
-/>
+<LocalFont />
 
 <script>
   import "@dotlottie/player-component";
