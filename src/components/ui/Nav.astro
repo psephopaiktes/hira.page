@@ -15,7 +15,7 @@ const pageList = ["blog", "works", "me", "price"];
 <nav class="l-nav">
   <h1 class="logo">
     <a href="/">
-      <img src={Logo.src} width={Logo.width} height={Logo.height} alt="webA" />
+      <img src={Logo.src} width={Logo.width} height={Logo.height} />
       <span class="u-textHidden">WEBA</span>
     </a>
   </h1>
@@ -133,9 +133,6 @@ const pageList = ["blog", "works", "me", "price"];
     li {
       position: relative;
       margin-top: 16px;
-      @media (width < @xs) {
-        // margin-top: 12px;
-      }
 
       .navIndicator {
         position: absolute;
@@ -144,7 +141,7 @@ const pageList = ["blog", "works", "me", "price"];
         width: 12px;
         height: 16px;
         clip-path: polygon(0 0, 100% 50%, 0 100%);
-        background-color: rgba(#fff, 0.8);
+        background-color: #fff;
         transition: @transition;
         @media (width < @lg) {
           width: 48px;
@@ -164,12 +161,12 @@ const pageList = ["blog", "works", "me", "price"];
     a {
       display: flex;
       height: 40px;
-      opacity: 0.7;
       align-items: center;
       gap: 6px;
       font-size: 20px;
       font-weight: 500;
       font-variation-settings: "wght" 500;
+      opacity: 0.8;
       color: #fff;
       text-shadow: 0 0 24px rgba(#840, 0.2);
       @media (width < @lg) {
@@ -207,7 +204,7 @@ const pageList = ["blog", "works", "me", "price"];
     background: none;
     border: solid 16px;
     border-image-slice: 16 fill;
-    color: rgba(#fff, 0.8);
+    color: #fff;
     text-shadow: 0 0 24px rgba(#840, 0.2);
     word-break: keep-all;
     &.active,

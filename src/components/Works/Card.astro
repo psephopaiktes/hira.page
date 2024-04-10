@@ -6,7 +6,7 @@ const { slug, data } = Astro.props;
 
 <a href={`/works/${slug}/`} transition:name={"works-card-" + slug}>
   <div class="meta">
-    <h4 class="title">{data.title}</h4>
+    <h3>{data.title}</h3>
     <p>{data.description}</p>
     <ul>
       {
@@ -62,7 +62,7 @@ const { slug, data } = Astro.props;
       gap: 2px;
     }
 
-    h4 {
+    h3 {
       width: 100%;
       font-size: 1.6em;
       white-space: nowrap;
