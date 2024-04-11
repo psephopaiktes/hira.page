@@ -158,6 +158,32 @@
     &:visited {
       filter: brightness(80%);
     }
+
+    &.download {
+      display: inline-block;
+      text-decoration: none;
+      margin-right: 0.2em;
+      padding: 4px 8px 4px 4px;
+      border-radius: 6px;
+      background: rgba(@label, 0.8);
+      color: rgb(@base);
+      line-height: 1em;
+      &::before {
+        content: "↓";
+        display: inline-block;
+        border-radius: 3px;
+        width: 1.6em;
+        height: 1.6em;
+        line-height: 1.4em;
+        text-align: center;
+        margin-right: 6px;
+        color: rgba(@label, 0.8);
+        background-color: rgb(@base);
+      }
+      &:hover {
+        scale: 1.02;
+      }
+    }
   }
 
   img {

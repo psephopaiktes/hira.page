@@ -66,7 +66,7 @@ const followList = [
       />
 
       <div class="meta">
-        <ol
+        <!-- <ol
           class="breadcrumb"
           itemscope=""
           itemtype="https://schema.org/BreadcrumbList"
@@ -91,7 +91,7 @@ const followList = [
             <SVG symbol="next" class="u-iconInText" />
             <meta itemprop="position" content="2" />
           </li>
-        </ol>
+        </ol> -->
 
         <h1>{post.data.title}</h1>
         <p>{post.data.description}</p>
@@ -147,7 +147,7 @@ const followList = [
                 <li>
                   <a href={"#" + heading.slug}>{heading.text}</a>
                 </li>
-              ) : null,
+              ) : null
             )
           }
         </ul>
@@ -182,16 +182,20 @@ const followList = [
         </script>
       </div>
 
-      <h2>おすすめ記事</h2>
-      <ul class="recommendList">
-        {
-          recommendCollection.posts.slice(0, 5).map((post) => (
-            <li>
-              <BlogCard slug={post.slug} data={post.data} />
-            </li>
-          ))
-        }
-      </ul>
+      {
+        recommendCollection.posts.length > 0 && (
+          <>
+            <h2>おすすめ記事</h2>
+            <ul class="recommendList">
+              {recommendCollection.posts.slice(0, 5).map((post) => (
+                <li>
+                  <BlogCard slug={post.slug} data={post.data} />
+                </li>
+              ))}
+            </ul>
+          </>
+        )
+      }
     </div>
   </footer>
 </BlogDetail>
@@ -251,7 +255,7 @@ const followList = [
     }
 
     .meta {
-      margin-top: 24px;
+      margin-top: 32px;
       @media (width < @xl) {
         padding: 0 48px;
       }
@@ -264,7 +268,7 @@ const followList = [
     }
 
     h1 {
-      margin-top: 4px;
+      margin-top: 8px;
       font-size: 2em;
     }
 
@@ -290,7 +294,9 @@ const followList = [
     }
 
     p {
+      margin-top: 16px;
       font-size: 0.9em;
+      font-weight: 400;
     }
   }
 
@@ -367,7 +373,7 @@ const followList = [
         padding-block: 8px;
         font-size: 0.8em;
         line-height: 1.4;
-        opacity: 0.4;
+        opacity: 0.5;
         text-overflow: ellipsis;
         overflow: hidden;
         white-space: nowrap;
@@ -386,6 +392,7 @@ const followList = [
 
   .content {
     grid-area: content;
+    margin-top: 32px;
     @media (width < @xl) {
       padding: 0 48px;
     }

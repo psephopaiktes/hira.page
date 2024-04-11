@@ -59,7 +59,7 @@ const schema = JSON.stringify([
   Source Code:
   https://github.com/psephopaiktes/hira.page
 
---><!-- TODO: DevではSmoothにしない -->
+-->
 <html lang="ja">
   <head prefix="og: https://ogp.me/ns#">
     <BaseMeta title={data.title + "｜WEBA"} description={data.description} />
@@ -90,6 +90,14 @@ const schema = JSON.stringify([
   </head>
 
   <CommonBody>
+    { import.meta.env.DEV &&
+      <style>
+        :root {
+          scroll-behavior: auto;
+        }
+      </style>
+    }
+
     <slot />
   </CommonBody>
 
