@@ -15,7 +15,7 @@
   }
   @keyframes highlight {
     0% {
-      background-color: rgba(@theme, 0.6);
+      background-color: rgb(@theme / 0.6);
     }
     100% {
       background-color: none;
@@ -44,7 +44,7 @@
     padding-bottom: 0.2em;
     line-height: 1.4;
     font-size: 1.4em;
-    border-bottom: 1px solid rgba(@main, 0.1);
+    border-bottom: 1px solid rgb(@main / 0.1);
   }
 
   h4 {
@@ -92,14 +92,14 @@
     width: 100%;
     th,
     td {
-      border: 1px solid rgba(@main, 0.2);
+      border: 1px solid rgb(@main / 0.2);
       padding: 0.4em 0.8em;
     }
     th {
-      background: rgba(@main, 0.2);
+      background: rgb(@main / 0.2);
     }
     tr:nth-child(even) td {
-      background: rgba(@main, 0.02);
+      background: rgb(@main / 0.02);
     }
   }
 
@@ -108,13 +108,13 @@
   }
 
   strong {
-    background: linear-gradient(transparent 60%, rgba(@theme, 0.2) 40%);
+    background: linear-gradient(transparent 60%, rgb(@theme / 0.2) 40%);
   }
 
   :not(pre) code {
     font-family: Consolas, "Courier New", Courier, Monaco, monospace;
-    color: rgba(@label, 0.9);
-    background-color: rgba(@main, 0.08);
+    color: rgb(@label / 0.9);
+    background-color: rgb(@main / 0.08);
     padding: 0.2em 0.4em;
     margin: auto 0.2em;
     border-radius: 2px;
@@ -124,10 +124,10 @@
 
   blockquote {
     font-style: italic;
-    color: rgba(@main, 0.8);
-    background: rgba(@main, 0.05);
+    color: rgb(@main / 0.8);
+    background: rgb(@main / 0.05);
     padding: 0.6em 1em;
-    border-left: 2px solid rgba(@main, 0.1);
+    border-left: 2px solid rgb(@main / 0.1);
   }
 
   small {
@@ -139,7 +139,7 @@
       display: block;
       margin-top: 0.4em;
       a {
-        color: rgba(@main, 0.4);
+        color: rgb(@main / 0.4);
         text-decoration: underline;
       }
     }
@@ -148,7 +148,7 @@
   hr {
     border: 0;
     margin: 8em 0 6em;
-    border-top: 1px dashed rgba(@main, 0.5);
+    border-top: 1px dashed rgb(@main / 0.5);
   }
 
   a {
@@ -165,7 +165,7 @@
       margin-right: 0.2em;
       padding: 4px 8px 4px 4px;
       border-radius: 6px;
-      background: rgba(@label, 0.8);
+      background: rgb(@label / 0.8);
       color: rgb(@base);
       line-height: 1em;
       &::before {
@@ -177,7 +177,7 @@
         line-height: 1.4em;
         text-align: center;
         margin-right: 6px;
-        color: rgba(@label, 0.8);
+        color: rgb(@label / 0.8);
         background-color: rgb(@base);
       }
       &:hover {
@@ -208,7 +208,7 @@
   pre {
     padding: 1em;
     border-radius: 4px;
-    border: 2px solid rgba(@main, 0.2);
+    border: 2px solid rgb(@main / 0.2);
     code {
       counter-reset: step;
       counter-increment: step 0;
@@ -227,7 +227,7 @@
   .footnotes {
     margin-top: 8em;
     padding-top: 2em;
-    border-top: 1px solid rgba(@main, 0.2);
+    border-top: 1px solid rgb(@main / 0.2);
     h2 {
       display: none;
     }
@@ -249,9 +249,9 @@
     grid-template-columns: 160px auto 1fr;
     grid-template-rows: auto 1fr;
     box-sizing: content-box;
-    border: 1px solid rgba(@main, 0.1);
+    border: 1px solid rgb(@main / 0.1);
     border-radius: 6px;
-    box-shadow: 2px 8px 48px -24px rgba(@main, 0.4);
+    box-shadow: 2px 8px 48px -24px rgb(@main / 0.4);
     overflow: hidden;
     will-change: transform;
     text-decoration: none;
@@ -271,7 +271,7 @@
       object-fit: cover;
       width: 160px;
       aspect-ratio: 4 / 3;
-      border-right: 1px solid rgba(@main, 0.1);
+      border-right: 1px solid rgb(@main / 0.1);
       border-radius: 0;
       @media (width < @xs) {
         width: 100px;
@@ -289,7 +289,7 @@
       font-size: 15px;
       line-height: 1.4;
       margin: 16px 16px 0px;
-      color: rgba(@main, 0.8);
+      color: rgb(@main / 0.8);
       font-weight: 600;
       @media (width < @xs) {
         -webkit-line-clamp: 2;
@@ -310,9 +310,8 @@
       white-space: nowrap;
       text-overflow: ellipsis;
       font-size: 11px;
-      // height: 11px;
       line-height: 14px;
-      color: rgba(@main, 0.6);
+      color: rgb(@main / 0.6);
     }
   }
 

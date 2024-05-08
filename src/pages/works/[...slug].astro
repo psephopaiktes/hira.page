@@ -61,7 +61,7 @@ const { Content } = await post.render();
   .cover {
     display: block;
     border-radius: 8px;
-    border: 1px solid rgba(@main, 0.05);
+    border: 1px solid rgb(@main / 0.05);
     margin: 64px 64px 0;
     width: calc(100% - 128px);
     background: @placeholder;
@@ -98,7 +98,7 @@ const { Content } = await post.render();
       display: block;
       font-size: 0.9em;
       margin-top: 16px;
-      color: rgba(@main, 0.6);
+      color: rgb(@main / 0.6);
     }
 
     > p {

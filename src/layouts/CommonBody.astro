@@ -62,7 +62,7 @@ const pathOuter = Squircle({
     letter-spacing: .1em;
     font-size: large;
     font-weight: bold;
-  `,
+  `
   );
 </script>
 
@@ -72,9 +72,9 @@ const pathOuter = Squircle({
   main {
     margin: 8px;
     border-radius: 24px;
-    border: 1px solid rgba(@label, 0.1);
+    border: 1px solid rgb(@label / 0.1);
     background: rgb(@base);
-    box-shadow: 2px 8px 48px rgba(@label, 0.3);
+    box-shadow: 2px 8px 48px rgb(@label / 0.3);
     @media (width < @xs) {
       margin-bottom: 0;
       border-radius: 0;

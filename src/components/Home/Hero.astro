@@ -31,7 +31,7 @@ import AoSleepImage from "@/assets/img/ao-sleep.webp";
         fadeImage.setAttribute("data-loaded", "true");
       });
     },
-    { once: false },
+    { once: false }
   );
 </script>
 
@@ -53,20 +53,6 @@ import AoSleepImage from "@/assets/img/ao-sleep.webp";
     > * {
       grid-area: 1/-1;
     }
-    // &::after {
-    //   content: "";
-    //   grid-area: 1/-1;
-    //   backdrop-filter: blur(2px);
-    //   background-image: radial-gradient(
-    //     ellipse 160% 100% at top center,
-    //     rgba(@base, 0.8) 70%,
-    //     rgba(@base, 1) 100%
-    //   );
-    //   background-size: 100%;
-    //   @media (width < @xs) {
-    //     backdrop-filter: blur(1px);
-    //   }
-    // }
   }
   img {
     width: 100%;
@@ -98,7 +84,7 @@ import AoSleepImage from "@/assets/img/ao-sleep.webp";
     p {
       margin: 16px 4px -16px;
       line-height: 1.8;
-      color: rgba(@label, 0.9);
+      color: rgb(@label / 0.9);
       font-size: 14px;
       font-weight: 400;
       letter-spacing: 0.1em;

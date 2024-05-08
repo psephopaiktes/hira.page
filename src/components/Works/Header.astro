@@ -61,7 +61,7 @@ const currentSort = Astro.params.sort || sortTypes[0].id;
         window.location.href = this.value;
       });
     },
-    { once: false },
+    { once: false }
   );
 </script>
 
@@ -99,7 +99,7 @@ const currentSort = Astro.params.sort || sortTypes[0].id;
     border: none;
     font-weight: 700;
     color: rgb(@label);
-    background-color: rgba(@theme, 0.2);
+    background-color: rgb(@theme / 0.2);
     background-size: 32px;
     background-position: center right 4px;
     background-repeat: no-repeat;

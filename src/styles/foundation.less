@@ -1,20 +1,20 @@
 :root {
-  background: rgba(@theme);
-  accent-color: rgba(@theme);
-  color: rgba(@main, 0.9);
+  background: rgb(@theme);
+  accent-color: rgb(@theme);
+  color: rgb(@main / 0.9);
 
-  --color-theme: 255, 187, 0;
-  --color-label: 136, 68, 0;
-  --color-base: 255, 252, 246;
-  --color-main: 56, 52, 48;
-  --color-caution: 216, 39, 0;
+  --color-theme: 255 187 0;
+  --color-label: 136 68 0;
+  --color-base: 255 252 246;
+  --color-main: 56 52 48;
+  --color-caution: 216 39 0;
 
   @media (prefers-color-scheme: dark) {
-    --color-theme: 255, 187, 0;
-    --color-label: 255, 187, 0;
-    --color-base: 42, 40, 36;
-    --color-main: 255, 255, 255;
-    --color-caution: 255, 83, 29;
+    --color-theme: 255 187 0;
+    --color-label: 255 187 0;
+    --color-base: 42 40 36;
+    --color-main: 255 255 255;
+    --color-caution: 255 83 29;
   }
 }
 
@@ -118,7 +118,7 @@ path {
   color: rgb(@base);
 }
 ::marker {
-  color: rgba(@main, 0.6);
+  color: rgb(@main / 0.6);
 }
 :is(
     ::-webkit-calendar-picker-indicator,

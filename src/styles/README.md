@@ -13,7 +13,5 @@
 ## カラー
 
 ```.less
-color: rgb(@theme);
+color: rgb(@theme / 0.5);
 ```
-
-`rgb()`もしくは`rgba()`は生CSS関数。

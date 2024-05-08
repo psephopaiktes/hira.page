@@ -233,7 +233,7 @@ const followList = [
     img {
       display: block;
       border-radius: 6px;
-      border: 1px solid rgba(@main, 0.05);
+      border: 1px solid rgb(@main / 0.05);
       background: @placeholder;
       @media (width < @xl) {
         border-radius: 24px 24px 0 0;
@@ -280,7 +280,7 @@ const followList = [
       gap: 0.5em;
       margin-top: 20px;
       margin-right: 16px;
-      color: rgba(@main, 0.6);
+      color: rgb(@main / 0.6);
     }
 
     ul {
@@ -306,7 +306,7 @@ const followList = [
       margin-inline: 48px;
       margin-top: 24px;
       position: relative;
-      background: rgba(@theme, 0.05);
+      background: rgb(@theme / 0.05);
       border-radius: 6px;
       padding: 0 24px 32px;
     }
@@ -356,7 +356,7 @@ const followList = [
 
     .toc {
       list-style: disc;
-      border-left: 1px solid rgba(@main, 0.2);
+      border-left: 1px solid rgb(@main / 0.2);
       margin: 16px 0 0 16px;
       padding-left: 13.5px;
       @media (width < @xl) {
@@ -405,7 +405,7 @@ const followList = [
   }
 
   .blogFooter {
-    border-top: 2px dashed rgba(@theme, 0.4);
+    border-top: 2px dashed rgb(@theme / 0.4);
     margin-top: 96px;
     @media (width < @lg) {
       margin-top: 64px;
@@ -418,10 +418,10 @@ const followList = [
     }
 
     .banner {
-      box-shadow: 0px 8px 24px -8px rgba(@label, 0.1);
+      box-shadow: 0px 8px 24px -8px rgb(@label / 0.1);
       margin-top: 16px;
       min-height: 160px;
-      background: rgba(@main, 0.1);
+      background: rgb(@main / 0.1);
       border-radius: 6px;
       overflow: hidden;
     }

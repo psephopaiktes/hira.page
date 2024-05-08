@@ -17,7 +17,7 @@ priority: 3
 
 全体のUIデザインはFigmaで公開しているので、ぜひご覧ください。
 
-<iframe class="figma-iframe" style="border: 1px solid rgba(0, 0, 0, 0.1);" width="800" height="450" src="https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Ffile%2FcjVUh6J1EYjoztzKKoPHbF7D%2Fiaia%3Fnode-id%3D192%253A0" allowfullscreen></iframe>
+<iframe class="figma-iframe" style="border: 1px solid rgb(0 0 0 / 0.1);" width="800" height="450" src="https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Ffile%2FcjVUh6J1EYjoztzKKoPHbF7D%2Fiaia%3Fnode-id%3D192%253A0" allowfullscreen></iframe>
 
 ## 実装
 Webページをアプリとして提供できる、PWAの形態でリリースしました。フロントエンドはVue.js+TypeScript、バックエンドはFirebaseを利用しています。ソースコードは[GitHub](https://github.com/psephopaiktes/iAiA)に公開しています。

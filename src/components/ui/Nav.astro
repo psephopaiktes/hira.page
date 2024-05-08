@@ -167,7 +167,7 @@ const pageList = ["blog", "works", "me", "price"];
       font-variation-settings: "wght" 500;
       opacity: 0.8;
       color: #fff;
-      text-shadow: 0 0 24px rgba(#840, 0.2);
+      text-shadow: 0 0 24px rgb(136 68 0 / 0.2);
       @media (width < @lg) {
         font-size: 18px;
       }
@@ -204,14 +204,14 @@ const pageList = ["blog", "works", "me", "price"];
     border: solid 16px;
     border-image-slice: 16 fill;
     color: #fff;
-    text-shadow: 0 0 24px rgba(#840, 0.2);
+    text-shadow: 0 0 24px rgb(136 68 0 / 0.2);
     word-break: keep-all;
     &.active,
     &:hover,
     &:active {
-      color: rgba(#fff, 1);
+      color: #fff;
       font-variation-settings: "wght" 700;
-      filter: drop-shadow(0 0 8px rgba(#fff, 0.5));
+      filter: drop-shadow(0 0 8px rgb(255 255 255 / 0.5));
     }
     @media (width < @lg) {
       width: 160px;

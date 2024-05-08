@@ -256,7 +256,7 @@ import { Image } from "astro:assets";
     img {
       background-size: cover;
       scale: 1.25;
-      filter: drop-shadow(0px 16px 48px rgba(@main, 0.2));
+      filter: drop-shadow(0px 16px 48px rgb(@main / 0.2));
       @media (width < @lg) {
         scale: 1.4;
       }
@@ -291,7 +291,7 @@ import { Image } from "astro:assets";
 
   .skillmap {
     dotlottie-player {
-      border: 2px solid rgba(@theme, 0.2);
+      border: 2px solid rgb(@theme / 0.2);
       border-radius: 6px;
       background: #fff;
     }

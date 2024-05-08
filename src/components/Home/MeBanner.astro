@@ -65,9 +65,9 @@ const path = Squircle({
       position: relative;
       height: 100%;
       padding: 64px 32px;
-      background-color: rgba(@base, 0.7);
+      background-color: rgb(@base / 0.7);
       backdrop-filter: blur(8px) grayscale(0.4);
-      color: rgba(@main, 1);
+      color: rgb(@main);
       transition: @transition;
       @media (width < @lg) {
         gap: 8px 16px;
@@ -91,7 +91,7 @@ const path = Squircle({
         height: 1200px;
         transform-origin: left center;
         rotate: 45deg;
-        background: rgba(@theme, 0.25);
+        background: rgb(@theme / 0.25);
         top: calc(50% - 600px);
         left: 50%;
       }

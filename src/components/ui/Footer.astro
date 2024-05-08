@@ -48,7 +48,7 @@ const snsList = ["X", "note", "GitHub", "Instagram", "Pinterest"];
         }
       });
     },
-    { once: false },
+    { once: false }
   );
 </script>
 
@@ -61,7 +61,7 @@ const snsList = ["X", "note", "GitHub", "Instagram", "Pinterest"];
     gap: 32px;
     margin-top: 96px;
     padding: 64px 48px;
-    background: rgba(@theme, 0.1);
+    background: rgb(@theme / 0.1);
     color: rgb(@label);
     position: sticky;
     top: 100vh;
@@ -134,9 +134,9 @@ const snsList = ["X", "note", "GitHub", "Instagram", "Pinterest"];
     white-space: nowrap;
 
     border-radius: 24px 0 0 24px;
-    background: rgba(@main, 0.2);
+    background: rgb(@main / 0.2);
     backdrop-filter: saturate(1.6) blur(16px);
-    box-shadow: 2px 2px 16px rgba(@main, 0.2);
+    box-shadow: 2px 2px 16px rgb(@main / 0.2);
 
     &::before {
       content: "";
@@ -153,7 +153,7 @@ const snsList = ["X", "note", "GitHub", "Instagram", "Pinterest"];
 
     &:hover,
     &:active {
-      background: rgba(@main, 0.6);
+      background: rgb(@main / 0.6);
       &::before {
         top: 14px;
       }

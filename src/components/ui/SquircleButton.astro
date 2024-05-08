@@ -42,13 +42,13 @@ const svgUrl = Squircle({
     font-size: 1.1em;
     &:disabled {
       opacity: 0.7;
-      color: rgba(@base, 0.5);
+      color: rgb(@base / 0.5);
       pointer-events: none;
     }
     &:hover,
     &:active,
     &:focus {
-      filter: drop-shadow(0 4px 8px rgba(@theme, 0.8));
+      filter: drop-shadow(0 4px 8px rgb(@theme / 0.8));
     }
     :global(svg) {
       width: 1.6em;

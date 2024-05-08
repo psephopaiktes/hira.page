@@ -32,11 +32,11 @@ import Base from "@/layouts/Base.astro";
         const Query = prompt("キーワードを入力");
         if (!Query) return;
         window.open(
-          `https://www.google.co.jp/search?q=${Query}&as_sitesearch=hira.page`,
+          `https://www.google.co.jp/search?q=${Query}&as_sitesearch=hira.page`
         );
       });
     },
-    { once: false },
+    { once: false }
   );
 </script>
 
