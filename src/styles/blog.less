@@ -212,6 +212,9 @@
     code {
       counter-reset: step;
       counter-increment: step 0;
+      span:empty {
+        display: none;
+      }
       .line::before {
         content: counter(step);
         counter-increment: step;

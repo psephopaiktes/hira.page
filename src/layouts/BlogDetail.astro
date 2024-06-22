@@ -91,13 +91,7 @@ const schema = JSON.stringify([
   </head>
 
   <CommonBody>
-    { import.meta.env.DEV &&
-      <style>
-        :root {
-          scroll-behavior: auto;
-        }
-      </style>
-    }
+    { import.meta.env.DEV && <style>:root { scroll-behavior: auto }</style> }
 
     <slot />
   </CommonBody>
