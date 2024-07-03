@@ -194,15 +194,15 @@
     max-width: 100%;
     background-color: @placeholder;
   }
-  .youtube {
+  iframe {
+    max-width: 100%;
+  }
+  iframe[src*="youtube"] {
     max-width: 100%;
     aspect-ratio: 16 / 9;
     overflow: hidden;
     border-radius: 6px;
-    iframe {
-      width: 100%;
-      height: 100%;
-    }
+    height: auto;
   }
 
   pre {
