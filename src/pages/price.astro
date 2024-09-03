@@ -54,16 +54,30 @@ const priceList = [
 
     <p>
       <budoux-ja>
-        ロゴ・UIなどのデザイン制作、Webサイトのコーディング作業、イベントでの登壇などを受け付けております。
-        過去の実績は <a href="/works">WORKS</a> ページからご確認ください。
-      </budoux-ja>
-    </p>
-    <p>
-      <budoux-ja>
-        制作料金は人日単価4万円〜からお見積もりします。例はあくまで目安ですので、作業内容の複雑さや納期により調整いたします。期間を決めて委任契約での対応も可能です。
+        制作料金は人日単価4万円〜からお見積もりします。例はあくまで目安ですので、作業内容の複雑さや納期により調整いたします。期間を決めて委任契約での対応も可能です。過去の実績は
+        <a href="/works">WORKS</a> ページからご確認ください。
       </budoux-ja>
     </p>
 
+    <h2>できること</h2>
+    <ul>
+      <li>ロゴ・名刺などのデザイン制作</li>
+      <li>ランディングページのデザインからコーディング、公開まで</li>
+      <li>CMSによるコーポレート/ブログサイト等の作成</li>
+      <li>アプリケーションのUIデザイン・設計</li>
+      <li>
+        上記制作で必要になる、簡易的な画像・動画・ライティング素材などの作成
+      </li>
+    </ul>
+
+    <h2>得意ではないこと</h2>
+    <ul>
+      <li>アーティスティックな写真・イラスト・アイキャッチ画像などの作成</li>
+      <li>プロモーションムービーなどの長尺の動画制作</li>
+      <li>サーバーの構築や、複雑なWebシステムの作成</li>
+    </ul>
+
+    <h2>料金例</h2>
     <ol>
       {priceList.map((item) => <ListItem {...item} />)}
     </ol>
@@ -83,12 +97,20 @@ const priceList = [
 <style lang="less">
   @import "@/styles/common.less";
 
-  ol {
-    margin-top: 96px;
-    @media (width < @lg) {
-      margin-top: 64px;
-    }
+  h2 {
+    margin-top: 64px;
+    padding-bottom: 0.2em;
+    font-size: 26px;
+    color: rgb(@main);
+    border-bottom: 1px solid rgb(@main / 0.05);
   }
+
+  ul {
+    margin-top: 12px;
+    list-style: disc;
+    padding-left: 1.4em;
+  }
+
   .contactBtn {
     margin: 96px auto 0;
     @media (width < @lg) {

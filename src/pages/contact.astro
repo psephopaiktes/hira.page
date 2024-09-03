@@ -36,8 +36,8 @@ const svgUrl = Squircle({
       <h3>現在の稼働状況</h3>
       <ul>
         <li>
-          <!-- 対応可能です。 -->
-          しばらく手が空かないため、基本的に新規のご依頼はお断りしております。
+          対応可能です。
+          <!-- しばらく手が空かないため、基本的に新規のご依頼はお断りしております。 -->
         </li>
         <li>
           転職活動は行っておりません。エージェント様のメールにはご返事できかねます。
@@ -155,13 +155,11 @@ const svgUrl = Squircle({
     }
     ul {
       margin-top: 0.2em;
+      padding-left: 1.4em;
+      list-style: disc;
     }
     li {
       opacity: 0.8;
-      &::before {
-        opacity: 0.4;
-        content: "※";
-      }
     }
   }
 
@@ -205,12 +203,12 @@ const svgUrl = Squircle({
       border: solid 12px;
       border-image-slice: 12 fill;
       opacity: 0.8;
-      &:user-invalid {
+      &:user-invalid:not(:focus) {
         color: rgb(@caution);
         border-color: red;
       }
       &::placeholder {
-        color: rgb(@main, 0.3);
+        color: rgb(@main / 0.3);
       }
       &:focus {
         opacity: 1;

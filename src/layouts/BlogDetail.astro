@@ -14,6 +14,8 @@ const schema = JSON.stringify([
     headline: data.title,
     image: Astro.site?.toString().slice(0, -1) + data.cover.src,
     datePublished: data.date.toISOString(),
+    dateModified: data.updatedDate.toISOString() || data.date.toISOString(),
+    // たまにエラーになるのはバグ?
     author: {
       "@type": "Person",
       name: "Akira HIRATA",

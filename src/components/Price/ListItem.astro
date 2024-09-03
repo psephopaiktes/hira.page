@@ -2,7 +2,7 @@
 const data = Astro.props;
 const totalPrice = Object.values(data.price).reduce(
   (acc, price) => acc + price,
-  0
+  0,
 );
 ---
 
@@ -13,7 +13,7 @@ const totalPrice = Object.values(data.price).reduce(
   </div>
 
   <section class="meta">
-    <h2>{data.title}</h2>
+    <h3>{data.title}</h3>
     <p>
       <budoux-ja>{data.text}</budoux-ja>
     </p>
@@ -110,7 +110,7 @@ const totalPrice = Object.values(data.price).reduce(
   }
   .meta {
     max-width: 560px;
-    h2 {
+    h3 {
       font-size: 24px;
       color: rgb(@label);
     }
