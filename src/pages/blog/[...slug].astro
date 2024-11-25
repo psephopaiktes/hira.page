@@ -1,11 +1,11 @@
 ---
+import { Image } from "astro:assets";
 import BlogCard from "@/components/Blog/Card.astro";
 import Share from "@/components/Blog/Share.astro";
 import SVG from "@/components/SVG.astro";
 import { loadCollection } from "@/components/loadCollection.js";
 import SnsLink from "@/components/ui/SnsLink.astro";
 import BlogDetail from "@/layouts/BlogDetail.astro";
-import { Image } from "astro:assets";
 
 export async function getStaticPaths() {
   const blogCollection = await loadCollection("blog");
@@ -147,7 +147,11 @@ const followList = [
                 <li>
                   <a href={"#" + heading.slug}>{heading.text}</a>
                 </li>
-              ) : null
+              ) : heading.depth === 3 ? (
+                <li class="sub">
+                  <a href={"#" + heading.slug}>{heading.text}</a>
+                </li>
+              ) : null,
             )
           }
         </ul>
@@ -366,6 +370,14 @@ const followList = [
         padding-left: 12px;
       }
 
+      li.sub {
+        list-style: none;
+        a {
+          padding-block: 6px;
+          font-weight: 400;
+        }
+      }
+
       a {
         display: block;
         position: relative;
@@ -373,9 +385,10 @@ const followList = [
         padding-block: 8px;
         font-size: 0.8em;
         line-height: 1.4;
-        opacity: 0.5;
+        opacity: 0.6;
         text-overflow: ellipsis;
         overflow: hidden;
+        font-weight: 600;
         white-space: nowrap;
         @media (width < @xl) {
           padding: 4px 8px;
@@ -384,7 +397,7 @@ const followList = [
         }
 
         &:hover {
-          opacity: 0.8;
+          opacity: 0.9;
         }
       }
     }
