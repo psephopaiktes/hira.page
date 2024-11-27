@@ -17,6 +17,8 @@ const snsList = ["X", "note", "GitHub", "Instagram", "Pinterest"];
     }
   </ul>
 
+  <a href="terms" class="terms">利用規約・ポリシー</a>
+
   <small>
     © Akira HIRATA {new Date().getFullYear()}.
   </small>
@@ -48,7 +50,7 @@ const snsList = ["X", "note", "GitHub", "Instagram", "Pinterest"];
         }
       });
     },
-    { once: false }
+    { once: false },
   );
 </script>
 
@@ -83,6 +85,11 @@ const snsList = ["X", "note", "GitHub", "Instagram", "Pinterest"];
     @media (width < @2xs) {
       gap: 16px;
     }
+  }
+
+  .terms {
+    text-decoration: underline;
+    opacity: 0.6;
   }
 
   .octocat {

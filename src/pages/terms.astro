@@ -1,0 +1,63 @@
+---
+import Headline from "@/components/ui/Headline.astro";
+import Base from "@/layouts/Base.astro";
+---
+
+<Base title="利用規約・ポリシー">
+  <div class="l-content">
+    <Headline label="利用規約・ポリシー" />
+
+    <section>
+      <h2>利用規約</h2>
+      <p>本ブログをご利用いただくにあたり、以下の規約を遵守してください。</p>
+      <ul>
+        <li>
+          当サイトのコンテンツ（文章、画像、動画等）の無断転載を禁止します。
+        </li>
+        <li>利用者は自己責任でサイトを利用してください。</li>
+        <li>予告なく内容を変更する場合があります。</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>免責事項</h2>
+      <p>
+        当サイトの情報は正確性や信頼性を保証するものではありません。利用者が当サイトの情報を利用して行う行動について、一切の責任を負いません。
+      </p>
+      <p>外部リンク先で発生したトラブルについても責任を負いかねます。</p>
+    </section>
+
+    <section>
+      <h2>プライバシーポリシー</h2>
+      <p>本ブログでは以下の方法で個人情報を収集し、適切に管理します。</p>
+      <ul>
+        <li>
+          Google
+          Analyticsを使用し、アクセス解析を行っています。この際にCookieを使用し、匿名データを収集します。
+        </li>
+        <li>
+          アフィリエイトプログラムを利用しています。これにより、第三者（広告配信業者）が訪問者の情報を取得することがあります。
+        </li>
+        <li>
+          コンタクトフォームを通じて提供された情報（名前、メールアドレスなど）は、問い合わせ対応の目的でのみ使用します。
+        </li>
+      </ul>
+      <p>
+        取得した個人情報は、法令に基づく場合を除き、第三者に開示することはありません。
+      </p>
+    </section>
+  </div>
+</Base>
+
+<style lang="less">
+  @import "@/styles/common.less";
+
+  section {
+    margin-block-start: 64px;
+  }
+  ul {
+    list-style: disc;
+    padding-inline-start: 1.5em;
+    margin-block-start: 1em;
+  }
+</style>
