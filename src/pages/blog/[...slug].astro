@@ -249,7 +249,7 @@ const followList = [
     }
 
     .breadcrumb {
-      margin-top: 8px;
+      margin-block-start: 8px;
       display: flex;
       gap: 2px;
       opacity: 0.6;
@@ -259,7 +259,7 @@ const followList = [
     }
 
     .meta {
-      margin-top: 32px;
+      margin-block-start: 32px;
       @media (width < @xl) {
         padding: 0 48px;
       }
@@ -272,7 +272,7 @@ const followList = [
     }
 
     h1 {
-      margin-top: 8px;
+      margin-block-start: 8px;
       font-size: 2em;
     }
 
@@ -282,15 +282,15 @@ const followList = [
       align-items: center;
       justify-content: center;
       gap: 0.5em;
-      margin-top: 20px;
-      margin-right: 16px;
+      margin-block-start: 20px;
+      margin-inline-end: 16px;
       color: rgb(@main / 0.6);
     }
 
     ul {
       display: flex;
       float: right;
-      margin-top: 18px;
+      margin-block-start: 18px;
       gap: 6px;
       @media (width < @xs) {
         float: none;
@@ -298,7 +298,7 @@ const followList = [
     }
 
     p {
-      margin-top: 16px;
+      margin-block-start: 16px;
       font-size: 0.9em;
       font-weight: 400;
     }
@@ -308,7 +308,7 @@ const followList = [
     grid-area: aside;
     @media (width < @xl) {
       margin-inline: 48px;
-      margin-top: 24px;
+      margin-block-start: 24px;
       position: relative;
       background: rgb(@theme / 0.05);
       border-radius: 6px;
@@ -330,17 +330,17 @@ const followList = [
       font-size: 18px;
       opacity: 0.2;
       &:nth-of-type(2) {
-        margin-top: 32px;
+        margin-block-start: 32px;
       }
       @media (width < @xl) {
-        margin-top: 24px !important;
+        margin-block-start: 24px !important;
       }
     }
 
     .follow {
       display: flex;
       gap: 4px;
-      margin-top: 16px;
+      margin-block-start: 16px;
       li:nth-child(1):hover {
         color: rgb(@main);
       }
@@ -362,12 +362,12 @@ const followList = [
       list-style: disc;
       border-left: 1px solid rgb(@main / 0.2);
       margin: 16px 0 0 16px;
-      padding-left: 13.5px;
+      padding-inline-start: 13.5px;
       @media (width < @xl) {
-        margin-top: 12px;
+        margin-block-start: 12px;
       }
       @media (width < @md) {
-        padding-left: 12px;
+        padding-inline-start: 12px;
       }
 
       li.sub {
@@ -392,7 +392,7 @@ const followList = [
         white-space: nowrap;
         @media (width < @xl) {
           padding: 4px 8px;
-          margin-top: 4px;
+          margin-block-start: 4px;
           opacity: 0.7;
         }
 
@@ -405,7 +405,7 @@ const followList = [
 
   .content {
     grid-area: content;
-    margin-top: 32px;
+    margin-block-start: 32px;
     @media (width < @xl) {
       padding: 0 48px;
     }
@@ -419,20 +419,20 @@ const followList = [
 
   .blogFooter {
     border-top: 2px dashed rgb(@theme / 0.4);
-    margin-top: 96px;
+    margin-block-start: 96px;
     @media (width < @lg) {
-      margin-top: 64px;
+      margin-block-start: 64px;
     }
 
     h2 {
       font-size: 1.4em;
       color: rgb(@label);
-      margin-top: 64px;
+      margin-block-start: 64px;
     }
 
     .banner {
       box-shadow: 0px 8px 24px -8px rgb(@label / 0.1);
-      margin-top: 16px;
+      margin-block-start: 16px;
       min-height: 160px;
       background: rgb(@main / 0.1);
       border-radius: 6px;
@@ -442,7 +442,7 @@ const followList = [
 
   .recommendList {
     filter: @filterShadow;
-    margin-top: 16px;
+    margin-block-start: 16px;
     display: flex;
     gap: 8px;
     @media (width < @lg) {

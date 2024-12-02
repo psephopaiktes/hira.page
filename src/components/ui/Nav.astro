@@ -91,9 +91,9 @@ const pageList = ["blog", "works", "me", "price"];
 
   .logo {
     width: @width;
-    margin-top: -5vh;
+    margin-block-start: -5vh;
     @media (width < @lg) {
-      margin-top: 0;
+      margin-block-start: 0;
       width: 128px;
     }
     @media (width < @xs) {
@@ -131,7 +131,7 @@ const pageList = ["blog", "works", "me", "price"];
 
     li {
       position: relative;
-      margin-top: 16px;
+      margin-block-start: 16px;
 
       .navIndicator {
         position: absolute;
@@ -220,7 +220,7 @@ const pageList = ["blog", "works", "me", "price"];
       top: 24px;
       right: 2px;
       dotlottie-player {
-        margin-left: -6px;
+        margin-inline-start: -6px;
       }
     }
     @media (width < @xs) {
@@ -231,7 +231,7 @@ const pageList = ["blog", "works", "me", "price"];
       font-size: 12px;
       font-variation-settings: "wght" 700;
       dotlottie-player {
-        margin-left: -8px;
+        margin-inline-start: -8px;
       }
     }
   }

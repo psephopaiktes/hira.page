@@ -24,10 +24,10 @@ const { label, href } = Astro.props;
 
   h2 {
     position: relative; // for z-index
-    margin-top: 64px;
+    margin-block-start: 64px;
     color: rgb(@label);
     @media (width < @lg) {
-      margin-top: 48px;
+      margin-block-start: 48px;
       font-size: 20px;
     }
   }
@@ -52,7 +52,7 @@ const { label, href } = Astro.props;
     display: inline-flex;
     align-items: center;
     font-size: 0.8em;
-    margin-left: 0.4em;
+    margin-inline-start: 0.4em;
     font-variation-settings: "wght" 500;
     color: rgb(@main);
     opacity: 0.6;
@@ -61,7 +61,7 @@ const { label, href } = Astro.props;
     :global(svg) {
       width: 1em;
       height: 1em;
-      margin-bottom: -0.35em;
+      margin-block-end: -0.35em;
     }
   }
   :is(a:hover, a:active) small {

@@ -41,7 +41,7 @@ const totalPrice = Object.values(data.price).reduce(
   li {
     perspective: 1200;
     -webkit-perspective: 1200;
-    margin-top: 64px;
+    margin-block-start: 64px;
     display: grid;
     gap: 48px;
     grid-template-areas: "left right";
@@ -52,7 +52,7 @@ const totalPrice = Object.values(data.price).reduce(
       gap: 24px;
     }
     @media (width < @lg) {
-      margin-top: 48px;
+      margin-block-start: 48px;
       grid-template-areas: "left" "right";
       grid-template-columns: 100%;
     }
@@ -118,7 +118,7 @@ const totalPrice = Object.values(data.price).reduce(
       opacity: 0.8;
       display: inline-block;
       width: auto;
-      margin-top: 20px;
+      margin-block-start: 20px;
       text-align: left;
       @media (width < @lg) {
         width: 100%;
@@ -128,7 +128,7 @@ const totalPrice = Object.values(data.price).reduce(
         padding: 2px 0 4px;
       }
       td:first-child {
-        padding-right: 24px;
+        padding-inline-end: 24px;
         @media (width < @lg) {
           width: 100%;
         }

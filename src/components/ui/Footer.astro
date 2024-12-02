@@ -17,7 +17,7 @@ const snsList = ["X", "note", "GitHub", "Instagram", "Pinterest"];
     }
   </ul>
 
-  <a href="terms" class="terms">利用規約・ポリシー</a>
+  <a href="/terms" class="terms">利用規約・ポリシー</a>
 
   <small>
     © Akira HIRATA {new Date().getFullYear()}.
@@ -61,14 +61,14 @@ const snsList = ["X", "note", "GitHub", "Instagram", "Pinterest"];
     display: grid;
     place-items: center;
     gap: 32px;
-    margin-top: 96px;
+    margin-block-start: 96px;
     padding: 64px 48px;
     background: rgb(@theme / 0.1);
     color: rgb(@label);
     position: sticky;
     top: 100vh;
     @media (width < @lg) {
-      margin-top: 64px;
+      margin-block-start: 64px;
     }
     small {
       font-size: 0.9em;

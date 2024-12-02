@@ -1,8 +1,8 @@
 ---
 import SVG from "@/components/SVG.astro";
+import { loadCollection } from "@/components/loadCollection.js";
 import Headline from "@/components/ui/Headline.astro";
 import SnsLink from "@/components/ui/SnsLink.astro";
-import { loadCollection } from "@/components/loadCollection.js";
 
 const followList = [
   {
@@ -79,11 +79,11 @@ const currentTag = Astro.params.tag;
         const Query = prompt("キーワードを入力");
         if (!Query) return;
         window.open(
-          `https://www.google.co.jp/search?q=${Query}&as_sitesearch=hira.page`
+          `https://www.google.co.jp/search?q=${Query}&as_sitesearch=hira.page`,
         );
       });
     },
-    { once: false }
+    { once: false },
   );
 </script>
 
@@ -122,7 +122,7 @@ const currentTag = Astro.params.tag;
 
   #js-search {
     color: rgb(@label);
-    margin-left: 8px;
+    margin-inline-start: 8px;
     display: block;
     height: 28px;
     :global(svg) {

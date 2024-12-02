@@ -1,9 +1,9 @@
 ---
-import { Squircle } from "@/components/Squircle.js";
-import SquircleButton from "@/components/ui/SquircleButton.astro";
-import Headline from "@/components/ui/Headline.astro";
-import Base from "@/layouts/Base.astro";
 import SVG from "@/components/SVG.astro";
+import { Squircle } from "@/components/Squircle.js";
+import Headline from "@/components/ui/Headline.astro";
+import SquircleButton from "@/components/ui/SquircleButton.astro";
+import Base from "@/layouts/Base.astro";
 
 const FormId = import.meta.env.PUBLIC_FORMCARRY_ENDPOINT;
 
@@ -150,12 +150,12 @@ const svgUrl = Squircle({
 
   .status {
     h3 {
-      margin-top: 24px;
+      margin-block-start: 24px;
       font-size: 1em;
     }
     ul {
-      margin-top: 0.2em;
-      padding-left: 1.4em;
+      margin-block-start: 0.2em;
+      padding-inline-start: 1.4em;
       list-style: disc;
     }
     li {
@@ -164,20 +164,20 @@ const svgUrl = Squircle({
   }
 
   form {
-    margin-top: 48px;
+    margin-block-start: 48px;
     max-width: 40em;
     label {
       display: block;
-      margin-top: 24px;
+      margin-block-start: 24px;
       span {
-        margin-left: 2px;
+        margin-inline-start: 2px;
         letter-spacing: 0;
         font-weight: 500;
         &::after {
           content: "必須";
           font-size: 11px;
           color: rgb(@base);
-          margin-left: 0.5em;
+          margin-inline-start: 0.5em;
           padding: 0 0.5em;
           line-height: 1.5;
           font-weight: 500;
@@ -189,7 +189,7 @@ const svgUrl = Squircle({
     input,
     textarea {
       display: block;
-      margin-top: 8px;
+      margin-block-start: 8px;
       padding: 0;
       width: 100%;
       color: rgb(@main);
@@ -222,9 +222,9 @@ const svgUrl = Squircle({
     #js-errorText {
       display: none;
       color: rgb(@caution);
-      margin-left: 4px;
+      margin-inline-start: 4px;
       span {
-        margin-left: 0.5em;
+        margin-inline-start: 0.5em;
       }
     }
   }

@@ -1,9 +1,9 @@
 ---
+import { Image } from "astro:assets";
 import Icon from "@/assets/img/icon.png";
 import MeImage from "@/assets/img/me/eyecatch.jpg";
 import { Squircle } from "@/components/Squircle.js";
 import { ME_DESCRIPTION } from "@/consts";
-import { Image } from "astro:assets";
 
 const path = Squircle({
   returnFormat: "path",
@@ -39,7 +39,7 @@ const path = Squircle({
   a {
     display: block;
     filter: @filterShadow;
-    margin-top: 16px;
+    margin-block-start: 16px;
     width: 100%;
     overflow: hidden;
 

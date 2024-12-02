@@ -1,6 +1,6 @@
 ---
-import SVG from "@/components/SVG.astro";
 import NotFound from "@/assets/404.svg";
+import SVG from "@/components/SVG.astro";
 import Base from "@/layouts/Base.astro";
 ---
 
@@ -32,11 +32,11 @@ import Base from "@/layouts/Base.astro";
         const Query = prompt("キーワードを入力");
         if (!Query) return;
         window.open(
-          `https://www.google.co.jp/search?q=${Query}&as_sitesearch=hira.page`
+          `https://www.google.co.jp/search?q=${Query}&as_sitesearch=hira.page`,
         );
       });
     },
-    { once: false }
+    { once: false },
   );
 </script>
 
@@ -44,7 +44,7 @@ import Base from "@/layouts/Base.astro";
   @import "@/styles/common.less";
 
   h1 {
-    margin-top: 96px;
+    margin-block-start: 96px;
     text-align: center;
 
     img {
@@ -55,7 +55,7 @@ import Base from "@/layouts/Base.astro";
     }
 
     p {
-      margin-top: 0.4em;
+      margin-block-start: 0.4em;
       font-size: 64px;
       font-weight: 800;
       letter-spacing: 0.1em;
@@ -68,7 +68,7 @@ import Base from "@/layouts/Base.astro";
   }
 
   h2 {
-    margin-top: 48px;
+    margin-block-start: 48px;
     text-align: center;
     font-size: 24px;
     color: rgb(@label);

@@ -24,7 +24,7 @@
 
   h2 {
     margin: 3.2em 0 0;
-    padding-bottom: 0.2em;
+    padding-block-end: 0.2em;
     line-height: 1;
     font-size: 1.6em;
     color: rgb(@label);
@@ -41,7 +41,7 @@
 
   h3 {
     margin: 2em 0 0;
-    padding-bottom: 0.2em;
+    padding-block-end: 0.2em;
     line-height: 1.4;
     font-size: 1.4em;
     border-bottom: 1px solid rgb(@main / 0.1);
@@ -55,12 +55,12 @@
 
   ul {
     list-style: disc;
-    padding-left: 1.5em;
+    padding-inline-start: 1.5em;
     &.contains-task-list {
       list-style: none;
-      padding-left: 0;
+      padding-inline-start: 0;
       li {
-        padding-left: 1.6em;
+        padding-inline-start: 1.6em;
         position: relative;
       }
       input {
@@ -72,7 +72,7 @@
   }
   ol {
     list-style: decimal;
-    padding-left: 1.5em;
+    padding-inline-start: 1.5em;
   }
   li {
     margin: 0 0 0.5em;
@@ -93,7 +93,7 @@
     dt {
       font-weight: 700;
       font-size: 1.1em;
-      margin-top: 1em;
+      margin-block-start: 1em;
       &::after {
         content: " :";
         opacity: 0.4;
@@ -141,6 +141,64 @@
     background: rgb(@main / 0.05);
     padding: 0.6em 1em;
     border-left: 2px solid rgb(@main / 0.1);
+    p { margin: 0 }
+  }
+
+  details {
+    background-color:  rgb(@main / 0.05);
+    border: 1px solid rgb(@main / 0.05);
+    padding: 16px;
+    border-radius: 10px;
+    overflow: hidden;
+    p:empty {
+      display: none;
+    }
+
+    & summary {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      display: block;
+      position: relative;
+      margin: -16px;
+      padding: 14px 16px 16px;
+      padding-inline-start: calc(16px + 1.8em);
+      cursor: pointer;
+      background-color: rgb(@base);
+      line-height: 1.4;
+      &::-webkit-details-marker {
+        display: none;
+      }
+      &::before {
+        content: "";
+        display: block;
+        position: absolute;
+        inset: 16px;
+        width: 1.2em;
+        aspect-ratio: 1;
+        background: rgb(@main / 0.2);
+        clip-path: polygon(
+          10% 35%,
+          50% 75%,
+          90% 35%,
+          80% 25%,
+          50% 55%,
+          20% 25%
+        );
+        transition: 0.2s linear;
+        transform-origin: center;
+        rotate: z -90deg;
+      }
+    }
+
+    &[open] summary {
+      text-overflow: unset;
+      white-space: unset;
+      margin-block-end: 16px;
+      &::before {
+        rotate: z 0deg;
+      }
+    }
   }
 
   small {
@@ -150,7 +208,7 @@
       width: 100%;
       text-align: right;
       display: block;
-      margin-top: 0.4em;
+      margin-block-start: 0.4em;
       a {
         color: rgb(@main / 0.4);
         text-decoration: underline;
@@ -175,7 +233,7 @@
     &.download {
       display: inline-block;
       text-decoration: none;
-      margin-right: 0.2em;
+      margin-inline-end: 0.2em;
       padding: 4px 8px 4px 4px;
       border-radius: 6px;
       background: rgb(@label / 0.8);
@@ -189,7 +247,7 @@
         height: 1.6em;
         line-height: 1.4em;
         text-align: center;
-        margin-right: 6px;
+        margin-inline-end: 6px;
         color: rgb(@label / 0.8);
         background-color: rgb(@base);
       }
@@ -232,7 +290,7 @@
         content: counter(step);
         counter-increment: step;
         width: 1em;
-        margin-right: 1em;
+        margin-inline-end: 1em;
         display: inline-block;
         text-align: right;
         color: #ffffff33;
@@ -241,8 +299,8 @@
   }
 
   .footnotes {
-    margin-top: 8em;
-    padding-top: 2em;
+    margin-block-start: 8em;
+    padding-block-start: 2em;
     border-top: 1px solid rgb(@main / 0.2);
     h2 {
       display: none;
@@ -313,7 +371,7 @@
     }
 
     .favi {
-      margin-left: 16px;
+      margin-inline-start: 16px;
       grid-area: 2 / 2 / 3 / 3;
       width: 20px;
       height: 20px;
@@ -332,6 +390,6 @@
   }
 
   .twitter-tweet {
-    margin-top: 1.2rem !important;
+    margin-block-start: 1.2rem !important;
   }
 }
