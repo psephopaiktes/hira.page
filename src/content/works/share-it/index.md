@@ -2,7 +2,7 @@
 title: "Share it"
 date: 2021-05-20T10:58:47+09:00
 draft: false
-tags: ["UI","CODE"]
+tags: ["UI","CODE","OSS"]
 description: "Webページを様々な方法で共有・コピーできるChrome拡張機能です。"
 url: "https://chrome.google.com/webstore/detail/share-it/kmfmfcdigkgfhmnopjfdnaikhjkmmplm/"
 priority: 4

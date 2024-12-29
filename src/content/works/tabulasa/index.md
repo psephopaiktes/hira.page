@@ -2,7 +2,7 @@
 title: "Tabulasa"
 date: 2020-04-03T19:03:17+09:00
 draft: false
-tags: ["UI","CODE"]
+tags: ["UI","CODE","OSS"]
 description: "Chromeの新しいタブをMarkdownエディタにする拡張機能です。"
 url: "https://psephopaiktes.github.io/tabulasa/"
 priority: 5
