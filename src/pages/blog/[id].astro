@@ -1,5 +1,6 @@
 ---
 import { Image } from "astro:assets";
+import { render } from "astro:content";
 import BlogCard from "@/components/Blog/Card.astro";
 import Share from "@/components/Blog/Share.astro";
 import SVG from "@/components/SVG.astro";
@@ -11,20 +12,20 @@ export async function getStaticPaths() {
   const blogCollection = await loadCollection("blog");
 
   return blogCollection.posts.map((post) => ({
-    params: { slug: post.slug },
+    params: { id: post.id },
     props: { post },
   }));
 }
 
 const { post } = Astro.props;
-const { Content, headings } = await post.render();
+const { Content, headings } = await render(post);
 
 // 関連記事
 let recommendCollection = await loadCollection("blog");
 recommendCollection.posts = recommendCollection.posts.filter((recPost) => {
   const includesFirstTag = recPost.data.tags.includes(post.data.tags[0]);
-  const isDifferentSlug = recPost.slug !== post.slug;
-  return includesFirstTag && isDifferentSlug;
+  const isDifferentId = recPost.id !== post.id;
+  return includesFirstTag && isDifferentId;
 });
 
 const followList = [
@@ -62,7 +63,7 @@ const followList = [
       <Image
         src={post.data.cover}
         alt={post.data.title}
-        transition:name={"blog-cover-" + post.slug}
+        transition:name={"blog-cover-" + post.id}
       />
 
       <div class="meta">
@@ -145,11 +146,11 @@ const followList = [
             headings.map((heading) =>
               heading.depth === 2 ? (
                 <li>
-                  <a href={"#" + heading.slug}>{heading.text}</a>
+                  <a href={"#" + heading.id}>{heading.text}</a>
                 </li>
               ) : heading.depth === 3 ? (
                 <li class="sub">
-                  <a href={"#" + heading.slug}>{heading.text}</a>
+                  <a href={"#" + heading.id}>{heading.text}</a>
                 </li>
               ) : null,
             )
@@ -193,7 +194,7 @@ const followList = [
             <ul class="recommendList">
               {recommendCollection.posts.slice(0, 5).map((post) => (
                 <li>
-                  <BlogCard slug={post.slug} data={post.data} />
+                  <BlogCard id={post.id} data={post.data} />
                 </li>
               ))}
             </ul>

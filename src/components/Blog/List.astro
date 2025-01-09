@@ -8,7 +8,7 @@ const { posts } = Astro.props;
   {
     posts.map((post) => (
       <li>
-        <BlogCard slug={post.slug} data={post.data} />
+        <BlogCard id={post.id} data={post.data} />
       </li>
     ))
   }

@@ -4,18 +4,19 @@ import { loadCollection } from "@/components/loadCollection.js";
 import Base from "@/layouts/Base.astro";
 import "@/styles/blog.less";
 import { Image } from "astro:assets";
+import { render } from "astro:content";
 
 export async function getStaticPaths() {
   const worksCollection = await loadCollection("works");
 
   return worksCollection.posts.map((post) => ({
-    params: { slug: post.slug },
+    params: { id: post.id },
     props: { post },
   }));
 }
 
 const { post } = Astro.props;
-const { Content } = await post.render();
+const { Content } = await render(post);
 ---
 
 <Base title={post.data.title}>

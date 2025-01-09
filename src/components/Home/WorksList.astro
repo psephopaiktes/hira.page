@@ -9,7 +9,7 @@ const worksCollection = await loadCollection("works");
   {
     worksCollection.posts.slice(0, 5).map((post) => (
       <li>
-        <WorksCard slug={post.slug} data={post.data} />
+        <WorksCard id={post.id} data={post.data} />
       </li>
     ))
   }

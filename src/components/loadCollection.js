@@ -10,15 +10,15 @@ const loadCollection = async (collection) => {
 
   // タグの件数リストと、件数順のタグ一覧を取得
   const tagCounts = {};
-  posts.forEach((post) => {
-    post.data.tags.forEach((tag) => {
+  for (const post of posts) {
+    for (const tag of post.data.tags) {
       if (tagCounts[tag]) {
         tagCounts[tag]++;
       } else {
         tagCounts[tag] = 1;
       }
-    });
-  });
+    }
+  }
   const tags = Object.keys(tagCounts).sort((a, b) => {
     return tagCounts[b] - tagCounts[a];
   });
