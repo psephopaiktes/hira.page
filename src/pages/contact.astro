@@ -1,6 +1,6 @@
 ---
 import SVG from "@/components/SVG.astro";
-import { Squircle } from "@/components/Squircle.js";
+import { Squircle } from "@/components/Squircle";
 import Headline from "@/components/ui/Headline.astro";
 import SquircleButton from "@/components/ui/SquircleButton.astro";
 import Base from "@/layouts/Base.astro";
@@ -8,7 +8,7 @@ import Base from "@/layouts/Base.astro";
 const FormId = import.meta.env.PUBLIC_FORMCARRY_ENDPOINT;
 
 const svgUrl = Squircle({
-  returnFormat: "dataUrl",
+  format: "dataUrl",
   radius: 12,
   curve: 8,
   fill: "#ddccbb66",

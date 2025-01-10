@@ -1,9 +1,9 @@
 ---
-import { Squircle } from "@/components/Squircle.js";
+import { Squircle } from "@/components/Squircle.ts";
 const { fill = "#fb0", button = false, ...attr } = Astro.props;
 
 const svgUrl = Squircle({
-  returnFormat: "dataUrl",
+  format: "dataUrl",
   radius: 16,
   curve: 12,
   fill: fill,

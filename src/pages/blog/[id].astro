@@ -4,7 +4,7 @@ import { render } from "astro:content";
 import BlogCard from "@/components/Blog/Card.astro";
 import Share from "@/components/Blog/Share.astro";
 import SVG from "@/components/SVG.astro";
-import { loadCollection } from "@/components/loadCollection.js";
+import { loadCollection } from "@/components/loadCollection.ts";
 import SnsLink from "@/components/ui/SnsLink.astro";
 import BlogDetail from "@/layouts/BlogDetail.astro";
 
@@ -21,7 +21,7 @@ const { post } = Astro.props;
 const { Content, headings } = await render(post);
 
 // 関連記事
-let recommendCollection = await loadCollection("blog");
+const recommendCollection = await loadCollection("blog");
 recommendCollection.posts = recommendCollection.posts.filter((recPost) => {
   const includesFirstTag = recPost.data.tags.includes(post.data.tags[0]);
   const isDifferentId = recPost.id !== post.id;
