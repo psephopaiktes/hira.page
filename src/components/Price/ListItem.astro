@@ -1,25 +1,31 @@
 ---
-const data = Astro.props;
-const totalPrice = Object.values(data.price).reduce(
-  (acc, price) => acc + price,
-  0,
-);
+interface Props {
+  id: string;
+  title: string;
+  text: string;
+  price: {
+    [key: string]: number;
+  };
+}
+
+const { id, title, text, price } = Astro.props;
+const totalPrice = Object.values(price).reduce((acc, price) => acc + price, 0);
 ---
 
 <li data-inview>
   <div class="playerContiner">
-    <dotlottie-player autoplay loop src={`/lottie/example-${data.id}.lottie`}
+    <dotlottie-player autoplay loop src={`/lottie/example-${id}.lottie`}
     ></dotlottie-player>
   </div>
 
   <section class="meta">
-    <h3>{data.title}</h3>
+    <h3>{title}</h3>
     <p>
-      <budoux-ja>{data.text}</budoux-ja>
+      <budoux-ja>{text}</budoux-ja>
     </p>
     <table>
       {
-        Object.entries(data.price).map(([service, price]) => (
+        Object.entries(price).map(([service, price]) => (
           <tr>
             <td>{service}</td>
             <td>{`¥${price.toLocaleString()}`}</td>

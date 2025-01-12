@@ -46,7 +46,7 @@ const snsList = ["X", "note", "GitHub", "Instagram", "Pinterest"];
     () => {
       const fadeImage = document.getElementById("js-fadeImage");
 
-      fadeImage?.complete && fadeImage.setAttribute("data-loaded", "true");
+      fadeImage?.setAttribute("data-loaded", "true");
       fadeImage?.addEventListener("load", () => {
         fadeImage.setAttribute("data-loaded", "true");
       });

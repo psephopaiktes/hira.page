@@ -25,7 +25,7 @@ const schema = JSON.stringify([
       name: SITE_TITLE,
       logo: {
         "@type": "ImageObject",
-        url: Astro.site + "img/logo.svg",
+        url: `${Astro.site}img/logo.svg`,
       },
     },
   },
@@ -90,7 +90,7 @@ const schema = JSON.stringify([
     }
 
     <!-- JSON-LD -->
-    <script type="application/ld+json" set:html={schema} />
+    <script is:inline type="application/ld+json" set:html={schema} />
   </head>
 
   <CommonBody>
