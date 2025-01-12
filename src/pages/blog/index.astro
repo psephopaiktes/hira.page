@@ -1,7 +1,7 @@
 ---
 import BlogHeader from "@/components/Blog/Header.astro";
 import BlogList from "@/components/Blog/List.astro";
-import { loadCollection } from "@/components/loadCollection.js";
+import { loadCollection } from "@/components/loadCollection.ts";
 import Base from "@/layouts/Base.astro";
 
 const blogCollection = await loadCollection("blog");

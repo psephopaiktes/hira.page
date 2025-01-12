@@ -1,6 +1,6 @@
 ---
-import { loadCollection } from "@/components/loadCollection.js";
 import { sortTypes } from "@/components/Works/SortConstructor.js";
+import { loadCollection } from "@/components/loadCollection.ts";
 
 export async function getStaticPaths() {
   const worksCollection = await loadCollection("works");
@@ -14,3 +14,5 @@ export async function getStaticPaths() {
 
 return Astro.redirect(`/works/tag=${Astro.params.tag}/sort=${sortTypes[0].id}`);
 ---
+
+<small>redirect: {sortTypes[0].id}</small>

@@ -2,11 +2,11 @@
 import { Image } from "astro:assets";
 import Icon from "@/assets/img/icon.png";
 import MeImage from "@/assets/img/me/eyecatch.jpg";
-import { Squircle } from "@/components/Squircle.js";
+import { Squircle } from "@/components/Squircle.ts";
 import { ME_DESCRIPTION } from "@/consts";
 
 const path = Squircle({
-  returnFormat: "path",
+  format: "path",
   width: 160,
   height: 40,
   radius: 16,

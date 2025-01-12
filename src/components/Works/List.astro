@@ -1,5 +1,10 @@
 ---
 import WorksCard from "@/components/Works/Card.astro";
+import type { CollectionEntry } from "astro:content";
+
+interface Props {
+  posts: CollectionEntry<"works">[];
+}
 
 const { posts } = Astro.props;
 ---
@@ -8,7 +13,7 @@ const { posts } = Astro.props;
   {
     posts.map((post) => (
       <li>
-        <WorksCard slug={post.slug} data={post.data} />
+        <WorksCard {post} />
       </li>
     ))
   }

@@ -1,10 +1,17 @@
 ---
-import SVG from "@/components/SVG.astro";
 import { Image } from "astro:assets";
-const { slug, data } = Astro.props;
+import type { CollectionEntry } from "astro:content";
+import SVG from "@/components/SVG.astro";
+
+interface Props {
+  post: CollectionEntry<"works">;
+}
+
+const { post } = Astro.props;
+const [id, data] = [post.id, post.data];
 ---
 
-<a href={`/works/${slug}/`} transition:name={"works-card-" + slug}>
+<a href={`/works/${id}/`} transition:name={"works-card-" + id}>
   <div class="meta">
     <h3>{data.title}</h3>
     <p>{data.description}</p>

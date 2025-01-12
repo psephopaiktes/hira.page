@@ -26,12 +26,12 @@ import AoSleepImage from "@/assets/img/ao-sleep.webp";
     () => {
       const fadeImage = document.getElementById("js-fadeImage");
 
-      fadeImage?.complete && fadeImage.setAttribute("data-loaded", "true");
+      fadeImage?.setAttribute("data-loaded", "true");
       fadeImage?.addEventListener("load", () => {
         fadeImage.setAttribute("data-loaded", "true");
       });
     },
-    { once: false }
+    { once: false },
   );
 </script>
 

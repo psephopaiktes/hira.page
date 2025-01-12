@@ -1,7 +1,14 @@
 ---
-import { Image } from "astro:assets";
 import SVG from "@/components/SVG.astro";
-const { slug, data } = Astro.props;
+import { Image } from "astro:assets";
+import type { CollectionEntry } from "astro:content";
+
+interface Props {
+  post: CollectionEntry<"blog">;
+}
+
+const { post } = Astro.props;
+const [id, data] = [post.id, post.data];
 
 const redirectSite = data.redirect
   ? /note/.test(data.redirect)
@@ -15,9 +22,9 @@ const redirectSite = data.redirect
 ---
 
 <a
-  href={data.redirect || `/blog/${slug}/`}
+  href={data.redirect || `/blog/${id}/`}
   target={redirectSite ? "_blank" : null}
-  transition:name={"blog-card-" + slug}
+  transition:name={"blog-card-" + id}
   class="c-card"
 >
   <Image class="bg" src={data.cover} alt="背景" />
@@ -25,7 +32,7 @@ const redirectSite = data.redirect
     class="cover"
     src={data.cover}
     alt={data.title}
-    transition:name={"blog-cover-" + slug}
+    transition:name={"blog-cover-" + id}
   />
 
   {

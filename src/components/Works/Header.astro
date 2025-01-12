@@ -1,8 +1,8 @@
 ---
 import SVG from "@/components/SVG.astro";
-import Headline from "@/components/ui/Headline.astro";
-import { loadCollection } from "@/components/loadCollection.js";
 import { sortTypes } from "@/components/Works/SortConstructor.js";
+import { loadCollection } from "@/components/loadCollection.ts";
+import Headline from "@/components/ui/Headline.astro";
 
 const worksCollection = await loadCollection("works");
 
@@ -58,7 +58,8 @@ const currentSort = Astro.params.sort || sortTypes[0].id;
     () => {
       const sort = document.getElementById("js-sort");
       sort?.addEventListener("change", function () {
-        window.location.href = this.value;
+        const value = (this as HTMLSelectElement).value;
+        window.location.href = value;
       });
     },
     { once: false },

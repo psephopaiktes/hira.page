@@ -4,8 +4,11 @@ import SVG from "@/components/SVG.astro";
 import Headline from "@/components/ui/Headline.astro";
 import SquircleButton from "@/components/ui/SquircleButton.astro";
 import Base from "@/layouts/Base.astro";
+import type { ComponentProps } from "astro/types";
 
-const priceList = [
+type ListItemProps = ComponentProps<typeof ListItem>;
+
+const priceList: ListItemProps[] = [
   {
     id: "logo",
     title: "ロゴと名刺の作成",

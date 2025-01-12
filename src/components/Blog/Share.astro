@@ -1,5 +1,10 @@
 ---
+import type { CollectionEntry } from "astro:content";
 import SVG from "@/components/SVG.astro";
+
+interface Props {
+  post: CollectionEntry<"blog">;
+}
 
 const { post } = Astro.props;
 ---
@@ -98,7 +103,7 @@ const { post } = Astro.props;
         nativeBtn.classList.add("apple");
       }
     },
-    { once: false }
+    { once: false },
   );
 </script>
 
