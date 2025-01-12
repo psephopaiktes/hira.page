@@ -1,12 +1,12 @@
 import { type CollectionEntry, getCollection } from "astro:content";
 
-type LoadCollectionResult = {
-  posts: CollectionEntry<'blog' | 'works'>[];
+type LoadCollectionResult<T extends 'blog' | 'works'>  = {
+  posts: CollectionEntry<T>[];
   tags: string[];
   tagCounts: Record<string, number>;
 };
 
-const loadCollection = async (collection: 'blog' | 'works'): Promise<LoadCollectionResult> => {
+const loadCollection = async <T extends 'blog' | 'works'>(collection: T): Promise<LoadCollectionResult<T>> => {
   // 記事一覧を取得
   const posts = await getCollection(collection, ({ data }) => {
     return import.meta.env.PROD ? data.draft !== true : true;

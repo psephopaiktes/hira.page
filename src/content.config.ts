@@ -11,7 +11,7 @@ const blog = defineCollection({
       updatedDate: z.coerce.date().optional(),
       draft: z.boolean().optional(),
       redirect: z.string().optional(),
-      cover: image().optional(),
+      cover: image(),
       tags: z.array(z.string()),
     }),
 });
@@ -27,8 +27,8 @@ const works = defineCollection({
       draft: z.boolean().optional(),
       url: z.string().optional(),
       priority: z.number().default(0),
-      thumbnail: image().optional(),
-      cover: image().optional(),
+      thumbnail: image(),
+      cover: image(),
       tags: z.array(z.string()),
     }),
 });

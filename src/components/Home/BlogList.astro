@@ -9,7 +9,7 @@ const blogCollection = await loadCollection("blog");
   {
     blogCollection.posts.slice(0, 5).map((post) => (
       <li>
-        <BlogCard id={post.id} data={post.data} />
+        <BlogCard {post} />
       </li>
     ))
   }
