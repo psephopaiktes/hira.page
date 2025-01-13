@@ -183,6 +183,9 @@ import { Image } from "astro:assets";
     dotlottie-player {
       width: 480px;
       aspect-ratio: 3/2;
+      @media (width < @2xl) {
+        width: 400px;
+      }
       @media (width < @xl) {
         width: 320px;
       }

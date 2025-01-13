@@ -276,6 +276,7 @@
     height: auto;
   }
 
+  // Code Highlight
   pre {
     padding: 1em;
     border-radius: 4px;
@@ -286,6 +287,10 @@
       span:empty {
         display: none;
       }
+      .line {
+        display: inline-block;
+        width: 100%;
+      }
       .line::before {
         content: counter(step);
         counter-increment: step;
@@ -295,6 +300,50 @@
         text-align: right;
         color: #ffffff33;
       }
+    }
+    // Shiki Transformers
+    /* transformerNotationDiff */
+    .line.diff {
+      &.add {
+        background-color: #0505;
+        &:before {
+          content: '+';
+        }
+      }
+      &.remove {
+        background-color: #8005;
+        &:before {
+          content: '−';
+        }
+      }
+    }
+
+    /* transformerNotationHighlight */
+    .line.highlighted {
+      background-color: #85858566;
+    }
+
+    /* transformerNotationWordHighlight */
+    .highlighted-word {
+      background-color: #85858566;
+    }
+
+    /* transformerNotationFocus */
+    &.has-focused {
+      .line {
+        filter: blur(0.06em);
+      }
+      .focused {
+        filter: blur(0);
+      }
+    }
+
+    /* transformerNotationErrorLevel */
+    .line.highlighted.error {
+      background-color: #72000075;
+    }
+    .line.highlighted.warning {
+      background-color: #964b0075;
     }
   }
 
