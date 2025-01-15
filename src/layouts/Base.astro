@@ -22,7 +22,7 @@ title = title ? title + "｜" + SITE_TITLE : SITE_TITLE;
     <meta property="og:title" content={title} />
     <meta property="og:site_name" content={SITE_TITLE} />
     <meta property="og:description" content={description} />
-    <meta property="og:image" content={Astro.site + "img/ogp.png"} />
+    <meta property="og:image" content={Astro.site + "img/meta/ogp.png"} />
     <meta property="og:url" content={Astro.url} />
     <meta property="og:locale" content="ja_JP" />
     <meta name="twitter:card" content="summary" />
@@ -56,7 +56,7 @@ title = title ? title + "｜" + SITE_TITLE : SITE_TITLE;
         window.addEventListener("scroll", checkInView);
         checkInView();
       },
-      { once: false }
+      { once: false },
     );
   </script>
 </html>

@@ -1,10 +1,9 @@
 ---
-import HirataImage from "@/assets/img/hirata.webp";
-import DesignImageAnimation from "@/assets/img/me/design-animation.webp";
-import DesignImage from "@/assets/img/me/design.webp";
-import DevelopImageAnimation from "@/assets/img/me/develop-animation.webp";
-import DevelopImage from "@/assets/img/me/develop.webp";
-import SVG from "@/components/SVG.astro";
+import HirataImage from "@/assets/hirata.webp";
+import DesignImageAnimation from "@/assets/me/design-animation.webp";
+import DesignImage from "@/assets/me/design.webp";
+import DevelopImageAnimation from "@/assets/me/develop-animation.webp";
+import DevelopImage from "@/assets/me/develop.webp";
 import { ME_DESCRIPTION } from "@/consts";
 import { Image } from "astro:assets";
 ---
@@ -59,7 +58,9 @@ import { Image } from "astro:assets";
         target="_blank"
       >
         このサイトのソースコード
-        <SVG symbol="open" class="u-iconInText" />
+        <svg-mask-icon src="/img/icon/open.svg" class="u-iconInText">
+          新しいタブで開く
+        </svg-mask-icon>
       </a>
     </p>
   </div>
@@ -93,7 +94,9 @@ import { Image } from "astro:assets";
         target="_blank"
       >
         参考
-        <SVG symbol="open" class="u-iconInText" />
+        <svg-mask-icon src="/img/icon/open.svg" class="u-iconInText">
+          新しいタブで開く
+        </svg-mask-icon>
       </a>
     </p>
   </div>

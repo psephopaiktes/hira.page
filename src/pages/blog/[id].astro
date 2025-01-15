@@ -3,7 +3,6 @@ import { Image } from "astro:assets";
 import { render } from "astro:content";
 import BlogCard from "@/components/Blog/Card.astro";
 import Share from "@/components/Blog/Share.astro";
-import SVG from "@/components/SVG.astro";
 import { loadCollection } from "@/components/loadCollection.ts";
 import SnsLink from "@/components/ui/SnsLink.astro";
 import BlogDetail from "@/layouts/BlogDetail.astro";
@@ -79,7 +78,7 @@ const followList = [
             itemType="https://schema.org/ListItem"
           >
             <a href="/" itemprop="item">HOME</a>
-            <SVG symbol="next" class="u-iconInText" />
+            <svg-mask-icon src="/img/icon/next.svg" class="u-iconInText" />
             <meta itemprop="position" content="1" />
           </li>
           <li
@@ -89,7 +88,7 @@ const followList = [
             itemType="https://schema.org/ListItem"
           >
             <a href="/blog" itemprop="item">ブログ一覧</a>
-            <SVG symbol="next" class="u-iconInText" />
+            <svg-mask-icon src="/img/icon/next.svg" class="u-iconInText" />
             <meta itemprop="position" content="2" />
           </li>
         </ol> -->
@@ -98,13 +97,14 @@ const followList = [
         <p>{post.data.description}</p>
 
         <time datetime={post.data.date.toISOString()}>
-          <SVG symbol="date" class="u-iconInText" />
+          <svg-mask-icon src="/img/icon/date.svg" class="u-iconInText"
+          ></svg-mask-icon>
           {post.data.date.toLocaleDateString("ja-JP")}
         </time>
         {
           post.data.updatedDate && (
             <time datetime={post.data.updatedDate.toISOString()}>
-              <SVG symbol="update" class="u-iconInText" />
+              <svg-mask-icon src="/img/icon/update.svg" class="u-iconInText" />
               {post.data.updatedDate.toLocaleDateString("ja-JP")}更新
             </time>
           )
@@ -115,7 +115,7 @@ const followList = [
             post.data.tags.map((tag) => (
               <li>
                 <a class="c-tag" href={`/blog/tag=${tag}/`}>
-                  <SVG symbol="tag" />
+                  <svg-mask-icon src="/img/icon/tag.svg" />
                   {tag}
                 </a>
               </li>
@@ -255,7 +255,7 @@ const followList = [
       display: flex;
       gap: 2px;
       opacity: 0.6;
-      :global(svg) {
+      svg-mask-icon {
         opacity: 0.4;
       }
     }

@@ -1,7 +1,6 @@
 ---
 import { Image } from "astro:assets";
 import type { CollectionEntry } from "astro:content";
-import SVG from "@/components/SVG.astro";
 
 interface Props {
   post: CollectionEntry<"works">;
@@ -19,7 +18,7 @@ const [id, data] = [post.id, post.data];
       {
         data.tags.slice(0, 2).map((tag) => (
           <li class="c-tag">
-            <SVG symbol="tag" />
+            <svg-mask-icon src="/img/icon/tag.svg" />
             {tag}
           </li>
         ))

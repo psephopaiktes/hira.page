@@ -1,5 +1,4 @@
 ---
-import SVG from "@/components/SVG.astro";
 import { Image } from "astro:assets";
 import type { CollectionEntry } from "astro:content";
 
@@ -38,8 +37,11 @@ const redirectSite = data.redirect
   {
     redirectSite && (
       <span class:list={["redirect", redirectSite]}>
-        <SVG symbol={"logo-" + redirectSite} />
-        <SVG symbol="open" />
+        <img
+          src={`/img/external-logo/${redirectSite}.svg`}
+          alt={redirectSite}
+        />
+        <svg-mask-icon src="/img/icon/open.svg">open</svg-mask-icon>
       </span>
     )
   }
@@ -51,7 +53,7 @@ const redirectSite = data.redirect
       {
         data.tags.slice(0, 2).map((tag) => (
           <li class="c-tag">
-            <SVG symbol="tag" />
+            <svg-mask-icon src="/img/icon/tag.svg" />
             {tag}
           </li>
         ))
@@ -111,28 +113,31 @@ const redirectSite = data.redirect
     padding: 12px 14px 4px;
     opacity: 0.4;
     z-index: 1;
+    color: #fff;
+    img {
+      height: 20px;
+    }
+    svg-mask-icon {
+      display: inline-block;
+      vertical-align: top;
+    }
     &.note {
       background: #000;
-      :global(svg:first-child) {
+      img {
         aspect-ratio: 167/60;
       }
     }
     &.qiita {
       background: #41c9b4;
-      :global(svg:first-child) {
+      img {
         aspect-ratio: 181/60;
       }
     }
     &.zenn {
       background: #3ea8ff;
-      :global(svg:first-child) {
+      img {
         aspect-ratio: 342/120;
       }
-    }
-
-    :global(svg) {
-      height: 20px;
-      fill: #fff;
     }
   }
 

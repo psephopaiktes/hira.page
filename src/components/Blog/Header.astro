@@ -1,5 +1,4 @@
 ---
-import SVG from "@/components/SVG.astro";
 import { loadCollection } from "@/components/loadCollection.ts";
 import Headline from "@/components/ui/Headline.astro";
 import SnsLink from "@/components/ui/SnsLink.astro";
@@ -49,7 +48,11 @@ const currentTag = Astro.params.tag;
         );
       })
     }
-    <li><button id="js-search"><SVG symbol="search" /></button></li>
+    <li>
+      <button id="js-search">
+        <svg-mask-icon src="/img/icon/search.svg">検索</svg-mask-icon>
+      </button>
+    </li>
   </ul>
 
   <ul class="c-tagFilter grid3">
@@ -60,7 +63,7 @@ const currentTag = Astro.params.tag;
             href={tag == currentTag ? "/blog" : `/blog/tag=${tag}/`}
             class:list={["c-tag", tag == currentTag ? "active" : ""]}
           >
-            <SVG symbol="tag" class="u-iconInText" />
+            <svg-mask-icon src="/img/icon/tag.svg" />
             {tag}
           </a>
           <span>{blogCollection.tagCounts[tag]}</span>
@@ -125,7 +128,7 @@ const currentTag = Astro.params.tag;
     margin-inline-start: 8px;
     display: block;
     height: 28px;
-    :global(svg) {
+    svg-mask-icon {
       aspect-ratio: 1;
       width: 28px;
     }

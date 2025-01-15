@@ -1,6 +1,4 @@
 ---
-import SVG from "@/components/SVG.astro";
-
 const {
   sns,
   link = `https://${sns}.com/psephopaiktes`,
@@ -9,7 +7,7 @@ const {
 ---
 
 <a href={link} target="_blank" title={title}>
-  <SVG symbol={sns} />
+  <svg-mask-icon src={`/img/sns/${sns.toLowerCase()}.svg`}></svg-mask-icon>
   <span class="u-textHidden">{sns}</span>
 </a>
 
@@ -29,7 +27,7 @@ const {
       height: 0;
     }
 
-    :global(svg) {
+    svg-mask-icon {
       width: 100%;
       aspect-ratio: 1;
     }

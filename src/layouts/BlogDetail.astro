@@ -14,7 +14,9 @@ const schema = JSON.stringify([
     headline: data.title,
     image: Astro.site?.toString().slice(0, -1) + data.cover.src,
     datePublished: data.date.toISOString(),
-    dateModified: data.updatedDate ? data.updatedDate.toISOString() : data.date.toISOString(),
+    dateModified: data.updatedDate
+      ? data.updatedDate.toISOString()
+      : data.date.toISOString(),
     // たまにエラーになるのはバグ?
     author: {
       "@type": "Person",
@@ -74,8 +76,14 @@ const schema = JSON.stringify([
     <meta property="og:title" content={data.title} />
     <meta property="og:site_name" content={SITE_TITLE} />
     <meta property="og:description" content={data.description} />
-    <meta property="og:image" content={Astro.site?.toString().slice(0, -1) + data.cover.src} />
-    <meta property="og:image:url" content={Astro.site?.toString().slice(0, -1) + data.cover.src} />
+    <meta
+      property="og:image"
+      content={Astro.site?.toString().slice(0, -1) + data.cover.src}
+    />
+    <meta
+      property="og:image:url"
+      content={Astro.site?.toString().slice(0, -1) + data.cover.src}
+    />
     <meta property="og:locale" content="ja_JP" />
     <meta property="og:type" content="article" />
 
@@ -94,17 +102,15 @@ const schema = JSON.stringify([
   </head>
 
   <CommonBody>
-    { import.meta.env.DEV && <style>:root { scroll-behavior: auto }</style> }
-
     <slot />
   </CommonBody>
 
   <script>
-    const links = document.getElementsByTagName('a');
+    const links = document.getElementsByTagName("a");
 
     for (const link of links) {
       link.hostname !== location.hostname &&
-        link.setAttribute('target', '_blank');
+        link.setAttribute("target", "_blank");
     }
   </script>
 </html>

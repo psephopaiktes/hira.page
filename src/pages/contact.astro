@@ -1,5 +1,4 @@
 ---
-import SVG from "@/components/SVG.astro";
 import { Squircle } from "@/components/Squircle";
 import Headline from "@/components/ui/Headline.astro";
 import SquircleButton from "@/components/ui/SquircleButton.astro";
@@ -76,8 +75,9 @@ const svgUrl = Squircle({
       </SquircleButton>
 
       <p id="js-errorText">
-        <SVG symbol="caution" class="u-iconInText" />
-        <span></span>
+        <svg-mask-icon src="/img/icon/caution.svg" class="u-iconInText">
+          エラー
+        </svg-mask-icon><span></span>
       </p>
     </form>
   </div>

@@ -29,7 +29,7 @@
   &:hover {
     color: rgb(@label);
   }
-  svg {
+  svg-mask-icon {
     opacity: 0.5;
     margin-inline-end: -0.35em;
     width: 1.3em;
@@ -53,7 +53,7 @@
   .active {
     color: rgb(@main / 0.8);
     position: relative;
-    :global(svg) {
+    :global(svg-mask-icon) {
       opacity: 1;
     }
     &::after {

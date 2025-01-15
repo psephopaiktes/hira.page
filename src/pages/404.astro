@@ -1,6 +1,5 @@
 ---
 import NotFound from "@/assets/404.svg";
-import SVG from "@/components/SVG.astro";
 import Base from "@/layouts/Base.astro";
 ---
 
@@ -19,7 +18,9 @@ import Base from "@/layouts/Base.astro";
   <h2>お探しのページは存在しません</h2>
 
   <button id="js-search">
-    <SVG symbol="search" class="u-iconInText" /> サイト内検索
+    <svg-mask-icon src="/img/icon/search.svg" class="u-iconInText">
+      検索アイコン
+    </svg-mask-icon> サイト内検索
   </button>
 </Base>
 

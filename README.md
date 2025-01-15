@@ -37,8 +37,3 @@ npm run draft
 ```bash
 npm run deploy
 ```
-
-[./src/assets/svg-sprite/](./src/assets/svg-sprite/)の.svgからSVGスプライト用のファイルを生成。フォルダ構造は無視される
-```bash
-npm run sprite
-```

@@ -1,5 +1,5 @@
 ---
-import SVG from "@/components/SVG.astro";
+
 ---
 
 <p data-inview>
@@ -8,18 +8,18 @@ import SVG from "@/components/SVG.astro";
 <ul data-inview>
   <li>
     <a href="/price" class="c-card">
-      <SVG symbol="price" />
+      <svg-mask-icon src="/img/icon/price.svg"></svg-mask-icon>
       <h3>PRICE</h3>
       <p>請負内容・参考価格</p>
-      <SVG symbol="next" />
+      <svg-mask-icon src="/img/icon/next.svg"></svg-mask-icon>
     </a>
   </li>
   <li>
     <a href="/contact" class="c-card">
-      <SVG symbol="contact" />
+      <svg-mask-icon src="/img/icon/contact.svg"></svg-mask-icon>
       <h3>CONTACT</h3>
       <p>お問い合わせ</p>
-      <SVG symbol="next" />
+      <svg-mask-icon src="/img/icon/next.svg"></svg-mask-icon>
     </a>
   </li>
 </ul>
@@ -50,10 +50,10 @@ import SVG from "@/components/SVG.astro";
     gap: 2px 16px;
     padding: 16px 16px 16px 24px;
     align-items: center;
-    :global(svg) {
+    svg-mask-icon {
       width: 32px;
       aspect-ratio: 1;
-      fill: rgb(@theme);
+      color: rgb(@theme);
       &:first-child {
         grid-area: 1 / 1 / 3 / 2;
       }

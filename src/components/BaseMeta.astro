@@ -17,12 +17,12 @@ const { title, description } = Astro.props;
 <link rel="canonical" href={import.meta.env.SITE + Astro.url.pathname} />
 
 <!-- Favicon -->
-<link rel="icon" type="image/svg+xml" href="/img/icon/favicon.svg" />
-<link rel="icon" sizes="192x192" href="/img/icon/android-chrome.png" />
+<link rel="icon" type="image/svg+xml" href="/img/meta/favicon.svg" />
+<link rel="icon" sizes="192x192" href="/img/meta/android-chrome.png" />
 <link
   rel="apple-touch-icon"
   sizes="180x180"
-  href="/img/icon/apple-touch-icon.png"
+  href="/img/meta/apple-touch-icon.png"
 />
 <meta name="theme-color" content="#fb0" />
 <meta name="color-scheme" content="light dark" />
@@ -33,4 +33,5 @@ const { title, description } = Astro.props;
 <script>
   import "@dotlottie/player-component";
   import "budoux/module/webcomponents/budoux-ja";
+  import "svg-mask-icon";
 </script>

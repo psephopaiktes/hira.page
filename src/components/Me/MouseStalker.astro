@@ -1,34 +1,34 @@
 ---
-import SVG from "@/components/SVG.astro";
+
 ---
 
 <ul id="js-stalker">
   <li class="hirata">
-    <SVG symbol="contact" />
+    <svg-mask-icon src="/img/icon/contact.svg"></svg-mask-icon>
     <p>お問い合わせ</p>
   </li>
 
   <li class="design">
-    <SVG symbol="next" />
+    <svg-mask-icon src="/img/icon/next.svg"></svg-mask-icon>
     <p>デザインの実績</p>
   </li>
 
   <li class="develop">
-    <SVG symbol="next" />
+    <svg-mask-icon src="/img/icon/next.svg"></svg-mask-icon>
     <p>フロントエンドの実績</p>
   </li>
 
   <li class="skillmap">
-    <SVG symbol="next" />
+    <svg-mask-icon src="/img/icon/next.svg"></svg-mask-icon>
     <p>すべての実績</p>
   </li>
 
   <li class="open">
-    <SVG symbol="open" />
+    <svg-mask-icon src="/img/icon/open.svg"></svg-mask-icon>
   </li>
 
   <li class="contact">
-    <SVG symbol="contact" />
+    <svg-mask-icon src="/img/icon/contact.svg"></svg-mask-icon>
   </li>
 </ul>
 
@@ -96,7 +96,7 @@ import SVG from "@/components/SVG.astro";
     li {
       display: none;
       text-align: center;
-      :global(svg) {
+      svg-mask-icon {
         margin-block-start: 4px;
         width: 64px;
         aspect-ratio: 1;
@@ -117,7 +117,7 @@ import SVG from "@/components/SVG.astro";
         width: 40px;
         height: 40px;
         margin: -20px 0 0 -20px;
-        :global(svg) {
+        svg-mask-icon {
           width: 32px;
         }
       }

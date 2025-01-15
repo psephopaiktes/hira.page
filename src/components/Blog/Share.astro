@@ -1,6 +1,5 @@
 ---
 import type { CollectionEntry } from "astro:content";
-import SVG from "@/components/SVG.astro";
 
 interface Props {
   post: CollectionEntry<"blog">;
@@ -16,8 +15,8 @@ const { post } = Astro.props;
     data-title={post.data.title + "｜WEBA"}
     data-url={Astro.url}
   >
-    <SVG symbol="share-google" />
-    <SVG symbol="share-apple" />
+    <svg-mask-icon src="/img/icon/share-google.svg"></svg-mask-icon>
+    <svg-mask-icon src="/img/icon/share-apple.svg"></svg-mask-icon>
     <span class="u-textHidden">シェア</span>
   </button>
 
@@ -31,7 +30,7 @@ const { post } = Astro.props;
     target="_blank"
     title="Xにポスト"
   >
-    <SVG symbol="x" />
+    <svg-mask-icon src="/img/sns/x.svg"></svg-mask-icon>
     <span class="u-textHidden">Xにポスト</span>
   </a>
 
@@ -41,7 +40,7 @@ const { post } = Astro.props;
     target="_blank"
     title="Facebookでシェア"
   >
-    <SVG symbol="facebook" />
+    <svg-mask-icon src="/img/sns/facebook.svg"></svg-mask-icon>
     <span class="u-textHidden">Facebookでシェア</span>
   </a>
 
@@ -51,7 +50,7 @@ const { post } = Astro.props;
     target="_blank"
     title="はてブに登録"
   >
-    <SVG symbol="hatebu" />
+    <svg-mask-icon src="/img/sns/hatebu.svg"></svg-mask-icon>
     <span class="u-textHidden">はてブに登録</span>
   </a>
 
@@ -61,7 +60,7 @@ const { post } = Astro.props;
     target="_blank"
     title="Pocketに保存"
   >
-    <SVG symbol="pocket" />
+    <svg-mask-icon src="/img/sns/pocket.svg"></svg-mask-icon>
     <span class="u-textHidden">Pocketに保存</span>
   </a>
 
@@ -74,7 +73,7 @@ const { post } = Astro.props;
     target="_blank"
     title="LINEで共有"
   >
-    <SVG symbol="line" />
+    <svg-mask-icon src="/img/sns/line.svg"></svg-mask-icon>
     <span class="u-textHidden">LINEで共有</span>
   </a>
 </aside>
@@ -142,8 +141,8 @@ const { post } = Astro.props;
         width: 32px;
         padding: 4px;
       }
-      :global(svg) {
-        fill: #fff;
+      svg-mask-icon {
+        color: #fff;
         width: 100%;
         aspect-ratio: 1;
       }
@@ -158,7 +157,7 @@ const { post } = Astro.props;
         display: block;
       }
       &.apple {
-        :global(svg:first-child) {
+        svg-mask-icon:first-child {
           display: none;
         }
       }

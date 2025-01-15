@@ -50,9 +50,9 @@ const svgUrl = Squircle({
     &:focus {
       filter: drop-shadow(0 4px 8px rgb(@theme / 0.8));
     }
-    :global(svg) {
+    :global(svg, svg-mask-icon) {
       width: 1.6em;
-      height: 1.6em;
+      aspect-ratio: 1;
       vertical-align: bottom;
       fill: currentColor;
     }

@@ -1,5 +1,4 @@
 ---
-import SVG from "@/components/SVG.astro";
 import { loadCollection } from "@/components/loadCollection.ts";
 import Base from "@/layouts/Base.astro";
 import "@/styles/blog.less";
@@ -27,7 +26,7 @@ const { Content } = await render(post);
     {
       post.data.url && (
         <a href={post.data.url} target="_blank">
-          <SVG symbol="open" class="u-iconInText" />
+          <svg-mask-icon src="/img/icon/open.svg" class="u-iconInText" />
           {post.data.url}
         </a>
       )
@@ -42,7 +41,7 @@ const { Content } = await render(post);
         post.data.tags.map((tag) => (
           <li>
             <a class="c-tag" href={`/works/tag=${tag}/`}>
-              <SVG symbol="tag" />
+              <svg-mask-icon src="/img/icon/tag.svg" />
               {tag}
             </a>
           </li>

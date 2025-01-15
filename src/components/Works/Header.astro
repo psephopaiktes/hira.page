@@ -1,5 +1,4 @@
 ---
-import SVG from "@/components/SVG.astro";
 import { sortTypes } from "@/components/Works/SortConstructor.js";
 import { loadCollection } from "@/components/loadCollection.ts";
 import Headline from "@/components/ui/Headline.astro";
@@ -42,7 +41,7 @@ const currentSort = Astro.params.sort || sortTypes[0].id;
             }
             class:list={["c-tag", tag == currentTag ? "active" : ""]}
           >
-            <SVG symbol="tag" class="u-iconInText" />
+            <svg-mask-icon src="/img/icon/tag.svg" />
             {tag}
           </a>
           <span>{worksCollection.tagCounts[tag]}</span>
