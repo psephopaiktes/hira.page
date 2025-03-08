@@ -90,9 +90,10 @@ const currentSort = Astro.params.sort || sortTypes[0].id;
   }
 
   #js-sort {
+    appearance: none; // for Safari
     appearance: base-select;
     display: block;
-    width: 9em;
+    width: 140px;
     position: relative;
     padding: 4px 40px 4px 12px;
     cursor: pointer;
