@@ -90,10 +90,11 @@ const currentSort = Astro.params.sort || sortTypes[0].id;
   }
 
   #js-sort {
+    appearance: base-select;
     display: block;
+    width: 9em;
     position: relative;
     padding: 4px 40px 4px 12px;
-    appearance: none;
     cursor: pointer;
     border-radius: 6px;
     border: none;
@@ -106,6 +107,56 @@ const currentSort = Astro.params.sort || sortTypes[0].id;
     background-image: url("data:image/svg+xml;charset=utf8,%3Csvg%20fill%3D%22none%22%20height%3D%2224%22%20viewBox%3D%220%200%2024%2024%22%20width%3D%2224%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Cpath%20d%3D%22m15.88%209.29-3.88%203.88-3.87998-3.88c-.08965-.10468-.19997-.1897-.32403-.24973-.12407-.06002-.2592-.09375-.39692-.09907s-.27505.01789-.40338.06816c-.12832.05028-.24487.12653-.34232.22399-.09746.09745-.17372.214-.22399.34233-.05028.12832-.07348.26565-.06816.40337.00532.13775.03905.27285.09907.39695.06002.124.14505.2344.24973.324l4.58998%204.59c.1874.1863.4408.2908.705.2908s.5177-.1045.705-.2908l4.59-4.59c.1863-.1874.2908-.4408.2908-.705%200-.26419-.1045-.51764-.2908-.705-.0929-.09373-.2035-.16812-.3254-.21889s-.2526-.07691-.3846-.07691-.2627.02614-.3846.07691c-.1218.05077-.2324.12516-.3254.21889z%22%20fill%3D%22%23fb0%22%2F%3E%3C%2Fsvg%3E");
     @media (width < @2xs) {
       width: 100%;
+    }
+    &::picker-icon {
+      display: none;
+    }
+    &::picker(select) {
+      appearance: base-select;
+      background: rgb(@label);
+      color: rgb(@base);
+      border-radius: 8px;
+      border: 0;
+      margin: 4px 0;
+      padding: 4px;
+      box-shadow: 2px 8px 32px -16px rgb(@label / 0.2);
+      transition: 0.2s ease;
+      &:hover {
+        scale: 1.02;
+        transform-origin: 50% 0;
+      }
+    }
+    option {
+      padding: 4px 8px;
+      position: relative;
+      border-radius: 4px;
+      opacity: 0.8;
+      outline: none;
+      &:focus,
+      &:hover {
+        background-color: rgb(@base / 0.1);
+      }
+      &::checkmark {
+        display: none;
+      }
+      &:checked::after {
+        content: "";
+        position: absolute;
+        right: 8px;
+        bottom: 14px;
+        width: 1em;
+        height: 0.6em;
+        background: rgb(@base / 0.5);
+        clip-path: polygon(
+          0 0,
+          0.2em 0,
+          0.2em 0.4em,
+          1em 0.4em,
+          1em 0.6em,
+          0 0.6em
+        );
+        rotate: -45deg;
+      }
     }
   }
 </style>

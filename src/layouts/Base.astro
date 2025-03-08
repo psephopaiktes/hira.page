@@ -4,7 +4,7 @@ import { SITE_DESCRIPTION, SITE_TITLE } from "@/consts";
 import CommonBody from "@/layouts/CommonBody.astro";
 
 let { title, description = SITE_DESCRIPTION } = Astro.props;
-title = title ? title + "｜" + SITE_TITLE : SITE_TITLE;
+title = title ? `${title}｜${SITE_TITLE}` : SITE_TITLE;
 ---
 
 <!--
@@ -46,10 +46,9 @@ title = title ? title + "｜" + SITE_TITLE : SITE_TITLE;
               el.getBoundingClientRect().top <= window.innerHeight - 48;
             if (inView) {
               el.classList.add("show");
+            } else {
+              el.classList.remove("show");
             }
-            // else {
-            //   el.classList.remove("show");
-            // }
           });
         }
 

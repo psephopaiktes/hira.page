@@ -17,11 +17,11 @@ const snsList = ["X", "note", "GitHub", "Instagram", "Pinterest"];
     }
   </ul>
 
-  <a href="/terms" class="terms">利用規約・ポリシー</a>
-
   <small>
     © Akira HIRATA {new Date().getFullYear()}.
   </small>
+
+  <a href="/terms" class="terms">利用規約・ポリシー</a>
 
   <a
     href="https://github.com/psephopaiktes/hira.page"
@@ -60,7 +60,6 @@ const snsList = ["X", "note", "GitHub", "Instagram", "Pinterest"];
   footer {
     display: grid;
     place-items: center;
-    gap: 32px;
     margin-block-start: 96px;
     padding: 64px 48px;
     background: rgb(@theme / 0.1);
@@ -71,8 +70,25 @@ const snsList = ["X", "note", "GitHub", "Instagram", "Pinterest"];
       margin-block-start: 64px;
     }
     small {
+      margin-block-start: 32px;
       font-size: 0.9em;
       opacity: 0.8;
+    }
+    .terms {
+      margin-block-start: 8px;
+      font-size: 12px;
+      opacity: 0.8;
+      &::before,
+      &::after {
+        margin: 0 0.2em;
+        opacity: 0.6;
+      }
+      &::before {
+        content: "[";
+      }
+      &::after {
+        content: "]";
+      }
     }
   }
 
@@ -85,11 +101,6 @@ const snsList = ["X", "note", "GitHub", "Instagram", "Pinterest"];
     @media (width < @2xs) {
       gap: 16px;
     }
-  }
-
-  .terms {
-    text-decoration: underline;
-    opacity: 0.6;
   }
 
   .octocat {

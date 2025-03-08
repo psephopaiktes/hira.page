@@ -1,9 +1,11 @@
 [data-inview] {
-  transition: 0.6s ease;
+  transition: 0.8s ease;
   opacity: 0;
-  transform: translateY(96px);
+  filter: blur(24px);
+  transform: translateY(48px);
   &.show {
     opacity: 1;
+    filter: none;
     transform: translateY(0);
   }
 }
