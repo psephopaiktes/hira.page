@@ -2,6 +2,9 @@
   "private": true,
   "license": "MIT",
   "homepage": "https://hira.page",
+  "engines": {
+    "node": ">=20"
+  },
   "scripts": {
     "biome": "biome check --write",
     "dev": "astro dev",
