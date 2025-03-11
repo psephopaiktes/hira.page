@@ -1,4 +1,3 @@
-
 const sortTypes = [
   {
     id: "priority",
@@ -20,9 +19,13 @@ const sortPosts = (posts, sotrType) => {
   if (sotrType === "priority") {
     sortedPosts = [...posts].sort((a, b) => b.data.priority - a.data.priority);
   } else if (sotrType === "title") {
-    sortedPosts = [...posts].sort((a, b) => a.data.title.localeCompare(b.data.title));
+    sortedPosts = [...posts].sort((a, b) =>
+      a.data.title.localeCompare(b.data.title),
+    );
   } else if (sotrType === "date") {
-    sortedPosts = [...posts].sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+    sortedPosts = [...posts].sort(
+      (a, b) => b.data.date.valueOf() - a.data.date.valueOf(),
+    );
   }
 
   return sortedPosts;

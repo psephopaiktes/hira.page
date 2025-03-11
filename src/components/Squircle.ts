@@ -30,12 +30,17 @@ const Squircle = ({
   curveX,
   curveY,
 }: options) => {
-
   // Parse input for border-radius style values
   const parseInput = (input: number | string): number[] => {
-    const values = typeof input === "string" ? input.split(" ").map(Number) : [input];
+    const values =
+      typeof input === "string" ? input.split(" ").map(Number) : [input];
     // If the string contains a space, split into CSS border-radius format
-    const [topLeft, topRight = topLeft, bottomRight = topLeft, bottomLeft = topRight] = values;
+    const [
+      topLeft,
+      topRight = topLeft,
+      bottomRight = topLeft,
+      bottomLeft = topRight,
+    ] = values;
     return [topLeft, topRight, bottomRight, bottomLeft];
   };
 
@@ -72,7 +77,6 @@ const Squircle = ({
     default:
       throw new Error("Invalid format. Use 'svg', 'path', or 'dataUrl'.");
   }
-
 };
 
 export { Squircle };

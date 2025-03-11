@@ -8,7 +8,7 @@ import {
   transformerNotationFocus,
   transformerNotationHighlight,
   transformerNotationWordHighlight,
-} from '@shikijs/transformers';
+} from "@shikijs/transformers";
 import { defineConfig } from "astro/config";
 
 // https://astro.build/config
@@ -17,7 +17,7 @@ export default defineConfig({
   integrations: [sitemap(), mdx()],
   markdown: {
     shikiConfig: {
-      theme: 'one-dark-pro',
+      theme: "one-dark-pro",
       transformers: [
         transformerNotationDiff(),
         transformerNotationHighlight(),
