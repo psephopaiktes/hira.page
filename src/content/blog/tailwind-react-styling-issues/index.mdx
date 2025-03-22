@@ -1,0 +1,121 @@
+---
+title: "私がTailwind(とReact)が嫌いな理由"
+date: 2025-03-22
+# updatedDate: 2024-05-15T19:00:00+09:00
+draft: false
+tags: ["React", "Tailwind CSS", "CSS", "JavaScript", "Web"]
+description: "Tailwind CSSとReactの組み合わせに私が感じている課題点について解説します。スタイル定義と文書構造の混在、scoped CSSの利用に関する不満、そしてAstro, Svelte, Vueといった他のフレームワークとの比較などです"
+cover: "./cover.png"
+---
+import EmbedCard from '@/components/Blog/EmbedCard.astro';
+
+## スタイル定義と文書構造の定義がごちゃごちゃに混ざる
+
+Reactでコンポーネントを作成する際、JSXの中に直接Tailwindのクラスを記述することになります。しかし、これが**HTMLの構造とスタイルの定義を密接に結びつけてしまい、可読性やメンテナンス性を損なう**と感じています。
+
+本来、HTMLは文書の構造を記述するものであり、CSSは見た目を定義する役割を持つべきです。Tailwindを使用すると、この**関心の分離が曖昧になりがち**です。
+
+例えば、ボタンを作成する場合、以下のようなコードになります：
+
+```jsx
+<button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+  保存
+</button>
+```
+
+このように、ボタンの役割とは直接関係のないスタイリングのためのクラスが多数記述されます。これは、コンポーネントが肥大化するにつれて、何が構造で何が見た目なのかが分かりにくくなる原因となります。
+
+## .tsxファイル内に\<style\>タグでscopedCSSが書けない
+
+Reactの標準的な機能では、.tsxファイル内に`<style>`タグを記述してコンポーネントにスコープされたCSS（scoped CSS）を定義することができません。コンポーネントと密接に関連するスタイルを同じファイル内で管理できるscoped CSSの簡潔さが好きなのですが、Reactではこれが標準で実現できません。
+
+例えば、Vueでは、`<style scoped>`のように記述することで、コンポーネントのスコープ内でCSSを定義できます。Astro, Svelteもほぼ同様のことが可能です。
+
+これにより、スタイルの衝突を心配することなく、コンポーネント単位でスタイリングを管理できるため、より直感的で開発しやすいと感じています。
+
+Reactでscoped CSSを実現するためには、CSS-in-JSライブラリを導入する必要がありますし、それらもあまりきれいなコードにはなりません。そもそも標準機能として提供されていない点に不便さを感じます。
+
+### Astro, Svelte, Vue ならこう書ける
+
+私がより好んで使用するAstro、Svelte、Vueといったフレームワークでは、コンポーネントごとにscoped CSSを標準で記述できるため、スタイル定義と文書構造がより明確に分離され、開発体験が向上します。このように関心の分離が明確なフレームワークを利用することで、SEO対策と開発のしやすさを両立できると考えています。
+
+例えば、Astroでは、コンポーネントの.astroファイル内で以下のようにscoped CSSを記述できます。
+
+```astro
+---
+// コンポーネントのフロントマター
+---
+
+<button class="button">保存</button>
+
+<style>
+  .button {
+    background-color: blue;
+    color: white;
+    font-weight: bold;
+    padding: 0.5rem 1rem;
+    border-radius: 0.25rem;
+  }
+  .button:hover {
+    background-color: darkblue;
+  }
+</style>
+```
+
+SvelteやVueでも同様に、`<style>`タグを利用することで、コンポーネントのスタイルを局所的に定義できます。
+
+```astro
+<script lang="ts">
+</script>
+
+<button class="button">保存</button>
+
+<style>
+  .button {
+    background-color: blue;
+    color: white;
+    font-weight: bold;
+    padding: 0.5rem 1rem;
+    border-radius: 0.25rem;
+  }
+  .button:hover {
+    background-color: darkblue;
+  }
+</style>
+```
+
+## そもそも昨今は生のCSSで十分に事足りる
+
+- [Goodbye SASS 👋, welcome back native CSS - DEV Community](https://dev.to/karsten_biedermann/goodbye-sass-welcome-back-native-css-cf)
+- [最近Sassを使ってないなぁって話 | Webクリエイターボックス](https://www.webcreatorbox.com/blog/bye-sass)
+
+最近のCSSの進化は目覚ましく、以前はSassやLESSなどのプリプロセッサを使って実現していた機能の多くが、今では標準のCSSだけで実装できるようになりました。
+
+* **CSS変数（カスタムプロパティ）**：テーマやカラースキームの管理が容易になり、JavaScriptからも操作可能です。
+    * 参考: [生のCSS変数で値を管理するときのTips](https://zenn.dev/psephopaiktes/scraps/496efc26afdb73)
+* **@supports**：特定のCSS機能がサポートされているかを検出し、適切な代替手段を提供できます。
+* **:is() と :where() セレクタ**：セレクタのグループ化が簡潔になり、CSSのメンテナンス性が向上しました。
+* **アニメーションとトランジション**：keyframes や transition、view-transition などなど
+* [カスケードレイヤー](https://azukiazusa.dev/blog/manage-styles-structurally-with-css-cascade-layer/)を使うことで重要度を管理しやすくなった
+
+唯一の課題として、ブレイクポイントを変数で管理できない問題があります。メディアクエリ内でCSS変数を使用することはできますが、ブレイクポイント自体を変数化することはまだ標準ではサポートされていません。
+
+```css
+/* 変数でブレイクポイントを定義したいが、これはまだ不可能 */
+:root {
+  --breakpoint-md: 768px;
+}
+
+/* 以下は機能しない */
+@media (var(--breakpoint-md) < width) {
+  /* スタイル */
+}
+```
+
+この問題に対処するためには、CSS-in-JSやプリプロセッサを使用するか、CSSを生成するビルドステップを導入する必要がありますが、それ以外の多くの点では、モダンCSSは十分に強力で柔軟になっています。
+
+## まとめ
+
+Tailwind CSSは、素早くスタイルを適用できるというメリットがある一方で、HTML構造の可読性の低下や、コンポーネント単位でのスタイリングのしにくさといったデメリットも存在すると感じています。
+
+React自体も強力なフレームワークですが、スタイリングに関しては、より関心の分離を重視し、scoped CSSを標準でサポートする他のフレームワークの方が、個人的にはより快適に開発を進められると感じています。
