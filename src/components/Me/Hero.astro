@@ -123,10 +123,14 @@ const snsList = ["X", "note", "GitHub", "Instagram", "Pinterest"];
     .sns {
       display: flex;
       gap: 16px;
-      margin-block-start: 24px;
+      margin-block-start: 32px;
       justify-content: center;
       @media (width < @xs) {
-        gap: 12px;
+        gap: 20px;
+        :global(a) {
+          opacity: 1;
+          width: 32px;
+        }
       }
     }
   }
