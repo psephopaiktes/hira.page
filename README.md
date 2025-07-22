@@ -1,9 +1,10 @@
 # WEBA
+
 [hira.page](https://hira.page/)
 
 [![GitHub license](https://img.shields.io/github/license/psephopaiktes/hira.page)](https://github.com/psephopaiktes/hira.page/blob/main/LICENSE)
 
-<strong>平田 章</strong>のブログ兼ポートフォリオWebサイト
+<strong>平田 章</strong> のブログ兼ポートフォリオWebサイト
 
 <br />
 
