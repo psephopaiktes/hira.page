@@ -1,8 +1,8 @@
 ---
+import { loadCollection } from "@/components/loadCollection.ts";
 import WorksHeader from "@/components/Works/Header.astro";
 import WorksList from "@/components/Works/List.astro";
 import { sortPosts, sortTypes } from "@/components/Works/SortConstructor.js";
-import { loadCollection } from "@/components/loadCollection.ts";
 import Base from "@/layouts/Base.astro";
 
 const worksCollection = await loadCollection("works");

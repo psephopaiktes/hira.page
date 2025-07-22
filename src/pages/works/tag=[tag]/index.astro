@@ -1,6 +1,6 @@
 ---
-import { sortTypes } from "@/components/Works/SortConstructor.js";
 import { loadCollection } from "@/components/loadCollection.ts";
+import { sortTypes } from "@/components/Works/SortConstructor.js";
 
 export async function getStaticPaths() {
   const worksCollection = await loadCollection("works");
