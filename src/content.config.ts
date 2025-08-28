@@ -13,6 +13,7 @@ const blog = defineCollection({
       redirect: z.string().optional(),
       cover: image(),
       tags: z.array(z.string()),
+      customCSS: z.string().optional(),
     }),
 });
 

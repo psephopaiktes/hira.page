@@ -99,6 +99,8 @@ const schema = JSON.stringify([
 
     <!-- JSON-LD -->
     <script is:inline type="application/ld+json" set:html={schema} />
+
+    <style is:inline set:html={data.customCSS ?? ""}></style>
   </head>
 
   <CommonBody>
