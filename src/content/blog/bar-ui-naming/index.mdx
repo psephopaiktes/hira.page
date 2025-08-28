@@ -40,12 +40,12 @@ import EmbedCard from '@/components/Blog/EmbedCard.astro';
 
 |  | iOS | Android |
 | :--: | :--: | :--: |
-| 現在 | ![ios/statusbar](ios/statusbar.png) <br/> [Status bar](https://developer.apple.com/jp/design/human-interface-guidelines/status-bars) | ![android/statusbar](android/statusbar.png)  <br/> [Status bar](https://developer.android.com/design/ui/mobile/guides/foundations/system-bars#status-bar) |
+| 現在 | ![ios/statusbar](ios/statusbar.png) <br/> [Status bar](https://developer.apple.com/design/human-interface-guidelines/status-bars) | ![android/statusbar](android/statusbar.png)  <br/> [Status bar](https://developer.android.com/design/ui/mobile/guides/foundations/system-bars#status-bar) |
 | 以前 | ![ios-old/statusbar](ios-old/statusbar.png) <br/> 名称変更無し | ![android-old/statusbar](android-old/statusbar.png)  <br/> [名称変更無し](https://m2.material.io/design/platform-guidance/android-bars.html#status-bar) |
 
 これはわかりやすいですね。時計・ネットワーク・バッテリーなどシステムの状態を表示するシステムUIです。
 
-基本的に開発側でカスタムできることは少ないです。動画プレーヤーやゲームアプリなど全画面で表示したいアプリの場合は、隠したりすることは可能です。
+基本的に開発側でカスタムできることは少ないです。動画プレーヤーやゲームアプリなどで全画面表示したい場合、隠したりすることは可能です。
 
 ### OS最下部のバーUI
 
@@ -58,7 +58,8 @@ OSのホーム画面に戻ったり、アプリを切り替えたりするため
 
 `Home indicator`の公式ガイドライン自体は見つけられなかったのですが、開発者向けのドキュメント([例](https://developer.apple.com/documentation/uikit/uiviewcontroller/prefershomeindicatorautohidden))やユーザーヘルプで良く登場する呼称です。
 
-Androidの`Gesture bar`という名前も正式なガイドラインにある呼称ではなく、いまだにGoogleの一部記事では`Navigation bar`と書かれています。しかしMaterial Design 3において`Navigation bar`は後述するタブUIをことを指すことになったので、今後これは明確に間違いになります。
+Androidでは`Status bar`とまとめて`System bar`と呼ばれたりもします。`Gesture bar`という名前も正式なガイドラインにある呼称ではなく、いまだにGoogleの一部記事では`Navigation bar`と書かれています。しかしMaterial Design 3において`Navigation bar`は後述するタブUIをことを指すことになったので、今後これは間違いになっていくと思います。
+
 
 ### アプリ内の上部のBar
 
@@ -77,7 +78,7 @@ iOSでは`Navigation bar`が正式なUI名称でしたが、OS26に伴うHIGの�
 
 という表記があるので、引き続き上部のBarを`Navigation bar`と呼んでも間違いでは無いらしいです。おそらく多くのドキュメントや実装APIに名前が残っているからでしょうが、紛らわしい。
 
-Androidでは**逆に**以前までは上部も下部も`App bar`と呼ばれていたのが、上部のみを`App bar`下部のものは`Toolbar`と呼ぶように**分解**されました。ああ紛らわしい、、、。
+Androidでは**逆に**以前までは上部も下部も`App bar`と呼ばれていたのが、上部のみを`App bar`、下部のものは`Toolbar`と呼ぶように**分解**されました。ああ紛らわしい、、、。
 
 
 ### アプリ内の下部のBar
@@ -89,7 +90,7 @@ Androidでは**逆に**以前までは上部も下部も`App bar`と呼ばれて
 
 現在の画面に何かアクションをするためのBarです。登場頻度は少なめ。Webの世界では`Footer`UIと呼ばれることが多いですね。
 
-この次の「グローバルナビゲーションのタブバー」と同じ位置に表示されて似ていますが、明確に別のUIです。
+この次の「グローバルナビゲーションのタブバー」と同じ位置に表示され似ていますが、明確に別のUIです。
 
 
 
@@ -117,12 +118,11 @@ iOSは昔から`Tab bars`で名称には変化がないです。しかし最近�
 | 現在 | 無し | ![android/snackbar](android/snackbar.png)  <br/> [Snackbar](https://m3.material.io/components/snackbar/overview) |
 | 以前 | 無し | ![android-old/snackbar](android-old/snackbar.png)  <br/> [名称変更無し](https://m2.material.io/components/snackbars) |
 
-
 Material Designで定義される、自動で消える通知UIですね。一般的に「トースト」UIと呼ばれることも多いですが、Androidでは**OSが表示するエラーUIを`Toast`と呼び区別することもある**ので注意です。
 
 [Toasts overview  |  Android Developers](https://developer.android.com/guide/topics/ui/notifiers/toasts)
 
-Appleではこのような<b>自動で消える</b>トースト系の通知UIはNativeに存在しません。カスタムで似たようなUIを実装しているアプリはよくあり、慣例的に`HUD`(Head Up Display)や`Toast`と呼ばれることが多いようです。ちなみにNativeの通知UIだと[Alerts](https://developer.apple.com/design/human-interface-guidelines/alerts), [Action sheets](https://developer.apple.com/design/human-interface-guidelines/action-sheets)などがあります。
+Appleではこのような<b>自動で消える</b>トースト系の通知UIはNativeに存在しません。カスタムで似たようなUIを実装しているアプリはよくあり、慣例的に`HUD`(Head Up Display)や`Toast`と呼ばれることが多いようです。iOS Nativeの通知UIには[Alerts](https://developer.apple.com/design/human-interface-guidelines/alerts), [Action sheets](https://developer.apple.com/design/human-interface-guidelines/action-sheets)などがあります。
 
 
 
@@ -139,11 +139,11 @@ Appleではこのような<b>自動で消える</b>トースト系の通知UIは
     site="developer.apple.com" />
 
 
-`Tab bar`同様にアプリ内でのセクションを移動するためのナビゲーションUIです。iPadOSでは`Tab bars`は上部に表示するか、代わりにこの`Sidebar`を使うことを推奨されます。`Tab bar`と`Sidebar`を統合する実装も可能で、ユーザーが切り替えて利用できるようになります。
+`Tab bar`同様にアプリ内でのセクションを移動するためのナビゲーションUIです。iPadOSでは`Tab bar`は上部に表示するか、代わりにこの`Sidebar`を使うことを推奨されます。`Tab bar`と`Sidebar`を統合する実装も可能で、ユーザーが切り替えて利用できるようになります。
 
 https://developer.apple.com/design/human-interface-guidelines/tab-bars#iPadOS
 
-`Sidebar`はiPadOS, macOS, visionOSでの利用が想定されており、**iOS(iPhone)では非推奨なので注意**です。iOSで同様の目的がある場合はTabbarを使うか、[Sheet](https://developer.apple.com/design/human-interface-guidelines/sheets)を使うのが適切です。
+`Sidebar`はiPadOS, macOS, visionOSでの利用が想定されており、**iOS(iPhone)では非推奨なので注意**です。iOSで同様の目的がある場合は`Tabbar`を使うか、[Sheet](https://developer.apple.com/design/human-interface-guidelines/sheets)を使うのが適切です。
 
 Androidでは[Navigation drawer](https://m3.material.io/components/navigation-drawer/overview), [Navigation rail](https://m3.material.io/components/navigation-rail/overview), [Side Sheets](https://m3.material.io/components/side-sheets/overview)などが似たコンテキストで使用されます。いずれも名称に`Bar`はつきませんね。
 
@@ -167,8 +167,8 @@ Android(というかMaterial Design)の[Menu](https://m3.material.io/components/
 もしご質問・ご指摘ありましたら[X](https://x.com/psephopaiktes)とかにご連絡ください。
 
 ついでにここで復習です。`Navigation bar`とは
-* Apple系OSにおいてはアプリ上部のBarUI (※ただし慣例名、正式名は`Toolbars`)
-* **現在の**AndroidOSにおいては下部のタブUI 
-* **以前の**AndroidOSにおいてはシステムのホームに戻るUI
+* Apple系OSにおいてはアプリ上部のヘッダーUI (※ただし以前からの慣例名、現在の正式名は`Toolbars`)
+* **現在の**AndroidOSにおいてはアプリ下部のタブUI 
+* **以前の**AndroidOSにおいてはホームに戻るシステムUI(※ただし未だにこっちを使う公式資料もある)
 
 のことでした。ムズすぎ。
