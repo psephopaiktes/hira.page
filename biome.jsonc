@@ -22,6 +22,12 @@
     "indentStyle": "space",
     "indentWidth": 2
   },
+  "linter": {
+    "enabled": true,
+    "rules": {
+      "recommended": true
+    }
+  },
   "assist": {
     "enabled": true,
     "actions": {
@@ -30,23 +36,17 @@
       }
     }
   },
-  "linter": {
-    "enabled": true,
-    "rules": {
-      "recommended": true
-    }
-  },
   "javascript": {
     "formatter": {
       "quoteStyle": "double"
     }
   },
-  "html": {
-    "formatter": {
-      "enabled": true
-    },
-    "experimentalFullSupportEnabled": true
-  },
+  // "html": {
+  //   "formatter": {
+  //     "enabled": true
+  //   },
+  //   "experimentalFullSupportEnabled": true
+  // },
   "overrides": [
     {
       "includes": ["**/*.svelte", "**/*.astro", "**/*.vue"],
