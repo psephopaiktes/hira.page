@@ -41,12 +41,12 @@
       "quoteStyle": "double"
     }
   },
-  // "html": {
-  //   "formatter": {
-  //     "enabled": true
-  //   },
-  //   "experimentalFullSupportEnabled": true
-  // },
+  "html": {
+    "formatter": {
+      "enabled": true
+    },
+    "experimentalFullSupportEnabled": true
+  },
   "overrides": [
     {
       "includes": ["**/*.svelte", "**/*.astro", "**/*.vue"],
