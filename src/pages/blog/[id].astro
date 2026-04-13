@@ -362,46 +362,38 @@ const followList = [
     }
 
     .toc {
-      list-style: disc;
+      scroll-target-group: auto;
       border-left: 1px solid rgb(@main / 0.2);
-      margin: 16px 0 0 16px;
-      padding-inline-start: 13.5px;
-      @media (width < @xl) {
-        margin-block-start: 12px;
-      }
-      @media (width < @md) {
-        padding-inline-start: 12px;
-      }
-
-      li.sub {
-        list-style: none;
-        a {
-          padding-block: 6px;
-          font-weight: 400;
-        }
-      }
+      margin-block-start: 12px;
 
       a {
         display: block;
+        padding-inline-start: 8px;
         position: relative;
         top: -2px;
-        padding-block: 8px;
+        margin-block-start: 14px;
+        padding-block: 4px;
         font-size: 0.8em;
         line-height: 1.4;
         opacity: 0.6;
         text-overflow: ellipsis;
         overflow: hidden;
-        font-weight: 600;
+        font-weight: bold;
         white-space: nowrap;
-        @media (width < @xl) {
-          padding: 4px 8px;
-          margin-block-start: 4px;
-          opacity: 0.7;
+        border-left: 2px solid rgb(@main / 0);
+        &:target-current {
+          border-left: 2px solid rgb(@main / 0.6);
         }
-
         &:hover {
           opacity: 0.9;
         }
+      }
+
+      li.sub a {
+        font-weight: normal;
+        padding-inline-start: 14px;
+        font-size: 0.7em;
+        margin-block-start: 2px;
       }
     }
   }
