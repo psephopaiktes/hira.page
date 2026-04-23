@@ -32,7 +32,7 @@
     "enabled": true,
     "actions": {
       "source": {
-        "organizeImports": "on"
+        "organizeImports": "off"
       }
     }
   },
@@ -41,12 +41,6 @@
       "quoteStyle": "double"
     }
   },
-  // "html": {
-  //   "formatter": {
-  //     "enabled": true
-  //   },
-  //   "experimentalFullSupportEnabled": true
-  // },
   "overrides": [
     {
       "includes": ["**/*.svelte", "**/*.astro", "**/*.vue"],

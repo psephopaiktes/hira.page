@@ -1,9 +1,12 @@
 ---
 import BaseMeta from "@/components/BaseMeta.astro";
 import { SITE_TITLE } from "@/consts";
+import { useTranslations, LOCALES, type Lang } from "@/i18n";
 import CommonBody from "@/layouts/CommonBody.astro";
 import "@/styles/blog.less";
 
+const t = useTranslations(Astro.currentLocale as Lang);
+const locale = Astro.currentLocale as Lang;
 const { data } = Astro.props;
 
 const schema = JSON.stringify([
@@ -24,7 +27,7 @@ const schema = JSON.stringify([
     },
     publisher: {
       "@type": "Organization",
-      name: SITE_TITLE,
+      name: t(SITE_TITLE),
       logo: {
         "@type": "ImageObject",
         url: `${Astro.site}img/logo.svg`,
@@ -64,9 +67,12 @@ const schema = JSON.stringify([
   https://github.com/psephopaiktes/hira.page
 
 -->
-<html lang="ja">
+<html lang={LOCALES[locale].lang || locale} dir={LOCALES[locale].dir || null}>
   <head prefix="og: https://ogp.me/ns#">
-    <BaseMeta title={data.title + "｜WEBA"} description={data.description} />
+    <BaseMeta
+      title={`${data.title}｜${t(SITE_TITLE)}`}
+      description={data.description}
+    />
 
     <!-- OGP -->
     <meta name="twitter:card" content="summary_large_image" />
@@ -74,7 +80,7 @@ const schema = JSON.stringify([
 
     <meta property="og:url" content={Astro.url} />
     <meta property="og:title" content={data.title} />
-    <meta property="og:site_name" content={SITE_TITLE} />
+    <meta property="og:site_name" content={t(SITE_TITLE)} />
     <meta property="og:description" content={data.description} />
     <meta
       property="og:image"
@@ -84,10 +90,10 @@ const schema = JSON.stringify([
       property="og:image:url"
       content={Astro.site?.toString().slice(0, -1) + data.cover.src}
     />
-    <meta property="og:locale" content="ja_JP" />
+    <meta property="og:locale" content={LOCALES[locale].lang || locale} />
     <meta property="og:type" content="article" />
 
-    <!-- Redirect -->
+    <!-- Redirect TODOi18n -->
     {
       data.redirect && (
         <>

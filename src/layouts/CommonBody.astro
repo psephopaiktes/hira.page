@@ -2,6 +2,7 @@
 import { Squircle } from "@/components/Squircle";
 import Footer from "@/components/ui/Footer.astro";
 import Nav from "@/components/ui/Nav.astro";
+import LocaleSuggest from "@/components/i18n/LocaleSuggest.astro";
 
 const path = Squircle({
   format: "path",
@@ -18,7 +19,7 @@ const pathOuter = Squircle({
 ---
 
 <body class="l-body">
-  { import.meta.env.DEV && <style>:root { scroll-behavior: auto }</style> }
+  <LocaleSuggest />
   <Nav />
 
   <main class="l-main">
@@ -26,7 +27,7 @@ const pathOuter = Squircle({
     <Footer />
   </main>
 
-  <!-- clip-pathで切り取る用 -->
+  <!-- for clip-path elm -->
   <svg class="c-clip" width="0" height="0" viewBox="0 0 120 120">
     <clipPath id="squircle" clipPathUnits="objectBoundingBox">
       <path d={path} transform="scale(0.0083333333, 0.0083333333)"></path>
@@ -52,6 +53,8 @@ const pathOuter = Squircle({
 
     gtag("config", "G-GNSHF898LD");
   </script>
+
+  { import.meta.env.DEV && <style>:root { scroll-behavior: auto }</style> }
 </body>
 
 <script is:inline>
