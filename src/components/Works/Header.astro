@@ -97,7 +97,11 @@ const currentSort = Astro.params.sort || sortTypes[0].id;
     position: relative;
     padding: 4px 40px 4px 12px;
     cursor: pointer;
-    border-radius: 6px;
+    border-radius: 12px;
+    @supports (corner-shape: superellipse(2.4)) {
+      corner-shape: superellipse(2.4);
+      border-radius: 32px;
+    }
     border: none;
     font-weight: 700;
     color: rgb(@label);
@@ -116,7 +120,11 @@ const currentSort = Astro.params.sort || sortTypes[0].id;
       appearance: base-select;
       background: rgb(@label);
       color: rgb(@base);
-      border-radius: 8px;
+      border-radius: 12px;
+      @supports (corner-shape: superellipse(2.4)) {
+        corner-shape: superellipse(2.4);
+        border-radius: 32px;
+      }
       border: 0;
       margin: 4px 0;
       padding: 4px;

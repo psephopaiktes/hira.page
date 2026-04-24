@@ -1,13 +1,7 @@
 ---
 import Logo from "@/assets/logo.svg";
-import { Squircle } from "@/components/Squircle.ts";
+import LocaleSelect from "@/components/i18n/LocaleSelect.astro";
 
-const url = Squircle({
-  format: "dataUrl",
-  radius: 16,
-  curve: 12,
-  fill: "#ffffff44",
-});
 const currentPath = Astro.url.pathname;
 const pageList = ["blog", "works", "me", "price"];
 ---
@@ -47,13 +41,14 @@ const pageList = ["blog", "works", "me", "price"];
   <a
     class:list={["contact", { active: /^\/contact\/?$/.test(currentPath) }]}
     href="/contact"
-    style={`border-image-source: url('${url}')`}
   >
     <dotlottie-player
       autoplay={/^\/contact\/?$/.test(currentPath) ? "autoplay" : null}
       src="/lottie/contact.lottie"></dotlottie-player>
     CONTACT
   </a>
+
+  <LocaleSelect />
 </nav>
 
 <style lang="less">
@@ -200,12 +195,15 @@ const pageList = ["blog", "works", "me", "price"];
     font-size: 18px;
     font-weight: 500;
     font-variation-settings: "wght" 500;
-    background: none;
-    border: solid 16px;
-    border-image-slice: 16 fill;
+    background: #ffffff44;
     color: #fff;
     text-shadow: 0 0 24px rgb(136 68 0 / 0.2);
     word-break: keep-all;
+    border-radius: 12px;
+    @supports (corner-shape: superellipse(2.4)) {
+      corner-shape: superellipse(2.4);
+      border-radius: 32px;
+    }
     &.active,
     &:hover,
     &:active {
@@ -214,24 +212,26 @@ const pageList = ["blog", "works", "me", "price"];
       filter: drop-shadow(0 0 8px rgb(255 255 255 / 0.5));
     }
     @media (width < @lg) {
-      width: 160px;
+      width: 140px;
       height: 40px;
       position: absolute;
       top: 24px;
       right: 2px;
+      font-size: 1em;
       dotlottie-player {
         margin-inline-start: -6px;
       }
     }
     @media (width < @xs) {
-      width: auto;
+      width: 64px;
       top: 12px;
       right: 6px;
-      gap: 2px;
-      font-size: 12px;
-      font-variation-settings: "wght" 700;
+      text-indent: 200%;
+      line-height: 10;
+      display: block;
+      overflow: hidden;
       dotlottie-player {
-        margin-inline-start: -8px;
+        margin: 4px auto;
       }
     }
   }

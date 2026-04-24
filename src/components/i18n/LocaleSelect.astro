@@ -5,7 +5,7 @@ import { getLocalePaths, LOCALES } from "@/i18n";
 ---
 
 <label>
-  <span class="material-icons-sharp">translate</span>
+  <svg-icon src="/img/icon/translate.svg"></svg-icon>
   <select data-languageSelect>
     {
       getLocalePaths(Astro.url).map(({ path, lang }) => (
@@ -19,7 +19,6 @@ import { getLocalePaths, LOCALES } from "@/i18n";
       ))
     }
   </select>
-  <span class="material-icons-sharp">expand_more</span>
 </label>
 
 <script is:inline>
@@ -34,37 +33,140 @@ import { getLocalePaths, LOCALES } from "@/i18n";
   });
 </script>
 
-<style>
+<style lang="less">
+  @import "@/styles/common.less";
+
   label {
     position: relative;
-    display: inline-block;
-    width: 240px;
-    text-align-last: left;
-    .material-icons-sharp {
-      pointer-events: none;
+    width: 168px;
+    height: 40px;
+    color: #fff;
+    opacity: 0.8;
+    cursor: pointer;
+    svg-icon {
       position: absolute;
-      color: var(--color-theme);
-      &:first-child {
-        font-size: 24px;
-        inset: 8px auto 8px 8px;
-        opacity: 0.4;
-      }
-      &:last-child {
-        font-size: 28px;
-        inset: 6px 6px 6px auto;
+      width: 24px;
+      aspect-ratio: 1;
+      inset: 8px;
+      pointer-events: none;
+      opacity: 0.6;
+      @media (width < @xs) {
+        display: none;
       }
     }
+    &::before,
+    &::after {
+      content: "";
+      position: absolute;
+      top: 19px;
+      width: 10px;
+      height: 3px;
+      border-radius: 100px;
+      background: #fff;
+      @media (width < @xs) {
+        top: 17px;
+      }
+    }
+    &::before {
+      right: 9px;
+      rotate: -45deg;
+    }
+    &::after {
+      right: 14.5px;
+      rotate: 45deg;
+    }
+
+    @media (width < @lg) {
+      width: auto;
+      position: absolute;
+      top: 24px;
+      right: 152px;
+    }
+    @media (width < @xs) {
+      top: 14px;
+      right: 80px;
+      font-size: 11px;
+    }
   }
+
   select {
+    appearance: none; // for Safari
+    appearance: base-select;
     width: 100%;
+    line-height: 32px;
+    // display: block;
     height: 40px;
-    padding-inline: 38px;
-    cursor: pointer;
-    appearance: none;
-    border-radius: 6px;
-    font-family: "Noto Sans";
-    color: var(--color-main);
-    background-color: var(--color-base);
-    border: 2px solid var(--color-theme);
+    padding: 0 36px 0 36px;
+    color: inherit;
+    border: 2px solid #fff;
+    background-color: transparent;
+
+    border-radius: 12px;
+    @supports (corner-shape: superellipse(2.4)) {
+      corner-shape: superellipse(2.4);
+      border-radius: 32px;
+    }
+
+    @media (width < @xs) {
+      height: 36px;
+      line-height: 28px;
+      padding: 0 28px 0 8px;
+    }
+
+    &::picker-icon {
+      display: none;
+    }
+    &::picker(select) {
+      appearance: base-select;
+      background: rgb(@label);
+      color: rgb(@base);
+      border: 0;
+      margin: 4px 0;
+      padding: 4px;
+      box-shadow: 2px 8px 32px -16px rgb(@label / 0.2);
+      transition: 0.2s ease;
+      border-radius: 12px;
+      @supports (corner-shape: superellipse(2.4)) {
+        corner-shape: superellipse(2.4);
+        border-radius: 32px;
+      }
+      &:hover {
+        scale: 1.02;
+        transform-origin: 50% 0;
+      }
+    }
+
+    option {
+      padding: 4px 8px;
+      position: relative;
+      border-radius: 4px;
+      opacity: 0.8;
+      outline: none;
+      &:focus,
+      &:hover {
+        background-color: rgb(@base / 0.1);
+      }
+      &::checkmark {
+        display: none;
+      }
+      &:checked::after {
+        content: "";
+        position: absolute;
+        right: 8px;
+        bottom: 17px;
+        width: 1em;
+        height: 0.6em;
+        background: rgb(@base / 0.5);
+        clip-path: polygon(
+          0 0,
+          0.2em 0,
+          0.2em 0.4em,
+          1em 0.4em,
+          1em 0.6em,
+          0 0.6em
+        );
+        rotate: -45deg;
+      }
+    }
   }
 </style>

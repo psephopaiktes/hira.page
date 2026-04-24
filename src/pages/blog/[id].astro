@@ -100,12 +100,14 @@ const followList = [
           <svg-mask-icon src="/img/icon/date.svg" class="u-iconInText"
           ></svg-mask-icon>
           {post.data.date.toLocaleDateString("ja-JP")}
+          <!-- TODO  -->
         </time>
         {
           post.data.updatedDate && (
             <time datetime={post.data.updatedDate.toISOString()}>
               <svg-mask-icon src="/img/icon/update.svg" class="u-iconInText" />
               {post.data.updatedDate.toLocaleDateString("ja-JP")}更新
+              <!-- TODO  -->
             </time>
           )
         }
