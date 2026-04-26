@@ -4,15 +4,28 @@ import { sortTypes } from "@/components/Works/SortConstructor.js";
 
 export async function getStaticPaths() {
   const worksCollection = await loadCollection("works");
+  const paths = [] as {
+    params: { lang: string; tag: string };
+  }[];
 
-  return worksCollection.tags.map((tag) => {
-    return {
-      params: { tag },
-    };
+  worksCollection.posts.forEach((post) => {
+    const [lang] = post.id.split("/");
+    post.data.tags.forEach((tag) => {
+      let path = paths.find(
+        (p) => p.params.lang === lang && p.params.tag === tag,
+      );
+      if (!path) {
+        path = { params: { lang, tag } };
+        paths.push(path);
+      }
+    });
   });
+  return paths;
 }
 
-return Astro.redirect(`/works/tag=${Astro.params.tag}/sort=${sortTypes[0].id}`);
+return Astro.redirect(
+  `/${Astro.params.lang}/works/tag=${Astro.params.tag}/sort=${sortTypes[0].id}`,
+);
 ---
 
 <small>redirect: {sortTypes[0].id}</small>

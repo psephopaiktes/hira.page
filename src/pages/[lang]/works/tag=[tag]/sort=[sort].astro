@@ -3,29 +3,51 @@ import { loadCollection } from "@/components/loadCollection.ts";
 import WorksHeader from "@/components/Works/Header.astro";
 import WorksList from "@/components/Works/List.astro";
 import { sortPosts, sortTypes } from "@/components/Works/SortConstructor.js";
+import { type Lang } from "@/i18n";
 import Base from "@/layouts/Base.astro";
+import type { CollectionEntry } from "astro:content";
+
+const locale = Astro.currentLocale as Lang;
 
 export async function getStaticPaths() {
   const worksCollection = await loadCollection("works");
+  const paths = [] as {
+    params: { lang: string; tag: string; sort: string };
+    props: { posts: CollectionEntry<"works">[] };
+  }[];
 
-  return worksCollection.tags.flatMap((tag) => {
-    const filteredPosts = worksCollection.posts.filter((post) =>
-      post.data.tags.includes(tag),
-    );
-
-    return sortTypes.map((sortType) => {
-      return {
-        params: { tag, sort: sortType.id },
-        props: { posts: sortPosts(filteredPosts, sortType.id) },
-      };
+  worksCollection.posts.forEach((post) => {
+    const [lang] = post.id.split("/");
+    post.data.tags.forEach((tag) => {
+      sortTypes.forEach((sortType) => {
+        let path = paths.find(
+          (p) =>
+            p.params.lang === lang &&
+            p.params.tag === tag &&
+            p.params.sort === sortType.id,
+        );
+        if (!path) {
+          path = {
+            params: { lang, tag, sort: sortType.id },
+            props: { posts: [] },
+          };
+          paths.push(path);
+        }
+        path.props.posts.push(post);
+      });
     });
   });
+
+  return paths.map((path) => ({
+    ...path,
+    props: { posts: sortPosts(path.props.posts, path.params.sort) },
+  }));
 }
 
 const { posts } = Astro.props;
 ---
 
-<Base title="WORKS">
+<Base title="WORKS" canonical={`/${locale}/works`}>
   <div class="l-content">
     <WorksHeader />
     <WorksList {posts} />

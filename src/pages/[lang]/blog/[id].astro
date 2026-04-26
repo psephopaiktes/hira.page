@@ -4,56 +4,72 @@ import { render } from "astro:content";
 import BlogCard from "@/components/Blog/Card.astro";
 import Share from "@/components/Blog/Share.astro";
 import { loadCollection } from "@/components/loadCollection.ts";
+import { useTranslations, type Lang } from "@/i18n";
 import SnsLink from "@/components/ui/SnsLink.astro";
 import BlogDetail from "@/layouts/BlogDetail.astro";
 
-export async function getStaticPaths() {
-  const blogCollection = await loadCollection("blog");
-
-  return blogCollection.posts.map((post) => ({
-    params: { id: post.id },
-    props: { post },
-  }));
-}
-
-const { post } = Astro.props;
-const { Content, headings } = await render(post);
-
-// 関連記事
-const recommendCollection = await loadCollection("blog");
-recommendCollection.posts = recommendCollection.posts.filter((recPost) => {
-  const includesFirstTag = recPost.data.tags.includes(post.data.tags[0]);
-  const isDifferentId = recPost.id !== post.id;
-  return includesFirstTag && isDifferentId;
-});
+const locale = Astro.currentLocale as Lang;
+const t = useTranslations(locale);
 
 const followList = [
   {
     sns: "x",
     link: "https://x.com/psephopaiktes",
-    title: "Xでフォロー",
+    title: t({ ja: "Xでフォロー", en: "Follow on X", "zh-cn": "在X上关注" }),
   },
   {
     sns: "facebook",
     link: "https://fb.me/webablog",
-    title: "Facebookでフォロー",
+    title: t({
+      ja: "Facebookでフォロー",
+      en: "Follow on Facebook",
+      "zh-cn": "在Facebook上关注",
+    }),
   },
   {
     sns: "feedly",
     link: "https://feedly.com/i/subscription/feed%2Fhttps%3A%2F%2Fhira.page%2Frss.xml",
-    title: "Feedlyでフォロー",
+    title: t({
+      ja: "Feedlyでフォロー",
+      en: "Follow on Feedly",
+      "zh-cn": "在Feedly上关注",
+    }),
   },
   {
     sns: "rss",
     link: "https://hira.page/rss.xml",
-    title: "RSSを表示",
+    title: t({ ja: "RSSを表示", en: "View RSS", "zh-cn": "查看RSS" }),
   },
   {
     sns: "gnews",
     link: "https://news.google.com/publications/CAAqBwgKML_jpQswl-69Aw",
-    title: "Googleニュース",
+    title: t({ ja: "Googleニュース", en: "Google News", "zh-cn": "谷歌新闻" }),
   },
 ];
+
+export async function getStaticPaths() {
+  const blogCollection = await loadCollection("blog");
+
+  return blogCollection.posts.map((post) => {
+    const [lang, ...id] = post.id.split("/");
+    return {
+      params: { lang, id: id.join("/") || undefined },
+      props: { post },
+    };
+  });
+}
+
+const { lang } = Astro.params;
+const { post } = Astro.props;
+const { Content, headings } = await render(post);
+
+// 関連記事
+const recommendCollection = await loadCollection("blog", locale);
+recommendCollection.posts = recommendCollection.posts.filter((recPost) => {
+  const includesFirstTag = recPost.data.tags.includes(post.data.tags[0]);
+  const isDifferentId = recPost.id !== post.id;
+  return includesFirstTag && isDifferentId;
+});
 ---
 
 <BlogDetail data={post.data}>
@@ -66,48 +82,19 @@ const followList = [
       />
 
       <div class="meta">
-        <!-- <ol
-          class="breadcrumb"
-          itemscope=""
-          itemtype="https://schema.org/BreadcrumbList"
-        >
-          <li
-            itemprop="itemListElement"
-            name="HOME"
-            itemscope=""
-            itemType="https://schema.org/ListItem"
-          >
-            <a href="/" itemprop="item">HOME</a>
-            <svg-mask-icon src="/img/icon/next.svg" class="u-iconInText" />
-            <meta itemprop="position" content="1" />
-          </li>
-          <li
-            itemprop="itemListElement"
-            name="ブログ一覧"
-            itemscope=""
-            itemType="https://schema.org/ListItem"
-          >
-            <a href="/blog" itemprop="item">ブログ一覧</a>
-            <svg-mask-icon src="/img/icon/next.svg" class="u-iconInText" />
-            <meta itemprop="position" content="2" />
-          </li>
-        </ol> -->
-
         <h1>{post.data.title}</h1>
         <p>{post.data.description}</p>
 
         <time datetime={post.data.date.toISOString()}>
-          <svg-mask-icon src="/img/icon/date.svg" class="u-iconInText"
-          ></svg-mask-icon>
-          {post.data.date.toLocaleDateString("ja-JP")}
-          <!-- TODO  -->
+          <svg-icon src="/img/icon/date.svg" class="u-iconInText"></svg-icon>
+          {post.data.date.toLocaleDateString(lang)}
         </time>
         {
           post.data.updatedDate && (
             <time datetime={post.data.updatedDate.toISOString()}>
-              <svg-mask-icon src="/img/icon/update.svg" class="u-iconInText" />
-              {post.data.updatedDate.toLocaleDateString("ja-JP")}更新
-              <!-- TODO  -->
+              <svg-icon src="/img/icon/update.svg" class="u-iconInText" />
+              {post.data.updatedDate.toLocaleDateString(lang)}
+              <small>{t({ ja: "更新", en: "Updated", "zh-cn": "更新" })}</small>
             </time>
           )
         }
@@ -116,14 +103,27 @@ const followList = [
           {
             post.data.tags.map((tag) => (
               <li>
-                <a class="c-tag" href={`/blog/tag=${tag}/`}>
-                  <svg-mask-icon src="/img/icon/tag.svg" />
+                <a class="c-tag" href={`/${locale}/blog/tag=${tag}/`}>
+                  <svg-icon src="/img/icon/tag.svg" />
                   {tag}
                 </a>
               </li>
             ))
           }
         </ul>
+        {
+          locale === "ja" ? null : locale === "zh-cn" ? (
+            <p class="caution">
+              <svg-icon src="/img/icon/caution.svg" class="u-iconInText" />
+              这篇文章是由机器翻译生成的
+            </p>
+          ) : (
+            <p class="caution">
+              <svg-icon src="/img/icon/caution.svg" class="u-iconInText" />
+              This article was created by machine translation.
+            </p>
+          )
+        }
       </div>
     </header>
 
@@ -170,7 +170,7 @@ const followList = [
 
   <footer class="blogFooter">
     <div class="l-content">
-      <h2>広告</h2>
+      <h2>{t({ ja: "広告", en: "Ad", "zh-cn": "广告" })}</h2>
       <div class="banner">
         <script
           is:inline
@@ -193,7 +193,13 @@ const followList = [
       {
         recommendCollection.posts.length > 0 && (
           <>
-            <h2>おすすめ記事</h2>
+            <h2>
+              {t({
+                ja: "おすすめ",
+                en: "Recommended",
+                "zh-cn": "推荐",
+              })}
+            </h2>
             <ul class="recommendList">
               {recommendCollection.posts.slice(0, 5).map((post) => (
                 <li>
@@ -252,16 +258,6 @@ const followList = [
       }
     }
 
-    .breadcrumb {
-      margin-block-start: 8px;
-      display: flex;
-      gap: 2px;
-      opacity: 0.6;
-      svg-mask-icon {
-        opacity: 0.4;
-      }
-    }
-
     .meta {
       margin-block-start: 32px;
       @media (width < @xl) {
@@ -277,7 +273,7 @@ const followList = [
 
     h1 {
       margin-block-start: 8px;
-      font-size: 2em;
+      font-size: 1.6em;
     }
 
     time {
@@ -306,6 +302,17 @@ const followList = [
       margin-block-start: 16px;
       font-size: 0.9em;
       font-weight: 400;
+    }
+
+    .caution {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-block: 24px 8px;
+      padding: 12px 16px;
+      background: rgb(@main / 0.08);
+      border-radius: 6px;
+      font-size: 11px;
     }
   }
 
@@ -383,19 +390,26 @@ const followList = [
         font-weight: bold;
         white-space: nowrap;
         border-left: 2px solid rgb(@main / 0);
-        &:target-current {
-          border-left: 2px solid rgb(@main / 0.6);
+        @media (width >= @sm) {
+          &:target-current {
+            border-left: 2px solid rgb(@main / 0.6);
+          }
         }
         &:hover {
           opacity: 0.9;
         }
       }
 
-      li.sub a {
-        font-weight: normal;
-        padding-inline-start: 14px;
-        font-size: 0.7em;
-        margin-block-start: 2px;
+      li.sub {
+        @media (width < @sm) {
+          display: none;
+        }
+        a {
+          font-weight: normal;
+          padding-inline-start: 14px;
+          font-size: 0.7em;
+          margin-block-start: 2px;
+        }
       }
     }
   }

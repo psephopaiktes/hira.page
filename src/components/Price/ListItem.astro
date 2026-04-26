@@ -1,4 +1,7 @@
 ---
+import BudouX from "@/components/i18n/BudouX.astro";
+import { useTranslations, type Lang } from "@/i18n";
+
 interface Props {
   id: string;
   title: string;
@@ -7,6 +10,9 @@ interface Props {
     [key: string]: number;
   };
 }
+
+const locale = Astro.currentLocale as Lang;
+const t = useTranslations(locale);
 
 const { id, title, text, price } = Astro.props;
 const totalPrice = Object.values(price).reduce((acc, price) => acc + price, 0);
@@ -21,7 +27,7 @@ const totalPrice = Object.values(price).reduce((acc, price) => acc + price, 0);
   <section class="meta">
     <h3>{title}</h3>
     <p>
-      <budoux-ja>{text}</budoux-ja>
+      <BudouX {text} />
     </p>
     <table>
       {
@@ -33,7 +39,15 @@ const totalPrice = Object.values(price).reduce((acc, price) => acc + price, 0);
         ))
       }
       <tr>
-        <td>合計金額(税込)</td>
+        <td>
+          {
+            t({
+              ja: "合計金額(税込)",
+              en: "Total Price (Tax Included)",
+              "zh-cn": "总价（含税）",
+            })
+          }
+        </td>
         <td>{`¥${totalPrice.toLocaleString()}`}</td>
       </tr>
     </table>

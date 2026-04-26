@@ -1,4 +1,5 @@
 ---
+import BudouX from "@/components/i18n/BudouX.astro";
 import type { ComponentProps } from "astro/types";
 
 import ListItem from "@/components/Price/ListItem.astro";
@@ -6,49 +7,135 @@ import Headline from "@/components/ui/Headline.astro";
 import SquircleButton from "@/components/ui/SquircleButton.astro";
 import Base from "@/layouts/Base.astro";
 
+import { getLocaleParams, useTranslations, type Lang } from "@/i18n";
+
+const locale = Astro.currentLocale as Lang;
+const t = useTranslations(locale);
+
 type ListItemProps = ComponentProps<typeof ListItem>;
 
 const priceList: ListItemProps[] = [
   {
     id: "logo",
-    title: "ロゴと名刺の作成",
-    text: "ロゴと名刺をデザインする例です。モーションやコンストラクショングリッド等は含みません。",
+    title: t({
+      ja: "ロゴと名刺の作成",
+      en: "Logo and Business Card Design",
+      "zh-cn": "徽标和名片设计",
+    }),
+    text: t({
+      ja: "ロゴと名刺をデザインする例です。モーションやコンストラクショングリッド等は含みません。",
+      en: "An example of designing a logo and business card. This does not include motion or construction grids.",
+      "zh-cn": "设计徽标和名片的示例。这不包括动画或构造网格。",
+    }),
     price: {
-      "ヒアリング・ディレクション": 10000,
-      デザイン作業: 50000,
+      [t({
+        ja: "ヒアリング・ディレクション",
+        en: "Hearing & Direction",
+        "zh-cn": "听取与指导",
+      })]: 10000,
+      [t({
+        ja: "デザイン作業",
+        en: "Design Work",
+        "zh-cn": "设计工作",
+      })]: 50000,
     },
   },
   {
     id: "lp",
-    title: "ランディングページのデザイン・コーディング",
-    text: "静的なWebサイト構築の例です。サーバーサイドの設定や内容含めた企画ディレクションなどにより料金は前後いたします。",
+    title: t({
+      ja: "ランディングページのデザイン・コーディング",
+      en: "Landing Page Design and Coding",
+      "zh-cn": "登录页面设计和编码",
+    }),
+    text: t({
+      ja: "静的なWebサイト構築の例です。サーバーサイドの設定や内容含めた企画ディレクションなどにより料金は前後いたします。",
+      en: "An example of building a static website. Pricing may vary depending on server-side setup, planning direction, and content.",
+      "zh-cn":
+        "构建静态网站的示例。定价可能因服务器端设置、规划方向和内容而异。",
+    }),
     price: {
-      "ヒアリング・ディレクション": 40000,
-      "デザイン作業 x1ページ程": 50000,
-      "コーディング作業 x1ページ程": 60000,
+      [t({
+        ja: "ヒアリング・ディレクション",
+        en: "Hearing & Direction",
+        "zh-cn": "听取与指导",
+      })]: 40000,
+      [t({
+        ja: "デザイン作業 x1ページ程",
+        en: "Design Work x1 Page",
+        "zh-cn": "设计工作 x1页",
+      })]: 50000,
+      [t({
+        ja: "コーディング作業 x1ページ程",
+        en: "Coding Work x1 Page",
+        "zh-cn": "编码工作 x1页",
+      })]: 60000,
     },
   },
   {
     id: "cms",
-    title: "CMSによるコーポレート/ブログサイト等の作成",
-    text: "ブログやニュースなど、記事の更新機能を含めたWebサイトです。Wordpressでの対応も可能ですが、基本的には保守・運用性の高い Headless CMS での構築をおすすめしています。",
+    title: t({
+      ja: "CMSによるコーポレート/ブログサイト等の作成",
+      en: "Corporate/Blog Site Creation with CMS",
+      "zh-cn": "使用CMS创建企业/博客网站",
+    }),
+    text: t({
+      ja: "ブログやニュースなど、記事の更新機能を含めたWebサイトです。Wordpressでの対応も可能ですが、基本的には保守・運用性の高い Headless CMS での構築をおすすめしています。",
+      en: "A website that includes article update functionality such as blogs and news. WordPress support is available, but I recommend building with a Headless CMS with high maintainability and operational efficiency.",
+      "zh-cn":
+        "包括文章更新功能的网站，例如博客和新闻。可以支持WordPress，但我建议使用具有高可维护性和运营效率的Headless CMS进行构建。",
+    }),
     price: {
-      "ヒアリング・ディレクション": 80000,
-      "デザイン作業 x5ページ程": 150000,
-      "コーディング作業 x5ページ程": 200000,
+      [t({
+        ja: "ヒアリング・ディレクション",
+        en: "Hearing & Direction",
+        "zh-cn": "听取与指导",
+      })]: 80000,
+      [t({
+        ja: "デザイン作業 x5ページ程",
+        en: "Design Work x5 Pages",
+        "zh-cn": "设计工作 x5页",
+      })]: 150000,
+      [t({
+        ja: "コーディング作業 x5ページ程",
+        en: "Coding Work x5 Pages",
+        "zh-cn": "编码工作 x5页",
+      })]: 200000,
     },
   },
   {
     id: "ui",
-    title: "アプリケーションのUIデザイン・設計",
-    text: "iOS, Android や TV など、システムを考慮したアプリケーションのUIデザインです。Sketch, Figma, XD 等で納品いたします。ワイヤー・仕様設計・ドキュメンテーションなど全般的に対応可能です。",
+    title: t({
+      ja: "アプリケーションのUIデザイン・設計",
+      en: "Application UI Design and Planning",
+      "zh-cn": "应用程序UI设计和规划",
+    }),
+    text: t({
+      ja: "iOS, Android や TV など、システムを考慮したアプリケーションのUIデザインです。Sketch, Figma, XD 等で納品いたします。ワイヤー・仕様設計・ドキュメンテーションなど全般的に対応可能です。",
+      en: "UI design for applications considering systems such as iOS, Android, and TV. I deliver in Sketch, Figma, XD, etc. I can handle wireframes, specification design, documentation, and more.",
+      "zh-cn":
+        "针对iOS、Android和TV等系统的应用程序UI设计。我可以使用Sketch、Figma、XD等工具进行交付。我可以处理线框、规格设计、文档等。",
+    }),
     price: {
-      "ヒアリング・ディレクション": 60000,
-      "デザイン作業 x5画面程": 100000,
-      "設計・ドキュメント x5画面程": 40000,
+      [t({
+        ja: "ヒアリング・ディレクション",
+        en: "Hearing & Direction",
+        "zh-cn": "听取与指导",
+      })]: 60000,
+      [t({
+        ja: "デザイン作業 x5画面程",
+        en: "Design Work x5 Screens",
+        "zh-cn": "设计工作 x5屏幕",
+      })]: 100000,
+      [t({
+        ja: "設計・ドキュメント x5画面程",
+        en: "Design & Documentation x5 Screens",
+        "zh-cn": "设计和文档 x5屏幕",
+      })]: 40000,
     },
   },
 ];
+
+export const getStaticPaths = () => getLocaleParams(import.meta.url);
 ---
 
 <Base title="PRICE">
@@ -56,45 +143,172 @@ const priceList: ListItemProps[] = [
     <Headline label="PRICE" />
 
     <p>
-      <budoux-ja>
-        制作料金は人日単価5万円〜からお見積もりします。例はあくまで目安ですので、作業内容の複雑さや納期により調整いたします。期間を決めて委任契約での対応も可能です。過去の実績は
-        <a href="/works">WORKS</a> ページからご確認ください。
-      </budoux-ja>
+      <BudouX
+        text={t({
+          ja: "制作料金は人日単価5万円〜からお見積もりします。例はあくまで目安ですので、作業内容の複雑さや納期により調整いたします。期間を決めて委任契約での対応も可能です。",
+          en: "The production fee is estimated from 50,000 yen per day. The examples are just a guideline, and will be adjusted based on the complexity of the work and the delivery date. It is also possible to handle it with a delegation contract for a fixed period.",
+          "zh-cn":
+            "制作费用从每天50,000日元起估算。示例仅供参考，并将根据工作的复杂性和交货日期进行调整。也可以通过固定期限的委托合同来处理。",
+        })}
+      />
+    </p>
+    <p>
+      {
+        t({
+          ja: (
+            <>
+              過去の実績は <a href={`/${locale}/works`}>WORKS</a>{" "}
+              ページからご確認ください。
+            </>
+          ),
+          en: (
+            <>
+              Please check my past projects on the
+              <a href={`/${locale}/works`}>WORKS</a>
+              page.
+            </>
+          ),
+          "zh-cn": (
+            <>
+              请在 <a href={`/${locale}/works`}>作品</a>{" "}
+              页面上查看我过去的项目。
+            </>
+          ),
+        })
+      }
     </p>
 
-    <h2>得意なこと</h2>
+    <h2>
+      {
+        t({
+          ja: "得意なこと",
+          en: "What I'm Good At",
+          "zh-cn": "我擅长的",
+        })
+      }
+    </h2>
     <ul>
-      <li>ランディングページのデザイン〜コーディング〜公開まで</li>
-      <li>CMSによるコーポレート/ブログ/メディアサイト等の作成・公開</li>
-      <li>モバイルアプリケーションのUIデザイン・設計</li>
-      <li>ロゴ・名刺などのデザイン制作</li>
       <li>
-        上記制作で必要になる、簡易的な画像・動画・ライティング素材などの作成
+        {
+          t({
+            ja: "ランディングページのデザイン〜コーディング〜公開まで",
+            en: "Landing page design to coding to publication",
+            "zh-cn": "从登录页面设计到编码到发布",
+          })
+        }
+      </li>
+      <li>
+        {
+          t({
+            ja: "CMSによるコーポレート/ブログ/メディアサイト等の作成・公開",
+            en: "Creating and publishing corporate sites, blogs, and media sites using CMS",
+            "zh-cn": "使用CMS创建和发布公司网站、博客和媒体网站",
+          })
+        }
+      </li>
+      <li>
+        {
+          t({
+            ja: "モバイルアプリケーションのUIデザイン・設計",
+            en: "Mobile application UI design and planning",
+            "zh-cn": "移动应用程序UI设计和规划",
+          })
+        }
+      </li>
+      <li>
+        {
+          t({
+            ja: "ロゴ・名刺などのデザイン制作",
+            en: "Logo and business card design",
+            "zh-cn": "徽标和名片设计",
+          })
+        }
+      </li>
+      <li>
+        {
+          t({
+            ja: "上記制作で必要になる、簡易的な画像・動画・ライティング素材などの作成",
+            en: "Creating simple images, videos, and writing materials needed for the above work",
+            "zh-cn": "为上述工作创建所需的简单图像、视频和书写材料",
+          })
+        }
       </li>
     </ul>
 
-    <h2>苦手なこと</h2>
+    <h2>
+      {
+        t({
+          ja: "苦手なこと",
+          en: "What I'm Not Good At",
+          "zh-cn": "我不擅长的",
+        })
+      }
+    </h2>
     <ul>
-      <li>アーティスティックな写真・イラスト・アイキャッチ画像などの作成</li>
-      <li>プロモーションムービーなどの長尺の動画制作</li>
       <li>
-        サーバーサイドのシステム構築や、複雑なWebシステム・ECサイト等の作成
+        {
+          t({
+            ja: "アーティスティックな写真・イラスト・アイキャッチ画像などの作成",
+            en: "Creating artistic photos, illustrations, and eye-catching images",
+            "zh-cn": "创建艺术照片、插图和引人注目的图像",
+          })
+        }
+      </li>
+      <li>
+        {
+          t({
+            ja: "プロモーションムービーなどの長尺の動画制作",
+            en: "Long-form video production such as promotional videos",
+            "zh-cn": "长格式视频制作，如宣传视频",
+          })
+        }
+      </li>
+      <li>
+        {
+          t({
+            ja: "サーバーサイドのシステム構築や、複雑なWebシステム・ECサイト等の作成",
+            en: "Server-side system development, complex web systems, e-commerce sites, etc.",
+            "zh-cn": "服务器端系统开发、复杂网络系统、电子商务网站等",
+          })
+        }
       </li>
     </ul>
 
-    <h2>料金例</h2>
+    <h2>
+      {
+        t({
+          ja: "料金例",
+          en: "Pricing Examples",
+          "zh-cn": "定价示例",
+        })
+      }
+    </h2>
     <ol>
       {priceList.map((item) => <ListItem {...item} />)}
     </ol>
 
     <SquircleButton
       data-inview
-      href="/contact"
+      href={`/${locale}/contact`}
       data-swellStalker="contact"
       class="contactBtn"
     >
-      <svg-mask-icon src="/img/icon/contact.svg">メールアイコン</svg-mask-icon>
-      ご依頼・お問い合わせ
+      <svg-icon src="/img/icon/contact.svg">
+        {
+          t({
+            ja: "メールアイコン",
+            en: "Email icon",
+            "zh-cn": "电子邮件图标",
+          })
+        }
+      </svg-icon>
+      {
+        t({
+          ja: "ご依頼・お問い合わせ",
+          en: "Request or Inquiry",
+          "zh-cn": "请求或查询",
+        })
+      }
     </SquircleButton>
   </div>
 </Base>

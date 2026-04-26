@@ -1,6 +1,6 @@
 ---
 import BaseMeta from "@/components/BaseMeta.astro";
-import { SITE_TITLE } from "@/consts";
+import { SITE_TITLE, X_ACCOUNT } from "@/consts";
 import { useTranslations, LOCALES, type Lang } from "@/i18n";
 import CommonBody from "@/layouts/CommonBody.astro";
 import "@/styles/blog.less";
@@ -76,7 +76,8 @@ const schema = JSON.stringify([
 
     <!-- OGP -->
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:creator" content="@psephopaiktes" />
+    <meta name="twitter:site" content={t(X_ACCOUNT)} />
+    <meta name="twitter:creator" content={t(X_ACCOUNT)} />
 
     <meta property="og:url" content={Astro.url} />
     <meta property="og:title" content={data.title} />
@@ -93,13 +94,18 @@ const schema = JSON.stringify([
     <meta property="og:locale" content={LOCALES[locale].lang || locale} />
     <meta property="og:type" content="article" />
 
-    <!-- Redirect TODOi18n -->
+    <!-- Redirect -->
     {
-      data.redirect && (
+      data.redirect ? (
         <>
           <meta http-equiv="refresh" content={`0; url=${data.redirect}`} />
           <link rel="canonical" href={data.redirect} />
         </>
+      ) : (
+        <link
+          rel="canonical"
+          href={import.meta.env.SITE + Astro.url.pathname}
+        />
       )
     }
 

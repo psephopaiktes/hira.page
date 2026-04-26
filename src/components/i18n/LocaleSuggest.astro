@@ -8,14 +8,13 @@ const currentLocale = Astro.currentLocale as Lang;
 ---
 
 <div id="js-languageSuggest">
+  <button id="js-close">
+    <svg-icon src="/img/icon/close.svg">close</svg-icon>
+  </button>
+
   <a id="js-link" href="#">
-    <span class="material-icons-sharp">autorenew</span>
     <span id="js-linkText"></span>
   </a>
-
-  <button id="js-close">
-    <span class="material-icons-sharp">close</span>
-  </button>
 </div>
 
 <script is:inline define:vars={{ currentLocale, LOCALES }}>
@@ -30,7 +29,7 @@ const currentLocale = Astro.currentLocale as Lang;
     pathnames[1] = lang;
     link.href = pathnames.join("/");
     linkText.innerText = LOCALES[lang].label;
-    suggest.style.display = "block";
+    suggest.style.display = "flex";
   };
 
   if (
@@ -52,24 +51,34 @@ const currentLocale = Astro.currentLocale as Lang;
   });
 </script>
 
-<style>
+<style lang="less">
+  @import "@/styles/common.less";
+
   #js-languageSuggest {
-    height: 44px;
     display: none;
-    position: relative;
-    text-align: center;
-    background: var(--color-main);
-    color: var(--color-base);
+    position: fixed;
+    align-items: center;
+    top: 12px;
+    left: 12px;
+    padding: 12px 16px 12px 12px;
+    gap: 8px;
+    background: rgb(@label);
+    color: rgb(@base);
+    border-radius: 8px;
+    z-index: 9999;
+    @media (width < @lg) {
+      top: auto;
+      bottom: 12px;
+    }
   }
   #js-link {
-    line-height: 44px;
   }
   #js-close {
-    position: absolute;
-    inset: 0;
+    display: inline-flex;
     font-size: 24px;
-    width: 44px;
-    aspect-ratio: 1;
+    width: 24px;
+    height: 24px;
     opacity: 0.5;
+    color: rgb(@base);
   }
 </style>

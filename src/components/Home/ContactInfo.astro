@@ -1,25 +1,50 @@
 ---
-
+import { useTranslations, type Lang } from "@/i18n";
+const locale = Astro.currentLocale as Lang;
+const t = useTranslations(locale);
 ---
 
 <p data-inview>
-  ご依頼はこちらから。UIやロゴなどのデザイン制作、コーディング、イベントでの登壇等を受け付けております。
+  {
+    t({
+      ja: "ご依頼はこちらから。UIやロゴなどのデザイン制作、コーディング、イベントでの登壇等を受け付けております。",
+      en: "Please contact me from here. I accept design production such as UI and logo, coding, and speaking at events.",
+      "zh-cn":
+        "请从这里联系我。我接受UI和logo等设计制作、编码、在活动中演讲等。",
+    })
+  }
 </p>
 <ul data-inview>
   <li>
-    <a href="/price" class="c-card">
-      <svg-mask-icon src="/img/icon/price.svg"></svg-mask-icon>
+    <a href={`/${locale}/price`} class="c-card">
+      <svg-icon src="/img/icon/price.svg"></svg-icon>
       <h3>PRICE</h3>
-      <p>請負内容・参考価格</p>
-      <svg-mask-icon src="/img/icon/next.svg"></svg-mask-icon>
+      <p>
+        {
+          t({
+            ja: "請負内容・参考価格",
+            en: "Service Details & Pricing",
+            "zh-cn": "承接内容・参考价格",
+          })
+        }
+      </p>
+      <svg-icon src="/img/icon/next.svg"></svg-icon>
     </a>
   </li>
   <li>
-    <a href="/contact" class="c-card">
-      <svg-mask-icon src="/img/icon/contact.svg"></svg-mask-icon>
+    <a href={`/${locale}/contact`} class="c-card">
+      <svg-icon src="/img/icon/contact.svg"></svg-icon>
       <h3>CONTACT</h3>
-      <p>お問い合わせ</p>
-      <svg-mask-icon src="/img/icon/next.svg"></svg-mask-icon>
+      <p>
+        {
+          t({
+            ja: "お問い合わせ",
+            en: "Get in Touch",
+            "zh-cn": "联系",
+          })
+        }
+      </p>
+      <svg-icon src="/img/icon/next.svg"></svg-icon>
     </a>
   </li>
 </ul>
@@ -50,7 +75,7 @@
     gap: 2px 16px;
     padding: 16px 16px 16px 24px;
     align-items: center;
-    svg-mask-icon {
+    svg-icon {
       width: 32px;
       aspect-ratio: 1;
       color: rgb(@theme);

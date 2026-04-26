@@ -1,14 +1,16 @@
 ---
 import Logo from "@/assets/logo.svg";
 import LocaleSelect from "@/components/i18n/LocaleSelect.astro";
+import { type Lang } from "@/i18n";
 
+const locale = Astro.currentLocale as Lang;
 const currentPath = Astro.url.pathname;
 const pageList = ["blog", "works", "me", "price"];
 ---
 
 <nav class="l-nav">
   <h1 class="logo">
-    <a href="/">
+    <a href={`/${locale}/`}>
       <img src={Logo.src} width={Logo.width} height={Logo.height} alt="WEBA" />
     </a>
   </h1>
@@ -16,8 +18,10 @@ const pageList = ["blog", "works", "me", "price"];
   <ul class="menu">
     {
       pageList.map((path) => {
-        const isActive = new RegExp(`^/${path}/?$`).test(currentPath);
-        const isChild = new RegExp(`^/${path}(?:/|$)`).test(currentPath);
+        const isActive = new RegExp(`^/${locale}/${path}/?$`).test(currentPath);
+        const isChild = new RegExp(`^/${locale}/${path}(?:/|$)`).test(
+          currentPath,
+        );
 
         return (
           <li>
@@ -25,7 +29,7 @@ const pageList = ["blog", "works", "me", "price"];
               <div class="navIndicator" transition:name="nav-indicator" />
             )}
 
-            <a class={isChild ? "active" : null} href={`/${path}`}>
+            <a class={isChild ? "active" : null} href={`/${locale}/${path}`}>
               <dotlottie-player
                 autoplay={isActive ? "autoplay" : null}
                 src={`/lottie/${path}.lottie`}
@@ -39,8 +43,11 @@ const pageList = ["blog", "works", "me", "price"];
   </ul>
 
   <a
-    class:list={["contact", { active: /^\/contact\/?$/.test(currentPath) }]}
-    href="/contact"
+    class:list={[
+      "contact",
+      { active: new RegExp(`^/${locale}/contact/?$`).test(currentPath) },
+    ]}
+    href={`/${locale}/contact`}
   >
     <dotlottie-player
       autoplay={/^\/contact\/?$/.test(currentPath) ? "autoplay" : null}
@@ -87,6 +94,7 @@ const pageList = ["blog", "works", "me", "price"];
   .logo {
     width: @width;
     margin-block-start: -5vh;
+    line-height: 1;
     @media (width < @lg) {
       margin-block-start: 0;
       width: 128px;

@@ -25,7 +25,7 @@
     "@shikijs/transformers": "^4.0.2",
     "astro": "^6.1.5",
     "astro-font": "^1.1.0",
-    "budoux": "^0.6.2",
+    "budoux": "^0.8.2",
     "less": "^4.4.0",
     "svg-mask-icon": "^2.2.0",
     "typescript": "^5.7.3"

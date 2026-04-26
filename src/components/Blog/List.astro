@@ -24,13 +24,13 @@ const { posts } = Astro.props;
   @import "@/styles/common.less";
 
   ul {
-    filter: @filterShadow;
     margin-block-start: 32px;
     display: flex;
     flex-wrap: wrap;
     gap: 16px;
   }
   li {
+    filter: @filterShadow;
     width: calc((100% - 32px) / 3);
     @media (width < @lg) {
       width: calc(50% - 8px);

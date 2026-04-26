@@ -1,34 +1,89 @@
 ---
+import { useTranslations, type Lang } from "@/i18n";
 
+const locale = Astro.currentLocale as Lang;
+const t = useTranslations(locale);
 ---
 
 <section class="history">
-  <h2 data-inview>経歴</h2>
+  <h2 data-inview>{t({ ja: "経歴", en: "Career", "zh-cn": "经历" })}</h2>
   <table data-inview id="career">
     <tr>
       <th>2017</th>
       <td>
-        <h4>株式会社 U-NEXT 入社</h4>
-        プロダクトデザイナーとして勤務
+        <h4>
+          {
+            t({
+              ja: "株式会社 U-NEXT 入社",
+              en: "Joined U-NEXT Co., Ltd.",
+              "zh-cn": "加入U-NEXT株式会社",
+            })
+          }
+        </h4>
+        {
+          t({
+            ja: "プロダクトデザイナーとして勤務",
+            en: "Worked as a Product Designer",
+            "zh-cn": "担任产品设计师",
+          })
+        }
       </td>
     </tr>
     <tr>
       <th>2015</th>
       <td>
-        <h4>同大学院 図書館情報メディア研究科 入学</h4>
-        クラウドソーシングを用いたコンテンツ生成について研究
+        <h4>
+          {
+            t({
+              ja: "同大学院 図書館情報メディア研究科 入学",
+              en: "Entered the Graduate School of Library and Information Media Studies",
+              "zh-cn": "进入同大学院图书馆信息媒体研究科",
+            })
+          }
+        </h4>
+        {
+          t({
+            ja: "クラウドソーシングを用いたコンテンツ生成について研究",
+            en: "Researched content generation using crowdsourcing",
+            "zh-cn": "研究使用众包进行内容生成",
+          })
+        }
       </td>
     </tr>
     <tr>
       <th>2011</th>
       <td>
-        <h4>筑波大学 情報学群 情報メディア創生学類 入学</h4>
-        情報学の基本、デザイン、認知心理学等について学ぶ
+        <h4>
+          {
+            t({
+              ja: "筑波大学 情報学群 情報メディア創生学類 入学",
+              en: "Entered the University of Tsukuba, School of Informatics, Department of Information Media Creation",
+              "zh-cn": "进入筑波大学信息学群信息媒体创生学类",
+            })
+          }
+        </h4>
+        {
+          t({
+            ja: "情報学の基本、デザイン、認知心理学等について学ぶ",
+            en: "Studied the basics of informatics, design, cognitive psychology, etc.",
+            "zh-cn": "学习信息学基础、设计、认知心理学等",
+          })
+        }
       </td>
     </tr>
     <tr>
       <th>1992</th>
-      <td><h4>高知県出身</h4></td>
+      <td
+        ><h4>
+          {
+            t({
+              ja: "高知県出身",
+              en: "Born in Japan",
+              "zh-cn": "出生于日本",
+            })
+          }
+        </h4></td
+      >
     </tr>
   </table>
 </section>
@@ -71,7 +126,7 @@
       }
       td {
         font-weight: auto;
-        padding: 8px 16px;
+        padding: 8px 32px 8px 16px;
         text-align: left;
         h4 {
           font-weight: bold;

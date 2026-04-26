@@ -1,6 +1,12 @@
 ---
 import NotFound from "@/assets/404.svg";
 import Base from "@/layouts/Base.astro";
+
+import { LOCALES, getLocaleParams, useTranslations, type Lang } from "@/i18n";
+const locale = Astro.currentLocale as Lang;
+const t = useTranslations(locale);
+
+export const getStaticPaths = () => getLocaleParams(import.meta.url);
 ---
 
 <Base>
@@ -11,17 +17,54 @@ import Base from "@/layouts/Base.astro";
       height={NotFound.height}
       alt="404"
     />
-
     <p>NOT FOUND</p>
   </h1>
 
-  <h2>お探しのページは存在しません</h2>
+  <h2>
+    {
+      t({
+        ja: "お探しのページは存在しません",
+        en: "The page you are looking for does not exist",
+        "zh-cn": "您要查找的页面不存在",
+      })
+    }
+  </h2>
 
   <button id="js-search">
-    <svg-mask-icon src="/img/icon/search.svg" class="u-iconInText">
-      検索アイコン
-    </svg-mask-icon> サイト内検索
+    <svg-icon src="/img/icon/search.svg" class="u-iconInText">
+      {
+        t({
+          ja: "検索アイコン",
+          en: "Search icon",
+          "zh-cn": "搜索图标",
+        })
+      }
+    </svg-icon>
+    {
+      t({
+        ja: "サイト内検索",
+        en: "Site search",
+        "zh-cn": "网站搜索",
+      })
+    }
   </button>
+
+  <ul class="langList">
+    {
+      Object.entries(LOCALES).map(([lang, { label }]) => (
+        <li>
+          <a
+            href={`/${lang}/`}
+            data-lang-path={lang}
+            onclick={`localStorage.selectedLang = "${lang}"`}
+            dir={LOCALES[lang].dir || null}
+          >
+            {label}
+          </a>
+        </li>
+      ))
+    }
+  </ul>
 </Base>
 
 <script>
@@ -30,7 +73,7 @@ import Base from "@/layouts/Base.astro";
     () => {
       const search = document.getElementById("js-search");
       search?.addEventListener("click", () => {
-        const Query = prompt("キーワードを入力");
+        const Query = prompt("search word");
         if (!Query) return;
         window.open(
           `https://www.google.co.jp/search?q=${Query}&as_sitesearch=hira.page`,
@@ -85,5 +128,19 @@ import Base from "@/layouts/Base.astro";
     border: 1px solid rgb(@label);
     border-radius: 6px;
     color: rgb(@label);
+  }
+
+  .langList {
+    margin-block-start: 48px;
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+    list-style: none;
+    a {
+      text-decoration: underline;
+    }
+    @media (width < @sm) {
+      gap: 12px;
+    }
   }
 </style>

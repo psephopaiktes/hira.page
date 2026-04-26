@@ -6,7 +6,7 @@ import { getLocalePaths, LOCALES } from "@/i18n";
 
 <label>
   <svg-icon src="/img/icon/translate.svg"></svg-icon>
-  <select data-languageSelect>
+  <select data-languageSelect name="language">
     {
       getLocalePaths(Astro.url).map(({ path, lang }) => (
         <option

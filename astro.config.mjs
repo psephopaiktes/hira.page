@@ -34,6 +34,9 @@ export default defineConfig({
           ]),
         ),
       },
+      filter: (page) => {
+        return !page.includes('tag=') && !page.includes('sort=');
+      },
     }),
     mdx(),
   ],

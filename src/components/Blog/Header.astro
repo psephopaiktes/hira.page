@@ -3,40 +3,57 @@ import { loadCollection } from "@/components/loadCollection.ts";
 import Headline from "@/components/ui/Headline.astro";
 import SnsLink from "@/components/ui/SnsLink.astro";
 
+import { useTranslations, type Lang } from "@/i18n";
+
+const locale = Astro.currentLocale as Lang;
+const t = useTranslations(locale);
+
 const followList = [
   {
     sns: "x",
     link: "https://x.com/psephopaiktes",
-    title: "Xでフォロー",
+    title: t({ ja: "Xでフォロー", en: "Follow on X", "zh-cn": "在X上关注" }),
   },
   {
     sns: "facebook",
     link: "https://fb.me/webablog",
-    title: "Facebookでフォロー",
+    title: t({
+      ja: "Facebookでフォロー",
+      en: "Follow on Facebook",
+      "zh-cn": "在Facebook上关注",
+    }),
   },
   {
     sns: "feedly",
     link: "https://feedly.com/i/subscription/feed%2Fhttps%3A%2F%2Fhira.page%2Frss.xml",
-    title: "Feedlyでフォロー",
+    title: t({
+      ja: "Feedlyでフォロー",
+      en: "Follow on Feedly",
+      "zh-cn": "在Feedly上关注",
+    }),
   },
   {
     sns: "rss",
     link: "https://hira.page/rss.xml",
-    title: "RSSを表示",
+    title: t({ ja: "RSSを表示", en: "View RSS", "zh-cn": "查看RSS" }),
   },
   {
     sns: "gnews",
     link: "https://news.google.com/publications/CAAqBwgKML_jpQswl-69Aw",
-    title: "Googleニュース",
+    title: t({
+      ja: "Googleニュース",
+      en: "Google News",
+      "zh-cn": "谷歌新闻",
+    }),
   },
 ];
 
-const blogCollection = await loadCollection("blog");
+const blogCollection = await loadCollection("blog", locale);
 const currentTag = Astro.params.tag;
 ---
 
 <header class="grid">
-  <Headline label="BLOG" href="/blog" class="grid1" />
+  <Headline label="BLOG" href={`/${locale}/blog`} class="grid1" />
 
   <ul class="follow grid2">
     {
@@ -50,7 +67,9 @@ const currentTag = Astro.params.tag;
     }
     <li>
       <button id="js-search">
-        <svg-mask-icon src="/img/icon/search.svg">検索</svg-mask-icon>
+        <svg-icon src="/img/icon/search.svg">
+          {t({ ja: "検索", en: "Search", "zh-cn": "搜索" })}
+        </svg-icon>
       </button>
     </li>
   </ul>
@@ -60,10 +79,14 @@ const currentTag = Astro.params.tag;
       blogCollection.tags.map((tag) => (
         <li>
           <a
-            href={tag == currentTag ? "/blog" : `/blog/tag=${tag}/`}
+            href={
+              tag == currentTag
+                ? `/${locale}/blog`
+                : `/${locale}/blog/tag=${tag}/`
+            }
             class:list={["c-tag", tag == currentTag ? "active" : ""]}
           >
-            <svg-mask-icon src="/img/icon/tag.svg" />
+            <svg-icon src="/img/icon/tag.svg" />
             {tag}
           </a>
           <span>{blogCollection.tagCounts[tag]}</span>
@@ -79,7 +102,7 @@ const currentTag = Astro.params.tag;
     () => {
       const search = document.getElementById("js-search");
       search?.addEventListener("click", () => {
-        const Query = prompt("キーワードを入力");
+        const Query = prompt("search keyword");
         if (!Query) return;
         window.open(
           `https://www.google.co.jp/search?q=${Query}&as_sitesearch=hira.page`,
@@ -128,7 +151,7 @@ const currentTag = Astro.params.tag;
     margin-inline-start: 8px;
     display: block;
     height: 28px;
-    svg-mask-icon {
+    svg-icon {
       aspect-ratio: 1;
       width: 28px;
     }

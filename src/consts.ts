@@ -15,3 +15,5 @@ export const ME_DESCRIPTION: string | Multilingual = {
   "zh-cn":
     "居住在东京的设计师兼工程师，与猫一起生活。我擅长与团队合作创造和策划新事物。我喜欢烹饪、骑行和漫画。",
 };
+
+export const X_ACCOUNT: string | Multilingual = "@psephopaiktes";

@@ -2,28 +2,32 @@
 import { loadCollection } from "@/components/loadCollection.ts";
 import Headline from "@/components/ui/Headline.astro";
 import { sortTypes } from "@/components/Works/SortConstructor.js";
+import { useTranslations, type Lang } from "@/i18n";
 
-const worksCollection = await loadCollection("works");
+const locale = Astro.currentLocale as Lang;
+const t = useTranslations(locale);
+
+const worksCollection = await loadCollection("works", locale);
 
 const currentTag = Astro.params.tag;
 const currentSort = Astro.params.sort || sortTypes[0].id;
 ---
 
 <header class="grid">
-  <Headline label="WORKS" href="/works" class="grid1" />
+  <Headline label="WORKS" href={`/${locale}/works`} class="grid1" />
 
-  <select id="js-sort" class="grid2">
+  <select id="js-sort" class="grid2" name="sort">
     {
       sortTypes.map((sortType) => (
         <option
           value={
             currentTag
-              ? `/works/tag=${currentTag}/sort=${sortType.id}`
-              : `/works/sort=${sortType.id}`
+              ? `/${locale}/works/tag=${currentTag}/sort=${sortType.id}`
+              : `/${locale}/works/sort=${sortType.id}`
           }
           selected={currentSort === sortType.id}
         >
-          {sortType.label}
+          {t(sortType.label)}
         </option>
       ))
     }
@@ -36,12 +40,12 @@ const currentSort = Astro.params.sort || sortTypes[0].id;
           <a
             href={
               tag == currentTag
-                ? `/works/sort=${currentSort}`
-                : `/works/tag=${tag}/sort=${currentSort}`
+                ? `/${locale}/works/sort=${currentSort}`
+                : `/${locale}/works/tag=${tag}/sort=${currentSort}`
             }
             class:list={["c-tag", tag == currentTag ? "active" : ""]}
           >
-            <svg-mask-icon src="/img/icon/tag.svg" />
+            <svg-icon src="/img/icon/tag.svg" />
             {tag}
           </a>
           <span>{worksCollection.tagCounts[tag]}</span>

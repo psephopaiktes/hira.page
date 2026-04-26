@@ -3,10 +3,14 @@ import { loadCollection } from "@/components/loadCollection.ts";
 import WorksHeader from "@/components/Works/Header.astro";
 import WorksList from "@/components/Works/List.astro";
 import { sortPosts, sortTypes } from "@/components/Works/SortConstructor.js";
+import { getLocaleParams, type Lang } from "@/i18n";
 import Base from "@/layouts/Base.astro";
 
-const worksCollection = await loadCollection("works");
+const locale = Astro.currentLocale as Lang;
+const worksCollection = await loadCollection("works", locale);
 const posts = sortPosts(worksCollection.posts, sortTypes[0].id);
+
+export const getStaticPaths = () => getLocaleParams(import.meta.url);
 ---
 
 <Base title="WORKS">

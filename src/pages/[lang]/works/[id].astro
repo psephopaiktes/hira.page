@@ -1,17 +1,23 @@
 ---
 import { loadCollection } from "@/components/loadCollection.ts";
+import { type Lang } from "@/i18n";
 import Base from "@/layouts/Base.astro";
 import "@/styles/blog.less";
 import { Image } from "astro:assets";
 import { render } from "astro:content";
 
+const locale = Astro.currentLocale as Lang;
+
 export async function getStaticPaths() {
   const worksCollection = await loadCollection("works");
 
-  return worksCollection.posts.map((post) => ({
-    params: { id: post.id },
-    props: { post },
-  }));
+  return worksCollection.posts.map((post) => {
+    const [lang, ...id] = post.id.split("/");
+    return {
+      params: { lang, id: id.join("/") },
+      props: { post },
+    };
+  });
 }
 
 const { post } = Astro.props;
@@ -26,7 +32,7 @@ const { Content } = await render(post);
     {
       post.data.url && (
         <a href={post.data.url} target="_blank">
-          <svg-mask-icon src="/img/icon/open.svg" class="u-iconInText" />
+          <svg-icon src="/img/icon/open.svg" class="u-iconInText" />
           {post.data.url}
         </a>
       )
@@ -40,8 +46,8 @@ const { Content } = await render(post);
       {
         post.data.tags.map((tag) => (
           <li>
-            <a class="c-tag" href={`/works/tag=${tag}/`}>
-              <svg-mask-icon src="/img/icon/tag.svg" />
+            <a class="c-tag" href={`/${locale}/works/tag=${tag}/`}>
+              <svg-icon src="/img/icon/tag.svg" />
               {tag}
             </a>
           </li>
