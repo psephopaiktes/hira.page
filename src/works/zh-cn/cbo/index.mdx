@@ -3,21 +3,20 @@ title: "CraftBank Office リニューアル"
 date: 2024-08-08
 draft: false
 tags: ["CODE","UI"]
-description: "クラフトバンク株式会社様のメディアサイト、CraftBank Officeのフルリニューアルを行いました。"
+description: "CraftBank Office的完整更新，这是CraftBank公司的媒体网站"
 url: "https://cbo.craft-bank.com/"
 priority: 5
 cover: "cover.png"
 thumbnail: "thumbnail.png"
 ---
+## 概览
+我承担了之前使用无代码工具创建的博客媒体网站的更新。由于无代码工具限制了自定义和营销灵活性，我建议在自由可修改的环境中从头开始创建网页。
 
-## 概要
-ノーコードツールで作成されていたブログメディアサイトのリニューアルを請け負いました。ノーコードツールでは記事のカスタマイズやマーケティングの自由度が低かったため、自由に仕様変更できる環境にするため、フルスクラッチでWebページを作成しました。
+## 系统架构
+![架构](./architect.png)
 
-## システム構成
-![アーキテクチャ](./architect.png)
+在我的项目中，我通常避免使用WordPress，而是建议采用Headless CMS配置，在维护、操作和安全性方面更优越。
 
-私が担当する案件では基本的にWordpressを避け、保守・運用・セキュリティいずれの面からもすぐれているHeadless CMSの構成で構築をご提案しています。
+对于文章创建和管理，我使用[microCMS](https://microcms.io/)，这对非工程师来说很容易使用。前端使用[Astro](https://astro.build/)构建，这是一个能够创建极其快速网页的静态网站构建器。
 
-記事の作成・管理は非エンジニアでも利用しやすい[microCMS](https://microcms.io/)を利用し、フロントエンドは非常に高速なWebページを作成できる静的サイトビルダー[astro](https://astro.build/)で構築しています。
-
-ホスティングサーバーは[netlify](https://www.netlify.com/)を利用し、記事の更新に応じてサイトがビルドされるようになっています。
+对于主机，我使用[Netlify](https://www.netlify.com/)，它自动响应文章更新而重新构建网站。
