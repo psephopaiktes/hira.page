@@ -1,0 +1,48 @@
+---
+import Headline from "@/components/ui/Headline.astro";
+import Base from "@/layouts/Base.astro";
+
+import { getLocaleParams, useTranslations, type Lang } from "@/i18n";
+const locale = Astro.currentLocale as Lang;
+const t = useTranslations(locale);
+export const getStaticPaths = () => getLocaleParams(import.meta.url);
+
+import * as EnTerms from "@/components/Terms/en.md";
+import * as JaTerms from "@/components/Terms/ja.md";
+import * as ZhCnTerms from "@/components/Terms/zh-cn.md";
+
+const title = {
+  ja: "利用規約・ポリシー",
+  en: "Terms of Use and Policy",
+  "zh-cn": "使用条款和政策",
+};
+---
+
+<Base title={t(title)}>
+  <div class="l-content">
+    <Headline label={t(title)} />
+
+    <section
+      set:html={locale === "ja"
+        ? JaTerms.compiledContent()
+        : locale === "zh-cn"
+          ? ZhCnTerms.compiledContent()
+          : EnTerms.compiledContent()}
+    />
+  </div>
+</Base>
+
+<style lang="less" is:global>
+  @import "@/styles/common.less";
+
+  section {
+    h2 {
+      margin-block-start: 64px;
+    }
+    ul {
+      list-style: disc;
+      padding-inline-start: 1.5em;
+      margin-block-start: 1em;
+    }
+  }
+</style>

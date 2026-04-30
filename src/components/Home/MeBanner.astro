@@ -1,9 +1,13 @@
 ---
-import { Image } from "astro:assets";
 import Icon from "@/assets/icon.png";
 import MeImage from "@/assets/me/eyecatch.jpg";
+import BudouX from "@/components/i18n/BudouX.astro";
 import { Squircle } from "@/components/Squircle.ts";
 import { ME_DESCRIPTION } from "@/consts";
+import { type Lang } from "@/i18n";
+import { Image } from "astro:assets";
+
+const locale = Astro.currentLocale as Lang;
 
 const path = Squircle({
   format: "path",
@@ -14,15 +18,15 @@ const path = Squircle({
 });
 ---
 
-<a data-inview href="/me" class="c-card">
-  <Image class="meImage" src={MeImage} alt="平田のイメージ画像" />
+<a data-inview href={`/${locale}/me`} class="c-card">
+  <Image class="meImage" src={MeImage} alt="Akira HIRATA" />
 
   <div class="overlay">
-    <Image class="icon" src={Icon} alt="プロフィールアイコン" />
+    <Image class="icon" src={Icon} alt="profile icon" />
 
     <h3>Akira HIRATA</h3>
     <p>
-      <budoux-ja>{ME_DESCRIPTION}</budoux-ja>
+      <BudouX text={ME_DESCRIPTION} />
     </p>
   </div>
 </a>
@@ -38,7 +42,6 @@ const path = Squircle({
 
   a {
     display: block;
-    filter: @filterShadow;
     margin-block-start: 16px;
     width: 100%;
     overflow: hidden;

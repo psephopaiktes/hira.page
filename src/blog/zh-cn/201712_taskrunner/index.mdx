@@ -1,0 +1,264 @@
+---
+title: "【收藏版】gulp、webpack、parcel...理解层出不穷的任务运行器的特点,选择最合适的那一个"
+draft: false
+date: 2017-12-12T21:57:25+09:00
+updatedDate: 2017-12-16T21:57:25+09:00
+description: "前端开发依赖大量的库和框架,管理它们的任务运行器也百花齐放、群雄割据。本文目的在于简要介绍各类工具的特点和理念,让读者能更直观地把握它们之间的差异。"
+tags: ["JavaScript","Web"]
+cover: "./cover.png"
+---
+import EmbedCard from '@/components/Blog/EmbedCard.astro';
+
+近年来,前端开发依赖着大量的库和框架,管理它们的任务运行器也呈现出群雄割据的局面。本文的目的是简要介绍这些工具的特点和理念,让读者更容易把握它们之间的差异。关于 Node.js 的知识,以及实际具体的环境搭建方法,本文只会以介绍参考文章的形式简单提及。
+<small>※ Grunt、Bower、Browserify 都已经被某种工具下位替代,基本上已经过时了,所以这次不在讨论范围内。</small>
+
+
+
+## 前置知识
+先简单介绍一下背景。这部分偏离主题,不感兴趣可以直接跳过。
+
+### 任务运行器到底是什么 ?
+要做一个网页或 Web 应用,如果只想做最低限度的版本,直接写 HTML、CSS 和 JavaScript 就足够了。但近年来,使用以下这些工具进行开发已经变得司空见惯。
+
+- **EJS、pug、HAML 等模板引擎**
+能更简洁地编写 HTML,共用可复用的布局或部件,或者从 JSON 文件批量生成页面。
+- **SASS、PostCSS 等 CSS 预处理器**
+可以更易读地编写 CSS,使用变量和函数等。也能提前用上未来 CSS 官方将采用的特性。
+- **Babel、TypeScript 等 JavaScript 转译器**
+可以用更严格的规则定义类型,或者用未来确定要被采用的规范来编写代码。也有像 CoffeeScript 这种以简化书写为目的的转译器。
+- **React、Vue、Angular 等框架**
+进行 SPA 开发等前端多功能 UI 实现,以及大量服务于各种目的的库。
+- **CommonJS、AMD 等模块打包器**
+将拆分到多个文件的 JavaScript 作为 Module 处理,合并成一个文件。它不是简单地按顺序拼接(concat)文件,而是在解决函数和变量等依赖关系之后再合并成一个文件。
+- **eslint、stylelint 等语法检查器**
+用于检查 CSS 或 JavaScript 中是否存在语法错误的工具。还可以详细设置编码规则。
+
+
+等等,有许多让 HTML 和 CSS 写起来更便利、功能更丰富的库和工具,如今直接写原生 HTML 和 CSS 反而少见了。另外,在 Web 开发时,引入下面这些便利的开发环境也是常见操作:
+
+- <b>能实时在手机上预览制作中的页面、每次保存文件都会自动重载的本地服务器</b>
+- <b>压缩图片、自动生成 CSS Sprite 图像的插件</b>
+
+上面这些工具和库,当然每个都可以单独安装使用。但是,逐个执行它们,并对每个 HTML、CSS、图片文件都手动管理,显然不现实。而且每个项目用到的组合各不相同,如果共同开发的所有人都得一一了解,那简直是无理取闹。
+
+于是,把这些一个个的处理作为 <b>任务(task)</b> 统一管理、放到后台运行,让它自动按文件类型处理的工具就是 **任务运行器(Task Runner)**。借助统一的配置文件,团队所有人都可以快速搭建相同的环境,不必特意留意就能进行同样的处理。
+
+### 前端地狱
+读到这里你可能也意识到了——前端开发的世界里不知不觉间增加了各种各样的库、框架、转译器、开发环境,而且每一个都有相当的人气,没有"学了这个就万事大吉"的捷径。新东西也以相当快的速度涌现,荣枯盛衰激烈无比。读一下[这篇](https://kikuchi1201.hateblo.jp/entry/2016/10/26/172404)就能看出来,因为根本无法定下一个"先这样吧"的标准方案,即使学了一定程度,痛苦还是会无尽延续。换个角度看,正因为有这么多选择、各有所长,所以也能说很有趣。不必勉强自己学完所有,只对必要的部分一点一点熟悉就好。
+
+### Node.js 和 NPM
+上面介绍的库和框架,以及任务运行器本身,大多数都是用 [Node.js](https://nodejs.org) 开发,并以 <b>包(package)</b> 的形式公开发布。能够轻松安装和管理这些包的官方工具就是 NodePackageManager = **NPM**。(类似于 Ruby 的 bundler、Python 的 pip。) 可以毫不夸张地说,前端开发环境的搭建始于 NPM,也止于 NPM。( 与 NPM 兼容的 [YARN](https://yarnpkg.com) 也很流行,但本文不做介绍。 ) 在每个项目文件夹下创建名为 `package.json` 的管理文件,在其中以列表形式记录所使用的包。即使对 Node.js 和 npm 不甚了解,也能使用任务运行器,但请至少了解"原来是这样构成的"这个事实。
+
+---
+
+## gulp
+
+[[官方网站]](https://gulpjs.com)
+[[GitHub]](https://github.com/gulpjs/gulp)
+在新进任务运行器中,它算是历史相对悠久的一个。任务的设置定义在 `gulpfile.js` 中。逐个定义任务,通过组合可以完成各种各样的事情。自由度相当高,文件管理和识别 API 也很丰富。无论是想做最基础、纯静态的网页,还是想用 EJS 等模板引擎从 JSON 批量生成页面这种稍微特殊的场景,都很推荐。反过来说,作为 JavaScript 模块管理工具,单独使用 gulp 就相当不便了。顺便一提,[本博客就是用 Gulp 制作的](https://github.com/psephopaiktes/weba)。
+
+<table>
+  <tr>
+    <th>good</th>
+    <td>自由度相当高,参考资料和插件都很丰富。</td>
+  </tr>
+  <tr>
+    <th>bad</th>
+    <td>作为模块打包器功能贫弱,性能一般</td>
+  </tr>
+</table>
+
+### 推荐文章
+- [绝对不会踩坑的 Gulp 入门。从安装到 Sass 编译 - ICS MEDIA](https://ics.media/entry/3290)
+对 Gulp 的入门做了清晰的整理。
+- [使用任务自动化工具「gulp」缩短制作时间 | Web Creator Box](https://www.webcreatorbox.com/tech/gulp)
+虽然是旧文章,但即便是设计师也能很容易地理解 Gulp 的搭建。
+- [gulp | NxWorld](https://www.nxworld.net/tag/gulp/)
+要做一些更深入的设置和操作时,NxWorld 关于 Gulp 的文章非常有参考价值。
+
+## npm script
+
+[[官方网站]](https://npmjs.com)
+[[GitHub]](https://github.com/npm/npm)
+其实,Node.js 的包管理器 **npm** 单独也能用作任务运行器。在插件配置文件 `package.json` 中,把插件的执行命令组合起来定义为任务,通过 `$ npm run` 命令执行。功能比想象中要多,还能把任务定义到外部文件,认真折腾的话能做相当多的事情。比起依赖 Gulp 等工具,执行速度往往更快。本文介绍的所有任务运行器都依赖 npm,所以这种方式是最简洁的。
+
+<table>
+  <tr>
+    <th>good</th>
+    <td>只用 npm 本身的功能,结构简单。构建性能高</td>
+  </tr>
+  <tr>
+    <th>bad</th>
+    <td>作为模块打包器功能贫弱。自由度偏低,参考资料也少</td>
+  </tr>
+</table>
+
+### 推荐文章
+- [Node.js 用户必须掌握的 npm-scripts 任务执行方法汇总 - ICS MEDIA](https://ics.media/entry/12226)
+是篇短文,但对概要做了很好的整理。
+- [[意译]我抛弃 Gulp 和 Grunt 的理由 - Qiita](https://qiita.com/chuck0523/items/dafdbd19c12efd40e2de)
+- [被 Grunt/Gulp 折磨憔悴的大叔故事 - MOL](https://t32k.me/mol/log/npm-run-script/)
+我感觉就是这两篇文章,带起了"抛弃 Gulp 和 Webpack,简单地只用 NPM 就好"的潮流。如果没有用过 Gulp 或 Webpack,可能这两篇文章关系不大。
+
+---
+
+## webpack
+
+[[官方网站]](https://webpack.js.org)
+[[GitHub]](https://github.com/webpack/webpack)
+作为代替 Browserify 的模块打包器(兼任务运行器),近年来非常流行。组合名为 `loader` 的插件来执行各种处理。基本目的是 JavaScript 文件的整合,甚至能把 CSS 和图片当作 JavaScript 一起打包到一个文件里。SCSS 或图片的常规编译、压缩也可以做,但这种场景与 gulp 配合使用更佳。在 React、Angular 等现代 JS 框架开发中常被使用。配置容易变得复杂,门槛偏高,这是它的缺点吧。
+
+<table>
+  <tr>
+    <th>good</th>
+    <td>作为模块打包器人气很高,参考资料也多</td>
+  </tr>
+  <tr>
+    <th>bad</th>
+    <td>配置较难,文件操作较弱</td>
+  </tr>
+</table>
+
+### 推荐文章
+- [用最新版学 webpack 3 入门 - JavaScript 开发中人气的打包工具 - ICS MEDIA](https://ics.media/entry/12140/3)
+又是 ICS 的文章。作为入门读物非常合适。ICS 还介绍了与 [TypeScript](https://ics.media/entry/16329)、[Babel](https://ics.media/entry/16028) 以及 React、Vue 组合使用的代码示例,非常有参考价值。
+- [从 Gulp 开始的 webpack 3 入门 - Qiita](https://qiita.com/tonkotsuboy_com/items/2d4f3862e6d05dc0bea1)
+想配合 Gulp 使用的话,上面这篇 Qiita 文章整理得很到位。
+- [使用 React 的模块化 CSS:CSS-in-JS 与 CSS Module | 编程 | POSTD](https://postd.cc/modular-css-with-react/)
+像 React 这样以多个 Component 来管理页面时,有时也想把 CSS 也按 Component 来定义(称为 CSS-in-JS)。是把样式定义[写在 CSS 文件里](https://qiita.com/clockmaker/items/8fab54c93e84001846b0),还是写在 JS 里好,可以参考上面这篇文章。
+
+---
+
+
+## Rollup
+
+[[官方网站]](https://rollupjs.org)
+[[GitHub]](https://github.com/rollup/rollup)
+构建速度比 webpack 略慢,但 Minify 后生成的文件非常小,这是它的特色。因此 <b>常用于库等的开发</b>。配置文件与 webpack 类似。和其他模块打包器一样,作为任务运行器它本身的功能较弱,单独使用可能不太方便。
+
+<table>
+  <tr>
+    <th>good</th>
+    <td>生成文件体积小,适合开发库</td>
+  </tr>
+  <tr>
+    <th>bad</th>
+    <td>构建稍慢</td>
+  </tr>
+</table>
+
+### 推荐文章
+- [Rollup 用起来刚刚好 - Qiita](https://qiita.com/cognitom/items/e3ac0da00241f427dad6)
+- [Webpack and Rollup: the same but different – webpack – Medium](https://medium.com/webpack/webpack-and-rollup-the-same-but-different-a41ad427058c) ([日文翻译](https://postd.cc/webpack-and-rollup-the-same-but-different/) )
+
+
+---
+
+## Fusebox
+
+[[官方网站]](https://fuse-box.org)
+[[GitHub]](https://github.com/fuse-box/fuse-box)
+是相当新的模块打包器。比 webpack 速度快得多,而且配置简单,在一部分人群中获得了人气。(虽然势头不如后来的 Parcel...) 默认支持本地服务器和 TypeScript,配置文件 `fuse.js` 也能写得简洁。和 webpack 一样,可以作为任务运行器处理 CSS 和图片,但这部分交给 Gulp 或 npm script 来做可能更合适。参考资料还很少,做特殊定制时可能会比较辛苦。
+
+<table>
+  <tr>
+    <th>good</th>
+    <td>构建性能、配置简单度都优于 webpack</td>
+  </tr>
+  <tr>
+    <th>bad</th>
+    <td>参考资料少,可靠性可能略低</td>
+  </tr>
+</table>
+
+### 推荐文章
+- [FuseBox – 新锐 JavaScript 模块打包器 – PSYENCE:MEDIA](https://tech.recruit-mp.co.jp/front-end/post-12691/)
+关于 Fusebox 的概要和与竞品对比的好文章。
+- [比 webpack 更简单且更快!最新模块打包器「FuseBox」超入门 - WPJ](https://www.webprofessional.jp/fusebox-faster-webpack-alternative/)
+
+---
+
+
+## Parcel
+
+[[官方网站]](https://parceljs.org)
+[[GitHub]](https://github.com/parcel-bundler/parcel)
+这同样是刚发布不久的任务运行器,但凭借压倒性的简单性和性能不断扩大人气。不需要像 webpack 那样准备复杂的配置文件,它会自动判断并完成构建和打包。开发服务器从一开始就配套提供。配置非常省心,但反过来定制性和功能都还较弱,实际生产中使用还嫌功能不够。如果今后可用功能逐渐增加,有可能取代 webpack。
+
+<table>
+  <tr>
+    <th>good</th>
+    <td>构建性能、配置简单度都压倒性地优于 webpack</td>
+  </tr>
+  <tr>
+    <th>bad</th>
+    <td>参考资料少,还在发展过程中,功能较少</td>
+  </tr>
+</table>
+
+### 推荐文章
+- [webpack 时代的终结与 parcel 时代的开始 - Qiita](https://qiita.com/bitrinjani/items/b08876e0a2618745f54a)
+是引爆 Parcel 人气的 Qiita 文章。
+- [无需像 webpack 或 Gulp 那样的独立配置文件。用 Parcel 编译 Sass 和 Autoprefixer - Qiita](https://qiita.com/tonkotsuboy_com/items/2f96263294fad7661a82)
+- [无需配置文件的 Parcel 编译・打包 TypeScript 简单到令人意外 - Qiita](https://qiita.com/tonkotsuboy_com/items/20ee57c6bb2762746fce)
+
+---
+
+## 番外篇
+如果觉得上面这些任务运行器的配置都很麻烦,使用预先就配好任务运行器的 boilerplate(模板/开发用脚手架),或者使用嵌入到 Web 框架里的方案也是一种思路。
+
+- [Create React App](https://github.com/facebookincubator/create-react-app)
+React 的开发方 Facebook 提供的 React 开发用环境。已经用 webpack 等做好了配置,适合"先用一下 React 试试看"等场景。
+- [Web Starter Kit](https://developers.google.com/web/tools/starter-kit/?hl=ja)
+Google 提供的 Web 制作环境。基于 Gulp 制作,涵盖了常用功能。
+- [asset pipline ( Ruby on Rails ) ](https://rubyonrails.org/)
+Rails 自带 SASS 转换和本地服务器功能。另外从 `v5.1` 开始,据说还会加入 [webpacker](https://github.com/rails/webpacker) 这一模块打包器。
+- [CodeKit](https://codekitapp.com/)
+本文介绍的工具都是在终端里使用的 CUI 工具,但也有像 CodeKit 这样可以用 GUI 管理和操控的工具。如果只是个人爱好开发,作为选项之一可能合适,但因为可用插件有限、多人协作时代码不易管理等原因,基本上不推荐。
+
+---
+
+
+## 各自的人气情况
+是 2017 年 12 月 13 日时的信息。这种排序虽然不能等同于人气,但应该有参考价值。
+
+### GitHub Star 数
+\# | name | star
+:--:|:--:|:--:
+1 | [webpack](https://github.com/webpack/webpack) | 34,852
+2 | [gulp](https://github.com/gulpjs/gulp) | 28,170
+3 | [npm](https://github.com/npm/npm) | 14,795
+4 | [rollup](https://github.com/rollup/rollup) | 11,109
+5 | [parcel](https://github.com/parcel-bundler/parcel) | 9,304
+6 | [fuse-box](https://github.com/fuse-box/fuse-box) | 2,980
+
+### Google Trend
+[Google 趋势](https://trends.google.co.jp/trends/explore?cat=31&date=2014-12-13%202017-12-13&q=webpack,gulp,rollup,parcel,npm%20script) 上的搜索数走势。fuse-box 在图表外明显较少所以排除了。另外关于 npm script,因为也有不少人搜"npm run",所以实际数量应该还会更多一些。
+![Google 趋势的走势](./trends.png)
+
+
+
+## 选型方针
+
+如果嫌准备和学习都很麻烦,就用 <b>Create React App</b> 或 <b>Web Starter Kit</b> 之类。想用 React 就选 Create React App,想要功能丰富的 Web 开发环境就选 Web Starter Kit,这样的思路就行了。
+
+如果想自己定义任务,就需要配置任务运行器了。前提是,gulp 和 npm script 更倾向于通用任务运行器,而 webpack、rollup、parcel 更偏向模块打包器的定位。
+
+基本上,如果只是想最低限度地使用 SCSS 或 Babel 等,只用 <b>npm script</b> 就足够了。
+
+如果想用 EJS 或 PUG 来批量生成页面,或想做一些稍微特殊的构建任务,<b>Gulp</b> 丰富的 API 和插件可能很有帮助。
+
+要用 React 等做正式的 SPA 开发时,如果没有 <b>webpack</b> 这样的模块打包器会很辛苦。再进一步,要做面向公开发布的库,<b>rollup</b> 可能更合适。如果是兴趣开发,出于对未来的期待,试一下 <b>parcel</b> 也是个不错的选择。
+
+将 <b>webpack 用于打包 JS,gulp 用于 SCSS 和图片压缩</b> 这样分工使用两者,也是一种选择。
+
+另外,基本用 Gulp 或 Webpack 来定义任务,但通过执行命令时使用 `package.json` 中定义的 `$ npm run` 命令或 `$ npx` 命令来调用——这种做法也非常推荐。直接在终端命令行调用 gulp 或 webpack 时,需要把它们 <b>全局安装</b>(安装到整台 PC,在任何文件夹都能使用),但只装到项目文件夹中并通过 npm script 调用的情况下,只需要 <b>本地安装</b>(只安装在项目文件夹中,只在那里使用)就够了。这样做的好处包括:
+
+- 可以为每个项目指定版本
+- 多人使用时可以统一版本
+- 使用者只需用 npm 命令就够了
+
+等等。[这篇文章](https://ics.media/entry/12226)的最后部分有相关示例。我个人采用这种做法的情况较多——用 npm script 来构建 SCSS 等,用 Webpack 进行 JS 的打包。
+
+## 最后
+真心希望这场无谓的战争能早些结束,迎来和平的一天。

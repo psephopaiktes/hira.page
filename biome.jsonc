@@ -1,5 +1,5 @@
 {
-  "$schema": "https://biomejs.dev/schemas/2.3.8/schema.json",
+  "$schema": "https://biomejs.dev/schemas/2.4.12/schema.json",
   "vcs": {
     "enabled": false,
     "clientKind": "git",
@@ -32,7 +32,7 @@
     "enabled": true,
     "actions": {
       "source": {
-        "organizeImports": "on"
+        "organizeImports": "off"
       }
     }
   },
@@ -41,12 +41,6 @@
       "quoteStyle": "double"
     }
   },
-  // "html": {
-  //   "formatter": {
-  //     "enabled": true
-  //   },
-  //   "experimentalFullSupportEnabled": true
-  // },
   "overrides": [
     {
       "includes": ["**/*.svelte", "**/*.astro", "**/*.vue"],

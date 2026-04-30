@@ -1,0 +1,23 @@
+---
+title: "CraftBank Office Renewal"
+date: 2024-08-08
+draft: false
+tags: ["CODE","UI"]
+description: "Full renewal of CraftBank Office, a media site for CraftBank Inc."
+url: "https://cbo.craft-bank.com/"
+priority: 5
+cover: "cover.png"
+thumbnail: "thumbnail.png"
+---
+
+## Overview
+I undertook the renewal of a blog media site that was previously created with a no-code tool. Since the no-code tool limited customization and marketing flexibility, I proposed creating web pages from scratch in a freely modifiable environment.
+
+## System Architecture
+![Architecture](./architect.png)
+
+In my projects, I generally avoid WordPress and instead propose a Headless CMS configuration that is superior in maintenance, operations, and security.
+
+For article creation and management, I use [microCMS](https://microcms.io/), which is easy for non-engineers to use. The frontend is built with [Astro](https://astro.build/), a static site builder capable of creating extremely fast web pages.
+
+For hosting, I use [Netlify](https://www.netlify.com/), which automatically rebuilds the site in response to article updates.

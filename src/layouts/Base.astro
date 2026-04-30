@@ -1,10 +1,13 @@
 ---
 import BaseMeta from "@/components/BaseMeta.astro";
-import { SITE_DESCRIPTION, SITE_TITLE } from "@/consts";
+import { SITE_TITLE, SITE_DESCRIPTION, X_ACCOUNT } from "@/consts";
 import CommonBody from "@/layouts/CommonBody.astro";
+import { useTranslations, LOCALES, type Lang } from "@/i18n";
 
-let { title, description = SITE_DESCRIPTION } = Astro.props;
-title = title ? `${title}｜${SITE_TITLE}` : SITE_TITLE;
+const t = useTranslations(Astro.currentLocale as Lang);
+const locale = Astro.currentLocale as Lang;
+let { title, description = t(SITE_DESCRIPTION), canonical } = Astro.props;
+title = title ? `${title}｜${t(SITE_TITLE)}` : t(SITE_TITLE);
 ---
 
 <!--
@@ -13,20 +16,32 @@ title = title ? `${title}｜${SITE_TITLE}` : SITE_TITLE;
   https://github.com/psephopaiktes/hira.page
 
 -->
-<html lang="ja">
+<html lang={LOCALES[locale].lang || locale} dir={LOCALES[locale].dir || null}>
   <head prefix="og: https://ogp.me/ns#">
     <BaseMeta title={title} description={description} />
+
+    {
+      canonical ? (
+        <link rel="canonical" href={canonical} />
+      ) : (
+        <link
+          rel="canonical"
+          href={import.meta.env.SITE + Astro.url.pathname}
+        />
+      )
+    }
 
     <!-- OGP -->
     <meta property="og:type" content="website" />
     <meta property="og:title" content={title} />
-    <meta property="og:site_name" content={SITE_TITLE} />
+    <meta property="og:site_name" content={t(SITE_TITLE)} />
     <meta property="og:description" content={description} />
     <meta property="og:image" content={Astro.site + "img/meta/ogp.png"} />
     <meta property="og:url" content={Astro.url} />
-    <meta property="og:locale" content="ja_JP" />
+    <meta property="og:locale" content={LOCALES[locale].lang || locale} />
     <meta name="twitter:card" content="summary" />
-    <meta name="twitter:site" content="@psephopaiktes" />
+    <meta name="twitter:site" content={t(X_ACCOUNT)} />
+    <meta name="twitter:creator" content={t(X_ACCOUNT)} />
   </head>
 
   <CommonBody>

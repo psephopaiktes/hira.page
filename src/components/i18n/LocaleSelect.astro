@@ -1,0 +1,172 @@
+---
+// Select UI to switch between locales.
+
+import { getLocalePaths, LOCALES } from "@/i18n";
+---
+
+<label>
+  <svg-icon src="/img/icon/translate.svg"></svg-icon>
+  <select data-languageSelect name="language">
+    {
+      getLocalePaths(Astro.url).map(({ path, lang }) => (
+        <option
+          label={LOCALES[lang].label}
+          value={path}
+          data-lang={lang}
+          selected={lang === Astro.currentLocale}
+          dir={LOCALES[lang].dir || null}
+        />
+      ))
+    }
+  </select>
+</label>
+
+<script is:inline>
+  const selects = document.querySelectorAll("[data-languageSelect]");
+
+  selects.forEach((select) => {
+    select.addEventListener("change", (event) => {
+      // used for 404 page
+      localStorage.selectedLang = event.target?.selectedOptions[0].dataset.lang;
+      location.href = event.target?.value;
+    });
+  });
+</script>
+
+<style lang="less">
+  @import "@/styles/common.less";
+
+  label {
+    position: relative;
+    width: 168px;
+    height: 40px;
+    color: #fff;
+    opacity: 0.8;
+    cursor: pointer;
+    svg-icon {
+      position: absolute;
+      width: 24px;
+      aspect-ratio: 1;
+      inset: 8px;
+      pointer-events: none;
+      opacity: 0.6;
+      @media (width < @xs) {
+        display: none;
+      }
+    }
+    &::before,
+    &::after {
+      content: "";
+      position: absolute;
+      top: 19px;
+      width: 10px;
+      height: 3px;
+      border-radius: 100px;
+      background: #fff;
+      @media (width < @xs) {
+        top: 17px;
+      }
+    }
+    &::before {
+      right: 9px;
+      rotate: -45deg;
+    }
+    &::after {
+      right: 14.5px;
+      rotate: 45deg;
+    }
+
+    @media (width < @lg) {
+      width: auto;
+      position: absolute;
+      top: 24px;
+      right: 152px;
+    }
+    @media (width < @xs) {
+      top: 14px;
+      right: 80px;
+      font-size: 11px;
+    }
+  }
+
+  select {
+    appearance: none; // for Safari
+    appearance: base-select;
+    width: 100%;
+    line-height: 32px;
+    // display: block;
+    height: 40px;
+    padding: 0 36px 0 36px;
+    color: inherit;
+    border: 2px solid #fff;
+    background-color: transparent;
+
+    border-radius: 12px;
+    @supports (corner-shape: superellipse(2.4)) {
+      corner-shape: superellipse(2.4);
+      border-radius: 32px;
+    }
+
+    @media (width < @xs) {
+      height: 36px;
+      line-height: 28px;
+      padding: 0 28px 0 8px;
+    }
+
+    &::picker-icon {
+      display: none;
+    }
+    &::picker(select) {
+      appearance: base-select;
+      background: rgb(@label);
+      color: rgb(@base);
+      border: 0;
+      margin: 4px 0;
+      padding: 4px;
+      box-shadow: 2px 8px 32px -16px rgb(@label / 0.2);
+      transition: 0.2s ease;
+      border-radius: 12px;
+      @supports (corner-shape: superellipse(2.4)) {
+        corner-shape: superellipse(2.4);
+        border-radius: 32px;
+      }
+      &:hover {
+        scale: 1.02;
+        transform-origin: 50% 0;
+      }
+    }
+
+    option {
+      padding: 4px 8px;
+      position: relative;
+      border-radius: 4px;
+      opacity: 0.8;
+      outline: none;
+      &:focus,
+      &:hover {
+        background-color: rgb(@base / 0.1);
+      }
+      &::checkmark {
+        display: none;
+      }
+      &:checked::after {
+        content: "";
+        position: absolute;
+        right: 8px;
+        bottom: 17px;
+        width: 1em;
+        height: 0.6em;
+        background: rgb(@base / 0.5);
+        clip-path: polygon(
+          0 0,
+          0.2em 0,
+          0.2em 0.4em,
+          1em 0.4em,
+          1em 0.6em,
+          0 0.6em
+        );
+        rotate: -45deg;
+      }
+    }
+  }
+</style>

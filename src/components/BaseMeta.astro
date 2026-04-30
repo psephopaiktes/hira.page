@@ -2,7 +2,9 @@
 import "@/styles/global.less";
 import { ClientRouter } from "astro:transitions";
 import LocalFont from "./LocalFont.astro";
+import { LOCALES, getLocalePaths, type Lang } from "@/i18n";
 
+const locale = Astro.currentLocale as Lang;
 const { title, description } = Astro.props;
 ---
 
@@ -15,7 +17,21 @@ const { title, description } = Astro.props;
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <meta name="generator" content={Astro.generator} />
 <link rel="sitemap" href="/sitemap-index.xml" />
-<link rel="canonical" href={import.meta.env.SITE + Astro.url.pathname} />
+{
+  getLocalePaths(Astro.url).map((props) => (
+    <link
+      rel="alternate"
+      hreflang={LOCALES[props.lang].lang || props.lang}
+      href={Astro.site?.origin + props.path}
+    />
+  ))
+}
+<link
+  href={import.meta.env.SITE + `/${locale}/rss.xml`}
+  title="Blog Feed"
+  rel="alternate"
+  type="application/rss+xml"
+/>
 
 <!-- Favicon -->
 <link rel="icon" type="image/svg+xml" href="/img/meta/favicon.svg" />
@@ -33,6 +49,5 @@ const { title, description } = Astro.props;
 
 <script>
   import "@dotlottie/player-component";
-  import "budoux/module/webcomponents/budoux-ja";
   import "svg-mask-icon";
 </script>

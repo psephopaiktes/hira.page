@@ -1,8 +1,12 @@
 ---
 import BlogCard from "@/components/Blog/Card.astro";
 import { loadCollection } from "@/components/loadCollection.ts";
+import { type Lang } from "@/i18n";
 
-const blogCollection = await loadCollection("blog");
+const blogCollection = await loadCollection(
+  "blog",
+  Astro.currentLocale as Lang,
+);
 ---
 
 <ul data-inview>
@@ -19,7 +23,6 @@ const blogCollection = await loadCollection("blog");
   @import "@/styles/common.less";
 
   ul {
-    filter: @filterShadow;
     margin-block-start: 16px;
     display: flex;
     gap: 8px;
@@ -37,6 +40,7 @@ const blogCollection = await loadCollection("blog");
     }
 
     li {
+      filter: @filterShadow;
       width: calc((100% - 16px) / 3);
       @media (width < @lg) {
         width: calc(50% - 4px);

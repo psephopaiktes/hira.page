@@ -1,5 +1,9 @@
 ---
 import type { CollectionEntry } from "astro:content";
+import { useTranslations, type Lang } from "@/i18n";
+
+const locale = Astro.currentLocale as Lang;
+const t = useTranslations(locale);
 
 interface Props {
   post: CollectionEntry<"blog">;
@@ -15,9 +19,11 @@ const { post } = Astro.props;
     data-title={post.data.title + "｜WEBA"}
     data-url={Astro.url}
   >
-    <svg-mask-icon src="/img/icon/share-google.svg"></svg-mask-icon>
-    <svg-mask-icon src="/img/icon/share-apple.svg"></svg-mask-icon>
-    <span class="u-textHidden">シェア</span>
+    <svg-icon src="/img/icon/share-google.svg"></svg-icon>
+    <svg-icon src="/img/icon/share-apple.svg"></svg-icon>
+    <span class="u-textHidden">
+      {t({ ja: "シェア", en: "Share", "zh-cn": "分享" })}
+    </span>
   </button>
 
   <a
@@ -28,41 +34,51 @@ const { post } = Astro.props;
       post.data.title +
       "｜WEBA"}
     target="_blank"
-    title="Xにポスト"
+    title={t({ ja: "Xにポスト", en: "Post on X", "zh-cn": "在X上发布" })}
   >
-    <svg-mask-icon src="/img/sns/x.svg"></svg-mask-icon>
-    <span class="u-textHidden">Xにポスト</span>
+    <svg-icon src="/img/sns/x.svg"></svg-icon>
+    <span class="u-textHidden">
+      {t({ ja: "Xにポスト", en: "Post on X", "zh-cn": "在X上发布" })}
+    </span>
   </a>
 
   <a
     class="facebook"
     href={"https://www.facebook.com/sharer/sharer.php?u=" + Astro.url}
     target="_blank"
-    title="Facebookでシェア"
+    title={t({
+      ja: "Facebookでシェア",
+      en: "Share on Facebook",
+      "zh-cn": "在Facebook上分享",
+    })}
   >
-    <svg-mask-icon src="/img/sns/facebook.svg"></svg-mask-icon>
-    <span class="u-textHidden">Facebookでシェア</span>
+    <svg-icon src="/img/sns/facebook.svg"></svg-icon>
+    <span class="u-textHidden">
+      {
+        t({
+          ja: "Facebookでシェア",
+          en: "Share on Facebook",
+          "zh-cn": "在Facebook上分享",
+        })
+      }
+    </span>
   </a>
 
   <a
     class="hatena"
     href={"https://b.hatena.ne.jp/entry/" + Astro.url}
     target="_blank"
-    title="はてブに登録"
+    title={t({
+      ja: "はてブに登録",
+      en: "Add to Hatena",
+      "zh-cn": "添加到Hatena",
+    })}
   >
-    <svg-mask-icon src="/img/sns/hatebu.svg"></svg-mask-icon>
-    <span class="u-textHidden">はてブに登録</span>
+    <svg-icon src="/img/sns/hatebu.svg"></svg-icon>
+    <span class="u-textHidden">
+      {t({ ja: "はてブに登録", en: "Add to Hatena", "zh-cn": "添加到Hatena" })}
+    </span>
   </a>
-
-  <!-- <a
-    class="pocket u-hideSp"
-    href={"https://getpocket.com/save?url=" + Astro.url}
-    target="_blank"
-    title="Pocketに保存"
-  >
-    <svg-mask-icon src="/img/sns/pocket.svg"></svg-mask-icon>
-    <span class="u-textHidden">Pocketに保存</span>
-  </a> -->
 
   <a
     class="line u-showSp"
@@ -71,10 +87,18 @@ const { post } = Astro.props;
       "｜WEBA " +
       Astro.url}
     target="_blank"
-    title="LINEで共有"
+    title={t({
+      ja: "LINEで共有",
+      en: "Share on LINE",
+      "zh-cn": "在LINE上分享",
+    })}
   >
-    <svg-mask-icon src="/img/sns/line.svg"></svg-mask-icon>
-    <span class="u-textHidden">LINEで共有</span>
+    <svg-icon src="/img/sns/line.svg"></svg-icon>
+    <span class="u-textHidden"
+      >{
+        t({ ja: "LINEで共有", en: "Share on LINE", "zh-cn": "在LINE上分享" })
+      }</span
+    >
   </a>
 </aside>
 
@@ -133,17 +157,21 @@ const { post } = Astro.props;
       overflow: hidden;
       aspect-ratio: 1;
       width: 40px;
-      padding: 8px;
       border-radius: 50%;
       background-color: rgb(0 0 0 / 0.3);
       backdrop-filter: blur(8px);
       @media (width < @xs) {
         width: 32px;
-        padding: 4px;
       }
-      svg-mask-icon {
+      svg-icon {
         color: #fff;
         width: 100%;
+        width: 24px;
+        margin: 8px;
+        @media (width < @xs) {
+          width: 20px;
+          margin: 6px;
+        }
         aspect-ratio: 1;
       }
     }
@@ -157,7 +185,7 @@ const { post } = Astro.props;
         display: block;
       }
       &.apple {
-        svg-mask-icon:first-child {
+        svg-icon:first-child {
           display: none;
         }
       }

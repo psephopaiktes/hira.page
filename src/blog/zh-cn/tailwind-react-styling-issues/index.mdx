@@ -1,0 +1,121 @@
+---
+title: "我不喜欢 Tailwind(和 React)的理由"
+date: 2025-03-22
+# updatedDate: 2024-05-15T19:00:00+09:00
+draft: false
+tags: ["React", "tailwind", "CSS", "JavaScript", "Web"]
+description: "本文将解读我对 Tailwind CSS 与 React 组合所感到的问题点。包括样式定义与文档结构的混杂、对 scoped CSS 使用的不满,以及与 Astro、Svelte、Vue 等其他框架的对比。"
+cover: "./cover.png"
+---
+import EmbedCard from '@/components/Blog/EmbedCard.astro';
+
+## 样式定义与文档结构的定义混杂在一起
+
+在 React 中创建组件时,需要直接在 JSX 内部书写 Tailwind 的 class。但是,这会**让 HTML 的结构与样式定义紧密耦合,损害可读性和可维护性**,我对此深有感触。
+
+本来,HTML 应该负责描述文档的结构,而 CSS 应该承担定义外观的职责。一旦使用 Tailwind,**这种关注点分离就容易变得模糊**。
+
+例如,在创建一个按钮时,代码会变成下面这样:
+
+```jsx
+<button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+  保存
+</button>
+```
+
+像这样,与按钮本身职责无直接关系的、用于样式的 class 被大量书写。这会随着组件膨胀,导致越来越难分辨哪些是结构、哪些是外观。
+
+## 无法在 .tsx 文件内通过 \<style\> 标签编写 scoped CSS
+
+在 React 的标准功能中,无法在 .tsx 文件里通过 `<style>` 标签来定义作用域限定于该组件的 CSS(scoped CSS)。我喜欢 scoped CSS 那种把与组件密切相关的样式放在同一个文件里管理的简洁性,但 React 标准并不支持这样做。
+
+例如在 Vue 中,只要写成 `<style scoped>`,就能在组件作用域内定义 CSS。Astro、Svelte 也基本可以做到同样的事。
+
+这样一来,就不必担心样式冲突,可以以组件为单位管理样式,在我看来更直观也更好开发。
+
+要在 React 中实现 scoped CSS,就必须引入 CSS-in-JS 库,而它们写出来的代码也并不算优雅。最关键的是,这本身没有作为标准功能提供,这一点令我感到不便。
+
+### Astro、Svelte、Vue 可以这样写
+
+我更喜欢使用的 Astro、Svelte、Vue 等框架,默认就支持以组件为单位编写 scoped CSS,因此样式定义与文档结构能更清晰地分离,开发体验也得以提升。我认为使用关注点分离明确的框架,能够同时兼顾 SEO 与开发的便利。
+
+例如在 Astro 中,可以在组件的 .astro 文件内像下面这样书写 scoped CSS。
+
+```astro
+---
+// 组件的 frontmatter
+---
+
+<button class="button">保存</button>
+
+<style>
+  .button {
+    background-color: blue;
+    color: white;
+    font-weight: bold;
+    padding: 0.5rem 1rem;
+    border-radius: 0.25rem;
+  }
+  .button:hover {
+    background-color: darkblue;
+  }
+</style>
+```
+
+Svelte 和 Vue 也一样,通过 `<style>` 标签可以局部地定义组件的样式。
+
+```astro
+<script lang="ts">
+</script>
+
+<button class="button">保存</button>
+
+<style>
+  .button {
+    background-color: blue;
+    color: white;
+    font-weight: bold;
+    padding: 0.5rem 1rem;
+    border-radius: 0.25rem;
+  }
+  .button:hover {
+    background-color: darkblue;
+  }
+</style>
+```
+
+## 而且如今原生 CSS 已经完全够用
+
+- [Goodbye SASS 👋, welcome back native CSS - DEV Community](https://dev.to/karsten_biedermann/goodbye-sass-welcome-back-native-css-cf)
+- [最近不太用 Sass 了 | Web Creator Box](https://www.webcreatorbox.com/blog/bye-sass)
+
+近年 CSS 的发展令人瞩目,过去需要借助 Sass、LESS 等预处理器才能实现的许多功能,如今仅靠标准 CSS 就能实现。
+
+* **CSS 变量(自定义属性)**:主题、配色方案的管理变得更容易,也可以从 JavaScript 操作。
+    * 参考: [使用原生 CSS 变量管理值时的小技巧](https://zenn.dev/psephopaiktes/scraps/496efc26afdb73)
+* **@supports**:可检测特定 CSS 功能是否被支持,从而提供合适的替代方案。
+* **:is() 与 :where() 选择器**:选择器分组更加简洁,提升了 CSS 的可维护性。
+* **动画与过渡**:keyframes、transition、view-transition 等等
+* 通过 [级联层(cascade layer)](https://azukiazusa.dev/blog/manage-styles-structurally-with-css-cascade-layer/) 可以更便于管理优先级
+
+唯一的难点在于,无法用变量来管理断点。在媒体查询内部使用 CSS 变量是可以的,但断点本身被变量化目前还不在标准支持之列。
+
+```css
+/* 想用变量定义断点,但目前还做不到 */
+:root {
+  --breakpoint-md: 768px;
+}
+
+/* 以下无法工作 */
+@media (var(--breakpoint-md) < width) {
+  /* 样式 */
+}
+```
+
+要应对这个问题,需要使用 CSS-in-JS 或预处理器,或者引入用来生成 CSS 的构建步骤;但除此之外,在大多数方面,现代 CSS 都已经足够强大与灵活。
+
+## 总结
+
+Tailwind CSS 的优点是能快速地应用样式,但同时也存在 HTML 结构可读性下降、难以以组件为单位进行样式管理等缺点,我深有体会。
+
+React 本身也是一个强大的框架,但在样式方面,我个人认为更注重关注点分离、默认就支持 scoped CSS 的其他框架,会让开发更顺畅。

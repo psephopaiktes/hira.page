@@ -1,4 +1,5 @@
 ---
+import { type Lang } from "@/i18n";
 import { Image } from "astro:assets";
 
 import type { CollectionEntry } from "astro:content";
@@ -6,6 +7,8 @@ import type { CollectionEntry } from "astro:content";
 interface Props {
   post: CollectionEntry<"blog">;
 }
+
+const locale = Astro.currentLocale as Lang;
 
 const { post } = Astro.props;
 const [id, data] = [post.id, post.data];
@@ -17,17 +20,17 @@ const redirectSite = data.redirect
       ? "qiita"
       : /zenn/.test(data.redirect)
         ? "zenn"
-        : console.error("未対応のURLです")
+        : console.error("Invalid redirect url")
   : "";
 ---
 
 <a
-  href={data.redirect || `/blog/${id}/`}
+  href={data.redirect || `/${locale}/blog/${id.split("/").slice(1).join("/")}/`}
   target={redirectSite ? "_blank" : null}
   transition:name={"blog-card-" + id}
   class="c-card"
 >
-  <Image class="bg" src={data.cover} alt="背景" />
+  <Image class="bg" src={data.cover} alt="background" />
   <Image
     class="cover"
     src={data.cover}
@@ -42,7 +45,7 @@ const redirectSite = data.redirect
           src={`/img/external-logo/${redirectSite}.svg`}
           alt={redirectSite}
         />
-        <svg-mask-icon src="/img/icon/open.svg">open</svg-mask-icon>
+        <svg-icon src="/img/icon/open.svg">open</svg-icon>
       </span>
     )
   }
@@ -54,14 +57,14 @@ const redirectSite = data.redirect
       {
         data.tags.slice(0, 2).map((tag) => (
           <li class="c-tag">
-            <svg-mask-icon src="/img/icon/tag.svg" />
+            <svg-icon src="/img/icon/tag.svg" />
             {tag}
           </li>
         ))
       }
     </ul>
     <time datetime={data.date.toISOString()}>
-      {data.date.toLocaleDateString("ja-JP")}
+      {data.date.toLocaleDateString(locale)}
     </time>
   </div>
 </a>
@@ -118,7 +121,7 @@ const redirectSite = data.redirect
     img {
       height: 20px;
     }
-    svg-mask-icon {
+    svg-icon {
       display: inline-block;
       vertical-align: top;
     }

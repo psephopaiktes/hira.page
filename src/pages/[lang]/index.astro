@@ -1,0 +1,41 @@
+---
+import BlogList from "@/components/Home/BlogList.astro";
+import ContactInfo from "@/components/Home/ContactInfo.astro";
+import Headline from "@/components/Home/Headline.astro";
+import Hero from "@/components/Home/Hero.astro";
+import MeBanner from "@/components/Home/MeBanner.astro";
+import WorksList from "@/components/Home/WorksList.astro";
+import Base from "@/layouts/Base.astro";
+
+import { getLocaleParams, type Lang } from "@/i18n";
+
+const locale = Astro.currentLocale as Lang;
+export const getStaticPaths = () => getLocaleParams(import.meta.url);
+---
+
+<Base>
+  <Hero />
+
+  <div class="l-content">
+    <Headline href={`/${locale}/blog`} label="BLOG" />
+    <BlogList />
+
+    <Headline href={`/${locale}/works`} label="WORKS" />
+    <WorksList />
+
+    <Headline href={`/${locale}/me`} label="ABOUT ME" />
+    <MeBanner />
+
+    <Headline href={`/${locale}/contact`} label="REQUEST" />
+    <ContactInfo />
+  </div>
+</Base>
+
+<style lang="less">
+  @import "@/styles/common.less";
+
+  h2 {
+    font-size: 2em;
+    margin-block-start: 2rem;
+  }
+</style>

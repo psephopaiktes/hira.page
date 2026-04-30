@@ -1,21 +1,33 @@
 ---
-import { Image } from "astro:assets";
 import HirataImage from "@/assets/hirata.webp";
-import DesignImage from "@/assets/me/design.webp";
 import DesignImageAnimation from "@/assets/me/design-animation.webp";
-import DevelopImage from "@/assets/me/develop.webp";
+import DesignImage from "@/assets/me/design.webp";
 import DevelopImageAnimation from "@/assets/me/develop-animation.webp";
+import DevelopImage from "@/assets/me/develop.webp";
+import BudouX from "@/components/i18n/BudouX.astro";
 import { ME_DESCRIPTION } from "@/consts";
+import { useTranslations, type Lang } from "@/i18n";
+import { Image } from "astro:assets";
+
+const locale = Astro.currentLocale as Lang;
+const t = useTranslations(locale);
 ---
 
 <section data-inview class="infoBlock l-content hirata">
   <div class="left text">
     <h2>平田 章</h2>
-    <p><budoux-ja>{ME_DESCRIPTION}</budoux-ja></p>
+    {
+      locale !== "ja" && (
+        <p>
+          <small>Akira HIRATA</small>
+        </p>
+      )
+    }
+    <p><BudouX text={ME_DESCRIPTION} /></p>
   </div>
 
-  <a href="/contact" class="right" data-swellStalker="hirata">
-    <Image src={HirataImage} alt="平田 章" />
+  <a href={`/${locale}/contact`} class="right" data-swellStalker="hirata">
+    <Image src={HirataImage} alt="Akira HIRATA" />
   </a>
 </section>
 
@@ -23,13 +35,18 @@ import { ME_DESCRIPTION } from "@/consts";
   <div class="right text">
     <h2>Design</h2>
     <p>
-      <budoux-ja>
-        モバイルアプリケーションやWebサイトなどの情報設計/画面構築を行い、デザインに落とし込んだり、ドキュメントをまとめることができます。私自身開発者でもあるため、コンポーネントや実装の都合を考えたデザインが得意です。UIデザインが本業で、ツールとしてFigmaやSketchなどの特性を研究するのが好きです。Adobe製品を使用してロゴやモーション制作、イラストの作成も行えます。
-      </budoux-ja>
+      <BudouX
+        text={{
+          ja: "モバイルアプリケーションやWebサイトなどの情報設計/画面構築を行い、デザインに落とし込んだり、ドキュメントをまとめることができます。私自身開発者でもあるため、コンポーネントや実装の都合を考えたデザインが得意です。UIデザインが本業で、ツールとしてFigmaやSketchなどの特性を研究するのが好きです。Adobe製品を使用してロゴやモーション制作、イラストの作成も行えます。",
+          en: "I can conduct information design and screen development for mobile applications and websites, convert them into designs, and organize documentation. Since I am also a developer, I excel at designs that consider component and implementation requirements. UI design is my main profession, and I enjoy researching the characteristics of tools like Figma and Sketch. I can also create logos, motion graphics, and illustrations using Adobe products.",
+          "zh-cn":
+            "我可以为移动应用程序和网站进行信息设计和屏幕开发，将其转换为设计并组织文档。由于我也是一名开发人员，我擅长考虑组件和实现要求的设计。UI设计是我的主要职业，我喜欢研究Figma和Sketch等工具的特性。我还可以使用Adobe产品创建徽标、动画和插图。",
+        }}
+      />
     </p>
   </div>
 
-  <a href="/works/tag=UI" class="left" data-swellStalker="design">
+  <a href={`/${locale}/works/tag=UI`} class="left" data-swellStalker="design">
     <picture>
       <source
         media="(max-width: 480px)"
@@ -38,7 +55,14 @@ import { ME_DESCRIPTION } from "@/consts";
         height={DesignImage.height}
         type="image/webp"
       />
-      <Image src={DesignImageAnimation} alt="デザインスキルのイメージ画像" />
+      <Image
+        src={DesignImageAnimation}
+        alt={t({
+          ja: "デザインスキルのイメージ画像",
+          en: "Design skill image",
+          "zh-cn": "设计技能图像",
+        })}
+      />
     </picture>
   </a>
 </section>
@@ -47,9 +71,14 @@ import { ME_DESCRIPTION } from "@/consts";
   <div class="left text">
     <h2>Develop</h2>
     <p>
-      <budoux-ja>
-        HTML・CSS・Javascriptを用いて、Webサイトのフロントエンド構築を行えます。WordpressやHeadlessCMSなどを用いてブログやニュースサイトの構築もできます。好きなフレームワークはAstroで、本ポートフォリオサイトもAstroで作成されています。
-      </budoux-ja>
+      <BudouX
+        text={{
+          ja: "HTML・CSS・Javascriptを用いて、Webサイトのフロントエンド構築を行えます。WordpressやHeadlessCMSなどを用いてブログやニュースサイトの構築もできます。好きなフレームワークはAstroで、本ポートフォリオサイトもAstroで作成されています。",
+          en: "I can build the frontend of websites using HTML, CSS, and Javascript. I can also build blogs and news sites using WordPress and Headless CMS. My favorite framework is Astro, and this portfolio site is also built with Astro.",
+          "zh-cn":
+            "我可以使用HTML、CSS和Javascript构建网站的前端。我还可以使用WordPress和Headless CMS构建博客和新闻网站。我最喜欢的框架是Astro，这个作品集网站也是用Astro构建的。",
+        }}
+      />
     </p>
     <p>
       <a
@@ -57,15 +86,31 @@ import { ME_DESCRIPTION } from "@/consts";
         href="https://github.com/psephopaiktes/hira.page"
         target="_blank"
       >
-        このサイトのソースコード
-        <svg-mask-icon src="/img/icon/open.svg" class="u-iconInText">
-          新しいタブで開く
-        </svg-mask-icon>
+        {
+          t({
+            ja: "このサイトのソースコード",
+            en: "Source code of this site",
+            "zh-cn": "该网站的源代码",
+          })
+        }
+        <svg-icon src="/img/icon/open.svg" class="u-iconInText">
+          {
+            t({
+              ja: "新しいタブで開く",
+              en: "Open in new tab",
+              "zh-cn": "在新标签页中打开",
+            })
+          }
+        </svg-icon>
       </a>
     </p>
   </div>
 
-  <a href="/works/tag=CODE" class="right" data-swellStalker="develop">
+  <a
+    href={`/${locale}/works/tag=CODE`}
+    class="right"
+    data-swellStalker="develop"
+  >
     <picture>
       <source
         media="(max-width: 480px)"
@@ -74,18 +119,38 @@ import { ME_DESCRIPTION } from "@/consts";
         height={DevelopImage.height}
         type="image/webp"
       />
-      <Image src={DevelopImageAnimation} alt="開発スキルのイメージ画像" />
+      <Image
+        src={DevelopImageAnimation}
+        alt={t({
+          ja: "開発スキルのイメージ画像",
+          en: "Development skill image",
+          "zh-cn": "开发技能图像",
+        })}
+      />
     </picture>
   </a>
 </section>
 
 <section data-inview class="infoBlock l-content skillmap">
   <div class="right text">
-    <h2>Skill Map</h2>
+    <h2>
+      {
+        t({
+          ja: "Skill Map",
+          en: "Skill Map",
+          "zh-cn": "技能地图",
+        })
+      }
+    </h2>
     <p>
-      <budoux-ja>
-        アプリ・サービス開発に携わるデザイナーとして、スキル領域のイメージです。実装・ビジュアライズなど、アウトプットに落とし込むことが得意です。
-      </budoux-ja>
+      <BudouX
+        text={t({
+          ja: "アプリ・サービス開発に携わるデザイナーとして、スキル領域のイメージです。実装・ビジュアライズなど、アウトプットに落とし込むことが得意です。",
+          en: "As a designer involved in app and service development, this is an image of my skill areas. I am good at implementing and visualizing concepts and translating them into outputs.",
+          "zh-cn":
+            "作为参与应用程序和服务开发的设计师，这是我的技能领域的图像。我擅长实现和可视化概念，并将其转化为输出。",
+        })}
+      />
     </p>
     <p>
       <a
@@ -93,16 +158,34 @@ import { ME_DESCRIPTION } from "@/consts";
         href="https://yasuhisa.com/could/article/product-designer-skillmap/"
         target="_blank"
       >
-        参考
-        <svg-mask-icon src="/img/icon/open.svg" class="u-iconInText">
-          新しいタブで開く
-        </svg-mask-icon>
+        {
+          t({
+            ja: "参考",
+            en: "Reference",
+            "zh-cn": "参考",
+          })
+        }
+        <svg-icon src="/img/icon/open.svg" class="u-iconInText">
+          {
+            t({
+              ja: "新しいタブで開く",
+              en: "Open in new tab",
+              "zh-cn": "在新标签页中打开",
+            })
+          }
+        </svg-icon>
       </a>
     </p>
   </div>
 
-  <a href="/works" class="left" data-swellStalker="skillmap">
-    <dotlottie-player src="/lottie/skillmap.lottie" autoplay></dotlottie-player>
+  <a href={`/${locale}/works`} class="left" data-swellStalker="skillmap">
+    {
+      locale === "ja" ? (
+        <dotlottie-player src="/lottie/skillmap.lottie" autoplay />
+      ) : (
+        <img src="/img/skillmap-en.svg" alt="skill map" />
+      )
+    }
   </a>
 </section>
 
@@ -296,7 +379,8 @@ import { ME_DESCRIPTION } from "@/consts";
   }
 
   .skillmap {
-    dotlottie-player {
+    dotlottie-player,
+    img {
       border: 2px solid rgb(@theme / 0.2);
       border-radius: 6px;
       background: #fff;

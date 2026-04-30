@@ -1,89 +1,50 @@
 ---
-import NotFound from "@/assets/404.svg";
-import Base from "@/layouts/Base.astro";
+// Redirect to 404 page for user's system locale
+
+import { LOCALES, DEFAULT_LOCALE } from "@/i18n";
+
+const langs = Object.keys(LOCALES);
+const baseUrl = import.meta.env.PROD ? Astro.site : "/";
+const defaultLocale = DEFAULT_LOCALE;
 ---
 
-<Base>
-  <h1>
-    <img
-      src={NotFound.src}
-      width={NotFound.width}
-      height={NotFound.height}
-      alt="404"
-    />
+<html lang={DEFAULT_LOCALE}>
+  <head>
+    <meta charset="UTF-8" />
+    <title>404 PAGE NOT FOUND</title>
+    <link rel="canonical" href={Astro.site} />
 
-    <p>NOT FOUND</p>
-  </h1>
+    <noscript>
+      <meta
+        http-equiv="refresh"
+        content={`0;url=${baseUrl + DEFAULT_LOCALE}/404/`}
+      />
+    </noscript>
 
-  <h2>お探しのページは存在しません</h2>
+    <script is:inline define:vars={{ langs, baseUrl, defaultLocale }}>
+      const urlHasLang = langs.includes(location.pathname.split("/")[1]);
+      const localStorageHasLang =
+        localStorage.selectedLang && langs.includes(localStorage.selectedLang);
+      const referrerHasLang =
+        document.referrer &&
+        new URL(document.referrer).host == location.host &&
+        langs.includes(new URL(document.referrer).pathname.split("/")[1]);
 
-  <button id="js-search">
-    <svg-mask-icon src="/img/icon/search.svg" class="u-iconInText">
-      検索アイコン
-    </svg-mask-icon> サイト内検索
-  </button>
-</Base>
-
-<script>
-  document.addEventListener(
-    "astro:page-load",
-    () => {
-      const search = document.getElementById("js-search");
-      search?.addEventListener("click", () => {
-        const Query = prompt("キーワードを入力");
-        if (!Query) return;
-        window.open(
-          `https://www.google.co.jp/search?q=${Query}&as_sitesearch=hira.page`,
-        );
-      });
-    },
-    { once: false },
-  );
-</script>
-
-<style lang="less">
-  @import "@/styles/common.less";
-
-  h1 {
-    margin-block-start: 96px;
-    text-align: center;
-
-    img {
-      width: 480px;
-      @media (width < @sm) {
-        width: 280px;
+      if (urlHasLang) {
+        localStorage.userAccessPath = location.pathname;
+        location.href = `${baseUrl + location.pathname.split("/")[1]}/404/`;
+      } else if (localStorageHasLang) {
+        location.href = baseUrl + localStorage.selectedLang + location.pathname;
+      } else if (referrerHasLang) {
+        const referrerLang = new URL(document.referrer).pathname.split("/")[1];
+        location.href = baseUrl + referrerLang + location.pathname;
+      } else {
+        location.href = baseUrl + defaultLocale + location.pathname;
       }
-    }
-
-    p {
-      margin-block-start: 0.4em;
-      font-size: 64px;
-      font-weight: 800;
-      letter-spacing: 0.1em;
-      color: rgb(@theme);
-      @media (width < @sm) {
-        font-size: 40px;
-        letter-spacing: 0.05em;
-      }
-    }
-  }
-
-  h2 {
-    margin-block-start: 48px;
-    text-align: center;
-    font-size: 24px;
-    color: rgb(@label);
-    @media (width < @sm) {
-      font-size: 20px;
-    }
-  }
-
-  #js-search {
-    display: block;
-    margin: 48px auto 0;
-    padding: 8px 16px;
-    border: 1px solid rgb(@label);
-    border-radius: 6px;
-    color: rgb(@label);
-  }
-</style>
+    </script>
+  </head>
+  <body>
+    <h1>404 PAGE NOT FOUND</h1>
+    <a href={baseUrl}>TOP PAGE</a>
+  </body>
+</html>

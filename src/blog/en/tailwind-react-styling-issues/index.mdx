@@ -1,0 +1,121 @@
+---
+title: "Why I dislike Tailwind (and React)"
+date: 2025-03-22
+# updatedDate: 2024-05-15T19:00:00+09:00
+draft: false
+tags: ["React", "tailwind", "CSS", "JavaScript", "Web"]
+description: "I'll walk through the issues I have with the combination of Tailwind CSS and React—how style definitions get tangled up with document structure, my frustrations around scoped CSS, and how it compares to other frameworks like Astro, Svelte, and Vue."
+cover: "./cover.png"
+---
+import EmbedCard from '@/components/Blog/EmbedCard.astro';
+
+## Style definitions and document structure get jumbled together
+
+When you build components in React, you end up writing Tailwind classes directly inside the JSX. To me, this **tightly couples HTML structure with style definitions, which hurts readability and maintainability**.
+
+HTML is supposed to describe the structure of a document, and CSS is supposed to define how it looks. With Tailwind, that **separation of concerns tends to get blurred**.
+
+For example, building a button looks like this:
+
+```jsx
+<button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+  Save
+</button>
+```
+
+You end up writing a pile of styling classes that have nothing to do with the button's role itself. As components grow, it becomes harder and harder to tell what is structure and what is appearance.
+
+## You can't write scoped CSS via a \<style\> tag inside a .tsx file
+
+Out of the box, React doesn't let you write a `<style>` tag inside a .tsx file to define CSS that's scoped to that component. I really like the conciseness of scoped CSS—being able to manage styles tightly tied to a component in the same file—but React doesn't make this possible by default.
+
+In Vue, for example, you can write `<style scoped>` to define CSS within a component's scope. Astro and Svelte work in roughly the same way.
+
+This means you can manage styling on a per-component basis without worrying about style collisions, which feels much more intuitive and pleasant to work with.
+
+To pull off scoped CSS in React you have to bring in a CSS-in-JS library, and the resulting code generally isn't very clean either. The bigger issue, for me, is that it's not provided as a standard feature in the first place.
+
+### How it looks in Astro, Svelte, and Vue
+
+In the frameworks I prefer—Astro, Svelte, and Vue—you can write scoped CSS per component out of the box. That keeps style definitions and document structure clearly separated, which I find improves the development experience. I think frameworks with this kind of clear separation of concerns let you achieve both good SEO and a comfortable developer experience.
+
+For example, in Astro you can write scoped CSS inside a component's .astro file like this:
+
+```astro
+---
+// Component frontmatter
+---
+
+<button class="button">Save</button>
+
+<style>
+  .button {
+    background-color: blue;
+    color: white;
+    font-weight: bold;
+    padding: 0.5rem 1rem;
+    border-radius: 0.25rem;
+  }
+  .button:hover {
+    background-color: darkblue;
+  }
+</style>
+```
+
+You can do the same in Svelte and Vue, scoping component styles locally with a `<style>` tag.
+
+```astro
+<script lang="ts">
+</script>
+
+<button class="button">Save</button>
+
+<style>
+  .button {
+    background-color: blue;
+    color: white;
+    font-weight: bold;
+    padding: 0.5rem 1rem;
+    border-radius: 0.25rem;
+  }
+  .button:hover {
+    background-color: darkblue;
+  }
+</style>
+```
+
+## Honestly, plain CSS is plenty these days
+
+- [Goodbye SASS 👋, welcome back native CSS - DEV Community](https://dev.to/karsten_biedermann/goodbye-sass-welcome-back-native-css-cf)
+- [I'm Not Really Using Sass Lately | Web Creator Box](https://www.webcreatorbox.com/blog/bye-sass)
+
+CSS has evolved remarkably in recent years. A lot of features that used to require preprocessors like Sass or LESS can now be handled entirely with standard CSS.
+
+* **CSS variables (custom properties)**: Make it easy to manage themes and color schemes, and they can also be manipulated from JavaScript.
+    * Reference: [Tips for managing values with raw CSS variables](https://zenn.dev/psephopaiktes/scraps/496efc26afdb73)
+* **@supports**: Lets you detect whether a particular CSS feature is supported and provide appropriate fallbacks.
+* **:is() and :where() selectors**: Selector grouping has become much cleaner, improving CSS maintainability.
+* **Animation and transitions**: keyframes, transition, view-transition, and more.
+* [Cascade layers](https://azukiazusa.dev/blog/manage-styles-structurally-with-css-cascade-layer/) make it easier to manage specificity and importance.
+
+The one remaining pain point is that you can't manage breakpoints with variables. You can use CSS variables inside media queries, but turning the breakpoints themselves into variables isn't supported as a standard yet.
+
+```css
+/* I'd like to define breakpoints as variables, but this isn't possible yet */
+:root {
+  --breakpoint-md: 768px;
+}
+
+/* The following doesn't work */
+@media (var(--breakpoint-md) < width) {
+  /* styles */
+}
+```
+
+To work around this, you have to either use CSS-in-JS or a preprocessor, or introduce a build step that generates CSS. But aside from this, modern CSS has become more than powerful and flexible enough.
+
+## Wrapping up
+
+Tailwind CSS has the upside of letting you apply styles quickly, but in my experience the downsides—reduced HTML readability and the difficulty of styling on a per-component basis—are real.
+
+React itself is a powerful framework too, but when it comes to styling I personally find frameworks that emphasize separation of concerns and support scoped CSS out of the box much more comfortable to work with.

@@ -1,0 +1,335 @@
+---
+import { Squircle } from "@/components/Squircle";
+import Headline from "@/components/ui/Headline.astro";
+import SquircleButton from "@/components/ui/SquircleButton.astro";
+import Base from "@/layouts/Base.astro";
+
+import { getLocaleParams, useTranslations, type Lang } from "@/i18n";
+const locale = Astro.currentLocale as Lang;
+const t = useTranslations(locale);
+export const getStaticPaths = () => getLocaleParams(import.meta.url);
+
+const FormId = import.meta.env.PUBLIC_FORMCARRY_ENDPOINT;
+
+const svgUrl = Squircle({
+  format: "dataUrl",
+  radius: 12,
+  curve: 8,
+  fill: "#ddccbb66",
+});
+---
+
+<Base title="CONTACT">
+  <div class="l-content">
+    <Headline label="CONTACT" />
+
+    {
+      locale === "ja" ? (
+        <p>ご依頼、お問い合わせはこちらから。</p>
+        <p>
+          料金や請負内容については
+          <a href={`/${locale}/price`}>PRICEページ</a>
+          をご確認ください。
+          <a href="https://x.com/psephopaiktes" target="_blank">
+            𝕏
+          </a>
+          にリプライ、DMいただいても大丈夫です。
+        </p>
+      ) : locale === "en" ? (
+        <p>For inquiries and requests, please contact me through the form below.</p>
+        <p>
+          For details on pricing and services, please refer to the
+          <a href={`/${locale}/price`}>PRICE page</a>. You can also reach out via
+          <a href="https://x.com/psephopaiktes" target="_blank">
+            𝕏
+          </a>
+          through replies or DMs.
+        </p>
+      ) : (
+        <p>如有任何咨询和请求，请通过以下表格与我联系。</p>
+        <p>
+          有关定价和服务的详细信息，请参阅
+          <a href={`/${locale}/price`}>价格页面</a>。您也可以通过
+          <a href="https://x.com/psephopaiktes" target="_blank">
+            𝕏
+          </a>
+          通过回复或私信与我联系。
+        </p>
+      )
+    }
+
+    <!-- <section class="status">
+      <h3>
+        {
+          t({
+            ja: "現在の稼働状況",
+            en: "Current Availability",
+            "zh-cn": "当前可用性",
+          })
+        }
+      </h3>
+      <ul>
+        <li>
+          {
+            t({
+              ja: "現在並行して多くのご依頼を頂いており、基本的に新規のご依頼はお断りしております。将来的なスケジュールの案件、もしくは報酬を多くいただける案件のみお受けしております。",
+              en: "I am currently handling multiple projects in parallel and am generally unable to accept new requests. I only accept projects scheduled for the future or those with higher compensation.",
+              "zh-cn":
+                "我目前正在处理多个平行项目，通常无法接受新请求。我只接受计划在将来的项目或报酬更高的项目。",
+            })
+          }
+        </li>
+        <li>
+          {
+            t({
+              ja: "転職活動は行っておりません。エージェント様のメールにはご返事できかねます。",
+              en: "I am not currently looking for employment. I am unable to respond to emails from recruiters.",
+              "zh-cn": "我目前不在寻找工作。我无法回复招聘人员的电子邮件。",
+            })
+          }
+        </li>
+      </ul>
+    </section> -->
+
+    <form id="js-contactForm" novalidate>
+      <label>
+        <span>
+          {
+            t({
+              ja: "返信用メールアドレス",
+              en: "Email Address",
+              "zh-cn": "电子邮件地址",
+            })
+          }
+        </span>
+        <input
+          id="js-email"
+          type="email"
+          name="email"
+          placeholder="hoge@mail.com"
+          required
+          style={`border-image-source: url('${svgUrl}')`}
+        />
+      </label>
+
+      <label>
+        <span>
+          {
+            t({
+              ja: "お問い合わせ内容",
+              en: "Message",
+              "zh-cn": "消息",
+            })
+          }
+        </span>
+        <textarea
+          id="js-message"
+          name="message"
+          placeholder={t({
+            ja: "お問い合わせ内容",
+            en: "Your message",
+            "zh-cn": "您的消息",
+          })}
+          rows="6"
+          required
+          minlength="10"
+          maxlength="800"
+          style={`border-image-source: url('${svgUrl}')`}></textarea>
+      </label>
+
+      <SquircleButton id="js-submit" type="submit" disabled button>
+        {
+          t({
+            ja: "送信",
+            en: "Send",
+            "zh-cn": "发送",
+          })
+        }
+      </SquircleButton>
+
+      <p id="js-errorText">
+        <svg-icon src="/img/icon/caution.svg" class="u-iconInText">
+          {
+            t({
+              ja: "エラー",
+              en: "Error",
+              "zh-cn": "错误",
+            })
+          }
+        </svg-icon><span></span>
+      </p>
+    </form>
+  </div>
+</Base>
+
+<script define:vars={{ FormId, locale }} is:inline>
+  const contactForm = document.getElementById("js-contactForm");
+  const emailInput = document.getElementById("js-email");
+  const messageInput = document.getElementById("js-message");
+  const errorText = document.getElementById("js-errorText");
+  const submitButton = document.getElementById("js-submit");
+
+  emailInput?.addEventListener("input", validateForm);
+  messageInput?.addEventListener("input", validateForm);
+
+  const errorMessages = {
+    ja: {
+      email: "正しい形式のEmailを入力してください。",
+      message: "10文字以上、800文字以下のお問い合わせ内容を入力してください。",
+    },
+    en: {
+      email: "Please enter a valid email address.",
+      message: "Please enter a message between 10 and 800 characters.",
+    },
+    "zh-cn": {
+      email: "请输入有效的电子邮件地址。",
+      message: "请输入10至800个字符之间的消息。",
+    },
+  };
+
+  function validateForm() {
+    if (!emailInput?.checkValidity()) {
+      errorText.style.display = "block";
+      errorText.querySelector("span").textContent = errorMessages[locale].email;
+      submitButton.setAttribute("disabled", "");
+    } else if (!messageInput?.checkValidity()) {
+      errorText.style.display = "block";
+      errorText.querySelector("span").textContent =
+        errorMessages[locale].message;
+      submitButton.setAttribute("disabled", "");
+    } else {
+      errorText.style.display = "none";
+      errorText.querySelector("span").textContent = "";
+      submitButton.removeAttribute("disabled");
+    }
+  }
+
+  const buttonMessages = {
+    ja: {
+      sending: "送信中...",
+      sent: "送信しました",
+      serverError: "サーバーエラー ❌",
+      networkError: "ネットワークエラー ❌",
+    },
+    en: {
+      sending: "Sending...",
+      sent: "Sent",
+      serverError: "Server Error ❌",
+      networkError: "Network Error ❌",
+    },
+    "zh-cn": {
+      sending: "发送中...",
+      sent: "已发送",
+      serverError: "服务器错误 ❌",
+      networkError: "网络错误 ❌",
+    },
+  };
+
+  contactForm?.addEventListener("submit", (e) => {
+    e.preventDefault();
+    submitButton.textContent = buttonMessages[locale].sending;
+    submitButton.setAttribute("disabled", "");
+
+    fetch(`https://formcarry.com/s/${FormId}`, {
+      recapture: false,
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+      body: JSON.stringify({
+        email: emailInput.value,
+        message: messageInput.value,
+      }),
+    })
+      .then((res) => {
+        if (res.ok) {
+          submitButton.textContent = buttonMessages[locale].sent;
+          contactForm.reset();
+        } else {
+          // Formcarry error
+          submitButton.textContent = buttonMessages[locale].serverError;
+        }
+      })
+      .catch((err) => {
+        // network error
+        submitButton.textContent = buttonMessages[locale].networkError;
+        console.error(err);
+      });
+  });
+</script>
+
+<style lang="less">
+  @import "@/styles/common.less";
+
+  .status {
+    h3 {
+      margin-block-start: 24px;
+      font-size: 1em;
+    }
+    ul {
+      margin-block-start: 0.2em;
+      padding-inline-start: 1.4em;
+      list-style: disc;
+    }
+    li {
+      opacity: 0.8;
+    }
+  }
+
+  form {
+    margin-block-start: 48px;
+    max-width: 40em;
+    label {
+      display: block;
+      margin-block-start: 24px;
+      span {
+        margin-inline-start: 2px;
+        letter-spacing: 0;
+        font-weight: 500;
+      }
+    }
+    input,
+    textarea {
+      display: block;
+      margin-block-start: 8px;
+      padding: 0;
+      width: 100%;
+      color: rgb(@main);
+      outline: none;
+      caret-color: rgb(@theme);
+      font-size: 18px;
+      line-height: 1.5;
+      cursor: text;
+      appearance: none;
+      background: none;
+      border: solid 12px;
+      border-image-slice: 12 fill;
+      opacity: 0.8;
+      &:user-invalid:not(:focus) {
+        color: rgb(@caution);
+        border-color: red;
+      }
+      &::placeholder {
+        color: rgb(@main / 0.3);
+      }
+      &:focus {
+        opacity: 1;
+        filter: drop-shadow(0 0 8px rgb(@main / 0.2));
+      }
+    }
+    textarea {
+      resize: vertical;
+      min-height: 200px;
+      field-sizing: content;
+    }
+    #js-errorText {
+      display: none;
+      color: rgb(@caution);
+      margin-inline-start: 4px;
+      span {
+        margin-inline-start: 0.5em;
+      }
+    }
+  }
+</style>

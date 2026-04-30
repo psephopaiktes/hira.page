@@ -1,5 +1,8 @@
 ---
 import SnsLink from "@/components/ui/SnsLink.astro";
+import { useTranslations, type Lang } from "@/i18n";
+const locale = Astro.currentLocale as Lang;
+const t = useTranslations(locale);
 
 const snsList = ["X", "note", "GitHub", "Instagram", "Pinterest"];
 ---
@@ -21,7 +24,15 @@ const snsList = ["X", "note", "GitHub", "Instagram", "Pinterest"];
     © Akira HIRATA {new Date().getFullYear()}.
   </small>
 
-  <a href="/terms" class="terms">利用規約・ポリシー</a>
+  <a href={`/${locale}/terms`} class="terms">
+    {
+      t({
+        ja: "利用規約・ポリシー",
+        en: "Terms & Policy",
+        "zh-cn": "使用条款和政策",
+      })
+    }
+  </a>
 
   <a
     href="https://github.com/psephopaiktes/hira.page"
@@ -105,27 +116,24 @@ const snsList = ["X", "note", "GitHub", "Instagram", "Pinterest"];
 
   .octocat {
     display: block;
-    width: 96px;
-    height: 96px;
+    width: 64px;
+    height: 64px;
     position: fixed;
-    left: 0;
-    bottom: 24px;
+    left: 16px;
+    bottom: 0;
     will-change: transform;
     transform-origin: left bottom;
-    opacity: 0.6;
+    opacity: 0.5;
 
     span {
       position: fixed;
-      left: 16px;
-      bottom: 96px;
+      left: 8px;
+      bottom: 56px;
       width: 8em;
       font-size: 14px;
       color: #fff;
       opacity: 0;
-    }
-
-    dotlottie-player {
-      rotate: 90deg;
+      pointer-events: none;
     }
 
     &:hover {

@@ -1,34 +1,47 @@
 ---
+import { useTranslations, type Lang } from "@/i18n";
 
+const locale = Astro.currentLocale as Lang;
+const t = useTranslations(locale);
 ---
 
 <ul id="js-stalker">
   <li class="hirata">
-    <svg-mask-icon src="/img/icon/contact.svg"></svg-mask-icon>
-    <p>お問い合わせ</p>
+    <svg-icon src="/img/icon/contact.svg"></svg-icon>
+    <p>{t({ ja: "お問い合わせ", en: "Contact", "zh-cn": "联系" })}</p>
   </li>
 
   <li class="design">
-    <svg-mask-icon src="/img/icon/next.svg"></svg-mask-icon>
-    <p>デザインの実績</p>
+    <svg-icon src="/img/icon/next.svg"></svg-icon>
+    <p>
+      {t({ ja: "デザインの実績", en: "Design Works", "zh-cn": "设计作品" })}
+    </p>
   </li>
 
   <li class="develop">
-    <svg-mask-icon src="/img/icon/next.svg"></svg-mask-icon>
-    <p>フロントエンドの実績</p>
+    <svg-icon src="/img/icon/next.svg"></svg-icon>
+    <p>
+      {
+        t({
+          ja: "フロントエンドの実績",
+          en: "Front-end Works",
+          "zh-cn": "Front-end作品",
+        })
+      }
+    </p>
   </li>
 
   <li class="skillmap">
-    <svg-mask-icon src="/img/icon/next.svg"></svg-mask-icon>
-    <p>すべての実績</p>
+    <svg-icon src="/img/icon/next.svg"></svg-icon>
+    <p>{t({ ja: "すべての実績", en: "All Works", "zh-cn": "所有作品" })}</p>
   </li>
 
   <li class="open">
-    <svg-mask-icon src="/img/icon/open.svg"></svg-mask-icon>
+    <svg-icon src="/img/icon/open.svg"></svg-icon>
   </li>
 
   <li class="contact">
-    <svg-mask-icon src="/img/icon/contact.svg"></svg-mask-icon>
+    <svg-icon src="/img/icon/contact.svg"></svg-icon>
   </li>
 </ul>
 
@@ -96,7 +109,7 @@
     li {
       display: none;
       text-align: center;
-      svg-mask-icon {
+      svg-icon {
         margin-block-start: 4px;
         width: 64px;
         aspect-ratio: 1;
@@ -117,7 +130,7 @@
         width: 40px;
         height: 40px;
         margin: -20px 0 0 -20px;
-        svg-mask-icon {
+        svg-icon {
           width: 32px;
         }
       }

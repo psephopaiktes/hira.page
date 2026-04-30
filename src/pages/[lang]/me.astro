@@ -1,0 +1,53 @@
+---
+import Hero from "@/components/Me/Hero.astro";
+import Info from "@/components/Me/Info.astro";
+import MouseStalker from "@/components/Me/MouseStalker.astro";
+import Resume from "@/components/Me/Resume.astro";
+import SquircleButton from "@/components/ui/SquircleButton.astro";
+import { getLocaleParams, useTranslations, type Lang } from "@/i18n";
+import Base from "@/layouts/Base.astro";
+
+const locale = Astro.currentLocale as Lang;
+const t = useTranslations(locale);
+
+export const getStaticPaths = () => getLocaleParams(import.meta.url);
+---
+
+<Base title="ABOUT ME">
+  <Hero />
+  <Info />
+
+  <SquircleButton
+    data-inview
+    href={`/${locale}/contact`}
+    data-swellStalker="contact"
+    class="contactBtn"
+  >
+    <svg-icon src="/img/icon/contact.svg">
+      {t({ ja: "メールアイコン", en: "Mail Icon", "zh-cn": "邮件图标" })}
+    </svg-icon>
+    {
+      t({
+        ja: "ご依頼・お問い合わせ",
+        en: "Contact & Inquiries",
+        "zh-cn": "联系与咨询",
+      })
+    }
+  </SquircleButton>
+
+  <Resume />
+
+  <MouseStalker />
+</Base>
+
+<style lang="less">
+  @import "@/styles/common.less";
+
+  :global(main) {
+    text-align: center;
+  }
+
+  .contactBtn {
+    margin: 64px auto 0;
+  }
+</style>

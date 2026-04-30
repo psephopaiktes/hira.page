@@ -1,0 +1,146 @@
+---
+import NotFound from "@/assets/404.svg";
+import Base from "@/layouts/Base.astro";
+
+import { LOCALES, getLocaleParams, useTranslations, type Lang } from "@/i18n";
+const locale = Astro.currentLocale as Lang;
+const t = useTranslations(locale);
+
+export const getStaticPaths = () => getLocaleParams(import.meta.url);
+---
+
+<Base>
+  <h1>
+    <img
+      src={NotFound.src}
+      width={NotFound.width}
+      height={NotFound.height}
+      alt="404"
+    />
+    <p>NOT FOUND</p>
+  </h1>
+
+  <h2>
+    {
+      t({
+        ja: "お探しのページは存在しません",
+        en: "The page you are looking for does not exist",
+        "zh-cn": "您要查找的页面不存在",
+      })
+    }
+  </h2>
+
+  <button id="js-search">
+    <svg-icon src="/img/icon/search.svg" class="u-iconInText">
+      {
+        t({
+          ja: "検索アイコン",
+          en: "Search icon",
+          "zh-cn": "搜索图标",
+        })
+      }
+    </svg-icon>
+    {
+      t({
+        ja: "サイト内検索",
+        en: "Site search",
+        "zh-cn": "网站搜索",
+      })
+    }
+  </button>
+
+  <ul class="langList">
+    {
+      Object.entries(LOCALES).map(([lang, { label }]) => (
+        <li>
+          <a
+            href={`/${lang}/`}
+            data-lang-path={lang}
+            onclick={`localStorage.selectedLang = "${lang}"`}
+            dir={LOCALES[lang].dir || null}
+          >
+            {label}
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+</Base>
+
+<script>
+  document.addEventListener(
+    "astro:page-load",
+    () => {
+      const search = document.getElementById("js-search");
+      search?.addEventListener("click", () => {
+        const Query = prompt("search word");
+        if (!Query) return;
+        window.open(
+          `https://www.google.co.jp/search?q=${Query}&as_sitesearch=hira.page`,
+        );
+      });
+    },
+    { once: false },
+  );
+</script>
+
+<style lang="less">
+  @import "@/styles/common.less";
+
+  h1 {
+    margin-block-start: 96px;
+    text-align: center;
+
+    img {
+      width: 480px;
+      @media (width < @sm) {
+        width: 280px;
+      }
+    }
+
+    p {
+      margin-block-start: 0.4em;
+      font-size: 64px;
+      font-weight: 800;
+      letter-spacing: 0.1em;
+      color: rgb(@theme);
+      @media (width < @sm) {
+        font-size: 40px;
+        letter-spacing: 0.05em;
+      }
+    }
+  }
+
+  h2 {
+    margin-block-start: 48px;
+    text-align: center;
+    font-size: 24px;
+    color: rgb(@label);
+    @media (width < @sm) {
+      font-size: 20px;
+    }
+  }
+
+  #js-search {
+    display: block;
+    margin: 48px auto 0;
+    padding: 8px 16px;
+    border: 1px solid rgb(@label);
+    border-radius: 6px;
+    color: rgb(@label);
+  }
+
+  .langList {
+    margin-block-start: 48px;
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+    list-style: none;
+    a {
+      text-decoration: underline;
+    }
+    @media (width < @sm) {
+      gap: 12px;
+    }
+  }
+</style>

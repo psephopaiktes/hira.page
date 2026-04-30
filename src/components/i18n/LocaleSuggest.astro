@@ -1,0 +1,84 @@
+---
+// Displays a link to the user's system language page
+// if the language being viewed is different
+
+import { type Lang, LOCALES } from "@/i18n";
+
+const currentLocale = Astro.currentLocale as Lang;
+---
+
+<div id="js-languageSuggest">
+  <button id="js-close">
+    <svg-icon src="/img/icon/close.svg">close</svg-icon>
+  </button>
+
+  <a id="js-link" href="#">
+    <span id="js-linkText"></span>
+  </a>
+</div>
+
+<script is:inline define:vars={{ currentLocale, LOCALES }}>
+  const browserLang = navigator.language.toLowerCase();
+  const suggest = document.getElementById("js-languageSuggest");
+
+  const showSuggest = (lang) => {
+    const pathnames = location.pathname.split("/");
+    const link = document.getElementById("js-link");
+    const linkText = document.getElementById("js-linkText");
+
+    pathnames[1] = lang;
+    link.href = pathnames.join("/");
+    linkText.innerText = LOCALES[lang].label;
+    suggest.style.display = "flex";
+  };
+
+  if (
+    currentLocale === browserLang ||
+    currentLocale === browserLang.split("-")[0] ||
+    localStorage.languageSuggestDenied ||
+    localStorage.selectedLang
+  ) {
+    return;
+  } else if (Object.keys(LOCALES).includes(browserLang)) {
+    showSuggest(browserLang);
+  } else if (Object.keys(LOCALES).includes(browserLang.split("-")[0])) {
+    showSuggest(browserLang.split("-")[0]);
+  }
+
+  document.getElementById("js-close").addEventListener("click", () => {
+    suggest.style.display = "none";
+    localStorage.languageSuggestDenied = true;
+  });
+</script>
+
+<style lang="less">
+  @import "@/styles/common.less";
+
+  #js-languageSuggest {
+    display: none;
+    position: fixed;
+    align-items: center;
+    top: 12px;
+    left: 12px;
+    padding: 12px 16px 12px 12px;
+    gap: 8px;
+    background: rgb(@label);
+    color: rgb(@base);
+    border-radius: 8px;
+    z-index: 9999;
+    @media (width < @lg) {
+      top: auto;
+      bottom: 12px;
+    }
+  }
+  #js-link {
+  }
+  #js-close {
+    display: inline-flex;
+    font-size: 24px;
+    width: 24px;
+    height: 24px;
+    opacity: 0.5;
+    color: rgb(@base);
+  }
+</style>

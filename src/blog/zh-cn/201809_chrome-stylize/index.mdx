@@ -1,0 +1,161 @@
+---
+title: "[Chrome扩展] 自由改变常逛网站的设计! 加载自制CSS和JS的方法 [纪念Stylish下架]"
+date: 2018-09-03T00:46:13+10:00
+lastmod: 2021-06-22T00:46:13+10:00
+draft: false
+tags: ["Chrome", "Web"]
+description: "只要具备最基本的HTML和CSS知识就OK。可以把Google搜索或GitHub等网站的背景换成黑色,或是去除不需要的元素。这是一种在本地制作扩展的方法,具有「安心」「JS也能用」「SCSS也能用」等众多优点。"
+cover: "./cover.png"
+---
+import EmbedCard from '@/components/Blog/EmbedCard.astro';
+
+## 概要
+在PC上浏览各种网页时,你是否想过像YouTube或Twitter的暗黑模式那样把背景调暗呢?另外,是否想自由地应用自己独特的CSS,比如消除或放大特定元素、改变字体等?这些都可以通过Chrome的扩展来实现,以前一直有Stylish这个扩展是大家常用的标准方案。但前几天,Stylish因为擅自收集用户浏览历史的原因,[从Chrome的Web商店中被移除](https://forest.watch.impress.co.jp/docs/news/1131353.html)了。
+
+因此,本文要介绍的是,代替已下架的Stylish,把自己喜欢的CSS和JS应用到喜欢的网页上的方法。这是一种在本地制作扩展的方法,具有以下优缺点。
+
+### 🙆 GOOD
+- 可以在任意页面加载自己写的CSS和**Javascript**
+- 因为CSS和JS文件在本地管理,所以SASS、TypeScript等自己用惯的环境可以随便用
+- 因为CSS和JS文件在本地管理,所以可以用Git或Dropbox等管理
+- 不依赖第三方扩展,所以无需担心被下架,也无需担心隐私问题。
+
+### 🙅 BAD
+- 引入有点麻烦
+- 不能在Chrome之间通过账户同步
+- 不能像Stylish那样一键导入其他用户制作并公开的CSS。
+
+如上所述,虽然有缺点,但基本上自由度更高,能做的事情更多。那么我们立刻来看看步骤吧。想轻松搞定的人请查看[嫌麻烦人士的步骤](#嫌麻烦人士的步骤)。(虽然不太推荐就是了。)
+
+
+## 基本步骤
+制作Chrome扩展意外地简单,只要在一个文件夹里放置HTML、CSS、JS文件,以及配置文件`manifest.json`就完成了。把这个文件夹用zip压缩并上传就可以发布到商店,如果只是在本地个人使用的话,只要在`chrome://extensions/`页面加载这个文件夹就行。我为嫌麻烦的人[准备了一个模板](#模板),推荐下载并改造它。
+
+Chrome扩展中有按下按钮时执行的<b>Browser Action</b>、替换浏览器新标签或历史页面的<b>Override Pages</b>等各种功能。本次将利用可以对任意URL页面加载任意CSS、JS的**Content Script**功能。
+
+### 1. 创建manifest.json
+首先,在喜欢的位置以喜欢的名字创建文件夹,在其中创建`manifest.json`文件。`manifest.json`文件的内容大致如下。
+
+#### manifest.json
+```json
+{
+  "name": "chrome-stylize",
+  "author": "Akira HIRATA",
+  "description": "chrome extension for customize CSS and JS.",
+  "version": "1.0.0",
+  "manifest_version": 2,
+  "web_accessible_resources": ["*"],
+  "permissions": ["storage"],
+  "content_scripts": [
+    {
+      "matches": ["https://www.google.co.jp/*"],
+      "css": ["google/style.css"],"js": ["google/script.js"]
+    },
+    {
+      "matches": ["https://www.nicovideo.jp/watch/*"],
+      "css": ["nico/style.css"],"js": ["nico/script.js"]
+    }
+  ]
+}
+```
+
+这次,上面需要注意的是`content_scripts`的设置项目。其他基本上保持原样就好。`name`和`author`项目可以自由更改。如果想知道每个分别是什么设置,可以参考[这个页面](https://qiita.com/mdstoy/items/9866544e37987337dc79)等。
+
+### 2. 设置目标页面和文件
+指定想加载CSS、JS的页面。在`manifest.json`中的`content_scripts`部分指定URL模式。这次试着改造一下Google搜索和Niconico动画的视频观看页面。
+
+#### manifest.json
+```json
+  "content_scripts": [
+    {
+      "matches": ["https://www.google.co.jp/*"],
+      "css": ["google/style.css"],"js": ["google/script.js"]
+    },
+    {
+      "matches": ["https://www.nicovideo.jp/watch/*"],
+      "css": ["nico/style.css"],"js": ["nico/script.js"]
+    }
+  ]
+```
+`matches`是目标WEB页面的URL模式,`css`、`js`是该页面要加载的CSS、JS文件的指定。`*`是通配符。在上面的例子中,会匹配所有以`https://www.google.co.jp/`开头的URL。其他URL指定的方法在[这里](https://developer.chrome.com/extensions/match_patterns)有汇总。
+
+为每个目标页面分别创建好CSS、JS文件夹并存放文件。内容暂时是空白的。
+
+![文件夹结构](./directory.png)
+
+`css`、`js`可以指定多个。如果想用jQuery,放下载好的jQuery文件,然后写
+`"js": ["jquery.min.js","google/script.js"]`等就OK了。
+
+### 3. 创建CSS和JS
+来编写上面创建的CSS和JS吧。在该页面的HTML中,哪个元素使用了什么类名,只能在Dev工具中一点点查找。详细的方法后面会说,总之先按下面这样写`/google/style.css`和`/google/script.js`试试。
+
+#### /google/style.css
+```css
+body{
+  background: #ccc !important;
+}
+```
+
+#### /google/script.js
+```js
+console.log('Hello World');
+```
+
+
+### 4. 加载到Chrome中
+1. 打开Chrome的扩展页面。在Chrome的URL栏中输入`chrome://extensions/`。
+2. 右上角有「开发者模式」开关,把它打开。
+3. 把刚才创建的文件夹拖放到这个画面就完成了。
+4. 随便打开一个Google搜索页面试试。背景应该会变成灰色,在Dev工具的控制台也能看到消息了。
+
+![重载](./reload.png)
+之后再修改CSS或JS文件时,**更新不会立即反映,需要在扩展页面重新加载**。点击画面中的重载图标即可重新加载。
+
+
+
+## 如何高效地编写CSS
+以上是基本步骤,但实际操作就会发现,边看实时结果边编写CSS非常麻烦。这里总结两种实际编写CSS、JS文件的方法。
+
+### 在Chrome DevTool中边看结果边制作
+就是认真地查找该页面所用的类并编写CSS的方法。相当麻烦,而且对初学者可能比较困难。
+
+1. 打开Chrome Dev工具。在任意页面右键点击,选择「检查」,或用`⌘⌥I`(Mac)、`F12`(Win)的快捷键也能启动。
+2. 点击Dev工具左上的光标图标,进入元素选择模式。也可以用`⌘⇧C`(Mac)、`Ctrl+Shift+C`(Win)的快捷键启动。
+3. 用光标点击想查找类名的元素,Dev工具上就会高亮显示对应的元素。在这里可以确认类名。
+
+另外,基本上自定义的CSS因为[特异度](https://developer.mozilla.org/ja/docs/Web/CSS/Specificity)的关系,经常不会被优先采用。所以如果没有反映,加上`!important`强行让它优先生效是简单的做法。
+
+### 复制粘贴公开的样式
+这种方法压倒性地轻松。网上有有志者制作的各种用户样式表公开。复制粘贴使用是简单的方法。当然,使用时请确认许可,注意版权。(只在本地个人使用的话大多没问题。)
+
+之前用Stylish的人,在官方网站找CSS可能比较轻松。
+
+[Website Themes & Skins by Stylish | Userstyles.org](https://userstyles.org/)
+
+
+## 嫌麻烦人士的步骤
+
+1. 下载下面的模板并解压。
+2. 在manifest.json中写目标页面和想加载的CSS。[[详细]](#2-设置目标页面和文件)
+3. 复制粘贴网上公开的酷炫CSS,或用Dev工具努力写CSS。[[详细]](#如何高效地编写css)
+4. 在Chrome的扩展页面打开开发者模式,把文件夹拖放进去。[[详细]](#4-加载到chrome中)
+
+
+### 模板
+<a href="/download/weba_chrome-stylize.zip" download>模板 最小构成</a>
+以最小文件构成创建的示例。下载并解压后,可以随意改造。
+
+<a href="/download/weba_chrome-stylize_npm.zip" download>模板 含SCSS和BABEL</a>
+熟悉NPM的人推荐这个。使用方法是`npm i`后`npm start`即可。会监视src文件夹内的SCSS文件和JS文件,构建到docs文件夹。
+
+## 总结和补充
+试过的人应该都知道,只要有HTML、CSS、JS的知识,Chrome扩展就能相当容易地制作出来。除了本次的例子之外,在新标签页显示自定义页面的类型也很容易制作,很有意思。
+
+对扩展制作感兴趣的人,以下条目可能值得参考。如果做出好东西的话,请务必在[ChromeWebStore](https://chrome.google.com/webstore/category/extensions)发布。
+
+- [初学者也能理解的「Google Chrome扩展开发」 | OXY NOTES](https://oxynotes.com/?p=8836)
+  - 虽然是稍旧的页面,但作为整体俯瞰理解ChromeExtension的信息汇总得很好。
+- [2016年度版 我所设想的Chrome扩展制作时的设计模式 - Qiita](https://qiita.com/yoichiro6642/items/d446256e0bd709e2d76b)
+  - 在某种程度上熟悉Extension后,想要在商店发布等情况下使用
+- [浏览器扩展 - Mozilla | MDN](https://developer.mozilla.org/ja/docs/Mozilla/Add-ons/WebExtensions)
+  - 笔者并不太了解,但据说通过使用WebExtension API的功能群,不仅是Chrome,Firefox、Edge等也能用几乎相同的代码制作扩展。(因为Firefox支持了这个,在那之前的许多Firefox插件不能用了,曾经成为话题。)

@@ -1,0 +1,146 @@
+---
+title: "What I learned by ditching my wallet, and the current optimal solution"
+date: 2019-01-10T10:42:17+09:00
+draft: false
+tags: ["Review", "App・Service", "Life"]
+description: "Ever since I bought a Pixel3 the other day, I stopped carrying a wallet. All I carry is a Pixel3 and a card case, and I mostly pay using just the Google Pay app and a credit card."
+cover: "./cover.png"
+---
+import EmbedCard from '@/components/Blog/EmbedCard.astro';
+
+Ever since I bought a Pixel3 the other day, I stopped carrying a wallet. **All I carry is a Pixel3 and a card case**, and I mostly pay using just the Google Pay app and a credit card.
+
+After two months of this lifestyle, I'll summarize the good and the bad, and then introduce in detail what my current setup looks like.
+
+
+## The good
+
+### 🙆 Time at the register has dropped dramatically
+The hassle of being told the amount, taking the right money out of the wallet, waiting for the clerk to process it, and receiving change... all of that disappears. **It's just super convenient.** I also try to use point cards inside my phone whenever possible, so the time spent searching for them has also gone way down.
+
+### 🙆 Trips to the ATM have plummeted
+The "oh, I don't have enough cash" moment is just gone.
+
+### 🙆 Less hassle with friends and acquaintances
+Thanks to the money-transfer apps I'll mention later, splitting the bill has become so much easier.
+
+Things like "I don't have any cash, I'll pay you later," "Can you break a 5,000 yen bill?", "Got change?", or someone paying for everyone and ending up with pockets full of small change start to feel ridiculous.
+
+### 🙆 Less stuff to carry
+I had been using the [abrAsus thin wallet](https://superclassic.jp/?pid=16355432), but even that now feels big.
+
+### 🙆 Logs are clearly preserved
+Both Google Pay payments and money-transfer app usage automatically leave logs. They can also be linked with the popular budgeting app [MoneyForward](https://moneyforward.com/).
+
+People often say "if you don't use cash, you lose your sense of money and overspend," but once you get used to it, this method actually lets you manage your finances more clearly.
+
+### 🙆 You get cashback on everyday payments
+As you know, credit cards give you points and other rewards every time you use them.
+
+In my case, I also get 2% Kyash points back every time, which combined with my Rakuten Card's 1% point return means **I receive a 3% rebate on payments**. (I'll explain the setup later.)
+
+
+## The bad
+
+### 🙅 Coins are really annoying
+Most stores accept cashless, but small individual restaurants and ramen shops are often cash-only.
+
+In those cases, I pay with the spare 10,000 yen bill I keep stashed in my card case. I reluctantly stuff the change in my pocket and dump it in a piggy bank at home. Once it accumulates, I take it back to an ATM.
+
+### 🙅 It's a hassle to deal with people who don't use money-transfer apps
+Splitting the bill with people who don't use money-transfer apps is fairly cumbersome. Even ignoring the small change, I usually only carry 10,000 yen bills, so it puts a bit of burden on the other party.
+
+
+## Details of the payment setup
+Here's a specific introduction to which services and items I use to pay.
+
+### Configuration
+![Payment configuration](./payment-composition1.png)
+
+- Pixel3 (Android phone)
+  - Kyash, LINE Pay
+  - Google Pay
+      - QUICPay
+      - Suica, Suica commuter pass
+      - Various point cards
+
+- Card case
+  - Credit card
+  - Health insurance card
+  - Office entry pass
+  - Spare 10,000 yen bill
+
+### Kyash, LINE Pay
+These are money-transfer apps. They let you send money between users and are very handy for splitting the bill. <b>Many people use either Kyash or LINE Pay, so having these two installed pretty much covers everyone</b>.
+
+<EmbedCard
+    url="https://kyash.co/"
+    img="https://kyash.co/img/company_og.png"
+    title="Wallet App Kyash - Get 2% off your everyday payments"
+    site="kyash.co" />
+
+<EmbedCard
+    url="https://line.me/ja/pay"
+    img="https://d.line-scdn.net/n/line_lp/img/ogimage.png"
+    title="LINE Pay"
+    site="line.me" />
+
+
+The sender links a credit card or bank account to send money, and the recipient gets the money charged as points.
+
+Both Kyash and LINE Pay let you **create credit cards linked to each service, so you can use the charged points as a credit card**.
+
+
+### Google Pay
+I use Google Pay for QUICPay and Suica contactless payments, as well as for displaying point cards.
+
+It's basically not that different from Apple Pay. Apple Pay supports more services, but I feel Google Pay wins on convenience. However, the number of Android phones that support contactless payments is currently quite limited.
+
+You can also use nanaco, WAON, Edy, and so on. Unlike Apple Pay, **you don't have to wake up the phone and choose each time — just touch the payment terminal and it pays with the matching method automatically**.
+
+<small>* By the way, I also have QR-code-presenting apps like PayPay installed, but the steps are too tedious and I have no desire to keep using them. [This article](https://note.mu/takashi0zo/n/nf5c11a0baa0e) sums it up clearly, but I don't think they're at a level you'd use every day.</small>
+
+
+### QUICPay (credit card)
+I basically pay with this. It's the kind where you just tap at a supported register.
+
+To clarify, QUICPay is a <b>payment standard</b> — the actual money is paid via the credit card.
+
+There's another similar standard called iD. Which one is used depends on the partnership between the smartphone app and the credit card. Registering a Rakuten Card to Apple Pay makes it QUICPay, while registering an Amazon Card makes it iD. Both are accepted at many convenience stores and chain stores.
+
+In my case, I have a Kyash credit card registered to Google Pay. It's a little hard to follow, but the configuration looks like this.
+
+![Payment configuration](./payment-composition2.png)
+
+### Suica, Suica commuter pass
+Suica works in places where QUICPay doesn't. It needs to be charged in advance and there are no point rebates, so I don't use it much. My commuter pass is also on Suica, so I just tap-and-go at the ticket gate.
+
+### Various point cards
+**You can display barcodes inside the Google Pay app and use them as point cards**. It supports services like the following. I really wish every point card in the world would become an app.
+
+- T-Card
+- Nitori
+- IKEA
+- Matsumoto Kiyoshi
+- Rakuten Point Card
+- etc...
+
+The Ponta card didn't work well inside Google Pay, so I separately installed the [official Ponta Card app](https://play.google.com/store/apps/details?id=jp.ponta.myponta).
+
+
+### Card case
+A card case that doubles as a money band. It's strictly for backup — basically I rely on the phone alone. I only put the bare minimum cards inside. Hair salon cards, cash cards, and the like go into a separate card case in my bag.
+
+<EmbedCard
+    url="https://www.madera.com.au/collections/wallets/products/union-wallet-in-cherry"
+    img="//cdn.shopify.com/s/files/1/0261/7319/products/UNION-NEW-FRONT-CHERRY-ORIGINALSIZE_03_medium.jpg?v=1464762846"
+    title="Madera - Union Wallet in Cherry"
+    site="www.madera.com.au" />
+
+
+## Conclusion
+There are some inconvenient aspects, but overall I'm really glad I gave up the wallet. As long as ramen shops exist, true cashlessness still seems a way off, but I think the era where ditching the wallet has more pros than cons has finally arrived.
+
+For now, I strongly recommend that anyone who can use **just Apple Pay or Google Pay at convenience stores** at least try that. Once you get used to the speed at the register, you'll gradually start to dislike cash.
+
+The end.
