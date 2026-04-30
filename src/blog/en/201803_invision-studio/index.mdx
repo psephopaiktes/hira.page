@@ -1,14 +1,14 @@
 ---
-title: "ついに来た！ 最強のプロトタイピングツールと期待されている inVision Studio. (early access版) を触ってみました"
+title: "It's finally here! I tried out inVision Studio (early access), the prototyping tool everyone's been hyping as the strongest"
 date: 2018-03-23T00:46:13+10:00
 draft: false
 tags: ["App・Service"]
-description: "去年からプロモ動画のみを公開し、大きな反響を呼んでいた inVision Studio. SketchやXDの対抗となるアプリですが、動画を見る限りそれらを駆逐するほどの高い機能を持っていると噂されていました。ついに登録していた early access版の招待メールが来たので、調査します。"
+description: "Last year inVision released only a promo video, which created a huge buzz. It's an app that competes with Sketch and XD, and from the video it was rumored to have features powerful enough to wipe them out. The invitation email for the early access version that I had registered for finally arrived, so let's investigate."
 cover: "./cover.png"
 ---
 import EmbedCard from '@/components/Blog/EmbedCard.astro';
 
-[Studio.](https://www.invisionapp.com/studio) は昨年、プロトタイピングのWebサービス大手 [inVision](https://www.invisionapp.com/)がプロモ動画を発表し、その機能の豊富さから、「<b>これだけ機能があって、使いやすくて軽かったらSketchもXDも消えるのでは...?</b>」とまで期待させられていたソフトウェアです。
+[Studio.](https://www.invisionapp.com/studio) is a piece of software whose promo video was released last year by [inVision](https://www.invisionapp.com/), a major prototyping web service company. Because of its rich feature set, it had everyone thinking, "<b>If it has all these features, is easy to use, and lightweight, won't it kill off both Sketch and XD...?</b>"
 
 <EmbedCard
     url="https://www.invisionapp.com/studio"
@@ -17,121 +17,121 @@ import EmbedCard from '@/components/Blog/EmbedCard.astro';
     site="www.invisionapp.com" />
 
 
-現在[公式サイト](https://www.invisionapp.com/studio)に機能の紹介が解禁されていますが、ざっくりいうと
+The features are now revealed on the [official site](https://www.invisionapp.com/studio), but in a nutshell:
 
-- MacOS, Windowsのクロスプラットフォーム対応
-- Sketch、XDの様なデザインカンプ作成機能
-- Sketchのようなシンボル管理機能、ライブラリ機能
-- Abstarctのようなデザインレベルでのバージョン管理、レビュー・コミュニケーション機能
-- Keyframeを使ったアニメーション設定
-- もちろんInVisionのような画面遷移プロトタイピング
+- Cross-platform support for MacOS and Windows
+- Design comp creation features like Sketch and XD
+- Symbol management and library features like Sketch
+- Design-level version control, review, and communication features like Abstract
+- Animation settings using keyframes
+- Of course, screen-transition prototyping like InVision
 
-などなど、あきらかに盛りすぎですが最強感が半端ないアプリです。さらに、[デザインシステムのツール](https://www.invisionapp.com/blog/announcing-invision-design-system-manager/)も作ろうとしていたり、もう唯我独尊を目指しています。
+It's clearly piling on the features, but the "strongest app" vibe is intense. On top of that, they're also working on a [design system tool](https://www.invisionapp.com/blog/announcing-invision-design-system-manager/) — they're aiming to dominate the entire space.
 
-今年の1月にはダウンロード可能の予定でしたが、伸びていたのでやきもきしていた方も多いと思います。今回、ようやっと招待メールが届いたので、さっそくどの程度の機能が使えるのか試してみます。おもにSketchとの比較です。
-
-
-## インスコ・起動
-届いた招待メールの「GET STUDIO NOW」からダウンロードページへ行き、いつものように.dmgファイルからMacインスコするだけです。ここらへんは割愛。アイコンはこんな感じです。シンプルな分、目立っています。
-
-![スクショ](./2018-03-23-04-12-40.png)
-
-起動しました。この画面はLauncherと呼ぶ模様。「Open Studio or Sketch File」の文字が...Sketch形式にも対応している模様。ためしに手元のSketchファイルを開いてみましたが、だいぶ見た目バグったのでこれはみなかったことにします。左下「Learn Studio」は[YouTubeの動画](https://www.youtube.com/watch?v=LkEOaR4Bl5M&amp=&feature=youtu.be)が開くだけでした。
+It was supposed to be available for download back in January this year, but the release was delayed, so I'm sure many of you were getting impatient. The invitation mail finally arrived, so I'm going to try out what features are actually usable. The comparison is mainly with Sketch.
 
 
-![スクショ](./2018-03-23-04-14-40.png)
+## Installation and launch
+From the "GET STUDIO NOW" link in the invitation email, go to the download page and install on Mac from the .dmg file as usual. I'll skip the details. The icon looks like this. Simple, and stands out for that very reason.
 
-地味にテンプレートが多くてステキ。
+![Screenshot](./2018-03-23-04-12-40.png)
 
-![スクショ](./2018-03-23-04-22-39.png)
+It launched. This screen seems to be called the Launcher. The text "Open Studio or Sketch File"... apparently it supports the Sketch format. I tried opening a Sketch file I had on hand, but the appearance was pretty broken so let's pretend that never happened. Clicking "Learn Studio" at the bottom left just opens a [YouTube video](https://www.youtube.com/watch?v=LkEOaR4Bl5M&amp=&feature=youtu.be).
 
-やはり基本的なUIパネルの構成はSkechに近いですね。
 
-![スクショ](./2018-03-23-04-34-51.png)
+![Screenshot](./2018-03-23-04-14-40.png)
 
-ちなみにLightなThemeもあります。
+Quietly, there are lots of templates, which is nice.
 
-![スクショ](./2018-03-23-05-44-40.png)
+![Screenshot](./2018-03-23-04-22-39.png)
 
-## チュートリアルで紹介されている機能
-とりあえずLauncher画面にある、みっつのTutorialsをやってみます。これをクリックすると練習用の説明付きファイルが開きます。XDでも同じようなチュートリアルがありますが、こういうのとてもわかりやすくて良いです。
+As expected, the basic UI panel layout is close to Sketch.
+
+![Screenshot](./2018-03-23-04-34-51.png)
+
+By the way, there's also a Light theme.
+
+![Screenshot](./2018-03-23-05-44-40.png)
+
+## Features introduced in the tutorials
+Let's start by going through the three Tutorials on the Launcher screen. Clicking these opens a practice file with explanations. XD has similar tutorials too, and this kind of thing is really easy to follow and great.
 
 ### Layout
-- いきなし感動しました。要は**レイヤーオブジェクトの大きさを、アートボードに対する%で設定できる機能**ですね。むしろなんでSketchこれないんでしょうね。
-- それに加えて、リサイズ時に親要素に対して子要素をどの位置に置くかの指定もできます。これはSketchシンボルのResizing機能と一緒ですね。
+- I was instantly impressed. In short, this is the feature where **you can set the size of layer objects as a percentage of the artboard**. Honestly, why doesn't Sketch have this?
+- On top of that, you can also specify how child elements are positioned relative to the parent when resizing. This is the same as Sketch symbol's Resizing feature.
 
 <video src="./capture-layout.mp4" width="1247" height="830" controls autoplay></video>
 
 
 
 ### Animation
-- InVision本来のサービスである画面遷移のプロトタイピングを作成する機能
-- つい先日リリースされた[Sketchのプロトタイピング機能]( controls)にめっちゃ似てる...画面右上から本家InVisionのサービスにすぐアップロードできるし、この分野ではSKetchに勝ち目はないかもしれませんね。
+- A feature for creating screen-transition prototypes, which is InVision's original service.
+- It's super similar to the [Sketch prototyping feature]( controls) released just the other day... You can upload directly to the original InVision service from the top right of the screen, so Sketch may not stand a chance in this area.
 
 <video src="./capture-animation.mp4" width="1280" height="800" controls autoplay></video>
 
 ### Scroll
-- こちらも画面プロトタイピングの機能。一部固定+スクローラブルな画面を作成できる。
+- Another screen prototyping feature. You can create screens with partially fixed and scrollable areas.
 
-![動画](./capture-scroll.webp)
-
-
-
-## その他の機能
-
-### InVisionへのアップロード
-当然できます。まぁSketchでもCraft使ってよくやるし割愛。<br />
-![スクショ](./2018-03-23-06-01-03.png)
+![Video](./capture-scroll.webp)
 
 
 
-### モバイルプレビュー
-SketchMirrorのような機能もありますよ。プロトタイピングを作成したら、右上の画面からQRコードを表示し、<br />
-![スクショ](./2018-03-23-06-02-47.png)
+## Other features
+
+### Upload to InVision
+Of course you can. Well, you can already do this in Sketch with Craft, so I'll skip it.<br />
+![Screenshot](./2018-03-23-06-01-03.png)
+
+
+
+### Mobile preview
+There's also a feature like SketchMirror. Once you create a prototype, display the QR code from the upper right of the screen,<br />
+![Screenshot](./2018-03-23-06-02-47.png)
 <br />
-[InVisionアプリ](https://itunes.apple.com/app/invision-design-collaboration/id990700027)のカメラで読み取ってモバイルプレビューできます。
+and read it with the camera in the [InVision app](https://itunes.apple.com/app/invision-design-collaboration/id990700027) for a mobile preview.
 
 
 
-### コンポーネント ( シンボル )
-さて、大事なシンボル機能についてです。studio.ではシンボルではなく、**コンポーネント**と呼んでいる模様。Web開発の世界でモジュールの考え方が主流になっている昨今、シンボルよりも適切な名前だと思います。名前は違えど、コンポーネント化(めんどいのでシンボル化って書きます)の流れはほぼ同じです。シンボル化したいレイヤーを選択し、`⌘K`のショートカットもしくは上部ツールバーのこのナットのアイコンをクリックするだけです。
-![スクショ](./2018-03-23-06-15-43.png)
+### Components ( Symbols )
+Now, about the important symbol feature. In studio., they call them **components**, not symbols. With the module concept becoming mainstream in web development these days, I think this is a more appropriate name than "symbol." The name is different, but the flow of componentization (I'll call it "symbolization" since it's a hassle to write) is mostly the same. Select the layer you want to symbolize and either use the `⌘K` shortcut or click the nut icon in the upper toolbar.
+![Screenshot](./2018-03-23-06-15-43.png)
 <br />
-シンボルを管理する場所はSketchだと Symbolsレイヤー (正確には任意のレイヤー) ですが、studio.はレイヤーパネルに「Library」という専用の領域が用意されています。こちらは公式動画のスクショ↓
-![スクショ](./2018-03-23-06-31-40.png)
+The place where symbols are managed is the Symbols layer (more precisely, an arbitrary layer) in Sketch, but in studio. there's a dedicated area called "Library" in the layer panel. Here's a screenshot from the official video↓
+![Screenshot](./2018-03-23-06-31-40.png)
 <br />
-SymbolsのOverrideも当然できると思うのですが、どうも見当たりません...。さらに動画ではこのライブラリを複数人で共有したりテキストスタイルの管理などもここで行えるようなのですが、そのような機能は現状未実装の模様です。
+I would have thought Symbol Override would also be possible, but I can't seem to find it... Furthermore, in the video it looks like you can share this library with multiple people and manage text styles here, but those features don't seem to be implemented yet.
 
 
 
-## その他の評価
+## Other evaluations
 
-### ドキュメント構造
-- ページ、レイヤーやシンボルの構造が若干Sketchと違いますが、触れば一瞬で慣れます。
+### Document structure
+- The structure of pages, layers, and symbols is slightly different from Sketch, but you'll get used to it instantly once you start using it.
 
-### ショートカット
-- かなりSketchのが使えるので迷わない。`⌘.`とか`⌘⇧↓`なんかも普通に使えてGOOD。
-- 文字サイズの変更や繰り返しのショートカットは少し違うかも
+### Shortcuts
+- Most of Sketch's shortcuts work, so you won't get lost. `⌘.` and `⌘⇧↓` and so on work normally, GOOD.
+- The shortcuts for changing font size and repeating may be a bit different.
 
-### 日本語テキスト対応
-- お察し。
+### Japanese text support
+- You can imagine.
 
-### パフォーマンス
-操作はかなり<b>サクサク動きます</b>。拡大縮小のアニメーションがぬるっとしてて少し気持ち悪いです。ファイルの起動はSketchよりもだいぶ遅いです。
+### Performance
+The operations are quite <b>snappy</b>. The smoothed zoom-in/zoom-out animation feels a bit weird and uncomfortable. Opening files is much slower than Sketch.
 
-### ファイル形式
-やっぱしSketch同様にJSONでした。作成される`.studio`ファイルの拡張子を`.zip`に変えて解凍すると想像どおりの結果に。
-
-
-
-## 総評
-- **ほぼSketchだこれ...!!** Sketch慣れてる人ならまったく迷わずに使えます...。
-- まだまだ機能の一部お披露目って感じで、やはり<b>あくまでearly access版ですね</b>。以下の機能などはまだみあたらず...。
-    - バージョン管理・レビュー
-    - シンボルライブラリの共有
-- また、シンボル機能も現状簡易的なものなので、本格的な使用はまだまだ耐えれなそうです。
-- **使いやすさはかなり良いです、期待できます**。もちろん軽く触っただけなので、安定性や細かいところまで見れていませんが。今後機能が予定通り充実していけばInVisionのエコシステムにどっぷりつかる未来がくるのかも...
-- あとははやくプラグイン対応してほしいですね。Runnerは必須です
+### File format
+As expected, it's JSON like Sketch. If you change the extension of the generated `.studio` file to `.zip` and unzip it, you get exactly what you'd expect.
 
 
-以上、また発見があれば追記していきます。
+
+## Overall impression
+- **It's basically Sketch...!!** If you're used to Sketch, you can use this without any confusion at all...
+- It still feels like only some features have been revealed, and it really is <b>just an early access version after all</b>. The following features are not yet visible:
+    - Version control / review
+    - Symbol library sharing
+- Also, the symbol feature is still pretty basic, so it's not yet up to serious use.
+- **Usability is quite good — there's promise here**. Of course I've only touched it lightly, so I haven't been able to check stability or fine details. If features continue to roll out as planned, a future where we're fully immersed in the InVision ecosystem might just arrive...
+- I also hope they support plugins soon. Runner is a must.
+
+
+That's all. I'll add more if I find anything else.

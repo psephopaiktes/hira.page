@@ -1,16 +1,16 @@
 ---
-title: "Material Design 3 をざっくりまとめ"
+title: "A Quick Summary of Material Design 3"
 date: 2021-11-18T15:31:14+09:00
 draft: false
 tags: ["UI","Design"]
-description: "Android 12 のリリースといっしょに、Material Design の公式ドキュメントも大きくアップデートされました（通称M3）。ひととおり目を通したので要所を簡単にまとめて紹介します。ある程度従来のMaterial Designを知っている前提です。"
+description: "Along with the release of Android 12, the official Material Design documentation was significantly updated (often called M3). I read through it, so I'd like to give a quick rundown of the key points. This assumes you're already somewhat familiar with the previous Material Design."
 redirect: ""
 cover: "./cover.png"
 ---
 import EmbedCard from '@/components/Blog/EmbedCard.astro';
 
 
-こちらが先日公開された Material Design 3 の公式ページです。
+Here's the official Material Design 3 page that was recently released.
 
 <EmbedCard
     url="https://m3.material.io/"
@@ -18,7 +18,7 @@ import EmbedCard from '@/components/Blog/EmbedCard.astro';
     title="Material Design 3"
     site="m3.material.io" />
 
-[material.io](https://material.io/) のアップデートではなく、 [m3.material.io](https://m3.material.io/) と別でURLを分けているので、まだ正式版ではなさそうです。また、[Google公式のFigma](https://www.figma.com/@materialdesign)でもMaterial Design 3のUI Kitが公開されています。
+It's not an update to [material.io](https://material.io/); it's hosted at a separate URL [m3.material.io](https://m3.material.io/), so it doesn't seem to be the official version yet. The Material Design 3 UI Kit is also published on [Google's official Figma](https://www.figma.com/@materialdesign).
 
 
 
@@ -27,25 +27,25 @@ import EmbedCard from '@/components/Blog/EmbedCard.astro';
 ![dynamic-color](./dynamic-color.gif)
 <small>https://m3.material.io/foundations/customization</small>
 
-ユーザーの壁紙に応じてシステムUIの色を変更する、**Dynamic Color** が定義されました。画像に応じてどのような色が表示されるかは、[公式ツール](https://material-foundation.github.io/material-theme-builder/)を触ってみるとすぐ理解できると思います。
+**Dynamic Color**, which changes the system UI colors based on the user's wallpaper, has been defined. To get a feel for which colors are produced from a given image, try the [official tool](https://material-foundation.github.io/material-theme-builder/).
 
 ### M3 Color System
-この Dynamic Color はシステムUIだけじゃなく、自社アプリ内でも使用できます。M3カラーシステムという構成で色をトークンとして定義することで、デザイン・実装で共通認識を持って色を管理できるようです。Accent, Neutral, Errorなど数パターンで色相を定義し、それぞれが13段階のトーンに分けて使用できます。
+Dynamic Color isn't just for the system UI — you can use it inside your own apps, too. By defining colors as tokens within the M3 Color System, design and engineering can manage colors with a shared understanding. It defines hues across a few categories such as Accent, Neutral, and Error, each split into 13 tone steps.
 
-FigmaでUIデザインを作成している場合は、公式の[Figma Plugin](https://www.figma.com/community/plugin/1034969338659738588)を使用するとこのM3カラーシステムでデザインを進められそうです。
+If you design UIs in Figma, you can use the official [Figma Plugin](https://www.figma.com/community/plugin/1034969338659738588) to design with this M3 color system.
 
-また、詳しいドキュメントは見つけられなかったのですが、アプリアイコン自体もユーザーのカスタムカラーに応じて動的に変更できるようになりそうです。Pixel+Android12で、一部アイコンはすでに変更可能です。
+I couldn't find detailed documentation on it, but it looks like app icons themselves will also be able to dynamically change based on the user's custom colors. On Pixel + Android 12, some icons can already be changed.
 
 ![theme-color](./theme-color.png)
 
 ## Adaptive Design
 
-![動画](./adaptive.webp)
+![video](./adaptive.webp)
 <small>https://m3.material.io/foundations/adaptive-design/overview</small>
 
-モバイルディスプレイからタブレット・デスクトップ、フォルダブル（折りたたみ）デバイス、さらにそれらの縦横状態などでよりシームレスに利用できるUIデザイン対応が求められます。この背景はChromebook・Windows11でのAndroidアプリ対応や、発売が噂されているPixel Foldなど、Androidがこれからより多くのディスプレイサイズで利用されることが大きそうです。
+UI design now needs to support a more seamless experience across mobile displays, tablets, desktops, foldable devices, and various portrait/landscape states. The big driver behind this is likely the rising support for Android apps on Chromebook and Windows 11, the rumored release of Pixel Fold, and Android being used on a wider range of display sizes overall.
 
-大画面対応・フォルダブル対応はちょっと量が多いので別で記事にする予定です。
+Large-screen and foldable support is a big topic, so I plan to cover it in a separate article.
 
 ## Interaction states
 
@@ -55,10 +55,10 @@ FigmaでUIデザインを作成している場合は、公式の[Figma Plugin](h
     title="Interaction states – Material Design 3"
     site="m3.material.io" />
 
-ユーザーの操作に対するインタラクションに対しても、より丁寧な定義が追加されました。以前から[Surfaces](https://material.io/design/environment/surfaces.html)や各種コンポーネントのページで定義されていましたが、よりトークンに連携した形で説明されており、実装やデザインでの管理がしやすくなっています。
+More careful definitions have also been added for interactions in response to user actions. They were previously defined in the [Surfaces](https://material.io/design/environment/surfaces.html) page and the pages for various components, but they're now described in tighter coordination with tokens, making them easier to manage in design and implementation.
 
 ## Typography
-タイポグラフィはバリエーションが減ってシンプルになりました。こちらも同様にトークンによる管理が可能になっています。さらに、デバイスサイズに応じて動的にフォントサイズを管理できる<b>Adaptive type scale</b>も利用できるようになりました。
+Typography variations have been reduced and simplified. Token-based management is supported here as well. On top of that, the new <b>Adaptive type scale</b> lets you dynamically manage font sizes according to device size.
 
 ![adaptive-type-scal](./adaptive-type-scal.png)
 <small>https://m3.material.io/styles/typography/overview</small>
@@ -66,22 +66,22 @@ FigmaでUIデザインを作成している場合は、公式の[Figma Plugin](h
 
 
 ## Component
-Floating Action Button や Bottom Navigation などのコンポーネントは全体的にかなりスタイル変更されました。先述の Dynamic Color が採用され、全体的に丸っこいシェイプと淡い配色が多用されています。ドロップシャドウもけっこう減って、UI階層がわかりやすくなってます。全体的にスタイルは大きく変わったのですが、ざっと見た感じルールや用途はあまり変わっていなそうです。(当然っちゃ当然ですが)
+The styles of components like the Floating Action Button and Bottom Navigation have been significantly changed overall. The aforementioned Dynamic Color is adopted, with a lot of rounded shapes and softer color palettes. Drop shadows have been reduced quite a bit, making the UI hierarchy easier to read. The styles have changed a lot overall, but at a glance the rules and use cases don't seem to have changed much. (Which, naturally, makes sense.)
 
-あえて言うなら[Top App Bars](https://m3.material.io/components/top-app-bar/overview)の種類が増えて使いやすくなってますね。デバイスの縦長化に伴って上部UIを大きくしたい需要は高いので、ありがたいです。
+If anything, the variety of [Top App Bars](https://m3.material.io/components/top-app-bar/overview) has expanded and become easier to work with. As devices get taller, demand for larger top UIs is high, so this is appreciated.
 
 ![top-app-bars](./top-app-bars.png)
 <small>https://m3.material.io/components/top-app-bar/overview</small>
 
-あいかわらずMaterial DesignのドキュメントはUIの使用ケースやルールが明確でわかりやすいですね。
+As always, the Material Design documentation does a great job of clearly explaining UI use cases and rules.
 
 
-## まとめと個人的な感想
-全体的に
+## Wrap-up and personal thoughts
+Overall, the focus seems to be on:
 
-* トークンによる保守管理性の向上
-* マルチデバイスへのレスポンシブ対応
+* Improved maintainability via tokens
+* Responsive support for multi-device
 
-が重視されているようですね。Dynamic Colorはキャッチーですが、あくまでオマケかなあという印象です。
+Dynamic Color is catchy, but it feels more like an extra to me.
 
-Android12, 壁紙から色を変えてくれるのはいいんですが、個人的には自分ですべての色を選んでカスタムしたい...。公式ウィジェットが独特すぎるデザインを主張してくるのもすごく嫌です。
+On Android 12, while it's nice that the system picks colors from your wallpaper, personally I'd rather choose every color myself. The very distinct design of the official widgets is also something I really dislike.

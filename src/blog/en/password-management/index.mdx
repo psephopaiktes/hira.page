@@ -1,99 +1,99 @@
 ---
-title: "サービスごとに強力なパスワードを使い分けて、それでも簡単に覚えられる管理・作り方テクニック"
+title: "How to Use a Strong, Unique Password for Every Service—and Still Remember Them Easily"
 date: 2021-03-10T16:55:13+09:00
 draft: false
 tags: ["App・Service"]
-description: "安全のために、パスワードはかんたんに推測できない複雑なものを、アプリ・サービスごとに使い分ける必要があります。強力で安全なパスワードをサービスごとに使い分けて、なおかつ簡単で楽に覚えられる方法を紹介します。"
+description: "For safety, you should use complex passwords that can't be easily guessed, and use a different one for every app and service. Here's a way to use strong, secure, service-specific passwords that are also easy to remember."
 cover: "./cover.png"
 ---
 import EmbedCard from '@/components/Blog/EmbedCard.astro';
 
-前提として、[LastPass](https://www.lastpass.com/)や[1Password](https://1password.com/jp/)などの<b>パスワード管理アプリ</b>を使っている方にはあまり必要ないです。ただ、それと併用しても利用できるテクニックなので、参考にはなると思います。
+As a prerequisite, this isn't really necessary if you're already using a <b>password manager</b> like [LastPass](https://www.lastpass.com/) or [1Password](https://1password.com/jp/). That said, the technique can be used alongside one, so it should still be useful as a reference.
 
 
-## パスワードのセキュリティリスク
-まず、Webサービスやアプリのパスワードにはどんなリスクがあるかかんたんに確認します。読み飛ばしてもOKです。
+## Security Risks Around Passwords
+First, let's quickly review what kinds of risks passwords for web services and apps face. Feel free to skip this section.
 
 
-### リスト攻撃
-いわゆる「アカウント情報の漏洩」が起きてしまったときにリスクが発生します。攻撃者はあるサイトで漏洩した「アカウントIDとパスワード」のセットを利用して、他のサイトでログインを試みます。複数のサイトで同じID・パスワードの組み合わせを利用している人が被害に遭いやすいです。
+### Credential Stuffing (List Attacks)
+The risk arises when an "account information leak" occurs. Attackers take a set of "account IDs and passwords" leaked from one site and try them on other sites. People who reuse the same ID/password combinations across multiple sites are the most at risk.
 
-これを避けるために、**サービス、アプリごとにパスワードを変える**必要があります。
+To avoid this, you need to **use different passwords for every service and app**.
 
-### ブルートフォース(総当り)攻撃
-考えられる文字の組み合わせをすべて試せば、いつかはパスワードはバレてしまいます。もちろん人間が1つずつ試す場合は現実的ではないですが、コンピュータープログラムで自動処理することで、かんたんなパスワードならかなり短い時間で破られてしまいます。
+### Brute-Force Attacks
+If you try every possible character combination, sooner or later your password will be cracked. Of course this isn't realistic for a human to do one by one, but with automated computer programs, simple passwords can be broken in a remarkably short time.
 
-たとえば英語のみの4桁のパスワードであれば約3秒と一瞬で破られます。対して英後の大文字小文字＋数字＋記号を使った8桁のパスワードであれば、破るのに約1,000年かかるそうです。([参考](https://cybersecurity-jp.com/column/17426))
+For example, a 4-character password using only English letters can be cracked in about 3 seconds—instantly. By contrast, an 8-character password using uppercase and lowercase English letters, numbers, and symbols would take about 1,000 years to crack. ([Reference](https://cybersecurity-jp.com/column/17426))
 
-つまり、**英語の大文字小文字、数字、記号などを使った複雑なパスワードにする**必要があります。
+In other words, you need to **make your password complex by combining uppercase and lowercase English letters, numbers, and symbols**.
 
-### 辞書攻撃
-多くの人が`password`や`12345678`、`qwerty`などのかんたんなパスワードを使ってしまっています。これらは一般的に攻撃者に知られており、かんたんにログインを試行されてしまいます。また、辞書にある`banana`や`love`などの単語も総当りで試されることが多いです。これを避けるために、**よく使われているパスワード、かんたんな単語はパスワードに使わない**必要があります。
+### Dictionary Attacks
+Many people use simple passwords like `password`, `12345678`, or `qwerty`. These are well known to attackers and are easy to try in login attempts. Common dictionary words like `banana` or `love` are also frequently tried in brute-force attempts. To avoid this, you need to **avoid using commonly used passwords or simple words**.
 
-### パスワード推測によるアカウントハック
-パスワードに誕生日や好きなワードを使ってしまうと、家族や友人に推測されたり、個人情報を調査した攻撃者から推測されてしまうことがあります。知人の場合でも、ちょっとしたいたずら程度で済めばいいですが、子供がクレジットカードをつかって高価な買い物をしたりするリスクが考えられます。
+### Account Hacking via Password Guessing
+If you use your birthday or favorite words for your password, family members or friends might guess it, or an attacker who has researched your personal information might figure it out. If it's just an acquaintance, a small prank might be the worst of it, but there's also a risk of, say, a child using a credit card to make expensive purchases.
 
-これを避けるために、**誕生日など容易に推測できる情報は使わない**必要があります。
+To avoid this, you need to **avoid using easily guessed information like your birthday**.
 
-以上、かんたんにパスワードにひそむセキュリティリスクをまとめました。もっと詳しく知りたい方は、以下の本など参考になると思います。
+That's a quick rundown of the security risks that come with passwords. If you'd like to learn more, the following book is a good reference.
 
 <EmbedCard
     url="https://amzn.to/4aNVwVJ"
     img="https://ws-fe.amazon-adsystem.com/widgets/q?_encoding=UTF8&ASIN=B017SH8GZ8&Format=_SL250_&ID=AsinImage&ServiceVersion=20070822&WS=1"
-    title="徳丸浩のWebセキュリティ教室（日経BP Next ICT選書） | 徳丸 浩 | 工学 | Kindleストア | Amazon"
+    title="Hiroshi Tokumaru's Web Security Classroom (Nikkei BP Next ICT Selection) | Hiroshi Tokumaru | Engineering | Kindle Store | Amazon"
     site="amazon.co.jp" />
 
-つまりざっくりまとめると、**サービスごとに強力なパスワードを使い分ける**必要があるのですが、実際にはそうかんたんに考えてられないですし、すべて覚えることは現実的じゃありません。
+So, to sum it up roughly, you need to **use strong, unique passwords for every service**—but in practice that's not so easy to think through every time, and remembering all of them is unrealistic.
 
 
-## 安全で楽に覚えられるパスワード管理方法
-こっから本題です。その方法とは、**登録したいサービスの名前をもとに、自分ルールでパスワードに変換する**ことです。Googleのアカウントなら`google`、Instagramのアカウントなら`instagram`という英語の文字列をもとにしてパスワードを考えます。もちろんそのまま使用するとよわいパスワードですから、単語の変換ルールを自分なりに用意して強力なパスワードを作り出します。
+## A Safe and Easy-to-Remember Password Method
+Here's the main idea. The method is to **use the name of the service you're signing up for, and convert it into a password using your own personal rules**. For a Google account you'd base it on `google`; for an Instagram account you'd base it on `instagram`. Of course using the name as-is would be a weak password, so you create a strong password by applying your own conversion rules to the word.
 
-### 自分ルールの例
-たとえば、以下のようなルールが考えられます。
-<small>※ もちろん、これはそのまま使わずに、自分なりのルールを考える必要があります。</small>
+### An Example of Personal Rules
+For example, you could use rules like the following.
+<small>* Of course, don't use this verbatim—you'll need to come up with your own rules.</small>
 
-> 1.  4桁のランダムな数字と記号を組み合わせて用意する。(これはがんばって覚える)
-> 2.  サービス名の頭文字4つを取り出して、英語の大文字と小文字に互い違いにする
-> 3.  1と2を交互に組合わせて完成
+> 1. Prepare a combination of 4 random digits and symbols. (Memorize this part with effort.)
+> 2. Take the first 4 letters of the service name and alternate uppercase and lowercase.
+> 3. Combine 1 and 2 by interleaving them, and you're done.
 
-なんだか難しそうですが、実際にやってみればかんたんです。
+It might sound complicated, but it's actually easy once you try it.
 
-### 実際にパスワードを作り出す例
-では[U-NEXT](https://video.unext.jp/)というサービスにアカウントを登録し、パスワードを考えると仮定しましょう。この場合`unext`という文字列をもとにしてパスワードを考えます。
+### A Real Example of Building a Password
+Let's say you're registering an account on a service called [U-NEXT](https://video.unext.jp/) and need to come up with a password. In this case, you'd base your password on the string `unext`.
 
-#### 1. 4桁のランダムな数字と記号を組み合わせて用意する
-まず、数字と記号をランダムに組み合わせた4桁のキーワードを用意します。これは使い回すことになるので、がんばって覚えましょう。
-![ステップ1のイメージ](./step1.png)
+#### 1. Prepare a combination of 4 random digits and symbols
+First, prepare a 4-character keyword that randomly combines digits and symbols. Since you'll reuse this part, do your best to memorize it.
+![Image of step 1](./step1.png)
 
-#### 2.  サービス名の頭文字4つを取り出して、英語の大文字と小文字に互い違いにする
-サービス名の最初の4文字を取り出します。それを交互に大文字・小文字にしておきましょう。もしサービス名が短い場合は、繰り返せばいいと思います。(例:[alu](https://alu.jp/)→`alua`)
-![ステップ2のイメージ](./step2.png)
+#### 2. Take the first 4 letters of the service name and alternate uppercase and lowercase
+Take the first 4 characters of the service name. Alternate them in uppercase and lowercase. If the service name is short, just repeat it. (e.g., [alu](https://alu.jp/) → `alua`)
+![Image of step 2](./step2.png)
 
-#### 3. 1と2を交互に組合わせて完成
-あとはそれぞれの文字列を組み合わせて完成です。
-![ステップ3のイメージ](./step3.png)
+#### 3. Combine 1 and 2 by interleaving them, and you're done
+Just combine the two strings, and you're done.
+![Image of step 3](./step3.png)
 
-### 自分ルールの他の例
-自分ルールを複雑にしておくほど、より強力で破られづらいパスワードになります。例えば、以下のような変換ルールが考えられます。自分なりのルールを考えるときに参考にしてみてください。
+### Other Examples of Personal Rules
+The more complex your personal rule is, the stronger and harder to crack the password becomes. Here are some other conversion rule ideas to consider when designing your own.
 
-* サービス名をそのまま使うのではなく、アルファベット1文字ずつずらす
+* Instead of using the service name as-is, shift each letter of the alphabet by one
     * U-NEXT → unex → UnEx → `VoFy`
-* サービス名で8桁分で文字列を作り、その偶数番目をキーワードで置き換える
+* Build an 8-character string from the service name, and replace the even-numbered positions with characters from your keyword
     * U-NEXT → unextune + #4@1 → u#e4t@n1e
 
-なお、サービスによって使用できる文字や記号、パスワードの桁数は異なるので、それに対応できるルールだと完璧です。
+Note that the allowed characters, symbols, and password lengths vary by service, so a rule that adapts to those constraints would be ideal.
 
-### 自分ルールを覚える自信がないときは？
-ルールやキーワードを忘れそうで不安な場合は、紙に書いてしまって安全な場所で管理するのもいいと思います。なんだか危なそうな印象もありますが、セキュリティの専門家である[徳丸先生も紙に書いて保存すること自体は安全だとおっしゃっています](https://www.motex.co.jp/nomore/column/1036/)。もちろん付箋などに書いて誰でも見れる場所に貼っておくのは論外ですが...。
+### What if You're Worried About Forgetting Your Rules?
+If you're worried about forgetting your rule or keyword, writing them on paper and storing them somewhere safe is fine too. It might sound risky, but security expert [Tokumaru-sensei has also said that writing them on paper itself is safe](https://www.motex.co.jp/nomore/column/1036/). Of course, writing them on a sticky note and posting it where anyone can see is out of the question…
 
 
 
-## まとめ
-この手法のメリットは以下です。
+## Summary
+The advantages of this approach are:
 
-* 英数字・記号を組みあせた**強力なパスワード**を作れるので、**辞書・総当り攻撃に強い**
-* サービスごとに**違うパスワードを使い分けられる**ので、**リスト攻撃に強い**
-* 4桁のフレーズと、自分ルールさえ覚えておけばいいから**楽・かんたん**
+* You can build **strong passwords** combining letters, numbers, and symbols, so it's **resistant to dictionary and brute-force attacks**
+* You can **use a different password for each service**, making it **resistant to list attacks**
+* All you need to remember is a 4-character phrase and your personal rule, so it's **easy and convenient**
 
-読んでいただきありがとうございます。私はセキュリティの専門家ではないので、詳しい方がいたらコメントいただけると助かります。
+Thanks for reading. I'm not a security expert, so if anyone more knowledgeable has feedback, comments would be much appreciated.

@@ -1,16 +1,16 @@
 ---
-title: "Material Design 3 をざっくりまとめ"
+title: "Material Design 3 简明梳理"
 date: 2021-11-18T15:31:14+09:00
 draft: false
 tags: ["UI","Design"]
-description: "Android 12 のリリースといっしょに、Material Design の公式ドキュメントも大きくアップデートされました（通称M3）。ひととおり目を通したので要所を簡単にまとめて紹介します。ある程度従来のMaterial Designを知っている前提です。"
+description: "随着 Android 12 的发布，Material Design 的官方文档也迎来了一次重大更新（俗称 M3）。我大致通读了一遍，这里把要点简单梳理介绍一下。本文默认读者已经了解此前的 Material Design。"
 redirect: ""
 cover: "./cover.png"
 ---
 import EmbedCard from '@/components/Blog/EmbedCard.astro';
 
 
-こちらが先日公開された Material Design 3 の公式ページです。
+这是不久前发布的 Material Design 3 官方页面。
 
 <EmbedCard
     url="https://m3.material.io/"
@@ -18,7 +18,7 @@ import EmbedCard from '@/components/Blog/EmbedCard.astro';
     title="Material Design 3"
     site="m3.material.io" />
 
-[material.io](https://material.io/) のアップデートではなく、 [m3.material.io](https://m3.material.io/) と別でURLを分けているので、まだ正式版ではなさそうです。また、[Google公式のFigma](https://www.figma.com/@materialdesign)でもMaterial Design 3のUI Kitが公開されています。
+它并不是 [material.io](https://material.io/) 本身的更新，而是另起了一个新的 [m3.material.io](https://m3.material.io/) URL，所以看起来还不是正式版本。另外，[Google 官方的 Figma](https://www.figma.com/@materialdesign) 上也已经公开了 Material Design 3 的 UI Kit。
 
 
 
@@ -27,25 +27,25 @@ import EmbedCard from '@/components/Blog/EmbedCard.astro';
 ![dynamic-color](./dynamic-color.gif)
 <small>https://m3.material.io/foundations/customization</small>
 
-ユーザーの壁紙に応じてシステムUIの色を変更する、**Dynamic Color** が定義されました。画像に応じてどのような色が表示されるかは、[公式ツール](https://material-foundation.github.io/material-theme-builder/)を触ってみるとすぐ理解できると思います。
+这次定义了一项新的 **Dynamic Color**，会根据用户的壁纸来动态变化系统 UI 的颜色。具体哪种图片会得到怎样的配色，可以通过[官方工具](https://material-foundation.github.io/material-theme-builder/)上手体验，很容易理解。
 
-### M3 Color System
-この Dynamic Color はシステムUIだけじゃなく、自社アプリ内でも使用できます。M3カラーシステムという構成で色をトークンとして定義することで、デザイン・実装で共通認識を持って色を管理できるようです。Accent, Neutral, Errorなど数パターンで色相を定義し、それぞれが13段階のトーンに分けて使用できます。
+### M3 颜色系统
+Dynamic Color 不仅用于系统 UI，也可以用在自家应用里。它使用 M3 Color System 这套体系，将颜色作为 token 进行定义，让设计与实现可以基于同一套认知来管理颜色。色相由 Accent、Neutral、Error 等几组定义，每组又被划分为 13 级色调以便使用。
 
-FigmaでUIデザインを作成している場合は、公式の[Figma Plugin](https://www.figma.com/community/plugin/1034969338659738588)を使用するとこのM3カラーシステムでデザインを進められそうです。
+如果你正在用 Figma 进行 UI 设计，可以使用官方的 [Figma Plugin](https://www.figma.com/community/plugin/1034969338659738588) 直接基于 M3 颜色系统推进设计。
 
-また、詳しいドキュメントは見つけられなかったのですが、アプリアイコン自体もユーザーのカスタムカラーに応じて動的に変更できるようになりそうです。Pixel+Android12で、一部アイコンはすでに変更可能です。
+另外，虽然没找到详细文档，但应用图标本身似乎也能根据用户的自定义色动态变化。在 Pixel + Android 12 上，部分图标已经可以变化了。
 
 ![theme-color](./theme-color.png)
 
 ## Adaptive Design
 
-![動画](./adaptive.webp)
+![动画](./adaptive.webp)
 <small>https://m3.material.io/foundations/adaptive-design/overview</small>
 
-モバイルディスプレイからタブレット・デスクトップ、フォルダブル（折りたたみ）デバイス、さらにそれらの縦横状態などでよりシームレスに利用できるUIデザイン対応が求められます。この背景はChromebook・Windows11でのAndroidアプリ対応や、発売が噂されているPixel Foldなど、Androidがこれからより多くのディスプレイサイズで利用されることが大きそうです。
+从手机屏幕到平板、桌面，再到可折叠设备，以及它们的横竖状态，越来越要求 UI 设计能够无缝适配。这背后的原因主要是 Chromebook、Windows 11 对 Android 应用的支持，以及传闻中的 Pixel Fold 等等——Android 今后将在更多尺寸的屏幕上被使用。
 
-大画面対応・フォルダブル対応はちょっと量が多いので別で記事にする予定です。
+由于大屏适配、折叠屏适配的内容比较多，我会另写文章介绍。
 
 ## Interaction states
 
@@ -55,10 +55,10 @@ FigmaでUIデザインを作成している場合は、公式の[Figma Plugin](h
     title="Interaction states – Material Design 3"
     site="m3.material.io" />
 
-ユーザーの操作に対するインタラクションに対しても、より丁寧な定義が追加されました。以前から[Surfaces](https://material.io/design/environment/surfaces.html)や各種コンポーネントのページで定義されていましたが、よりトークンに連携した形で説明されており、実装やデザインでの管理がしやすくなっています。
+针对用户操作产生的交互状态，这次也有了更细致的定义。其实之前在 [Surfaces](https://material.io/design/environment/surfaces.html) 以及各组件页面里就有相关定义，但现在以更贴合 token 的形式进行讲解，便于在实现和设计上做统一管理。
 
 ## Typography
-タイポグラフィはバリエーションが減ってシンプルになりました。こちらも同様にトークンによる管理が可能になっています。さらに、デバイスサイズに応じて動的にフォントサイズを管理できる<b>Adaptive type scale</b>も利用できるようになりました。
+排版的种类被精简，整体更加简洁。和颜色一样，现在也可以通过 token 进行管理。此外还新增了能根据设备尺寸动态调整字号的 <b>Adaptive type scale</b>。
 
 ![adaptive-type-scal](./adaptive-type-scal.png)
 <small>https://m3.material.io/styles/typography/overview</small>
@@ -66,22 +66,22 @@ FigmaでUIデザインを作成している場合は、公式の[Figma Plugin](h
 
 
 ## Component
-Floating Action Button や Bottom Navigation などのコンポーネントは全体的にかなりスタイル変更されました。先述の Dynamic Color が採用され、全体的に丸っこいシェイプと淡い配色が多用されています。ドロップシャドウもけっこう減って、UI階層がわかりやすくなってます。全体的にスタイルは大きく変わったのですが、ざっと見た感じルールや用途はあまり変わっていなそうです。(当然っちゃ当然ですが)
+Floating Action Button、Bottom Navigation 等组件的样式整体都做了较大调整。前面提到的 Dynamic Color 被广泛采用，整体偏圆润的形状和柔和的配色用得很多。投影也减少了不少，UI 的层级关系更清晰了。整体样式变化很大，但大致看下来规则和用途好像没怎么变。（这也是当然的）
 
-あえて言うなら[Top App Bars](https://m3.material.io/components/top-app-bar/overview)の種類が増えて使いやすくなってますね。デバイスの縦長化に伴って上部UIを大きくしたい需要は高いので、ありがたいです。
+非要说的话，[Top App Bars](https://m3.material.io/components/top-app-bar/overview) 的种类增加了，使用起来更方便。随着设备屏幕越来越长，把顶部 UI 做大的需求也很高，这个变化挺让人感激。
 
 ![top-app-bars](./top-app-bars.png)
 <small>https://m3.material.io/components/top-app-bar/overview</small>
 
-あいかわらずMaterial DesignのドキュメントはUIの使用ケースやルールが明確でわかりやすいですね。
+Material Design 的文档一如既往，对 UI 的使用场景和规则讲得清楚明了。
 
 
-## まとめと個人的な感想
-全体的に
+## 总结与个人感想
+整体来看：
 
-* トークンによる保守管理性の向上
-* マルチデバイスへのレスポンシブ対応
+* 通过 token 提升可维护性
+* 多设备的响应式适配
 
-が重視されているようですね。Dynamic Colorはキャッチーですが、あくまでオマケかなあという印象です。
+这两点似乎被特别强调。Dynamic Color 虽然吸睛，但感觉更像是顺带的彩蛋。
 
-Android12, 壁紙から色を変えてくれるのはいいんですが、個人的には自分ですべての色を選んでカスタムしたい...。公式ウィジェットが独特すぎるデザインを主張してくるのもすごく嫌です。
+Android 12 能根据壁纸自动配色当然不错，不过个人来说还是更想自己挑选所有颜色来定制……。官方小部件也总是端出风格非常独特的设计，我也挺难受的。

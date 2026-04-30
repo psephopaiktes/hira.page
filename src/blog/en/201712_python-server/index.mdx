@@ -1,23 +1,23 @@
 ---
-title: "PCで作成中のWebページをリアルタイムにスマホで確認する方法"
+title: "How to check a web page being built on your PC in real time on your smartphone"
 date: 2017-12-03T13:05:42+09:00
 tags: ["Web"]
-description: "Macなら特別な準備なしに、簡単にすぐローカルサーバをたてて手元のスマホから、作成中のWebページ・アプリを確認できます。"
+description: "On a Mac, with no special preparation, you can easily spin up a local server and check the web page or app you're building on your phone."
 draft: false
 cover: "./cover.png"
 ---
 import EmbedCard from '@/components/Blog/EmbedCard.astro';
 
-## やり方
-ターミナルアプリで作業中のディレクトリに移動し、
+## How to do it
+Open your terminal app, navigate to the directory you're working in, and run:
 ```
 python -m http.server
 ```
-というコマンドを実行します。するとpythonのローカルサーバが起ち上がり、同一のWIFIに繋がったデバイスからアクセスできるようになります。スマホのブラウザなどにPCのIPアドレスとポート番号を入力することでアクセスします。IPアドレスはMacであれば<b>システム環境設定→ネットワーク</b>から見るか、`ifconfig`コマンドで確認できます。ポート番号はデフォルトでは`8000`です。たとえばIPアドレスが`192.168.11.11`なら`192.168.11.11:8000`にアクセスすることでプレビュー確認が可能です。
+This starts a local Python server, making it accessible from any device connected to the same Wi-Fi. Access it by entering your PC's IP address and port number into your phone's browser. On a Mac, you can find the IP address from <b>System Preferences → Network</b>, or with the `ifconfig` command. The default port number is `8000`. For example, if your IP address is `192.168.11.11`, you can preview by accessing `192.168.11.11:8000`.
 
-## 説明
-Webサイト・webアプリを作成していると、手元のPCで作成しているwebページを、スマホサイズで確認したいシーンが多々あると思います。基本的にはChromeのモバイルプレビューモード ( Devツールを開いてスマホのアイコンをクリック or `⌘⌥I` → `⌘⇧M` ) でもよいのですが、実機のCSSの正確な挙動を見たり、実際のデザインのイメージを説明するためには物足りません。
+## Explanation
+When building a website or web app, there are many situations where you'd like to check the page you're working on locally at smartphone size. Basically, Chrome's mobile preview mode (open the dev tools and click the smartphone icon, or `⌘⌥I` → `⌘⇧M`) works fine, but it's not enough for verifying the exact CSS behavior on a real device or for explaining the actual design intent.
 
-![Chromeのモバイルプレビュー](./chrome.png)
+![Chrome's mobile preview](./chrome.png)
 
-もしくはGulpやRailsなどの環境で開発用サーバが入っている場合ならそちらの機能を使えばいいのですが、ただ手元の静的なHTMLをちょっとスマホでみたい時、いちいち開発環境を用意するのは手間です。そういう時、Macであればデフォルトでインストールされている<b>Python</b>の機能を使用して、上記コマンドで簡単にサーバを起てられるというわけです。
+Or if you have a development server set up in an environment like Gulp or Rails, you can use those features—but when you just want to quickly view a static HTML file on your phone, it's a hassle to set up a development environment every time. In such cases, on a Mac, you can use the <b>Python</b> feature that's installed by default and easily start a server with the command above.

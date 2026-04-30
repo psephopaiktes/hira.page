@@ -1,9 +1,9 @@
 ---
-title: "Navigation bar ってどこのUIかわかりますか？最近名称が変わりました…。iOS&AndroidのBar系UI新旧まとめ"
+title: "你能说出 Navigation bar 是哪一块 UI 吗?最近名字又变了……iOS & Android 各类 Bar 系 UI 新旧名称汇总"
 date: 2025-08-28
 draft: false
 tags: ["Design","UI"]
-description: "モバイルアプリのUIでは、Navigation BarやToolbarなど、Barという名称がついたUIがたくさんあります。ここ最近で、iOSもAndroidも両方がらっとそれらの名称・仕様が変わっています。特にNavigation Barという名称は、iOS or Android、現在 or 以前でどのUIを指すのか非常に紛らわしいです。この記事ではそれぞれのOSでの名称や外観を表にして、公式仕様へのリンクをまとめます。"
+description: "在移动应用 UI 中,有很多名字带有 Bar 的 UI,例如 Navigation Bar、Toolbar 等。最近 iOS 和 Android 两边都对它们的名称和规范做了大幅调整。尤其是 Navigation Bar 这个名称,在 iOS 还是 Android、当前还是以前,指向的 UI 完全不同,非常容易混淆。本文用表格的形式梳理各操作系统中各部位的名称和外观,并附上官方规范的链接。"
 cover: "./cover.png"
 customCSS: |
     tr > *:first-child {
@@ -15,120 +15,120 @@ import EmbedCard from '@/components/Blog/EmbedCard.astro';
 
 ## 背景
 
-モバイルアプリには `Tab bar`, `Toolbar`, `Status bar`, `Menu bar`, `Navigation bar`, `Sidebar`, `App bar`, `Gesture bar` など、**Bar**がつくUIがたくさんあります。
+移动应用中存在大量带 **Bar** 的 UI,如 `Tab bar`、`Toolbar`、`Status bar`、`Menu bar`、`Navigation bar`、`Sidebar`、`App bar`、`Gesture bar` 等等。
 
-これらのUIがどれのことで、目的や制約を正しく理解していますか？また、iOSとAndroidそれぞれで、**同じ名前でも別のUIを指したり、挙動が違う**ことを理解していますか？
+你是否清楚这些 UI 分别指什么、它们的目的与限制?以及在 iOS 和 Android 上,**同一个名字可能指向不同的 UI、行为也不同**这件事,你是否了解?
 
-また2025年の[OS26の発表](https://www.apple.com/jp/newsroom/2025/06/apple-introduces-a-delightful-and-elegant-new-software-design/)や[Material 3 Expressiveの発表](https://m3.material.io/blog/building-with-m3-expressive)以降で、さりげなーくそれらの名称が変わったのをご存知ですか？
+另外 2025 年 [OS26 的发布](https://www.apple.com/jp/newsroom/2025/06/apple-introduces-a-delightful-and-elegant-new-software-design/) 和 [Material 3 Expressive 的发布](https://m3.material.io/blog/building-with-m3-expressive) 之后,这些名称又都被悄悄地改过了,你知道吗?
 
-この記事では俯瞰して一覧で見ることを目的としているので、デザイナーやエンジニアは、公式仕様をしっかり読み込みましょう。公式のFigmaもよく整理されているので、見てみるのもおすすめです。「この見た目のはこう呼ぶんだな」がわかりやすいです。
+本文目的是从总体上一览这些 UI,所以建议设计师和工程师们认真阅读官方规范。官方的 Figma 文件整理得也很清楚,推荐看一下,对于「这种外观叫这个名字」的对应关系会一目了然。
 
 * Apple
-    * [ヒューマンインターフェイスガイドライン | Apple Developer Documentation](https://developer.apple.com/jp/design/human-interface-guidelines/)
-    * [iOS and iPadOS 26 | Figma](https://www.figma.com/community/file/1527721578857867021)
+    * [人机界面指南 | Apple Developer Documentation](https://developer.apple.com/jp/design/human-interface-guidelines/)
+    * [iOS and iPadOS 26 | Figma](https://www.figma.com/community/file/1527721578857867021)
 * Google
     * [Material Design 3 - Google's latest open source design system](https://m3.material.io/)
-    * [Material 3 Design Kit | Figma](https://www.figma.com/community/file/1035203688168086460)
+    * [Material 3 Design Kit | Figma](https://www.figma.com/community/file/1035203688168086460)
 
 
 
-## 各部位ごとの名称まとめ
+## 各部位的名称汇总
 
-以降にBar系UIの名称と外観についてまとめます。各名称をできるだけ公式ドキュメントへリンクしていますが、iOSは古いドキュメントは残ってませんのでリンク無しです。
+下面整理 Bar 系 UI 各部位的名称与外观。各名称尽量附上官方文档链接,但 iOS 早期文档已不存在,所以没有链接。
 
-### OS最上部のバーUI
-
-|  | iOS | Android |
-| :--: | :--: | :--: |
-| 現在 | ![ios/statusbar](ios/statusbar.png) <br/> [Status bar](https://developer.apple.com/design/human-interface-guidelines/status-bars) | ![android/statusbar](android/statusbar.png)  <br/> [Status bar](https://developer.android.com/design/ui/mobile/guides/foundations/system-bars#status-bar) |
-| 以前 | ![ios-old/statusbar](ios-old/statusbar.png) <br/> 名称変更無し | ![android-old/statusbar](android-old/statusbar.png)  <br/> [名称変更無し](https://m2.material.io/design/platform-guidance/android-bars.html#status-bar) |
-
-これはわかりやすいですね。時計・ネットワーク・バッテリーなどシステムの状態を表示するシステムUIです。
-
-基本的に開発側でカスタムできることは少ないです。動画プレーヤーやゲームアプリなどで全画面表示したい場合、隠したりすることは可能です。
-
-### OS最下部のバーUI
+### 操作系统最顶部的 Bar UI
 
 |  | iOS | Android |
 | :--: | :--: | :--: |
-| 現在 | ![ios/homeindicator](ios/homeindicator.png) <br/> Home indicator | ![android/gesturebar](android/gesturebar.png)  <br/> Gesture bar ※[公式Figma](https://www.figma.com/community/file/1035203688168086460)での呼称 |
-| 以前 | ![ios-old/homeindicator](ios-old/homeindicator.png) <br/> 名称変更無し | ![android-old/android-navigationbar](android-old/android-navigationbar.png)  <br/> [Android navigation bar](https://m2.material.io/design/platform-guidance/android-bars.html#android-navigation-bar) |
+| 当前 | ![ios/statusbar](ios/statusbar.png) <br/> [Status bar](https://developer.apple.com/design/human-interface-guidelines/status-bars) | ![android/statusbar](android/statusbar.png)  <br/> [Status bar](https://developer.android.com/design/ui/mobile/guides/foundations/system-bars#status-bar) |
+| 以前 | ![ios-old/statusbar](ios-old/statusbar.png) <br/> 名称未变 | ![android-old/statusbar](android-old/statusbar.png)  <br/> [名称未变](https://m2.material.io/design/platform-guidance/android-bars.html#status-bar) |
 
-OSのホーム画面に戻ったり、アプリを切り替えたりするためのシステムUIです。`Status bar`同様、あまり開発者が考慮することはないです。
+这个比较好理解。是显示时间、网络、电量等系统状态的系统级 UI。
 
-`Home indicator`の公式ガイドライン自体は見つけられなかったのですが、開発者向けのドキュメント([例](https://developer.apple.com/documentation/uikit/uiviewcontroller/prefershomeindicatorautohidden))やユーザーヘルプで良く登場する呼称です。
+基本上开发侧能定制的部分很少。如果是视频播放器或游戏应用想全屏显示,可以将其隐藏。
 
-Androidでは`Status bar`とまとめて`System bar`と呼ばれたりもします。`Gesture bar`という名前も正式なガイドラインにある呼称ではなく、いまだにGoogleの一部記事では`Navigation bar`と書かれています。しかしMaterial Design 3において`Navigation bar`は後述するタブUIをことを指すことになったので、今後これは間違いになっていくと思います。
-
-
-### アプリ内の上部のBar
+### 操作系统最底部的 Bar UI
 
 |  | iOS | Android |
 | :--: | :--: | :--: |
-| 現在 | ![ios/toolbar-top](ios/toolbar-top.png) <br/> [Toolbars](https://developer.apple.com/design/human-interface-guidelines/toolbars) | ![android/appbar](android/appbar.png)  <br/> [App bars](https://m3.material.io/components/app-bars/overview) |
+| 当前 | ![ios/homeindicator](ios/homeindicator.png) <br/> Home indicator | ![android/gesturebar](android/gesturebar.png)  <br/> Gesture bar ※[官方 Figma](https://www.figma.com/community/file/1035203688168086460) 中的称呼 |
+| 以前 | ![ios-old/homeindicator](ios-old/homeindicator.png) <br/> 名称未变 | ![android-old/android-navigationbar](android-old/android-navigationbar.png)  <br/> [Android navigation bar](https://m2.material.io/design/platform-guidance/android-bars.html#android-navigation-bar) |
+
+是用来回到操作系统主屏幕、切换应用的系统 UI。和 `Status bar` 一样,开发者通常不太需要考虑它。
+
+`Home indicator` 的官方指南我没找到,但在面向开发者的文档([例如这里](https://developer.apple.com/documentation/uikit/uiviewcontroller/prefershomeindicatorautohidden))和用户帮助里经常出现这个名称。
+
+在 Android 中,它和 `Status bar` 合称为 `System bar`。`Gesture bar` 这个名字其实并没有出现在官方指南中,目前 Google 的部分文章里仍然写作 `Navigation bar`。但在 Material Design 3 中,`Navigation bar` 已经指代后面会讲到的 Tab UI,所以这种用法以后会逐渐变成错误。
+
+
+### 应用内顶部的 Bar
+
+|  | iOS | Android |
+| :--: | :--: | :--: |
+| 当前 | ![ios/toolbar-top](ios/toolbar-top.png) <br/> [Toolbars](https://developer.apple.com/design/human-interface-guidelines/toolbars) | ![android/appbar](android/appbar.png)  <br/> [App bars](https://m3.material.io/components/app-bars/overview) |
 | 以前 | ![ios-old/navigationbar](ios-old/navigationbar.png) <br/> Navigation bar | ![android-old/topappbar](android-old/topappbar.png)  <br/> [App bars: top (Top app bar)](https://m2.material.io/components/app-bars-top) |
 
-アプリ内での現在位置を示したり、前の画面に戻るボタンを置いたりするためのBarです。Webの世界では`Header`UIと呼ばれることが多いですね。
+用于在应用内显示当前位置、放置返回上一屏按钮的 Bar。Web 世界里通常被称为 `Header` UI。
 
-これが一番むずかしいというか紛らわしいです。この次に登場する「アプリ内の下部のBar」といっしょにチェックしてみてください。
+这个最难、也最容易混淆。请和接下来要讲的「应用内底部的 Bar」一起对照看。
 
-iOSでは`Navigation bar`が正式なUI名称でしたが、OS26に伴うHIGのアップデートから上部も下部も`Toolbars`に**統合**されました。ただしHIGには以下のように
+在 iOS 中,`Navigation bar` 原本是这种 UI 的正式名称,但在 OS26 的 HIG 更新中,顶部和底部都被 **合并** 进了 `Toolbars`。不过 HIG 中也有这样的描述:
 
 > In iOS, a navigation-specific toolbar is sometimes called a navigation bar.
 
-という表記があるので、引き続き上部のBarを`Navigation bar`と呼んでも間違いでは無いらしいです。おそらく多くのドキュメントや実装APIに名前が残っているからでしょうが、紛らわしい。
+所以继续把顶部 Bar 叫做 `Navigation bar` 也并不算错。大概是因为大量文档和 API 中还残留着这个名字吧,真是让人困惑。
 
-Androidでは**逆に**以前までは上部も下部も`App bar`と呼ばれていたのが、上部のみを`App bar`、下部のものは`Toolbar`と呼ぶように**分解**されました。ああ紛らわしい、、、。
-
-
-### アプリ内の下部のBar
-
-|  | iOS | Android |
-| :--: | :--: | :--: |
-| 現在 | ![ios/toolbar-bottom](ios/toolbar-bottom.png) <br/> [Toolbars](https://developer.apple.com/design/human-interface-guidelines/toolbars) | ![android/toolbar](android/toolbar.png)  <br/> [Toolbars](https://m3.material.io/components/toolbars/overview) |
-| 以前 | ![ios-old/toolbar](ios-old/toolbar.png) <br/> 名称変更無し | ![android-old/bottomappbar](android-old/bottomappbar.png)  <br/> [App bars: bottom (Bottom app bar)](https://m2.material.io/components/app-bars-bottom) |
-
-現在の画面に何かアクションをするためのBarです。登場頻度は少なめ。Webの世界では`Footer`UIと呼ばれることが多いですね。
-
-この次の「グローバルナビゲーションのタブバー」と同じ位置に表示され似ていますが、明確に別のUIです。
+而在 Android 上 **正好相反**:之前顶部和底部都叫 `App bar`,现在被 **拆分** 为顶部叫 `App bar`、底部叫 `Toolbar`。啊真乱……
 
 
-
-### グローバルナビゲーションのタブバー
+### 应用内底部的 Bar
 
 |  | iOS | Android |
 | :--: | :--: | :--: |
-| 現在 | ![ios/tabbar](ios/tabbar.png) <br/> [Tab bars](https://developer.apple.com/design/human-interface-guidelines/tab-bars) | ![android/navigationbar](android/navigationbar.png)  <br/> [Navigation bar](https://m3.material.io/components/navigation-bar/overview) |
-| 以前 | ![ios-old/tabbar](ios-old/tabbar.png) <br/> 名称変更無し | ![android-old/bottomnavidation](android-old/bottomnavidation.png)  <br/> [Bottom navigation](https://m2.material.io/components/bottom-navigation) |
+| 当前 | ![ios/toolbar-bottom](ios/toolbar-bottom.png) <br/> [Toolbars](https://developer.apple.com/design/human-interface-guidelines/toolbars) | ![android/toolbar](android/toolbar.png)  <br/> [Toolbars](https://m3.material.io/components/toolbars/overview) |
+| 以前 | ![ios-old/toolbar](ios-old/toolbar.png) <br/> 名称未变 | ![android-old/bottomappbar](android-old/bottomappbar.png)  <br/> [App bars: bottom (Bottom app bar)](https://m2.material.io/components/app-bars-bottom) |
 
-はい、また`Navigation bar`という名称が登場しました。Androidでは今後は下部のタブUIを`Navigation bar`と呼びます。
+是对当前页面执行某种操作的 Bar,出现频率较低。Web 世界里常被叫做 `Footer` UI。
 
-iOSは昔から`Tab bars`で名称には変化がないです。しかし最近は挙動や見た目が大きくアップデートされる頻度が高く、開発者泣かせです。OS26では見ての通りガラス状の見た目になり、配置もフローティング&変形するようになりました。
+它和接下来要讲的「全局导航的 Tab Bar」位置相同、外形相似,但属于明确不同的 UI。
+
+
+
+### 全局导航的 Tab Bar
+
+|  | iOS | Android |
+| :--: | :--: | :--: |
+| 当前 | ![ios/tabbar](ios/tabbar.png) <br/> [Tab bars](https://developer.apple.com/design/human-interface-guidelines/tab-bars) | ![android/navigationbar](android/navigationbar.png)  <br/> [Navigation bar](https://m3.material.io/components/navigation-bar/overview) |
+| 以前 | ![ios-old/tabbar](ios-old/tabbar.png) <br/> 名称未变 | ![android-old/bottomnavidation](android-old/bottomnavidation.png)  <br/> [Bottom navigation](https://m2.material.io/components/bottom-navigation) |
+
+好的,`Navigation bar` 这个名称又出现了。在 Android 上,以后底部的 Tab UI 才叫 `Navigation bar`。
+
+iOS 这边长期以来都叫 `Tab bars`,名字没变。但最近行为和外观更新得比较频繁,让开发者头疼。OS26 中如图所示变成了玻璃质感,布局也变成浮动 + 可变形。
 
 ![Liquid Glass](liquidglass.gif)
 
 <small class="reference">
-    参照: <a href="https://www.apple.com/jp/newsroom/2025/06/apple-introduces-a-delightful-and-elegant-new-software-design/" target="_blank">Apple、楽しくて優雅な新しいソフトウェアデザインを発表 - Apple (日本)</a>
+    参考: <a href="https://www.apple.com/jp/newsroom/2025/06/apple-introduces-a-delightful-and-elegant-new-software-design/" target="_blank">Apple 发布令人愉悦且优雅的全新软件设计 - Apple</a>
 </small>
 
-### 通知で表示されるバー
+### 用于通知的 Bar
 
 |  | iOS | Android |
 | :--: | :--: | :--: |
-| 現在 | 無し | ![android/snackbar](android/snackbar.png)  <br/> [Snackbar](https://m3.material.io/components/snackbar/overview) |
-| 以前 | 無し | ![android-old/snackbar](android-old/snackbar.png)  <br/> [名称変更無し](https://m2.material.io/components/snackbars) |
+| 当前 | 无 | ![android/snackbar](android/snackbar.png)  <br/> [Snackbar](https://m3.material.io/components/snackbar/overview) |
+| 以前 | 无 | ![android-old/snackbar](android-old/snackbar.png)  <br/> [名称未变](https://m2.material.io/components/snackbars) |
 
-Material Designで定義される、自動で消える通知UIですね。一般的に「トースト」UIと呼ばれることも多いですが、Androidでは**OSが表示するエラーUIを`Toast`と呼び区別することもある**ので注意です。
+是 Material Design 中定义的、会自动消失的通知 UI。一般也常被叫做「Toast」UI,但在 Android 中 **OS 显示的错误 UI 也叫 `Toast`,有时会作区分**,需要注意。
 
-[Toasts overview  |  Android Developers](https://developer.android.com/guide/topics/ui/notifiers/toasts)
+[Toasts overview  |  Android Developers](https://developer.android.com/guide/topics/ui/notifiers/toasts)
 
-Appleではこのような<b>自動で消える</b>トースト系の通知UIはNativeに存在しません。カスタムで似たようなUIを実装しているアプリはよくあり、慣例的に`HUD`(Head Up Display)や`Toast`と呼ばれることが多いようです。iOS Nativeの通知UIには[Alerts](https://developer.apple.com/design/human-interface-guidelines/alerts), [Action sheets](https://developer.apple.com/design/human-interface-guidelines/action-sheets)などがあります。
-
-
+Apple 没有在 Native 层面提供这种 <b>会自动消失</b> 的 Toast 类通知 UI。但很多应用会自定义出类似的 UI,通常按惯例称为 `HUD` (Head Up Display) 或 `Toast`。iOS 原生的通知 UI 包括 [Alerts](https://developer.apple.com/design/human-interface-guidelines/alerts)、[Action sheets](https://developer.apple.com/design/human-interface-guidelines/action-sheets) 等。
 
 
-## 番外編: 他にもBarってつくUIの紹介
-ここまでは主にスマホのUIについて紹介してきましたが、**iPad**OSを付け加えるともう少し登場します。
+
+
+## 番外篇: 其他还有哪些带 Bar 的 UI
+之前主要介绍的是手机上的 UI,加上 **iPad**OS 还会有更多。
 
 ### Sidebar
 
@@ -139,13 +139,13 @@ Appleではこのような<b>自動で消える</b>トースト系の通知UIは
     site="developer.apple.com" />
 
 
-`Tab bar`同様にアプリ内でのセクションを移動するためのナビゲーションUIです。iPadOSでは`Tab bar`は上部に表示するか、代わりにこの`Sidebar`を使うことを推奨されます。`Tab bar`と`Sidebar`を統合する実装も可能で、ユーザーが切り替えて利用できるようになります。
+和 `Tab bar` 类似,是用于在应用内不同板块间切换的导航 UI。在 iPadOS 中推荐 `Tab bar` 显示在顶部,或者直接换成 `Sidebar`。也可以将 `Tab bar` 与 `Sidebar` 整合实现,让用户可以切换使用。
 
 https://developer.apple.com/design/human-interface-guidelines/tab-bars#iPadOS
 
-`Sidebar`はiPadOS, macOS, visionOSでの利用が想定されており、**iOS(iPhone)では非推奨なので注意**です。iOSで同様の目的がある場合は`Tabbar`を使うか、[Sheet](https://developer.apple.com/design/human-interface-guidelines/sheets)を使うのが適切です。
+`Sidebar` 主要面向 iPadOS、macOS、visionOS 使用,**在 iOS(iPhone) 上不被推荐,需要注意**。在 iOS 上有相同目的时,使用 `Tabbar` 或 [Sheet](https://developer.apple.com/design/human-interface-guidelines/sheets) 更合适。
 
-Androidでは[Navigation drawer](https://m3.material.io/components/navigation-drawer/overview), [Navigation rail](https://m3.material.io/components/navigation-rail/overview), [Side Sheets](https://m3.material.io/components/side-sheets/overview)などが似たコンテキストで使用されます。いずれも名称に`Bar`はつきませんね。
+Android 中类似上下文使用的有 [Navigation drawer](https://m3.material.io/components/navigation-drawer/overview)、[Navigation rail](https://m3.material.io/components/navigation-rail/overview)、[Side Sheets](https://m3.material.io/components/side-sheets/overview) 等。它们的名字里都没有 `Bar`。
 
 ### The menu bar
 
@@ -155,20 +155,20 @@ Androidでは[Navigation drawer](https://m3.material.io/components/navigation-dr
     title="The menu bar | Apple Developer Documentation"
     site="developer.apple.com" />
 
-画面の最上部、アプリの**外**に表示される横断的なメニューUIです。MacOSやWindowsのデスクトップアプリでは定番ですよね。iPadOS26から、すべてのアプリにiPadでも表示されるようになります。
+显示在屏幕最顶部、应用 **外** 的横向贯穿型菜单 UI。在 macOS 或 Windows 的桌面应用中是经典存在。从 iPadOS26 开始,所有应用在 iPad 上也都会显示。
 
-Android(というかMaterial Design)の[Menu](https://m3.material.io/components/menus/guidelines#9a6467a3-ad1f-4975-a122-73cdd45dc8e6)でも、似たような使い方をされている画面は登場します。
+Android(或者说 Material Design)的 [Menu](https://m3.material.io/components/menus/guidelines#9a6467a3-ad1f-4975-a122-73cdd45dc8e6) 中也会有类似用法的画面。
 
-**マウスを前提とするUI**なので、スマホサイズで使われることは考えなくて良いでしょう。
+由于这是 **以鼠标操作为前提** 的 UI,在手机尺寸上基本不需要考虑。
 
 
 
-## おわり
-もしご質問・ご指摘ありましたら[X](https://x.com/psephopaiktes)とかにご連絡ください。
+## 结尾
+如果有疑问或指正,请通过 [X](https://x.com/psephopaiktes) 等渠道联系我。
 
-ついでにここで復習です。`Navigation bar`とは
-* Apple系OSにおいてはアプリ上部のヘッダーUI (※ただし以前からの慣例名、現在の正式名は`Toolbars`)
-* **現在の**AndroidOSにおいてはアプリ下部のタブUI 
-* **以前の**AndroidOSにおいてはホームに戻るシステムUI(※ただし未だにこっちを使う公式資料もある)
+最后顺便复习一下,`Navigation bar` 是指:
+* 在 Apple 系操作系统中,是应用顶部的 Header UI(※不过这是过去沿用的称呼,当前正式名称是 `Toolbars`)
+* 在 **当前的** Android 系统中,是应用底部的 Tab UI
+* 在 **以前的** Android 系统中,是用来回到主屏幕的系统 UI(※但仍有部分官方资料还在使用这个名称)
 
-のことでした。ムズすぎ。
+就是这样。太难了。
