@@ -21,16 +21,24 @@ import { getLocalePaths, LOCALES } from "@/i18n";
   </select>
 </label>
 
-<script is:inline>
-  const selects = document.querySelectorAll("[data-languageSelect]");
+<script>
+  document.addEventListener(
+    "astro:page-load",
+    () => {
+      const selects = document.querySelectorAll("[data-languageSelect]");
 
-  selects.forEach((select) => {
-    select.addEventListener("change", (event) => {
-      // used for 404 page
-      localStorage.selectedLang = event.target?.selectedOptions[0].dataset.lang;
-      location.href = event.target?.value;
-    });
-  });
+      selects.forEach((select) => {
+        select.addEventListener("change", (event) => {
+          const selectElement = event.target as HTMLSelectElement;
+          // used for 404 page
+          localStorage.selectedLang =
+            selectElement.selectedOptions[0].dataset.lang;
+          location.href = selectElement.value;
+        });
+      });
+    },
+    { once: false },
+  );
 </script>
 
 <style lang="less">
