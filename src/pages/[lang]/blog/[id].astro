@@ -1,5 +1,5 @@
 ---
-import { Image } from "astro:assets";
+import { Picture } from "astro:assets";
 import { render } from "astro:content";
 import BlogCard from "@/components/Blog/Card.astro";
 import Share from "@/components/Blog/Share.astro";
@@ -75,7 +75,9 @@ recommendCollection.posts = recommendCollection.posts.filter((recPost) => {
 <BlogDetail data={post.data}>
   <article>
     <header>
-      <Image
+      <Picture
+        formats={["avif"]}
+        widths={[480, 768, 1280]}
         src={post.data.cover}
         alt={post.data.title}
         transition:name={"blog-cover-" + post.id}

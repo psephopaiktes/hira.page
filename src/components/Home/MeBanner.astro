@@ -5,7 +5,7 @@ import BudouX from "@/components/i18n/BudouX.astro";
 import { Squircle } from "@/components/Squircle.ts";
 import { ME_DESCRIPTION } from "@/consts";
 import { type Lang } from "@/i18n";
-import { Image } from "astro:assets";
+import { Picture } from "astro:assets";
 
 const locale = Astro.currentLocale as Lang;
 
@@ -19,10 +19,16 @@ const path = Squircle({
 ---
 
 <a data-inview href={`/${locale}/me`} class="c-card">
-  <Image class="meImage" src={MeImage} alt="Akira HIRATA" />
+  <Picture
+    formats={["avif"]}
+    widths={[480, 768, 1280]}
+    class="meImage"
+    src={MeImage}
+    alt="Akira HIRATA"
+  />
 
   <div class="overlay">
-    <Image class="icon" src={Icon} alt="profile icon" />
+    <Picture formats={["avif"]} class="icon" src={Icon} alt="profile icon" />
 
     <h3>Akira HIRATA</h3>
     <p>
@@ -39,6 +45,10 @@ const path = Squircle({
 
 <style lang="less">
   @import "@/styles/common.less";
+
+  picture {
+    display: contents;
+  }
 
   a {
     display: block;
@@ -67,14 +77,14 @@ const path = Squircle({
 
       position: relative;
       height: 100%;
-      padding: 64px 32px;
+      padding: 64px 32px 48px;
       background-color: rgb(@base / 0.7);
       backdrop-filter: blur(8px) grayscale(0.4);
       color: rgb(@main);
       transition: @transition;
       @media (width < @lg) {
         gap: 8px 16px;
-        padding: 32px 24px;
+        padding: 32px 24px 16px;
       }
       @media (width < @sm) {
         padding: 24px;

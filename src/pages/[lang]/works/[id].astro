@@ -3,7 +3,7 @@ import { loadCollection } from "@/components/loadCollection.ts";
 import { type Lang } from "@/i18n";
 import Base from "@/layouts/Base.astro";
 import "@/styles/blog.less";
-import { Image } from "astro:assets";
+import { Picture } from "astro:assets";
 import { render } from "astro:content";
 
 const locale = Astro.currentLocale as Lang;
@@ -25,7 +25,13 @@ const { Content } = await render(post);
 ---
 
 <Base title={post.data.title}>
-  <Image class="cover" src={post.data.cover} alt={post.data.title} />
+  <Picture
+    class="cover"
+    formats={["avif"]}
+    widths={[480, 768, 1280]}
+    src={post.data.cover}
+    alt={post.data.title}
+  />
 
   <header class="l-content">
     <h1>{post.data.title}</h1>

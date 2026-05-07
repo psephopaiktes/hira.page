@@ -7,7 +7,7 @@ import DevelopImage from "@/assets/me/develop.webp";
 import BudouX from "@/components/i18n/BudouX.astro";
 import { ME_DESCRIPTION } from "@/consts";
 import { useTranslations, type Lang } from "@/i18n";
-import { Image } from "astro:assets";
+import { Image, Picture } from "astro:assets";
 
 const locale = Astro.currentLocale as Lang;
 const t = useTranslations(locale);
@@ -27,7 +27,12 @@ const t = useTranslations(locale);
   </div>
 
   <a href={`/${locale}/contact`} class="right" data-swellStalker="hirata">
-    <Image src={HirataImage} alt="Akira HIRATA" />
+    <Picture
+      formats={["avif"]}
+      widths={[480, 768, 1280]}
+      src={HirataImage}
+      alt="Akira HIRATA"
+    />
   </a>
 </section>
 

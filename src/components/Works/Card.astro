@@ -1,6 +1,6 @@
 ---
 import { type Lang } from "@/i18n";
-import { Image } from "astro:assets";
+import { Picture } from "astro:assets";
 
 import type { CollectionEntry } from "astro:content";
 
@@ -37,12 +37,16 @@ const [id, data] = [post.id, post.data];
   </div>
 
   <div class="cover c-card">
-    <Image src={data.thumbnail} alt={data.title} />
+    <Picture formats={["avif"]} src={data.thumbnail} alt={data.title} />
   </div>
 </a>
 
 <style lang="less">
   @import "@/styles/common.less";
+
+  picture {
+    display: contents;
+  }
 
   a {
     clip-path: url(#squircleOuter);
