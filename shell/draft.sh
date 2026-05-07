@@ -1,4 +1,5 @@
 #!/bin/sh
+# Draft状態の記事を選択してローカルで表示するスクリプト
 
 # Draft状態の記事を配列に取得
 DRAFTS=($(find . -name "*.mdx" -exec grep -l "draft: true" {} +

@@ -9,7 +9,8 @@
       "mcp__chrome-devtools__lighthouse_audit",
       "WebFetch(domain:docs.astro.build)",
       "Bash(npm view:*)",
-      "Bash(grep -n -A 20 \"getStaticPaths\" src/pages/works/sort=[sort].astro src/pages/works/tag=[tag]/index.astro src/pages/works/[id].astro src/pages/works/tag=[tag]/sort=[sort].astro src/pages/blog/tag=[tag].astro src/pages/blog/[id].astro)"
+      "Bash(grep -n -A 20 \"getStaticPaths\" src/pages/works/sort=[sort].astro src/pages/works/tag=[tag]/index.astro src/pages/works/[id].astro src/pages/works/tag=[tag]/sort=[sort].astro src/pages/blog/tag=[tag].astro src/pages/blog/[id].astro)",
+      "Bash(npm run *)"
     ]
   }
 }

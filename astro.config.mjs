@@ -9,7 +9,7 @@ import {
   transformerNotationHighlight,
   transformerNotationWordHighlight,
 } from "@shikijs/transformers";
-import { defineConfig } from "astro/config";
+import { defineConfig, svgoOptimizer } from "astro/config";
 import { DEFAULT_LOCALE_SETTING, LOCALES_SETTING } from "./src/locales";
 
 // https://astro.build/config
@@ -53,5 +53,8 @@ export default defineConfig({
         transformerMetaWordHighlight(),
       ],
     },
+  },
+  experimental: {
+    svgOptimizer: svgoOptimizer(),
   },
 });

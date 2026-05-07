@@ -1,4 +1,5 @@
 #!/bin/sh
+# ビルドしてGitHubにpushするスクリプト
 
 # Git用コミットメッセージを引数にとる
 COMMENT=$1
