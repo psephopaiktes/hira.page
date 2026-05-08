@@ -10,6 +10,7 @@ import {
   transformerNotationWordHighlight,
 } from "@shikijs/transformers";
 import { defineConfig, svgoOptimizer } from "astro/config";
+import { FONT_SETTING } from "./src/fonts";
 import { DEFAULT_LOCALE_SETTING, LOCALES_SETTING } from "./src/locales";
 
 // https://astro.build/config
@@ -54,6 +55,7 @@ export default defineConfig({
       ],
     },
   },
+  fonts: FONT_SETTING,
   experimental: {
     svgOptimizer: svgoOptimizer(),
   },

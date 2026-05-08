@@ -1,8 +1,8 @@
 ---
 import "@/styles/global.less";
 import { ClientRouter } from "astro:transitions";
-import LocalFont from "./LocalFont.astro";
 import { LOCALES, getLocalePaths, type Lang } from "@/i18n";
+import { Font } from "astro:assets";
 
 const locale = Astro.currentLocale as Lang;
 const { title, description } = Astro.props;
@@ -44,8 +44,17 @@ const { title, description } = Astro.props;
 <meta name="theme-color" content="#fb0" />
 <meta name="color-scheme" content="light dark" />
 
-<!-- Font preloads -->
-<LocalFont />
+<!-- Font -->
+<Font cssVariable="--font-futura" preload />
+{
+  locale === "ja" ? (
+    <Font cssVariable="--font-alibaba-jp" />
+  ) : locale === "zh-cn" ? (
+    <Font cssVariable="--font-alibaba-sc" />
+  ) : (
+    <Font cssVariable="--font-alibaba" />
+  )
+}
 
 <script>
   import "@dotlottie/player-component";

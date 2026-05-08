@@ -23,7 +23,7 @@ export async function getStaticPaths() {
   return paths;
 }
 
-return Astro.redirect(
+return Astro.rewrite(
   `/${Astro.params.lang}/works/tag=${Astro.params.tag}/sort=${sortTypes[0].id}`,
 );
 ---

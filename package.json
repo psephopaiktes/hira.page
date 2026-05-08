@@ -24,7 +24,6 @@
     "@dotlottie/player-component": "^2.7.0",
     "@shikijs/transformers": "^4.0.2",
     "astro": "^6.2.1",
-    "astro-font": "^1.1.0",
     "budoux": "^0.8.2",
     "less": "^4.4.0",
     "svg-mask-icon": "^2.2.0",

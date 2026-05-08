@@ -101,8 +101,7 @@ import { getLocalePaths, LOCALES } from "@/i18n";
     appearance: none; // for Safari
     appearance: base-select;
     width: 100%;
-    line-height: 32px;
-    // display: block;
+    line-height: 34px;
     height: 40px;
     padding: 0 36px 0 36px;
     color: inherit;
@@ -123,58 +122,6 @@ import { getLocalePaths, LOCALES } from "@/i18n";
 
     &::picker-icon {
       display: none;
-    }
-    &::picker(select) {
-      appearance: base-select;
-      background: rgb(@label);
-      color: rgb(@base);
-      border: 0;
-      margin: 4px 0;
-      padding: 4px;
-      box-shadow: 2px 8px 32px -16px rgb(@label / 0.2);
-      transition: 0.2s ease;
-      border-radius: 12px;
-      @supports (corner-shape: superellipse(2.4)) {
-        corner-shape: superellipse(2.4);
-        border-radius: 32px;
-      }
-      &:hover {
-        scale: 1.02;
-        transform-origin: 50% 0;
-      }
-    }
-
-    option {
-      padding: 4px 8px;
-      position: relative;
-      border-radius: 4px;
-      opacity: 0.8;
-      outline: none;
-      &:focus,
-      &:hover {
-        background-color: rgb(@base / 0.1);
-      }
-      &::checkmark {
-        display: none;
-      }
-      &:checked::after {
-        content: "";
-        position: absolute;
-        right: 8px;
-        bottom: 17px;
-        width: 1em;
-        height: 0.6em;
-        background: rgb(@base / 0.5);
-        clip-path: polygon(
-          0 0,
-          0.2em 0,
-          0.2em 0.4em,
-          1em 0.4em,
-          1em 0.6em,
-          0 0.6em
-        );
-        rotate: -45deg;
-      }
     }
   }
 </style>
