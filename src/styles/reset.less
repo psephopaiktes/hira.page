@@ -12,6 +12,8 @@
   -moz-text-size-adjust: none;
   -webkit-text-size-adjust: none;
   text-size-adjust: none;
+  text-autospace: normal;
+  text-spacing-trim: trim-start;
   font-smoothing: antialiased;
   hanging-punctuation: allow-end;
   // word-break: auto-phrase
@@ -111,6 +113,10 @@ button {
   border: none;
   font-size: inherit;
   color: inherit;
+}
+
+pre {
+  text-spacing-trim: space-all;
 }
 
 :target {
