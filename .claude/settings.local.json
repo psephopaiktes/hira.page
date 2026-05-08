@@ -10,7 +10,9 @@
       "WebFetch(domain:docs.astro.build)",
       "Bash(npm view:*)",
       "Bash(grep -n -A 20 \"getStaticPaths\" src/pages/works/sort=[sort].astro src/pages/works/tag=[tag]/index.astro src/pages/works/[id].astro src/pages/works/tag=[tag]/sort=[sort].astro src/pages/blog/tag=[tag].astro src/pages/blog/[id].astro)",
-      "Bash(npm run *)"
+      "Bash(npm run *)",
+      "Bash(sh -n /Users/a-hirata/projects/hira.page/shell/new.sh)",
+      "Bash(zsh -n /Users/a-hirata/projects/hira.page/shell/draft.sh)"
     ]
   }
 }
