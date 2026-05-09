@@ -34,9 +34,13 @@ const defaultLocale = DEFAULT_LOCALE;
     }
 
     <!-- icon -->
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="icon" sizes="192x192" href="/android-chrome.png" />
-    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="icon" type="image/svg+xml" href="/img/meta/favicon.svg" />
+    <link rel="icon" sizes="192x192" href="/img/meta/android-chrome.png" />
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="/img/meta/apple-touch-icon.png"
+    />
     <meta name="color-scheme" content="light dark" />
 
     <!-- OGP -->
@@ -44,7 +48,7 @@ const defaultLocale = DEFAULT_LOCALE;
     <meta property="og:title" content={t(SITE_TITLE)} />
     <meta property="og:site_name" content={t(SITE_TITLE)} />
     <meta property="og:description" content={t(SITE_DESCRIPTION)} />
-    <meta property="og:image" content={Astro.site + "ogp.png"} />
+    <meta property="og:image" content={Astro.site + "img/meta/ogp.png"} />
     <meta property="og:url" content={Astro.url} />
     <meta property="og:locale" content={DEFAULT_LOCALE} />
     <meta name="twitter:card" content="summary" />
