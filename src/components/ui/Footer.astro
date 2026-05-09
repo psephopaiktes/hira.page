@@ -1,5 +1,7 @@
 ---
 import SnsLink from "@/components/ui/SnsLink.astro";
+import ThemeSelect from "./ThemeSelect.astro";
+import LocaleSelect from "../i18n/LocaleSelect.astro";
 import { useTranslations, type Lang } from "@/i18n";
 const locale = Astro.currentLocale as Lang;
 const t = useTranslations(locale);
@@ -18,6 +20,11 @@ const snsList = ["X", "note", "GitHub", "Instagram", "Pinterest"];
         );
       })
     }
+  </ul>
+
+  <ul class="select">
+    <li><LocaleSelect /></li>
+    <li><ThemeSelect /></li>
   </ul>
 
   <small>
@@ -111,6 +118,19 @@ const snsList = ["X", "note", "GitHub", "Instagram", "Pinterest"];
     }
     @media (width < @2xs) {
       gap: 16px;
+    }
+  }
+
+  .select {
+    display: flex;
+    gap: 8px;
+    margin-block-start: 32px;
+    @media (width < @lg) {
+      margin-block-start: 24px;
+    }
+    @media (width < @2xs) {
+      margin-block-start: 16px;
+      gap: 8px;
     }
   }
 

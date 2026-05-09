@@ -55,7 +55,9 @@ const pageList = ["blog", "works", "me", "price"];
     CONTACT
   </a>
 
-  <LocaleSelect />
+  <div class="selectContainer">
+    <LocaleSelect />
+  </div>
 </nav>
 
 <style lang="less">
@@ -67,6 +69,7 @@ const pageList = ["blog", "works", "me", "price"];
     align-items: center;
     flex-direction: column;
     gap: 48px;
+    color: #fff;
     @media (width < @xl) {
       gap: 32px;
     }
@@ -174,7 +177,6 @@ const pageList = ["blog", "works", "me", "price"];
       gap: 6px;
       font-size: 20px;
       opacity: 0.8;
-      color: #fff;
       text-shadow: 0 0 24px rgb(136 68 0 / 0.2);
       @media (width < @lg) {
         font-size: 18px;
@@ -207,7 +209,6 @@ const pageList = ["blog", "works", "me", "price"];
     align-items: center;
     font-size: 18px;
     background: #ffffff44;
-    color: #fff;
     text-shadow: 0 0 24px rgb(136 68 0 / 0.2);
     word-break: keep-all;
     border-radius: 12px;
@@ -218,7 +219,6 @@ const pageList = ["blog", "works", "me", "price"];
     &.active,
     &:hover,
     &:active {
-      color: #fff;
       font-variation-settings: "wght" 700;
       filter: drop-shadow(0 0 8px rgb(255 255 255 / 0.5));
     }
@@ -244,6 +244,20 @@ const pageList = ["blog", "works", "me", "price"];
       dotlottie-player {
         margin: 4px auto;
       }
+    }
+  }
+
+  .selectContainer {
+    width: @width;
+    @media (width < @lg) {
+      width: auto;
+      position: absolute;
+      top: 24px;
+      right: 152px;
+    }
+    @media (width < @xs) {
+      top: 14px;
+      right: 80px;
     }
   }
 </style>

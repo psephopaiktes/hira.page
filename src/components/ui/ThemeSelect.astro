@@ -1,0 +1,61 @@
+---
+// Select UI to switch theme.
+import { useTranslations, type Lang } from "@/i18n";
+const locale = Astro.currentLocale as Lang;
+const t = useTranslations(locale);
+---
+
+<label class="c-systemSelect">
+  <i class="icon u-textHidden">theme icon</i>
+  <select data-themeSelect name="theme">
+    <option
+      label={t({ ja: "ライト", en: "Light", "zh-cn": "亮" })}
+      value="light"></option>
+    <option label={t({ ja: "ダーク", en: "Dark", "zh-cn": "暗" })} value="dark"
+    ></option>
+    <option
+      label={t({ ja: "システム", en: "System", "zh-cn": "系统" })}
+      value="system"></option>
+  </select>
+</label>
+
+<script>
+  document.addEventListener(
+    "astro:page-load",
+    () => {
+      const selectedTheme = localStorage.selectedTheme || "system";
+      document.documentElement.dataset.theme = selectedTheme;
+      const selects = document.querySelectorAll("[data-themeSelect]");
+
+      selects.forEach((select) => {
+        (select as HTMLSelectElement).value = selectedTheme;
+
+        select.addEventListener("change", (event) => {
+          const selectElement = event.target as HTMLSelectElement;
+          localStorage.selectedTheme = selectElement.selectedOptions[0].value;
+          document.documentElement.dataset.theme = localStorage.selectedTheme;
+        });
+      });
+    },
+    { once: false },
+  );
+</script>
+
+<style lang="less">
+  @import "@/styles/common.less";
+
+  :root {
+    .icon {
+      mask-image: url(/img/icon/theme-light.svg);
+      @media (prefers-color-scheme: dark) {
+        mask-image: url(/img/icon/theme-dark.svg);
+      }
+    }
+    &[data-theme="light"] .icon {
+      mask-image: url(/img/icon/theme-light.svg);
+    }
+    &[data-theme="dark"] .icon {
+      mask-image: url(/img/icon/theme-dark.svg);
+    }
+  }
+</style>

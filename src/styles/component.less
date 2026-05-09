@@ -70,3 +70,83 @@
     }
   }
 }
+
+.c-systemSelect {
+  position: relative;
+  width: min(100%, 168px);
+  height: 40px;
+  display: block;
+  color: currentColor;
+  opacity: 0.8;
+  cursor: pointer;
+  svg-icon, .icon {
+    background: currentColor;
+    position: absolute;
+    width: 24px;
+    aspect-ratio: 1;
+    inset: 8px;
+    pointer-events: none;
+    mask-size: cover;
+    opacity: 0.6;
+    @media (width < @xs) {
+      width: 16px;
+      inset: 10px 8px;
+    }
+  }
+  &::before,
+  &::after {
+    content: "";
+    position: absolute;
+    top: 19px;
+    width: 10px;
+    height: 3px;
+    border-radius: 100px;
+    background: currentColor;
+    @media (width < @xs) {
+      top: 17px;
+    }
+  }
+  &::before {
+    right: 9px;
+    rotate: -45deg;
+  }
+  &::after {
+    right: 14.5px;
+    rotate: 45deg;
+  }
+
+  @media (width < @lg) {
+    width: auto;
+  }
+  @media (width < @xs) {
+    font-size: 11px;
+  }
+
+  select {
+    appearance: none; // for Safari
+    appearance: base-select;
+    width: 100%;
+    line-height: 34px;
+    height: 40px;
+    padding: 0 36px;
+    color: inherit;
+    border: 2px solid currentColor;
+    background-color: transparent;
+
+    border-radius: 12px;
+    @supports (corner-shape: superellipse(2.4)) {
+      corner-shape: superellipse(2.4);
+      border-radius: 32px;
+    }
+
+    @media (width < @xs) {
+      height: 36px;
+      line-height: 30px;
+      padding: 0 28px 0 24px;
+    }
+
+    &::picker-icon {
+      display: none;
+    }
+  }
+}

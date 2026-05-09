@@ -4,7 +4,7 @@
 import { getLocalePaths, LOCALES } from "@/i18n";
 ---
 
-<label>
+<label class="c-systemSelect">
   <svg-icon src="/img/icon/translate.svg"></svg-icon>
   <select data-languageSelect name="language">
     {
@@ -40,88 +40,3 @@ import { getLocalePaths, LOCALES } from "@/i18n";
     { once: false },
   );
 </script>
-
-<style lang="less">
-  @import "@/styles/common.less";
-
-  label {
-    position: relative;
-    width: 168px;
-    height: 40px;
-    color: #fff;
-    opacity: 0.8;
-    cursor: pointer;
-    svg-icon {
-      position: absolute;
-      width: 24px;
-      aspect-ratio: 1;
-      inset: 8px;
-      pointer-events: none;
-      opacity: 0.6;
-      @media (width < @xs) {
-        display: none;
-      }
-    }
-    &::before,
-    &::after {
-      content: "";
-      position: absolute;
-      top: 19px;
-      width: 10px;
-      height: 3px;
-      border-radius: 100px;
-      background: #fff;
-      @media (width < @xs) {
-        top: 17px;
-      }
-    }
-    &::before {
-      right: 9px;
-      rotate: -45deg;
-    }
-    &::after {
-      right: 14.5px;
-      rotate: 45deg;
-    }
-
-    @media (width < @lg) {
-      width: auto;
-      position: absolute;
-      top: 24px;
-      right: 152px;
-    }
-    @media (width < @xs) {
-      top: 14px;
-      right: 80px;
-      font-size: 11px;
-    }
-  }
-
-  select {
-    appearance: none; // for Safari
-    appearance: base-select;
-    width: 100%;
-    line-height: 34px;
-    height: 40px;
-    padding: 0 36px 0 36px;
-    color: inherit;
-    border: 2px solid #fff;
-    background-color: transparent;
-
-    border-radius: 12px;
-    @supports (corner-shape: superellipse(2.4)) {
-      corner-shape: superellipse(2.4);
-      border-radius: 32px;
-    }
-
-    @media (width < @xs) {
-      height: 36px;
-      line-height: 28px;
-      padding: 0 28px 0 8px;
-    }
-
-    &::picker-icon {
-      display: none;
-    }
-  }
-</style>
