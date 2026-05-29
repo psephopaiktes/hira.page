@@ -14,10 +14,8 @@ fi
 COLLECTION=${ID%%/*}
 SLUG=${ID#*/}
 
-# 3言語ぶんテンプレートをコピー
-for LANG in ja en zh-cn; do
-  cp -r ./src/_template ./src/${COLLECTION}/${LANG}/${SLUG}
-done
+# ja のみテンプレートをコピー
+cp -r ./src/_template ./src/${COLLECTION}/ja/${SLUG}
 
 # Finder で ja フォルダを開き、ja の index.mdx を VS Code で開く
 open ./src/${COLLECTION}/ja/${SLUG}

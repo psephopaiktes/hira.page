@@ -1,13 +1,13 @@
 ---
 name: article-polish
-description: hira.page リポジトリのブログ記事 (src/blog/ja/{slug}/index.mdx) の本文を、ユーザーの文体・SEO 観点で清書する。Web 調査による出典補強・引用カードの挿入・仮画像パスの提案も行う。「記事を整えて」「記事を仕上げて」「記事清書」などと言われたとき、または対象 mdx を開いた状態で清書依頼をしたときに起動する。frontmatter は触らず本文のみを対象に、チャット内で全文提示 → レビュー → OK 検知で自動反映する。
+description: hira.page リポジトリのブログ記事 (src/blog/ja/{slug}/index.mdx) の本文を、ユーザーの文体・SEO 観点で清書する。Web 調査による出典補強・引用カードの挿入・仮画像パスの提案も行う。「記事を整えて」「記事を仕上げて」「記事清書」などと言われたとき、または対象 mdx を開いた状態で清書依頼をしたときに起動する。frontmatter はdescriptionのみ、あとは本文のみを対象に、チャット内で全文提示 → レビュー → OK 検知で自動反映する。
 ---
 
 # 記事清書スキル
 
 `hira.page` の **日本語ブログ記事** (`src/blog/ja/{slug}/index.mdx`) の本文を、雑な下書きや音声入力から、ユーザーの文体・SEO 観点で清書する。
 
-frontmatter は絶対に触らない。本文のみが対象。
+frontmatter はdescriptionのみ編集。あとは本文のみが対象。
 
 ---
 
@@ -52,10 +52,10 @@ frontmatter は絶対に触らない。本文のみが対象。
 
 ## 清書のルール (必ず守る制約)
 
-### 1. frontmatter は 1 文字も変更しない
+### 1. frontmatter は descriptionのみ変更
 
-- 先頭 `---` から **2 つめの `---` まで** はそのまま保持
-- `title` `description` `tags` `date` `cover` 等を勝手に変えない
+- 先頭 `---` から **2 つめの `---` まで** はほぼそのまま保持
+- `description` だけ生成
 - もしユーザーから明示的に「title も提案して」と言われた場合のみ、別の作業として扱う (このスキルの責任範囲外)
 
 ### 2. import 文・コード・URL・パスは保持
@@ -138,6 +138,7 @@ frontmatter は絶対に触らない。本文のみが対象。
 
 - 既に置かれている画像 (`cover.png`, `thumbnail.png`, 既存記事の画像) は触らない・パスを変えない
 - 動画プレースホルダは `<video src="/video/{slug}-{name}.mp4" controls />` と書き、TODO コメントで内容説明
+- **仮画像の実ファイル配置は書き込みフェーズ (Step 10) で自動的に行われる**。SKILL が `src/_template/cover.png` をコピー&リネームして実ファイルを置くので、ビルドエラーは起きない
 
 ### どこに仮画像を提案するか
 
@@ -202,11 +203,12 @@ frontmatter は絶対に触らない。本文のみが対象。
 
 `.claude/skills/article-polish/style-guide.md` を Read。**毎回必ず読む** (キャッシュに頼らない)。
 
-### Step 3: 対象ファイルを読む
+### Step 3: 対象ファイルを読む & 既存仮画像の配置
 
 - 対象 `index.mdx` を Read
 - frontmatter (先頭 `---` から 2 つめの `---` まで) を保持しておく
 - 2 つめの `---` 以降の本文と、ユーザーのチャット下書きを統合して清書のもとにする
+- **本文中の相対パス画像 (`./xxx.png` 等) を抽出し、実ファイルが存在しないものを `src/_template/cover.png` からコピー&リネームして即座に配置する** (詳細手順は Step 10-1 参照)。これにより、清書中・レビュー中もビルドエラーが起きない状態を保つ。配置したファイル名はメモしておき、最終報告で示す。
 
 ### Step 4: サンプル記事の参照 (必要時)
 
@@ -240,7 +242,7 @@ frontmatter は絶対に触らない。本文のみが対象。
 ````markdown
 📝 対象: `src/blog/ja/{slug}/index.mdx`
 
-清書版です。frontmatter は触っていません。
+清書版です。
 
 ```mdx
 import EmbedCard from '@/components/Blog/EmbedCard.astro';
@@ -277,19 +279,59 @@ import EmbedCard from '@/components/Blog/EmbedCard.astro';
 
 ### Step 10: 書き込み
 
+#### 10-1. 仮画像ファイルの配置 (本文 Write の前に必ず実施)
+
+清書版の本文中に書かれた相対パス画像 (`![alt](./xxx.png)` `![alt](./xxx.jpg)` `![alt](./xxx.gif)` `![alt](./xxx.webp)` `[![alt](./xxx.png)](URL)` など) について、**実ファイルが存在しないものは `src/_template/cover.png` をコピー&リネームして配置する**。これをやらないと `npm start` / `astro build` で「画像が見つからない」エラーになる。
+
+このロジックは Step 3 でも呼ばれている (既存ファイル本文の仮画像を即配置するため)。Step 10-1 では Step 3 と Step 6 で増えた **清書版に追加された新規仮画像** も含めて、再度実行する。既に配置済みのファイルはスキップされるので二重実行しても安全。
+
+手順:
+
+1. 清書版本文を正規表現で走査し、相対パス画像参照を全て抽出
+   - 対象パターン: `\(\.\/[^)]+\.(png|jpe?g|gif|webp|svg)\)` (Markdown 画像 / リンク)
+   - `<img src="./...">` のような HTML タグ内も対象
+2. 各画像パスについて `src/blog/ja/{slug}/{filename}` を `ls` で確認
+3. 存在しないファイルだけ `cp src/_template/cover.png src/blog/ja/{slug}/{filename}` でコピー
+4. **既存ファイル (`cover.png`, `thumbnail.png`, 既に置かれている画像) は絶対に上書きしない**
+5. 配置したファイル名のリストをメモしておき、書き込み後の報告で示す
+
+Bash 実装例:
+
+```bash
+# 拡張子をそのまま保ち、テンプレートPNGをコピーする (中身はPNGだが拡張子だけ変更)
+TEMPLATE="/Users/a-hirata/projects/hira.page/src/_template/cover.png"
+TARGET_DIR="/Users/a-hirata/projects/hira.page/src/blog/ja/{slug}"
+for filename in "dashboard-comparison.png" "switchbot-air-purifier.jpg" "..."; do
+  if [ ! -f "$TARGET_DIR/$filename" ]; then
+    cp "$TEMPLATE" "$TARGET_DIR/$filename"
+    echo "  placeholder: $filename"
+  fi
+done
+```
+
+注意:
+
+- `public/video/...` などの `/video/` から始まる絶対パスは **対象外** (動画はテンプレートにないため。書き込み後に手動で用意する旨を報告で添える)
+- 外部 URL (`https://...`) は対象外
+- `cover.png` `thumbnail.png` は frontmatter から参照されるが既存なのでコピー不要
+- SVG など `_template/cover.png` を流用しにくい形式は、`.png` などにリネームを提案するか、コピーをスキップして報告で「SVG はテンプレートからコピーできないので手動配置してください」と注意喚起
+
+#### 10-2. 本文の書き込み
+
 1. 対象ファイルを再度 Read (frontmatter の最新状態を取得するため)
 2. 先頭 `---` から 2 つめの `---` までを保持
 3. 2 つめの `---` 以降を清書版で置き換え
 4. Write で全文を上書き
 5. 末尾改行を保持
 
-書き込み後の報告:
+#### 10-3. 報告
 
 ```
 ✅ src/blog/ja/{slug}/index.mdx を更新しました
+📷 仮画像を配置: dashboard-comparison.png, switchbot-air-purifier.jpg, ...
 ```
 
-1 行で完結させる。差分や統計は表示しない (見たければユーザーが `git diff` する)。
+仮画像を配置していない場合は 2 行目を省略。差分や統計は表示しない (見たければユーザーが `git diff` する)。
 
 ---
 
@@ -299,7 +341,7 @@ import EmbedCard from '@/components/Blog/EmbedCard.astro';
 
 文体・構造:
 - [ ] `style-guide.md` を読んだ
-- [ ] frontmatter を含めていない
+- [ ] frontmatter の`description`以外を含めていない
 - [ ] import 文を本文先頭に置いている (もとからあれば)
 - [ ] `#` (h1) を使っていない
 - [ ] コードブロック内のコードを改変していない
@@ -328,6 +370,15 @@ Web 調査・引用:
 - [ ] ユーザーが明示的に OK の意思表示をした
 - [ ] 「ここだけ OK」のような部分 OK ではない
 - [ ] 対象ファイルを再 Read して frontmatter を最新状態にした
+
+対象ファイル Read 時 (Step 3):
+
+- [ ] 既存ファイル本文の相対パス画像を抽出し、不在ファイルを `src/_template/cover.png` からコピーした (ビルドエラー回避)
+
+書き込みフェーズ (Step 10) 中:
+
+- [ ] 清書版で新規追加された仮画像も含め、不在ファイルだけを `src/_template/cover.png` からコピーした (既存画像は上書きしていない)
+- [ ] Step 3 と Step 10 で配置した仮画像ファイル名をすべて報告に含めた
 
 ---
 

@@ -36,16 +36,27 @@ src/
 3. `src/{collection}/en/{slug}/index.mdx` と `src/{collection}/zh-cn/{slug}/index.mdx` を Read（存在しなければ「ファイル不足」として後で新規作成）。
 4. 必要なら `src/_template/index.mdx` も Read（判定用キャッシュ）。
 5. en と zh-cn それぞれについて「未翻訳判定ロジック」を実施。
-6. 未翻訳と判定された言語版について「翻訳ルール」に従って翻訳し、Write で上書き。
-7. 結果サマリを以下の形式で表示:
+6. **アセット同期（必須）**: ja の `index.mdx` 以外のファイル（画像・動画・添付ファイル等）のうち、en / zh-cn 側に **まだ存在しないもの** だけをコピーする。翻訳要否にかかわらず常に実行する。Bash 例:
+   ```bash
+   for lang in en zh-cn; do
+     mkdir -p "src/{collection}/$lang/{slug}"
+     rsync -a --ignore-existing --exclude='index.mdx' "src/{collection}/ja/{slug}/" "src/{collection}/$lang/{slug}/"
+   done
+   ```
+   - `--ignore-existing`: ターゲットに既に同名ファイルがあればスキップする（言語別に差し替えた画像を上書きしない）
+   - `--delete` は付けない（en/zh-cn 固有のファイルを消さない）
+   - 同名で内容を更新したい場合は、ユーザーが手動で en/zh-cn 側を削除してから再実行する運用
+7. 未翻訳と判定された言語版について「翻訳ルール」に従って翻訳し、Write で上書き。
+8. 結果サマリを以下の形式で表示:
    ```
    📝 {collection}/{slug}
    ├ ja:    ✓ 正本
+   ├ assets: 🔄 {N} 件同期
    ├ en:    ✓ 翻訳済み (変更なし) / 🔄 翻訳しました / ➕ 新規作成
    └ zh-cn: ✓ 翻訳済み (変更なし) / 🔄 翻訳しました / ➕ 新規作成
    ```
 
-**注意:** 既に翻訳されている言語版は触らない（上書きしない）。
+**注意:** 既に翻訳されている言語版の `index.mdx` は触らない（上書きしない）。アセット（画像等）は ja 側が正本なので常に同期する。
 
 ---
 
