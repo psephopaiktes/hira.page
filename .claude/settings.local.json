@@ -13,7 +13,9 @@
       "WebFetch(*)",
       "WebSearch",
       "Bash([ ! -f \"$TARGET_DIR/$filename\" ])",
-      "Bash(cp /Users/a-hirata/projects/hira.page/src/_template/cover.png /Users/a-hirata/projects/hira.page/src/blog/ja/i18n-font/__TRACKED_VAR__)"
+      "Bash(cp /Users/a-hirata/projects/hira.page/src/_template/cover.png /Users/a-hirata/projects/hira.page/src/blog/ja/i18n-font/__TRACKED_VAR__)",
+      "Bash(mkdir -p src/blog/__TRACKED_VAR__/i18n-font)",
+      "Bash(rsync -a --ignore-existing --exclude=index.mdx src/blog/ja/i18n-font/ src/blog/__TRACKED_VAR__/i18n-font/)"
     ]
   }
 }
