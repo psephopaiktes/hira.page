@@ -1,0 +1,25 @@
+---
+title: "大型Figma文档的Component Library构建"
+date: 2026-05-01
+draft: false
+tags: ["UI"]
+description: "为Scene Live株式会社的B2B服务lisnavi,以面向实现的视角从零开始重新梳理Component,构建了大规模的Figma Component Library。"
+cover: "./cover.png"
+url: "https://scene-live.com/lisnavi/" 
+priority: 4
+thumbnail: "./thumbnail.png"
+---
+
+
+## 课题
+处于成熟期的B2B服务`lisnavi`,由于采用按需逐个追加画面的设计运用体制,导致出现了以下问题:
+
+* 各个Figma文件中使用的部件设计存在细微差异
+* 存在大量目的相同却近乎重复的UI
+* 实现端与Component的管理体制不一致
+
+
+## 应对
+对工程团队进行访谈后,我依据其所使用的UI库[MUI](https://mui.com/)的Component理念,从零开始重新构建了Figma Library。
+
+为了让无论选择MUI的哪个Component或实现选项,都能与Figma精确对应,我在仔细研读实现端文档的基础上完成了构建。

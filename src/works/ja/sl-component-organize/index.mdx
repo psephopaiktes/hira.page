@@ -1,0 +1,27 @@
+---
+title: "大規模FigmaドキュメントのComponent Library作成"
+date: 2026-05-01
+draft: false
+tags: ["UI"]
+description: "株式会社Scene LiveさまのB2BサービスであるlisnaviのFigmaについて、実装向けにComponentをゼロから見直し、大規模なFigma用Component Libraryを作成しました。"
+cover: "./cover.png"
+url: "https://scene-live.com/lisnavi/" 
+priority: 4
+thumbnail: "./thumbnail.png"
+---
+
+
+## 課題
+成熟期にあるB2Bサービスである`lisnavi`ですが、都度画面追加するようなデザイン運用体制であったため、
+
+* Figmaごとに微妙に使われているパーツのデザインが違う
+* 非常似通った同じ目的のUIが無駄にある
+* 実装とComponentの管理体制が違う
+
+といった問題がおきていました。
+
+
+## 対応
+エンジニアチームにヒアリングを行い、利用されていたUIライブラリである[MUI](https://mui.com/)のComponent思想に沿ったFigma Libraryをゼロから完成しなおしました。
+
+MUIのどのComponent・実装オプションを選択してもFigmaと正確にリンクするように、実装側のドキュメントを読み込んだうえで作成されています。

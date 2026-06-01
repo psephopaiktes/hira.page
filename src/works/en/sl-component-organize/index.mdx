@@ -1,0 +1,24 @@
+---
+title: "Creating a Component Library for a Large-scale Figma Document"
+date: 2026-05-01
+draft: false
+tags: ["UI"]
+description: "For lisnavi, a B2B service by Scene Live Inc., I rebuilt the Figma components from scratch with implementation in mind and created a large-scale Figma Component Library."
+cover: "./cover.png"
+url: "https://scene-live.com/lisnavi/" 
+priority: 4
+thumbnail: "./thumbnail.png"
+---
+
+
+## The Challenge
+`lisnavi` is a mature B2B service, but because screens were being added on an ad-hoc basis, the following problems had emerged:
+
+* Slight design inconsistencies in parts used across different Figma files
+* Many near-duplicate UIs serving the same purpose
+* A management structure for components that diverged from the implementation
+
+## The Approach
+After interviewing the engineering team, I rebuilt the Figma Library from scratch in line with the component philosophy of [MUI](https://mui.com/), the UI library they were using.
+
+The library was created after carefully reading the implementation-side documentation, ensuring that any MUI component or implementation option you choose maps accurately to Figma.
