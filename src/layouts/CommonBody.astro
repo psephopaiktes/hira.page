@@ -72,16 +72,14 @@ const pathOuter = Squircle({
   );
 </script>
 
-<style lang="less">
-  @import "@/styles/common.less";
-
+<style>
   main {
     margin: 8px;
     border-radius: 24px;
-    border: 1px solid rgb(@label / 0.1);
-    background: rgb(@base);
-    box-shadow: 2px 8px 48px rgb(@label / 0.3);
-    @media (width < @xs) {
+    border: 1px solid rgb(from var(--color-label) r g b / 0.1);
+    background: var(--color-base);
+    box-shadow: 2px 8px 48px rgb(from var(--color-label) r g b / 0.3);
+    @media (width < 480px) {
       margin-block-end: 0;
       border-radius: 0;
     }

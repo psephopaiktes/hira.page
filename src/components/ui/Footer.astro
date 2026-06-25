@@ -72,19 +72,17 @@ const snsList = ["X", "note", "GitHub", "Instagram", "Pinterest"];
   );
 </script>
 
-<style lang="less">
-  @import "@/styles/common.less";
-
+<style>
   footer {
     display: grid;
     place-items: center;
     margin-block-start: 96px;
     padding: 64px 48px;
-    background: rgb(@theme / 0.1);
-    color: rgb(@label);
+    background: rgb(from var(--color-theme) r g b / 0.1);
+    color: var(--color-label);
     position: sticky;
     top: 100vh;
-    @media (width < @lg) {
+    @media (width < 1024px) {
       margin-block-start: 64px;
     }
     small {
@@ -113,10 +111,10 @@ const snsList = ["X", "note", "GitHub", "Instagram", "Pinterest"];
   .sns {
     display: flex;
     gap: 32px;
-    @media (width < @lg) {
+    @media (width < 1024px) {
       gap: 24px;
     }
-    @media (width < @2xs) {
+    @media (width < 360px) {
       gap: 16px;
     }
   }
@@ -125,10 +123,10 @@ const snsList = ["X", "note", "GitHub", "Instagram", "Pinterest"];
     display: flex;
     gap: 8px;
     margin-block-start: 32px;
-    @media (width < @lg) {
+    @media (width < 1024px) {
       margin-block-start: 24px;
     }
-    @media (width < @2xs) {
+    @media (width < 360px) {
       margin-block-start: 16px;
       gap: 8px;
     }
@@ -180,9 +178,9 @@ const snsList = ["X", "note", "GitHub", "Instagram", "Pinterest"];
     white-space: nowrap;
 
     border-radius: 24px 0 0 24px;
-    background: rgb(@main / 0.2);
+    background: rgb(from var(--color-main) r g b / 0.2);
     backdrop-filter: saturate(1.6) blur(16px);
-    box-shadow: 2px 2px 16px rgb(@main / 0.2);
+    box-shadow: 2px 2px 16px rgb(from var(--color-main) r g b / 0.2);
 
     &::before {
       content: "";
@@ -194,12 +192,12 @@ const snsList = ["X", "note", "GitHub", "Instagram", "Pinterest"];
       height: 16px;
       clip-path: polygon(50% 0, 100% 100%, 0 100%);
       background: #fff;
-      transition: @transition;
+      transition: var(--transition);
     }
 
     &:hover,
     &:active {
-      background: rgb(@main / 0.6);
+      background: rgb(from var(--color-main) r g b / 0.6);
       &::before {
         top: 14px;
       }
@@ -207,7 +205,7 @@ const snsList = ["X", "note", "GitHub", "Instagram", "Pinterest"];
 
     &.show {
       bottom: 24px;
-      @media (width < @xs) {
+      @media (width < 480px) {
         bottom: calc(16px + env(safe-area-inset-bottom));
       }
     }

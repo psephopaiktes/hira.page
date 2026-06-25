@@ -293,7 +293,7 @@ export const getStaticPaths = () => getLocaleParams(import.meta.url);
       data-swellStalker="contact"
       class="contactBtn"
     >
-      <svg-icon src="/img/icon/contact.svg">
+      <svg-icon src="/img/icon/contact.svg" class="u-iconInText">
         {
           t({
             ja: "メールアイコン",
@@ -313,15 +313,13 @@ export const getStaticPaths = () => getLocaleParams(import.meta.url);
   </div>
 </Base>
 
-<style lang="less">
-  @import "@/styles/common.less";
-
+<style>
   h2 {
     margin-block-start: 64px;
     padding-block-end: 0.2em;
     font-size: 26px;
-    color: rgb(@main);
-    border-bottom: 1px solid rgb(@main / 0.05);
+    color: var(--color-main);
+    border-bottom: 1px solid rgb(from var(--color-main) r g b / 0.05);
   }
 
   ul {
@@ -332,7 +330,7 @@ export const getStaticPaths = () => getLocaleParams(import.meta.url);
 
   .contactBtn {
     margin: 96px auto 0;
-    @media (width < @lg) {
+    @media (width < 1024px) {
       margin-block-start: 64px;
     }
   }

@@ -28,7 +28,12 @@ const path = Squircle({
   />
 
   <div class="overlay">
-    <Picture formats={["avif"]} class="icon" src={Icon} alt="profile icon" />
+    <Picture
+      formats={["avif"]}
+      class="profile-icon"
+      src={Icon}
+      alt="profile icon"
+    />
 
     <h3>Akira HIRATA</h3>
     <p>
@@ -43,9 +48,7 @@ const path = Squircle({
   </clipPath>
 </svg>
 
-<style lang="less">
-  @import "@/styles/common.less";
-
+<style>
   picture {
     display: contents;
   }
@@ -58,12 +61,12 @@ const path = Squircle({
 
     .meImage {
       clip-path: url(#squircleMe);
-      background-color: @placeholder;
+      background-color: var(--color-placeholder);
       width: 100%;
       height: 100%;
       object-fit: cover;
       position: absolute;
-      @media (width < @xs) {
+      @media (width < 480px) {
         clip-path: url(#squircle);
       }
     }
@@ -78,18 +81,18 @@ const path = Squircle({
       position: relative;
       height: 100%;
       padding: 64px 32px 48px;
-      background-color: rgb(@base / 0.7);
+      background-color: rgb(from var(--color-base) r g b / 0.7);
       backdrop-filter: blur(8px) grayscale(0.4);
-      color: rgb(@main);
-      transition: @transition;
-      @media (width < @lg) {
+      color: var(--color-main);
+      transition: var(--transition);
+      @media (width < 1024px) {
         gap: 8px 16px;
         padding: 32px 24px 16px;
       }
-      @media (width < @sm) {
+      @media (width < 640px) {
         padding: 24px;
       }
-      @media (width < @xs) {
+      @media (width < 480px) {
         clip-path: url(#squircle);
         gap: 8px;
         text-align: center;
@@ -104,19 +107,19 @@ const path = Squircle({
         height: 1200px;
         transform-origin: left center;
         rotate: 45deg;
-        background: rgb(@theme / 0.25);
+        background: rgb(from var(--color-theme) r g b / 0.25);
         top: calc(50% - 600px);
         left: 50%;
       }
 
-      .icon {
+      .profile-icon {
         grid-area: 1 / 1 / 3 / 2;
         justify-self: end;
         width: 96px;
-        @media (width < @sm) {
+        @media (width < 640px) {
           width: 64px;
         }
-        @media (width < @xs) {
+        @media (width < 480px) {
           grid-area: 1 / 1;
           justify-self: center;
           width: 80px;
@@ -127,7 +130,7 @@ const path = Squircle({
         font-size: 24px;
         font-weight: 600;
         letter-spacing: 0.1em;
-        @media (width < @xs) {
+        @media (width < 480px) {
           grid-area: 2 / 1;
         }
       }
@@ -137,7 +140,7 @@ const path = Squircle({
         font-size: 14px;
         font-weight: 400;
         margin: 0;
-        @media (width < @xs) {
+        @media (width < 480px) {
           grid-area: 3 / 1;
         }
       }

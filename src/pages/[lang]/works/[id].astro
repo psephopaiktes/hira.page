@@ -2,7 +2,7 @@
 import { loadCollection } from "@/components/loadCollection.ts";
 import { type Lang } from "@/i18n";
 import Base from "@/layouts/Base.astro";
-import "@/styles/blog.less";
+import "@/styles/blog.css";
 import { Picture } from "astro:assets";
 import { render } from "astro:content";
 
@@ -67,23 +67,21 @@ const { Content } = await render(post);
   </div>
 </Base>
 
-<style lang="less">
-  @import "@/styles/common.less";
-
+<style>
   .cover {
     display: block;
     border-radius: 8px;
-    border: 1px solid rgb(@main / 0.05);
+    border: 1px solid rgb(from var(--color-main) r g b / 0.05);
     margin: 64px 64px 0;
     width: calc(100% - 128px);
-    background: @placeholder;
-    @media (width < @xl) {
+    background: var(--color-placeholder);
+    @media (width < 1280px) {
       margin: 0;
       width: 100%;
       border-radius: 24px 24px 0 0;
       border-width: 0 0 1px;
     }
-    @media (width < @xs) {
+    @media (width < 480px) {
       border-radius: 0;
     }
   }
@@ -92,10 +90,10 @@ const { Content } = await render(post);
     h1 {
       margin-block-start: 32px;
       font-size: 2em;
-      @media (width < @lg) {
+      @media (width < 1024px) {
         margin-block-start: 24px;
       }
-      @media (width < @sm) {
+      @media (width < 640px) {
         margin-block-start: 20px;
       }
     }
@@ -103,14 +101,14 @@ const { Content } = await render(post);
     > a {
       display: block;
       margin-block-start: 8px;
-      color: rgb(@theme);
+      color: var(--color-theme);
     }
 
     time {
       display: block;
       font-size: 0.9em;
       margin-block-start: 16px;
-      color: rgb(@main / 0.6);
+      color: rgb(from var(--color-main) r g b / 0.6);
     }
 
     > p {
@@ -128,10 +126,10 @@ const { Content } = await render(post);
   .content,
   .content :global(h2) {
     margin-block-start: 48px;
-    @media (width < @lg) {
+    @media (width < 1024px) {
       margin-block-start: 32px;
     }
-    @media (width < @sm) {
+    @media (width < 640px) {
       margin-block-start: 24px;
     }
   }

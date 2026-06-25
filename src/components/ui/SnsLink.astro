@@ -11,9 +11,7 @@ const {
   <span class="u-textHidden">{sns}</span>
 </a>
 
-<style lang="less">
-  @import "@/styles/common.less";
-
+<style>
   a {
     display: block;
     position: relative;
@@ -39,14 +37,14 @@ const {
       left: 50%;
       transform: translateX(-50%);
       opacity: 0;
-      transition: bottom @transition;
+      transition: bottom var(--transition);
       pointer-events: none;
     }
     &::before {
       content: "";
       border-width: 20px 10px;
       border-style: solid;
-      border-color: rgb(@label) transparent transparent;
+      border-color: var(--color-label) transparent transparent;
       bottom: 30%;
     }
     &::after {
@@ -58,8 +56,8 @@ const {
       border-radius: 8px;
       text-align: center;
       font-size: 14px;
-      background: rgb(@label);
-      color: rgb(@base);
+      background: var(--color-label);
+      color: var(--color-base);
     }
     &:hover,
     &:active {

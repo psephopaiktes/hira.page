@@ -23,9 +23,7 @@ const svgUrl = Squircle({
   )
 }
 
-<style lang="less">
-  @import "@/styles/common.less";
-
+<style>
   a,
   button {
     display: block;
@@ -36,26 +34,20 @@ const svgUrl = Squircle({
     background: none;
     border: solid 16px;
     border-image-slice: 16 fill;
-    color: rgb(@base);
+    color: var(--color-base);
     letter-spacing: 0.1em;
     text-align: center;
     font-weight: 700;
     font-size: 1.1em;
     &:disabled {
       opacity: 0.7;
-      color: rgb(@base / 0.5);
+      color: rgb(from var(--color-base) r g b / 0.5);
       pointer-events: none;
     }
     &:hover,
     &:active,
     &:focus {
-      filter: drop-shadow(0 4px 8px rgb(@theme / 0.8));
-    }
-    :global(svg, svg-icon) {
-      width: 1.6em;
-      aspect-ratio: 1;
-      vertical-align: bottom;
-      fill: currentColor;
+      filter: drop-shadow(0 4px 8px rgb(from var(--color-theme) r g b / 0.8));
     }
   }
 </style>

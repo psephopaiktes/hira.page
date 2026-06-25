@@ -8,23 +8,21 @@ const { label, class: className, href } = Astro.props;
   </a>
 </h1>
 
-<style lang="less">
-  @import "@/styles/common.less";
-
+<style>
   h1 {
     font-family: var(--font-futura), sans-serif;
     margin-block-start: 40px;
     font-weight: 800;
     line-height: 1.2;
     letter-spacing: 0.05em;
-    color: rgb(@label);
-    @media (width < @xl) {
+    color: var(--color-label);
+    @media (width < 1280px) {
       margin-block-start: 56px;
     }
-    @media (width < @lg) {
+    @media (width < 1024px) {
       margin-block-start: 48px;
     }
-    @media (width < @sm) {
+    @media (width < 640px) {
       margin-block-start: 16px;
     }
 
@@ -34,9 +32,8 @@ const { label, class: className, href } = Astro.props;
     }
     &::after {
       content: ".";
-      color: rgb(@theme);
+      color: var(--color-theme);
       font-size: 1.4em;
-      margin-inline-start: -0.2em;
     }
   }
 </style>

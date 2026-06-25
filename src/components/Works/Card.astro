@@ -41,9 +41,7 @@ const [id, data] = [post.id, post.data];
   </div>
 </a>
 
-<style lang="less">
-  @import "@/styles/common.less";
-
+<style>
   picture {
     display: contents;
   }
@@ -54,13 +52,13 @@ const [id, data] = [post.id, post.data];
     aspect-ratio: 1;
     background: #cccccc33;
 
-    @media (width >= @xs) {
+    @media (width >= 480px) {
       &:hover .cover {
         opacity: 0.1;
         filter: blur(4px);
       }
     }
-    @media (width < @xs) {
+    @media (width < 480px) {
       background: none;
     }
   }
@@ -74,7 +72,7 @@ const [id, data] = [post.id, post.data];
     place-items: center;
     text-align: center;
     font-size: 12px;
-    @media (width < @xs) {
+    @media (width < 480px) {
       padding: 101% 5% 5%;
       gap: 2px;
     }
@@ -85,14 +83,14 @@ const [id, data] = [post.id, post.data];
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
-      @media (width < @xs) {
+      @media (width < 480px) {
         font-size: 1.1em;
       }
     }
     time {
       opacity: 0.6;
       line-height: 1;
-      @media (width < @xs) {
+      @media (width < 480px) {
         display: none;
       }
     }
@@ -102,7 +100,7 @@ const [id, data] = [post.id, post.data];
       -webkit-line-clamp: 2;
       -webkit-box-orient: vertical;
       overflow: hidden;
-      @media (width < @xs) {
+      @media (width < 480px) {
         display: none;
       }
     }
@@ -119,6 +117,6 @@ const [id, data] = [post.id, post.data];
     background: #fff;
     width: 96%;
     margin: 2%;
-    transition: @transition;
+    transition: var(--transition);
   }
 </style>

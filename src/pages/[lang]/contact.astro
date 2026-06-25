@@ -259,9 +259,7 @@ const svgUrl = Squircle({
   });
 </script>
 
-<style lang="less">
-  @import "@/styles/common.less";
-
+<style>
   .status {
     h3 {
       margin-block-start: 24px;
@@ -295,9 +293,9 @@ const svgUrl = Squircle({
       margin-block-start: 8px;
       padding: 0;
       width: 100%;
-      color: rgb(@main);
+      color: var(--color-main);
       outline: none;
-      caret-color: rgb(@theme);
+      caret-color: var(--color-theme);
       font-size: 18px;
       line-height: 1.5;
       cursor: text;
@@ -307,15 +305,15 @@ const svgUrl = Squircle({
       border-image-slice: 12 fill;
       opacity: 0.8;
       &:user-invalid:not(:focus) {
-        color: rgb(@caution);
+        color: var(--color-caution);
         border-color: red;
       }
       &::placeholder {
-        color: rgb(@main / 0.3);
+        color: rgb(from var(--color-main) r g b / 0.3);
       }
       &:focus {
         opacity: 1;
-        filter: drop-shadow(0 0 8px rgb(@main / 0.2));
+        filter: drop-shadow(0 0 8px rgb(from var(--color-main) r g b / 0.2));
       }
     }
     textarea {
@@ -325,7 +323,7 @@ const svgUrl = Squircle({
     }
     #js-errorText {
       display: none;
-      color: rgb(@caution);
+      color: var(--color-caution);
       margin-inline-start: 4px;
       span {
         margin-inline-start: 0.5em;

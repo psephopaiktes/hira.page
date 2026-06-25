@@ -56,6 +56,27 @@
           }
         }
       }
+    },
+    {
+      // 生CSSで意図的に使う最新CSS機能・fallback・ユーティリティパターンに対する誤検知を無効化
+      "includes": ["**/*.css"],
+      "linter": {
+        "rules": {
+          "complexity": {
+            "noImportantStyles": "off"
+          },
+          "correctness": {
+            "noUnknownFunction": "off",
+            "noUnknownProperty": "off"
+          },
+          "suspicious": {
+            "noDuplicateProperties": "off"
+          },
+          "style": {
+            "noDescendingSpecificity": "off"
+          }
+        }
+      }
     }
   ]
 }

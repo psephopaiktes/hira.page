@@ -5,7 +5,6 @@
 }
 
 .u-iconInText {
-  margin: 0 -0.2em;
   width: 1.4em;
   height: 1.4em;
   vertical-align: text-bottom;
@@ -13,27 +12,27 @@
 
 .u-showPc,
 .u-hideTabSp {
-  @media (width < @lg) {
+  @media (width < 1024px) {
     display: none !important;
   }
 }
 
 .u-showPcTab,
 .u-hideSp {
-  @media (width < @xs) {
+  @media (width < 480px) {
     display: none !important;
   }
 }
 
 .u-showTabSp,
 .u-hidePc {
-  @media (width >= @lg) {
+  @media (width >= 1024px) {
     display: none !important;
   }
 }
 .u-showSp,
 .u-hidePcTab {
-  @media (width >= @xs) {
+  @media (width >= 480px) {
     display: none !important;
   }
 }

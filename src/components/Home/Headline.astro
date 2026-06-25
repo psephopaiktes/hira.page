@@ -18,15 +18,13 @@ const { label, href } = Astro.props;
   }
 </h2>
 
-<style lang="less">
-  @import "@/styles/common.less";
-
+<style>
   h2 {
     font-family: var(--font-futura), sans-serif;
-    position: relative; // for z-index
+    position: relative; /* for z-index */
     margin-block-start: 64px;
-    color: rgb(@label);
-    @media (width < @lg) {
+    color: var(--color-label);
+    @media (width < 1024px) {
       margin-block-start: 48px;
       font-size: 20px;
     }
@@ -43,7 +41,7 @@ const { label, href } = Astro.props;
     }
     &::after {
       content: ".";
-      color: rgb(@theme);
+      color: var(--color-theme);
       font-size: 1.4em;
     }
   }
@@ -54,9 +52,9 @@ const { label, href } = Astro.props;
     font-size: 0.8em;
     margin-inline-start: 0.4em;
     font-variation-settings: "wght" 500;
-    color: rgb(@main);
+    color: var(--color-main);
     opacity: 0.6;
-    transition: @transition;
+    transition: var(--transition);
     line-height: 1;
     svg-icon {
       width: 1em;
@@ -66,7 +64,7 @@ const { label, href } = Astro.props;
   }
   :is(a:hover, a:active) small {
     opacity: 1;
-    color: rgb(@main / 0.9);
+    color: rgb(from var(--color-main) r g b / 0.9);
     font-variation-settings: "wght" 700;
   }
 </style>

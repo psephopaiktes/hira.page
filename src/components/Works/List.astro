@@ -20,25 +20,23 @@ const { posts } = Astro.props;
   }
 </ul>
 
-<style lang="less">
-  @import "@/styles/common.less";
-
+<style>
   ul {
     margin-block-start: 32px;
     display: flex;
     flex-wrap: wrap;
     gap: 16px;
-    @media (width < @xs) {
+    @media (width < 480px) {
       gap: 4px;
     }
   }
   li {
-    filter: @filterShadow;
+    filter: var(--filter-shadow);
     width: calc((100% - 32px) / 3);
-    @media (width < @lg) {
+    @media (width < 1024px) {
       width: calc(50% - 8px);
     }
-    @media (width < @xs) {
+    @media (width < 480px) {
       width: calc(50% - 2px);
     }
   }

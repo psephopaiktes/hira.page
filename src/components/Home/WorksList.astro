@@ -19,17 +19,15 @@ const worksCollection = await loadCollection(
   }
 </ul>
 
-<style lang="less">
-  @import "@/styles/common.less";
-
+<style>
   ul {
     margin-block-start: 16px;
     display: flex;
     gap: 8px;
-    @media (width < @lg) {
+    @media (width < 1024px) {
       flex-wrap: wrap;
     }
-    @media (width < @xs) {
+    @media (width < 480px) {
       flex-wrap: nowrap;
       width: 100vw;
       margin-inline: -24px;
@@ -41,23 +39,23 @@ const worksCollection = await loadCollection(
   }
 
   li {
-    filter: @filterShadow;
+    filter: var(--filter-shadow);
     width: calc((100% - 16px) / 3);
-    @media (width < @lg) {
+    @media (width < 1024px) {
       width: calc(50% - 4px);
     }
-    @media (width < @xs) {
+    @media (width < 480px) {
       width: 240px;
       flex-shrink: 0;
       scroll-snap-align: start;
     }
-    // 要素の数を調整
-    @media (width >= @xs) {
+    /* 要素の数を調整 */
+    @media (width >= 480px) {
       &:nth-child(n + 5) {
         display: none;
       }
     }
-    @media (width >= @lg) {
+    @media (width >= 1024px) {
       &:nth-child(n + 4) {
         display: none;
       }

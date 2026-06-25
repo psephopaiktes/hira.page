@@ -1,0 +1,125 @@
+:root {
+  background: var(--color-theme);
+  accent-color: var(--color-theme);
+  color: rgb(from var(--color-main) r g b / 0.9);
+
+  --color-theme: #ffbb00;
+  --color-label: #884400;
+  --color-base: #fffcf6;
+  --color-main: #383430;
+  --color-caution: #d82700;
+
+  --color-placeholder: #99999922;
+  --transition: 0.2s ease-out;
+  --filter-shadow: drop-shadow(
+    0px 8px 24px rgb(from var(--color-label) r g b / 0.1)
+  );
+
+  @media (prefers-color-scheme: dark) {
+    --color-theme: #ffbb00;
+    --color-label: #ffbb00;
+    --color-base: #2a2824;
+    --color-main: #ffffff;
+    --color-caution: #ff531d;
+  }
+  &[data-theme="light"] {
+    --color-theme: #ffbb00;
+    --color-label: #884400;
+    --color-base: #fffcf6;
+    --color-main: #383430;
+    --color-caution: #d82700;
+  }
+  &[data-theme="dark"] {
+    --color-theme: #ffbb00;
+    --color-label: #ffbb00;
+    --color-base: #2a2824;
+    --color-main: #ffffff;
+    --color-caution: #ff531d;
+  }
+}
+
+body {
+  &:lang(ja) {
+    font-family: var(--font-alibaba-jp), sans-serif;
+  }
+  &:lang(zh-cn) {
+    font-family: var(--font-alibaba-sc), sans-serif;
+  }
+  font-family: var(--font-alibaba), sans-serif;
+  line-height: 1.7;
+  font-weight: 500;
+  font-size: 16px;
+  font-feature-settings: "pkna" 1;
+  font-kerning: normal;
+  letter-spacing: 0.02em;
+  @media (width < 768px) {
+    font-size: 14px;
+  }
+}
+
+/* Grain Noise */
+body::before {
+  content: "";
+  display: block;
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  opacity: 0.4;
+  filter: contrast(480%) brightness(120%);
+  mix-blend-mode: color-burn;
+  background-image:
+    radial-gradient(160vw 120vh at center -20vh, #ff660000 20%, #ff6600cc 100%),
+    url("data:image/svg+xml,%3Csvg%20viewBox='0%200%201200%201200'%20xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter%20id='noiseFilter'%3E%3CfeTurbulence%20type='fractalNoise'%20baseFrequency='0.6'%20numOctaves='3'%20stitchTiles='stitch'/%3E%3C/filter%3E%3Crect%20width='100%25'%20height='100%25'%20filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  @media (width < 1024px) {
+    display: none;
+  }
+}
+
+/* Basic DOM Style */
+h1,
+h2,
+h3,
+h4,
+button,
+input,
+label {
+  line-height: 1.4;
+}
+
+p {
+  margin-block-start: 12px;
+}
+p a {
+  color: var(--color-theme);
+}
+
+a,
+button {
+  transition: var(--transition);
+  &:hover,
+  &:active {
+    transition: var(--transition);
+  }
+}
+
+:focus-visible {
+  outline-color: var(--color-theme);
+}
+::selection {
+  background: var(--color-theme);
+  color: var(--color-base);
+}
+::marker {
+  color: rgb(from var(--color-main) r g b / 0.6);
+}
+:is(
+    ::-webkit-calendar-picker-indicator,
+    ::-webkit-clear-button,
+    ::-webkit-inner-spin-button,
+    ::-webkit-outer-spin-button
+  ) {
+  color: var(--color-theme);
+}

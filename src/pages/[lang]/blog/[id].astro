@@ -216,9 +216,7 @@ recommendCollection.posts = recommendCollection.posts.filter((recPost) => {
   </footer>
 </BlogDetail>
 
-<style lang="less">
-  @import "@/styles/common.less";
-
+<style>
   article {
     display: grid;
     padding: 64px 32px 0 80px;
@@ -227,12 +225,12 @@ recommendCollection.posts = recommendCollection.posts.filter((recPost) => {
     grid-template-areas:
       "header aside"
       "content aside";
-    @media (width < @2xl) {
+    @media (width < 1536px) {
       padding: 56px 24px 0 64px;
       gap: 0 56px;
       grid-template-columns: 640px minmax(0, 1fr);
     }
-    @media (width < @xl) {
+    @media (width < 1280px) {
       gap: 0 16px;
       grid-template-columns: 100%;
       grid-template-areas:
@@ -249,26 +247,26 @@ recommendCollection.posts = recommendCollection.posts.filter((recPost) => {
     img {
       display: block;
       border-radius: 6px;
-      border: 1px solid rgb(@main / 0.05);
-      background: @placeholder;
-      @media (width < @xl) {
+      border: 1px solid rgb(from var(--color-main) r g b / 0.05);
+      background: var(--color-placeholder);
+      @media (width < 1280px) {
         border-radius: 24px 24px 0 0;
         border-width: 0 0 1px;
       }
-      @media (width < @xs) {
+      @media (width < 480px) {
         border-radius: 0;
       }
     }
 
     .meta {
       margin-block-start: 32px;
-      @media (width < @xl) {
+      @media (width < 1280px) {
         padding: 0 48px;
       }
-      @media (width < @md) {
+      @media (width < 768px) {
         padding: 0 32px;
       }
-      @media (width < @xs) {
+      @media (width < 480px) {
         padding: 0 24px;
       }
     }
@@ -286,7 +284,7 @@ recommendCollection.posts = recommendCollection.posts.filter((recPost) => {
       gap: 0.5em;
       margin-block-start: 20px;
       margin-inline-end: 16px;
-      color: rgb(@main / 0.6);
+      color: rgb(from var(--color-main) r g b / 0.6);
     }
 
     ul {
@@ -295,7 +293,7 @@ recommendCollection.posts = recommendCollection.posts.filter((recPost) => {
       float: right;
       margin-block-start: 18px;
       gap: 6px;
-      @media (width < @xs) {
+      @media (width < 480px) {
         float: none;
       }
     }
@@ -312,7 +310,7 @@ recommendCollection.posts = recommendCollection.posts.filter((recPost) => {
       gap: 8px;
       margin-block: 24px 8px;
       padding: 12px 16px;
-      background: rgb(@main / 0.08);
+      background: rgb(from var(--color-main) r g b / 0.08);
       border-radius: 6px;
       font-size: 11px;
     }
@@ -320,18 +318,18 @@ recommendCollection.posts = recommendCollection.posts.filter((recPost) => {
 
   aside {
     grid-area: aside;
-    @media (width < @xl) {
+    @media (width < 1280px) {
       margin-inline: 48px;
       margin-block-start: 24px;
       position: relative;
-      background: rgb(@theme / 0.05);
+      background: rgb(from var(--color-theme) r g b / 0.05);
       border-radius: 6px;
       padding: 0 24px 32px;
     }
-    @media (width < @md) {
+    @media (width < 768px) {
       margin-inline: 32px;
     }
-    @media (width < @xs) {
+    @media (width < 480px) {
       margin-inline: 24px;
     }
 
@@ -346,7 +344,7 @@ recommendCollection.posts = recommendCollection.posts.filter((recPost) => {
       &:nth-of-type(2) {
         margin-block-start: 32px;
       }
-      @media (width < @xl) {
+      @media (width < 1280px) {
         margin-block-start: 24px !important;
       }
     }
@@ -356,7 +354,7 @@ recommendCollection.posts = recommendCollection.posts.filter((recPost) => {
       gap: 4px;
       margin-block-start: 16px;
       li:nth-child(1):hover {
-        color: rgb(@main);
+        color: var(--color-main);
       }
       li:nth-child(2):hover {
         color: #1876f2;
@@ -365,7 +363,7 @@ recommendCollection.posts = recommendCollection.posts.filter((recPost) => {
         color: #2bb24c;
       }
       li:nth-child(4):hover {
-        color: rgb(@main);
+        color: var(--color-main);
       }
       li:nth-child(5):hover {
         color: #eb4d3c;
@@ -374,7 +372,7 @@ recommendCollection.posts = recommendCollection.posts.filter((recPost) => {
 
     .toc {
       scroll-target-group: auto;
-      border-left: 1px solid rgb(@main / 0.2);
+      border-left: 1px solid rgb(from var(--color-main) r g b / 0.2);
       margin-block-start: 12px;
 
       a {
@@ -391,10 +389,10 @@ recommendCollection.posts = recommendCollection.posts.filter((recPost) => {
         overflow: hidden;
         font-weight: bold;
         white-space: nowrap;
-        border-left: 2px solid rgb(@main / 0);
-        @media (width >= @sm) {
+        border-left: 2px solid rgb(from var(--color-main) r g b / 0);
+        @media (width >= 640px) {
           &:target-current {
-            border-left: 2px solid rgb(@main / 0.6);
+            border-left: 2px solid rgb(from var(--color-main) r g b / 0.6);
           }
         }
         &:hover {
@@ -403,7 +401,7 @@ recommendCollection.posts = recommendCollection.posts.filter((recPost) => {
       }
 
       li.sub {
-        @media (width < @sm) {
+        @media (width < 640px) {
           display: none;
         }
         a {
@@ -419,49 +417,49 @@ recommendCollection.posts = recommendCollection.posts.filter((recPost) => {
   .content {
     grid-area: content;
     margin-block-start: 32px;
-    @media (width < @xl) {
+    @media (width < 1280px) {
       padding: 0 48px;
     }
-    @media (width < @md) {
+    @media (width < 768px) {
       padding: 0 32px;
     }
-    @media (width < @xs) {
+    @media (width < 480px) {
       padding: 0 24px;
     }
   }
 
   .blogFooter {
-    border-top: 2px dashed rgb(@theme / 0.4);
+    border-top: 2px dashed rgb(from var(--color-theme) r g b / 0.4);
     margin-block-start: 96px;
-    @media (width < @lg) {
+    @media (width < 1024px) {
       margin-block-start: 64px;
     }
 
-    h2 {
+    & h2 {
       font-size: 1.4em;
-      color: rgb(@label);
+      color: var(--color-label);
       margin-block-start: 64px;
     }
 
     .banner {
-      box-shadow: 0px 8px 24px -8px rgb(@label / 0.1);
+      box-shadow: 0px 8px 24px -8px rgb(from var(--color-label) r g b / 0.1);
       margin-block-start: 16px;
       min-height: 160px;
-      background: rgb(@main / 0.1);
+      background: rgb(from var(--color-main) r g b / 0.1);
       border-radius: 6px;
       overflow: hidden;
     }
   }
 
   .recommendList {
-    filter: @filterShadow;
+    filter: var(--filter-shadow);
     margin-block-start: 16px;
     display: flex;
     gap: 8px;
-    @media (width < @lg) {
+    @media (width < 1024px) {
       flex-wrap: wrap;
     }
-    @media (width < @xs) {
+    @media (width < 480px) {
       flex-wrap: nowrap;
       width: 100vw;
       margin-inline: -24px;
@@ -471,23 +469,23 @@ recommendCollection.posts = recommendCollection.posts.filter((recPost) => {
       scroll-snap-type: x mandatory;
     }
 
-    li {
+    & > li {
       width: calc((100% - 16px) / 3);
-      @media (width < @lg) {
+      @media (width < 1024px) {
         width: calc(50% - 4px);
       }
-      @media (width < @xs) {
+      @media (width < 480px) {
         width: 240px;
         flex-shrink: 0;
         scroll-snap-align: start;
       }
-      // 要素の数を調整
-      @media (width >= @xs) {
+      /* 要素の数を調整 */
+      @media (width >= 480px) {
         &:nth-child(n + 5) {
           display: none;
         }
       }
-      @media (width >= @lg) {
+      @media (width >= 1024px) {
         &:nth-child(n + 4) {
           display: none;
         }

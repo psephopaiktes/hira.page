@@ -16,7 +16,7 @@
   text-spacing-trim: trim-start;
   font-smoothing: antialiased;
   hanging-punctuation: allow-end;
-  // word-break: auto-phrase
+  /* word-break: auto-phrase */
   line-break: strict;
 }
 
@@ -46,7 +46,7 @@ h1,
 h2,
 h3,
 h4 {
-  // text-wrap: balance;
+  /* text-wrap: balance; */
 }
 
 a {
