@@ -113,15 +113,13 @@ const currentTag = Astro.params.tag;
   );
 </script>
 
-<style lang="less">
-  @import "@/styles/common.less";
-
+<style>
   .grid {
     display: grid;
     gap: 24px;
     grid-template-areas: "grid1 grid2" "grid3 grid3";
     align-items: end;
-    @media (width < @xs) {
+    @media (width < 480px) {
       grid-template-areas: "grid1" "grid2" "grid3";
     }
     .grid1 {
@@ -140,14 +138,14 @@ const currentTag = Astro.params.tag;
     justify-content: end;
     align-items: center;
     gap: 4px;
-    color: rgb(@main / 0.7);
-    @media (width < @xs) {
+    color: rgb(from var(--color-main) r g b / 0.7);
+    @media (width < 480px) {
       justify-content: start;
     }
   }
 
   #js-search {
-    color: rgb(@label);
+    color: var(--color-label);
     margin-inline-start: 8px;
     display: block;
     height: 28px;

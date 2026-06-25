@@ -37,9 +37,7 @@ import AoSleepImage from "@/assets/ao-sleep.webp";
   );
 </script>
 
-<style lang="less">
-  @import "@/styles/common.less";
-
+<style>
   #js-fadeImage {
     opacity: 0;
     transition: opacity 0.4s ease-in;
@@ -65,7 +63,7 @@ import AoSleepImage from "@/assets/ao-sleep.webp";
     object-fit: cover;
     object-position: right;
     border-radius: 24px 24px 0 0;
-    @media (width < @xs) {
+    @media (width < 480px) {
       border-radius: 0;
       object-position: 80% center;
     }
@@ -73,7 +71,7 @@ import AoSleepImage from "@/assets/ao-sleep.webp";
   h2 {
     z-index: 1;
     margin-block: auto;
-    @media (width < @xs) {
+    @media (width < 480px) {
       display: grid;
       place-items: center;
       text-align: center;
@@ -81,14 +79,14 @@ import AoSleepImage from "@/assets/ao-sleep.webp";
     dotlottie-player {
       width: 160px;
       aspect-ratio: 4;
-      @media (width < @lg) {
+      @media (width < 1024px) {
         width: 120px;
       }
     }
     p {
       margin: 16px 4px -16px;
       line-height: 1.8;
-      color: rgb(@label / 0.9);
+      color: rgb(from var(--color-label) r g b / 0.9);
       font-size: 14px;
       font-weight: 400;
       letter-spacing: 0.1em;

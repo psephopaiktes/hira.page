@@ -79,9 +79,7 @@ const t = useTranslations(locale);
   );
 </script>
 
-<style lang="less">
-  @import "@/styles/common.less";
-
+<style>
   #js-stalker {
     position: fixed;
     top: 0;
@@ -99,10 +97,10 @@ const t = useTranslations(locale);
     pointer-events: none;
     z-index: 998;
     mix-blend-mode: exclusion;
-    transition: @transition;
-    background: rgb(@theme);
+    transition: var(--transition);
+    background: var(--color-theme);
     color: #000;
-    @media (width < @sm) {
+    @media (width < 640px) {
       display: none;
     }
 

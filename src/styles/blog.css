@@ -1,14 +1,21 @@
-@import "common";
-
 body {
   font-size: 17px;
-  @media (width < @md) {
+  @media (width < 768px) {
     font-size: 15px;
   }
 }
 
 h1 {
   line-height: 1.5;
+}
+
+@keyframes highlight {
+  0% {
+    background-color: rgb(from var(--color-theme) r g b / 0.6);
+  }
+  100% {
+    background-color: none;
+  }
 }
 
 .content {
@@ -24,28 +31,20 @@ h1 {
   h3:target {
     animation: highlight 2s;
   }
-  @keyframes highlight {
-    0% {
-      background-color: rgb(@theme / 0.6);
-    }
-    100% {
-      background-color: none;
-    }
-  }
 
   h2 {
     margin: 3.2em 0 0;
     padding-block-end: 0.2em;
     line-height: 1;
     font-size: 1.6em;
-    color: rgb(@label);
+    color: var(--color-label);
 
     &::first-letter {
       font-size: 1.3em;
     }
     &::after {
       content: ".";
-      color: rgb(@theme);
+      color: var(--color-theme);
       font-size: 1.6em;
     }
   }
@@ -55,7 +54,7 @@ h1 {
     padding-block-end: 0.2em;
     line-height: 1.4;
     font-size: 1.4em;
-    border-bottom: 1px solid rgb(@main / 0.1);
+    border-bottom: 1px solid rgb(from var(--color-main) r g b / 0.1);
   }
 
   h4 {
@@ -76,8 +75,9 @@ h1 {
       }
       input {
         position: absolute;
-        width: 1em; aspect-ratio: 1;
-        inset: .32em auto auto .2em;
+        width: 1em;
+        aspect-ratio: 1;
+        inset: 0.32em auto auto 0.2em;
       }
     }
   }
@@ -116,14 +116,14 @@ h1 {
     width: 100%;
     th,
     td {
-      border: 1px solid rgb(@main / 0.2);
+      border: 1px solid rgb(from var(--color-main) r g b / 0.2);
       padding: 0.4em 0.8em;
     }
     th {
-      background: rgb(@main / 0.2);
+      background: rgb(from var(--color-main) r g b / 0.2);
     }
     tr:nth-child(even) td {
-      background: rgb(@main / 0.02);
+      background: rgb(from var(--color-main) r g b / 0.02);
     }
   }
 
@@ -132,13 +132,16 @@ h1 {
   }
 
   strong {
-    background: linear-gradient(transparent 60%, rgb(@theme / 0.2) 40%);
+    background: linear-gradient(
+      transparent 60%,
+      rgb(from var(--color-theme) r g b / 0.2) 40%
+    );
   }
 
   :not(pre) code {
     font-family: Consolas, "Courier New", Courier, Monaco, monospace;
-    color: rgb(@label / 0.9);
-    background-color: rgb(@main / 0.08);
+    color: rgb(from var(--color-label) r g b / 0.9);
+    background-color: rgb(from var(--color-main) r g b / 0.08);
     padding: 0.2em 0.4em;
     margin: auto 0.2em;
     border-radius: 2px;
@@ -148,16 +151,18 @@ h1 {
 
   blockquote {
     font-style: italic;
-    color: rgb(@main / 0.8);
-    background: rgb(@main / 0.05);
+    color: rgb(from var(--color-main) r g b / 0.8);
+    background: rgb(from var(--color-main) r g b / 0.05);
     padding: 0.6em 1em;
-    border-left: 2px solid rgb(@main / 0.1);
-    p { margin: 0 }
+    border-left: 2px solid rgb(from var(--color-main) r g b / 0.1);
+    p {
+      margin: 0;
+    }
   }
 
   details {
-    background-color:  rgb(@main / 0.05);
-    border: 1px solid rgb(@main / 0.05);
+    background-color: rgb(from var(--color-main) r g b / 0.05);
+    border: 1px solid rgb(from var(--color-main) r g b / 0.05);
     padding: 16px;
     border-radius: 10px;
     overflow: hidden;
@@ -175,7 +180,7 @@ h1 {
       padding: 14px 16px 16px;
       padding-inline-start: calc(16px + 1.8em);
       cursor: pointer;
-      background-color: rgb(@base);
+      background-color: var(--color-base);
       line-height: 1.4;
       &::-webkit-details-marker {
         display: none;
@@ -187,7 +192,7 @@ h1 {
         inset: 16px;
         width: 1.2em;
         aspect-ratio: 1;
-        background: rgb(@main / 0.2);
+        background: rgb(from var(--color-main) r g b / 0.2);
         clip-path: polygon(
           10% 35%,
           50% 75%,
@@ -221,7 +226,7 @@ h1 {
       display: block;
       margin-block-start: 0.4em;
       a {
-        color: rgb(@main / 0.4);
+        color: rgb(from var(--color-main) r g b / 0.4);
         text-decoration: underline;
       }
     }
@@ -230,12 +235,12 @@ h1 {
   hr {
     border: 0;
     margin: 8em 0 6em;
-    border-top: 1px dashed rgb(@main / 0.5);
+    border-top: 1px dashed rgb(from var(--color-main) r g b / 0.5);
   }
 
   a {
     text-decoration: underline;
-    color: rgb(@label);
+    color: var(--color-label);
     font-weight: 500;
     &:visited {
       filter: brightness(80%);
@@ -247,8 +252,8 @@ h1 {
       margin-inline-end: 0.2em;
       padding: 4px 8px 4px 4px;
       border-radius: 6px;
-      background: rgb(@label / 0.8);
-      color: rgb(@base);
+      background: rgb(from var(--color-label) r g b / 0.8);
+      color: var(--color-base);
       line-height: 1em;
       &::before {
         content: "↓";
@@ -259,8 +264,8 @@ h1 {
         line-height: 1.4em;
         text-align: center;
         margin-inline-end: 6px;
-        color: rgb(@label / 0.8);
-        background-color: rgb(@base);
+        color: rgb(from var(--color-label) r g b / 0.8);
+        background-color: var(--color-base);
       }
       &:hover {
         scale: 1.02;
@@ -270,12 +275,12 @@ h1 {
 
   img {
     border-radius: 4px;
-    background-color: @placeholder;
+    background-color: var(--color-placeholder);
   }
   video {
     max-width: 100%;
     border-radius: 4px;
-    background-color: @placeholder;
+    background-color: var(--color-placeholder);
   }
   iframe {
     max-width: 100%;
@@ -288,11 +293,11 @@ h1 {
     height: auto;
   }
 
-  // Code Highlight
+  /* Code Highlight */
   pre {
     padding: 1em;
     border-radius: 4px;
-    border: 2px solid rgb(@main / 0.2);
+    border: 2px solid rgb(from var(--color-main) r g b / 0.2);
     code {
       counter-reset: step;
       counter-increment: step 0;
@@ -313,19 +318,19 @@ h1 {
         color: #ffffff33;
       }
     }
-    // Shiki Transformers
+    /* Shiki Transformers */
     /* transformerNotationDiff */
     .line.diff {
       &.add {
         background-color: #0505;
         &:before {
-          content: '+';
+          content: "+";
         }
       }
       &.remove {
         background-color: #8005;
         &:before {
-          content: '−';
+          content: "−";
         }
       }
     }
@@ -362,7 +367,7 @@ h1 {
   .footnotes {
     margin-block-start: 8em;
     padding-block-start: 2em;
-    border-top: 1px solid rgb(@main / 0.2);
+    border-top: 1px solid rgb(from var(--color-main) r g b / 0.2);
     h2 {
       display: none;
     }
@@ -384,14 +389,14 @@ h1 {
     grid-template-columns: 160px auto 1fr;
     grid-template-rows: auto 1fr;
     box-sizing: content-box;
-    border: 1px solid rgb(@main / 0.1);
+    border: 1px solid rgb(from var(--color-main) r g b / 0.1);
     border-radius: 6px;
-    box-shadow: 2px 8px 48px -24px rgb(@main / 0.4);
+    box-shadow: 2px 8px 48px -24px rgb(from var(--color-main) r g b / 0.4);
     overflow: hidden;
     will-change: transform;
     text-decoration: none;
-    background: rgb(@base);
-    @media (width < @xs) {
+    background: var(--color-base);
+    @media (width < 480px) {
       grid-template-columns: 100px auto 1fr;
     }
     &:hover {
@@ -406,9 +411,9 @@ h1 {
       object-fit: cover;
       width: 160px;
       aspect-ratio: 4 / 3;
-      border-right: 1px solid rgb(@main / 0.1);
+      border-right: 1px solid rgb(from var(--color-main) r g b / 0.1);
       border-radius: 0;
-      @media (width < @xs) {
+      @media (width < 480px) {
         width: 100px;
         aspect-ratio: 1;
       }
@@ -424,9 +429,9 @@ h1 {
       font-size: 15px;
       line-height: 1.4;
       margin: 16px 16px 0px;
-      color: rgb(@main / 0.8);
+      color: rgb(from var(--color-main) r g b / 0.8);
       font-weight: 600;
-      @media (width < @xs) {
+      @media (width < 480px) {
         -webkit-line-clamp: 2;
       }
     }
@@ -446,7 +451,7 @@ h1 {
       text-overflow: ellipsis;
       font-size: 11px;
       line-height: 14px;
-      color: rgb(@main / 0.6);
+      color: rgb(from var(--color-main) r g b / 0.6);
     }
   }
 

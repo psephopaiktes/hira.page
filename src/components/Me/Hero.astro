@@ -65,9 +65,7 @@ const snsList = ["X", "note", "GitHub", "Instagram", "Pinterest"];
   );
 </script>
 
-<style lang="less">
-  @import "@/styles/common.less";
-
+<style>
   #js-fadeImage {
     opacity: 0;
     transition: opacity 0.6s ease-in;
@@ -85,7 +83,7 @@ const snsList = ["X", "note", "GitHub", "Instagram", "Pinterest"];
     background: #999;
     position: relative;
     font-family: var(--font-futura), sans-serif;
-    @media (width < @xs) {
+    @media (width < 480px) {
       height: 240px;
       margin: 0;
       border-radius: 0;
@@ -104,7 +102,7 @@ const snsList = ["X", "note", "GitHub", "Instagram", "Pinterest"];
       &:first-child {
         opacity: 0.6;
       }
-      @media (width < @xs) {
+      @media (width < 480px) {
         object-position: 50% center;
       }
     }
@@ -113,7 +111,7 @@ const snsList = ["X", "note", "GitHub", "Instagram", "Pinterest"];
       z-index: 1;
       margin-block: auto;
       color: #fff;
-      @media (width < @xs) {
+      @media (width < 480px) {
         margin-block: 8px;
       }
     }
@@ -123,10 +121,10 @@ const snsList = ["X", "note", "GitHub", "Instagram", "Pinterest"];
       font-size: 48px;
       text-shadow: 0 0 32px rgb(0 0 0 / 0.4);
 
-      @media (width < @sm) {
+      @media (width < 640px) {
         text-align: left;
       }
-      @media (width < @xs) {
+      @media (width < 480px) {
         font-size: 32px;
       }
       p:nth-child(2) {
@@ -144,10 +142,10 @@ const snsList = ["X", "note", "GitHub", "Instagram", "Pinterest"];
       gap: 16px;
       margin-block-start: 32px;
       justify-content: center;
-      @media (width < @sm) {
+      @media (width < 640px) {
         justify-content: start;
       }
-      @media (width < @xs) {
+      @media (width < 480px) {
         gap: 20px;
         :global(a) {
           opacity: 1;
@@ -165,29 +163,30 @@ const snsList = ["X", "note", "GitHub", "Instagram", "Pinterest"];
       max-width: none;
       filter: drop-shadow(0 0 16px rgb(255 255 255 / 0.2));
       animation: slidein 0.4s ease-out;
-      @keyframes slidein {
-        0% {
-          translate: 200px;
-        }
-        90% {
-          translate: -10px;
-        }
-        100% {
-          translate: 0;
-        }
-      }
 
-      @media (width < @sm) {
+      @media (width < 640px) {
         height: 120px;
         bottom: -26px;
         right: 4px;
       }
-      @media (width < @xs) {
+      @media (width < 480px) {
         height: 96px;
         bottom: -20px;
         right: 0;
         filter: drop-shadow(0 0 12px rgb(255 255 255 / 0.4));
       }
+    }
+  }
+
+  @keyframes slidein {
+    0% {
+      translate: 200px;
+    }
+    90% {
+      translate: -10px;
+    }
+    100% {
+      translate: 0;
     }
   }
 </style>

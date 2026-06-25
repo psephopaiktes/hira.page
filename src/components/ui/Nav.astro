@@ -60,9 +60,7 @@ const pageList = ["blog", "works", "me", "price"];
   </div>
 </nav>
 
-<style lang="less">
-  @import "@/styles/common.less";
-
+<style>
   nav {
     display: flex;
     justify-content: center;
@@ -70,15 +68,15 @@ const pageList = ["blog", "works", "me", "price"];
     flex-direction: column;
     gap: 48px;
     color: #fff;
-    @media (width < @xl) {
+    @media (width < 1280px) {
       gap: 32px;
     }
-    @media (width < @lg) {
+    @media (width < 1024px) {
       align-items: start;
       padding: 28px 8px 0;
       gap: 8px;
     }
-    @media (width < @xs) {
+    @media (width < 480px) {
       padding: 20px 10px 0;
     }
   }
@@ -86,23 +84,22 @@ const pageList = ["blog", "works", "me", "price"];
   dotlottie-player {
     width: 36px;
     height: 36px;
-    @media (width < @xs) {
+    @media (width < 480px) {
       width: 32px;
       height: 32px;
     }
   }
 
-  @width: 168px;
 
   .logo {
-    width: @width;
+    width: 168px;
     margin-block-start: -5vh;
     line-height: 1;
-    @media (width < @lg) {
+    @media (width < 1024px) {
       margin-block-start: 0;
       width: 128px;
     }
-    @media (width < @xs) {
+    @media (width < 480px) {
       width: 96px;
     }
 
@@ -130,15 +127,15 @@ const pageList = ["blog", "works", "me", "price"];
   }
 
   .menu {
-    width: @width;
-    @media (width < @lg) {
+    width: 168px;
+    @media (width < 1024px) {
       display: flex;
       width: 100%;
       justify-content: space-between;
       align-items: center;
       padding: 0 16px;
     }
-    @media (width < @xs) {
+    @media (width < 480px) {
       padding: 0 24px;
     }
 
@@ -154,8 +151,8 @@ const pageList = ["blog", "works", "me", "price"];
         height: 16px;
         clip-path: polygon(0 0, 100% 50%, 0 100%);
         background-color: #fff;
-        transition: @transition;
-        @media (width < @lg) {
+        transition: var(--transition);
+        @media (width < 1024px) {
           width: 48px;
           height: 4px;
           bottom: -8px;
@@ -163,7 +160,7 @@ const pageList = ["blog", "works", "me", "price"];
           clip-path: none;
           border-radius: 4px 4px 0 0;
         }
-        @media (width < @xs) {
+        @media (width < 480px) {
           width: 32px;
           right: calc(50% - 16px);
         }
@@ -178,14 +175,14 @@ const pageList = ["blog", "works", "me", "price"];
       font-size: 20px;
       opacity: 0.8;
       text-shadow: 0 0 24px rgb(136 68 0 / 0.2);
-      @media (width < @lg) {
+      @media (width < 1024px) {
         font-size: 18px;
       }
-      @media (width < @sm) {
+      @media (width < 640px) {
         font-size: 16px;
         gap: 2px;
       }
-      @media (width < @xs) {
+      @media (width < 480px) {
         flex-direction: column;
         height: auto;
         gap: 0;
@@ -201,7 +198,7 @@ const pageList = ["blog", "works", "me", "price"];
   }
 
   .contact {
-    width: @width;
+    width: 168px;
     display: flex;
     gap: 6px;
     height: 48px;
@@ -209,7 +206,7 @@ const pageList = ["blog", "works", "me", "price"];
     align-items: center;
     font-size: 18px;
     background: rgb(255 255 255 / 0.4);
-    // text-shadow: 0 0 24px rgb(136 68 0 / 0.2);
+    /* text-shadow: 0 0 24px rgb(136 68 0 / 0.2); */
     word-break: keep-all;
     border: 2px solid rgb(255 255 255 / 0.4);
     border-radius: 12px;
@@ -226,7 +223,7 @@ const pageList = ["blog", "works", "me", "price"];
       font-variation-settings: "wght" 700;
       filter: drop-shadow(0 0 8px rgb(255 255 255 / 0.5));
     }
-    @media (width < @lg) {
+    @media (width < 1024px) {
       width: 140px;
       height: 40px;
       position: absolute;
@@ -237,7 +234,7 @@ const pageList = ["blog", "works", "me", "price"];
         margin-inline-start: -6px;
       }
     }
-    @media (width < @xs) {
+    @media (width < 480px) {
       width: 64px;
       top: 12px;
       right: 6px;
@@ -252,14 +249,14 @@ const pageList = ["blog", "works", "me", "price"];
   }
 
   .selectContainer {
-    width: @width;
-    @media (width < @lg) {
+    width: 168px;
+    @media (width < 1024px) {
       width: auto;
       position: absolute;
       top: 24px;
       right: 152px;
     }
-    @media (width < @xs) {
+    @media (width < 480px) {
       top: 14px;
       right: 80px;
     }

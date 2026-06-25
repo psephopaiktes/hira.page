@@ -23,7 +23,7 @@ export const getStaticPaths = () => getLocaleParams(import.meta.url);
     data-swellStalker="contact"
     class="contactBtn"
   >
-    <svg-icon src="/img/icon/contact.svg">
+    <svg-icon src="/img/icon/contact.svg" class="u-iconInText">
       {t({ ja: "メールアイコン", en: "Mail Icon", "zh-cn": "邮件图标" })}
     </svg-icon>
     {
@@ -40,9 +40,7 @@ export const getStaticPaths = () => getLocaleParams(import.meta.url);
   <MouseStalker />
 </Base>
 
-<style lang="less">
-  @import "@/styles/common.less";
-
+<style>
   :global(main) {
     text-align: center;
   }

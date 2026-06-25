@@ -54,10 +54,8 @@ const totalPrice = Object.values(price).reduce((acc, price) => acc + price, 0);
   </section>
 </li>
 
-<style lang="less">
-  @import "@/styles/common.less";
-
-  // Layout
+<style>
+  /* Layout */
   li {
     perspective: 1200;
     -webkit-perspective: 1200;
@@ -68,22 +66,22 @@ const totalPrice = Object.values(price).reduce((acc, price) => acc + price, 0);
     grid-template-columns: auto auto;
     align-items: center;
     justify-content: center;
-    @media (width < @xl) {
+    @media (width < 1280px) {
       gap: 24px;
     }
-    @media (width < @lg) {
+    @media (width < 1024px) {
       margin-block-start: 48px;
       grid-template-areas: "left" "right";
       grid-template-columns: 100%;
     }
     .playerContiner {
-      filter: @filterShadow;
+      filter: var(--filter-shadow);
     }
     &:nth-child(odd) {
       .playerContiner {
         grid-area: left;
         transform: rotateX(4deg) rotateY(12deg);
-        @media (width < @lg) {
+        @media (width < 1024px) {
           transform: none;
           grid-area: auto;
         }
@@ -91,7 +89,7 @@ const totalPrice = Object.values(price).reduce((acc, price) => acc + price, 0);
       .meta {
         grid-area: right;
         text-align: left;
-        @media (width < @lg) {
+        @media (width < 1024px) {
           text-align: left;
           grid-area: auto;
         }
@@ -101,7 +99,7 @@ const totalPrice = Object.values(price).reduce((acc, price) => acc + price, 0);
       .playerContiner {
         grid-area: right;
         transform: rotateX(4deg) rotateY(-12deg);
-        @media (width < @lg) {
+        @media (width < 1024px) {
           transform: none;
           grid-area: auto;
         }
@@ -109,7 +107,7 @@ const totalPrice = Object.values(price).reduce((acc, price) => acc + price, 0);
       .meta {
         grid-area: left;
         text-align: right;
-        @media (width < @lg) {
+        @media (width < 1024px) {
           text-align: left;
           grid-area: auto;
         }
@@ -117,14 +115,14 @@ const totalPrice = Object.values(price).reduce((acc, price) => acc + price, 0);
     }
   }
 
-  // Style
+  /* Style */
   dotlottie-player {
     clip-path: url(#squircle);
     margin-inline: auto;
     max-width: 400px;
     padding: 32px;
     background-color: #fff;
-    @media (width < @lg) {
+    @media (width < 1024px) {
       max-width: 320px;
     }
   }
@@ -132,7 +130,7 @@ const totalPrice = Object.values(price).reduce((acc, price) => acc + price, 0);
     max-width: 560px;
     h3 {
       font-size: 24px;
-      color: rgb(@label);
+      color: var(--color-label);
     }
     table {
       opacity: 0.8;
@@ -140,7 +138,7 @@ const totalPrice = Object.values(price).reduce((acc, price) => acc + price, 0);
       width: auto;
       margin-block-start: 20px;
       text-align: left;
-      @media (width < @lg) {
+      @media (width < 1024px) {
         width: 100%;
       }
 
@@ -149,7 +147,7 @@ const totalPrice = Object.values(price).reduce((acc, price) => acc + price, 0);
       }
       td:first-child {
         padding-inline-end: 24px;
-        @media (width < @lg) {
+        @media (width < 1024px) {
           width: 100%;
         }
       }

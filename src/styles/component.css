@@ -27,13 +27,12 @@
 
 .c-tag {
   padding: 0em 0.1em 0.2em;
-  color: rgb(@label / 0.6);
+  color: rgb(from var(--color-label) r g b / 0.6);
   &:hover {
-    color: rgb(@label);
+    color: var(--color-label);
   }
   svg-icon {
     opacity: 0.5;
-    margin-inline-end: -0.35em;
     width: 1.3em;
     height: 1.3em;
     vertical-align: text-bottom;
@@ -49,13 +48,12 @@
   span {
     opacity: 0.4;
     font-size: 11px;
-    margin-inline-start: -0.3em;
   }
 
   .active {
-    color: rgb(@main / 0.8);
+    color: rgb(from var(--color-main) r g b / 0.8);
     position: relative;
-    :global(svg-icon) {
+    svg-icon {
       opacity: 1;
     }
     &::after {
@@ -66,7 +64,7 @@
       height: 0.2em;
       top: 1.6em;
       left: 3%;
-      background: rgb(@main / 0.8);
+      background: rgb(from var(--color-main) r g b / 0.8);
     }
   }
 }
@@ -79,7 +77,8 @@
   color: currentColor;
   opacity: 0.8;
   cursor: pointer;
-  svg-icon, .icon {
+  svg-icon,
+  .icon {
     background: currentColor;
     position: absolute;
     width: 24px;
@@ -88,7 +87,7 @@
     pointer-events: none;
     mask-size: cover;
     opacity: 0.6;
-    @media (width < @xs) {
+    @media (width < 480px) {
       width: 16px;
       inset: 10px 8px;
     }
@@ -102,7 +101,7 @@
     height: 3px;
     border-radius: 100px;
     background: currentColor;
-    @media (width < @xs) {
+    @media (width < 480px) {
       top: 17px;
     }
   }
@@ -115,15 +114,15 @@
     rotate: 45deg;
   }
 
-  @media (width < @lg) {
+  @media (width < 1024px) {
     width: auto;
   }
-  @media (width < @xs) {
+  @media (width < 480px) {
     font-size: 11px;
   }
 
   select {
-    appearance: none; // for Safari
+    appearance: none; /* for Safari */
     appearance: base-select;
     width: 100%;
     line-height: 34px;
@@ -139,7 +138,7 @@
       border-radius: 32px;
     }
 
-    @media (width < @xs) {
+    @media (width < 480px) {
       height: 36px;
       line-height: 30px;
       padding: 0 28px 0 24px;
