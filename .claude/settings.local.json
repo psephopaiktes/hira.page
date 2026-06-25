@@ -17,9 +17,7 @@
       "Bash(mkdir -p src/blog/__TRACKED_VAR__/i18n-font)",
       "Bash(rsync -a --ignore-existing --exclude=index.mdx src/blog/ja/i18n-font/ src/blog/__TRACKED_VAR__/i18n-font/)",
       "Bash(rsync -a --ignore-existing --exclude=index.mdx src/works/ja/sl-component-organize/ src/works/__TRACKED_VAR__/sl-component-organize/)",
-      "Bash(npx astro *)",
-      "Bash(bash --norc --noprofile -c '{ echo \"### shell/ や package.json に update-index/skip-worktree があるか:\"; grep -rn \"update-index\\\\|skip-worktree\\\\|assume-unchanged\" shell package.json .husky 2>/dev/null || echo \"\\(該当なし\\)\"; echo \"### git hooks:\"; ls -la .git/hooks/ | grep -v sample || echo \"\\(カスタムフックなし\\)\"; } > /tmp/origin.txt 2>&1; echo done')",
-      "mcp__chrome-devtools__evaluate_script"
+      "Bash(bash --norc --noprofile -c '{ echo \"### shell/ や package.json に update-index/skip-worktree があるか:\"; grep -rn \"update-index\\\\|skip-worktree\\\\|assume-unchanged\" shell package.json .husky 2>/dev/null || echo \"\\(該当なし\\)\"; echo \"### git hooks:\"; ls -la .git/hooks/ | grep -v sample || echo \"\\(カスタムフックなし\\)\"; } > /tmp/origin.txt 2>&1; echo done')"
     ]
   }
 }
