@@ -8,6 +8,12 @@ const locale = Astro.currentLocale as Lang;
 const { title, description } = Astro.props;
 ---
 
+{
+  import.meta.env.DEV && (
+    <style is:inline>:root { scroll-behavior: auto !important; }</style>
+  )
+}
+
 <title>{title}</title>
 <meta name="description" content={description} />
 
